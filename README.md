@@ -1,1 +1,1 @@
-# AnimeBucketList2
+# AnimeBucketList
