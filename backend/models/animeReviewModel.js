@@ -12,11 +12,11 @@ const animeReviewSchema = mongoose.Schema(
             enum: [1, 2, 3, 4, 5]
         },
         userId: {
-            type: String,
+            type: mongoose.Schema.Types.ObjectId,
             required: true,
         },
         animeId: {
-            type: String,
+            type: mongoose.Schema.Types.ObjectId,
             required: true,
         },
     },

@@ -1,10 +1,11 @@
 import express from "express";
 import { Book } from "../models/bookModel.js";
+import { adminVerify } from "../middleware.js";
 
 const router = express.Router();
 
 //Route for Get All book
-router.get('/', async (req, res) =>{
+router.get('/', adminVerify,async (req, res) =>{
     try {
         const books = await Book.find({});
         return res.status(200).json({
