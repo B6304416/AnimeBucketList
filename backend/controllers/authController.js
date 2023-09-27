@@ -28,15 +28,26 @@ router.post('/signup', async (req, res) => {
 //Route for login
 router.post('/login', async (req, res) => {
     try {
-        const user = await User.findOne(req.email);
-        if (!user || !(await bcrypt.compare(req.body.password, user.password))) {
-            return res.status(401).json({ message: "The email or password may been wrong!" });
+        const user = await User.findOne({email: req.body.email})
+        //Check user
+        if (!user) {
+            return res.status(401).json({ 
+                message: "The email or password may been wrong!",
+            });
+        }
+        //Check password
+        const isPasswordValid = await bcrypt.compare(req.body.password, user.password);
+        if (!isPasswordValid) {
+            return res.status(401).json({ 
+                message: "The email or password may been wrong!",
+            });
         }
         const token = jwt.sign({ userId: user._id }, SECRET_KEY, { expiresIn: '1h' });
         req.session.userId = user._id
         return res.status(200).json({
             token: token, 
             userId: req.session.userId,
+            userRole: user.role,
         });
     } catch (error) {
         console.log(error.message);

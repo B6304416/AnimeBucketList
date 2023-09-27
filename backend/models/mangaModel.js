@@ -8,13 +8,30 @@ const mangaSchema = mongoose.Schema(
             unique: true
         },
         authorId: {
-            type: Number,
+            type: mongoose.Schema.Types.ObjectId,
             required: true,
-        }
+        },
+        genre: {
+            type: String,
+        },
     },
     {
         timestamps: true,
     }
 );
 
-export const Manga = mongoose.model('Manga', mangaSchema);
+const authorSchema = mongoose.Schema(
+    {
+        eng_name: {
+            type: String,
+            required: true,
+            unique: true
+        },
+    },
+    {
+        timestamps: true,
+    }
+);
+
+export const Manga = mongoose.model('Manga', mangaSchema)
+export const Author = mongoose.model('Author', authorSchema);

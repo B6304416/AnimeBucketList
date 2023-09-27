@@ -3,15 +3,22 @@ import mongoose from "mongoose";
 import cors from "cors";
 import session from "express-session";
 
-import { PORT, mongoDBURL, SECRET_KEY } from "./config.js";
-import tokenVerify from "./middleware.js";
+import { tokenVerify } from "./middleware.js";
+import { setupDatabase } from "./setupDatabase.js"
+import dotenv from 'dotenv';
 
 //Import controller
 import bookController from "./controllers/bookController.js";
 import authController from "./controllers/authController.js";
 import animeController from "./controllers/animeController.js";
+import animeReviewController from "./controllers/animeReviewController.js";
 
 const app = express();
+
+dotenv.config();
+const SECRET_KEY = process.env.SECRET_KEY;
+const PORT = process.env.PORT;
+const mongoDBURL = process.env.mongoDBURL;
 
 //Middleware for parsing request body
 app.use(express.json());
@@ -21,7 +28,7 @@ app.use(
     cors({
         origin: 'http://localhost:3000',
         methods: ['GET', 'POST', 'PUT', 'DELETE'],
-        allowedHeaders: ['Content-Type', 'Authorization'],
+        allowedHeaders: ['Content-Type', 'Authorization', 'UserRole'],
         credentials: true,
     })
 )
@@ -34,6 +41,15 @@ app.use(
     })
 );
 
+//setup database ฟังชั่นนี้ให้ใช้ครั้งตอนที่สร้างเดต้าเบสใหม่
+// setupDatabase()
+//     .then(() => {
+//         console.log("Database setup completed.");
+//     })
+//     .catch((error) => {
+//         console.error("Error seeding data:", error);
+//     });
+
 //Route for auth
 app.use('', authController);
 
@@ -42,6 +58,9 @@ app.use('/book', tokenVerify, bookController);
 
 //Route for CRUD animes
 app.use('/anime', animeController);
+
+//Route for CRUD animes
+app.use('/anime_review', tokenVerify, animeReviewController);
 
 //Connect database
 mongoose

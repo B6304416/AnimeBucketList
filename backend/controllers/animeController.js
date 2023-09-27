@@ -1,5 +1,6 @@
 import express from "express";
 import { Anime } from "../models/animeModel.js";
+import { adminVerify } from "../middleware.js";
 
 const router = express.Router();
 
@@ -30,7 +31,7 @@ router.get('/:id',async (req, res) =>{
 })
 
 //Route for Post a new Anime
-router.post('/', async (req, res) =>{
+router.post('/', adminVerify, async (req, res) =>{
     try {
         if (
             !req.body.name ||
@@ -60,7 +61,7 @@ router.post('/', async (req, res) =>{
 })
 
 //Route for Update a new Anime
-router.put('/:id', async (req, res) =>{
+router.put('/:id', adminVerify, async (req, res) =>{
     try {
         
         if (
@@ -89,7 +90,7 @@ router.put('/:id', async (req, res) =>{
 })
 
 //Route for Delete a anime by ID
-router.delete('/:id',async (req, res) =>{
+router.delete('/:id', adminVerify, async (req, res) =>{
     try{
         const {id} = req.params;
         const result = await Anime.findByIdAndRemove(id);
