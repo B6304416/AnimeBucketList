@@ -25,7 +25,7 @@ export class AnimelistComponent {
   // Function to create a new card element
   createCard(data: BlogPost): HTMLElement {
     const card = document.createElement("div");
-    card.className = "col-lg-6";
+    card.className = "col-lg-4";
     card.innerHTML = `
         <div class="card mb-4">
             <a href="#!"><img class="card-img-top" src="https://dummyimage.com/700x350/dee2e6/6c757d.jpg" alt="..." /></a>
@@ -65,7 +65,8 @@ export class AnimelistComponent {
   // Initial population of blog posts using sample data
   sampleData: BlogPost[] = [
     { date: "January 1, 2023", title: "Post Title 1", text: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis aliquid atque, nulla." },
-    { date: "January 2, 2023", title: "Post Title 2", text: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis aliquid atque, nulla." }
+    { date: "January 2, 2023", title: "Post Title 2", text: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis aliquid atque, nulla." },
+    { date: "January 3, 2023", title: "Post Title 2", text: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis aliquid atque, nulla." }
   ];
 
   constructor() {
