@@ -14,6 +14,9 @@ const mangaSchema = mongoose.Schema(
         genre: {
             type: String,
         },
+        imgUrl: {
+            type: String,
+        },
     },
     {
         timestamps: true,

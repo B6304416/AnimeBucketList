@@ -17,6 +17,9 @@ const characterSchema = mongoose.Schema(
         mangaId: {
             type: mongoose.Schema.Types.ObjectId,
         },
+        imgUrl: {
+            type: String,
+        },
     },
     {
         timestamps: true,
