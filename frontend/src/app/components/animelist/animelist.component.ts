@@ -43,7 +43,7 @@ export class AnimelistComponent implements OnInit {
   createCard(data: AnimeResponse): HTMLElement {
     console.log("data")
     const card = document.createElement("div");
-    card.className = "col-lg-6";
+    card.className = "col-lg-4";
     card.innerHTML = `
         <div class="card mb-4">
             <a href="#!"><img class="card-img-top" src="${data.imgUrl}" alt="..." /></a>

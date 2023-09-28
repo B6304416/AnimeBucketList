@@ -1,18 +1,38 @@
-<div class="login-container">
-    <h2>Login</h2>
-    <form (ngSubmit)="onSubmit()">
-        <div class="form-group">
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" [(ngModel)]="email" required>
+<div class="container-fluid bg-img">
+    <div class="row">
+        <div class="col-md-4 offset-md-4">
+            <div class="card my-5">
+
+                <!-- <form class="card-body cardbody-color p-lg-5"> -->
+                <form class="card-body cardbody-color p-lg-5 text-center" (ngSubmit)="onSubmit()">
+
+                    <div class="text-center">
+                        <img src="https://static.wikia.nocookie.net/c89873b3-6d89-4d09-9f1b-aa4dc27a50a7/scale-to-width/755"
+                            class="img-fluid profile-image-pic img-thumbnail rounded-circle my-3" width="200px"
+                            alt="profile">
+                    </div>
+           
+                    <div class="mb-3 form-group box">
+                        <input class="form-control" type="email" id="email" name="email" aria-describedby="emailHelp"
+                            placeholder="Email" [(ngModel)]="email" required>
+                    </div>
+                    <div class="mb-3 form-group box">
+                        <input class="form-control" type="password"  id="password" name="password" 
+                            placeholder="password" [(ngModel)]="password" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-color px-5 mb-5 w-10">Login</button>
+                    </div>
+                    
+                    <div id="emailHelp" class="form-text text-center mb-5 text-white">Not
+                        Registered? <a href="#" class="text-white font-weight-bold"> Create an Account</a>
+                    </div>
+                    
+                </form>
+            </div>
+
         </div>
-        <div class="form-group">
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" [(ngModel)]="password" required>
-        </div>
-        <div class="form-group">
-            <button type="submit">Login</button>
-        </div>
-    </form>
-    <h1>Anime list 👇👇</h1>
-    <h2>{{data}}</h2>
+    </div>
 </div>
+<router-outlet></router-outlet>

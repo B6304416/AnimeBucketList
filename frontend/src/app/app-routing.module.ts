@@ -8,7 +8,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'home', component: HomeComponent },
   { path: 'animelist', component: AnimelistComponent },
-  // { path: '', redirectTo: '/login', pathMatch: 'full' }, // Redirect to the login page by default
+  { path: '', redirectTo: '/animelist', pathMatch: 'full' }, // Redirect to the login page by default
 ];
 
 @NgModule({
