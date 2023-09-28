@@ -20,7 +20,7 @@ export class AnimelistComponent {
       this.addNewPost(data);
     });
   }
-  
+
 
   // Function to create a new card element
   createCard(data: BlogPost): HTMLElement {
@@ -48,7 +48,7 @@ export class AnimelistComponent {
       blogPosts.appendChild(newCard);
     }
   }
- 
+
   // Event listener for the "Add Post" button
   addButtonClick(): void {
     // Simulated new data (you can replace this with actual data)

@@ -1,21 +1,18 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
-
-import { LoginComponent } from './login/login.component'; // Import LoginComponent
+import { LoginComponent } from './components/login/login.component';
+import { HomeComponent } from './components/home/home.component';
+import { AnimelistComponent } from './components/animelist/animelist.component'
 
 const routes: Routes = [
-  { path: '', redirectTo: '/home', pathMatch: 'full' }, // เรียกหน้าหลัก
-  { path: 'login', component: LoginComponent }, // เส้นทางสำหรับหน้า Login
-  // เพิ่มเส้นทางอื่น ๆ ตามความต้องการ
+  { path: 'login', component: LoginComponent },
+  { path: 'home', component: HomeComponent },
+  { path: 'animelist', component: AnimelistComponent },
+  // { path: '', redirectTo: '/login', pathMatch: 'full' }, // Redirect to the login page by default
 ];
 
 @NgModule({
-  declarations: [],
-  imports: [
-    CommonModule,
-    RouterModule.forRoot(routes)
-  ],
+  imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
