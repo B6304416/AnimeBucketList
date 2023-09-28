@@ -1,28 +1,28 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { FormsModule } from '@angular/forms'
+import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { NavbarComponent } from './navbar/navbar.component';
-import { LoginComponent } from './login/login.component';
-import { FormsModule } from '@angular/forms';
-
-
-import { AppRoutingModule } from './app-routing.module'; // นำเข้า AppRoutingModule
-import { RouterModule } from '@angular/router';
-import { AnimelistComponent } from './animelist/animelist.component'; // นำเข้า RouterModule
+import { HttpClientModule } from '@angular/common/http';
+import { LoginComponent } from './components/login/login.component';
+import { SignUpComponent } from './components/sign-up/sign-up.component';
+import { HomeComponent } from './components/home/home.component';
+import { NavbarComponent } from './components/navbar/navbar.component'
+import { AnimelistComponent } from './components/animelist/animelist.component'
 
 @NgModule({
   declarations: [
     AppComponent,
-    NavbarComponent,
     LoginComponent,
+    SignUpComponent,
+    HomeComponent,
+    NavbarComponent,
     AnimelistComponent,
-
   ],
   imports: [
+    HttpClientModule,
     BrowserModule,
     AppRoutingModule,
-    RouterModule,
     FormsModule
   ],
   providers: [],

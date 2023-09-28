@@ -80,7 +80,8 @@ async function setupDatabase() {
         studioId: studio1._id,
         sourceId: source1._id,
         episode: 124,
-        genre: "Action, Adventure"
+        genre: "Action, Adventure",
+        imgUrl: "https://media.gq-magazin.de/photos/628e35d2be670efaab242579/16:9/w_2560%2Cc_limit/HunterxHunter-Aufmacher.jpg"
     }
     const newAnime2 = {
         name: "Oshi no Ko",
@@ -88,7 +89,8 @@ async function setupDatabase() {
         studioId: studio2._id,
         sourceId: source2._id,
         episode: 11,
-        genre: "Drama"
+        genre: "Drama",
+        imgUrl: "https://sm.ign.com/ign_in/screenshot/default/oshi-ni-ko_1gvm.jpg"
     }
     const anime1 = await Anime.create(newAnime1);
     const anime2 = await Anime.create(newAnime2);
@@ -137,11 +139,13 @@ async function setupDatabase() {
         name: "Oyasumi Punpun",
         authorId: author1._id,
         genre: 'Drama',
+        imgUrl: "https://www.theanimex.com/wp-content/uploads/2021/12/Goodnight-Punpun-Vol.-5-1071x1536.jpg.webp"
     }
     const newManga2 = {
         name: "Berserk",
         authorId: author2._id,
         genre: 'Action',
+        imgUrl: "https://comicvine.gamespot.com/a/uploads/scale_small/11156/111567728/8724269-berserkv41%282022%29.jpg"
     }
     const manga1 = await Manga.create(newManga1);
     const manga2 = await Manga.create(newManga2);
@@ -183,12 +187,14 @@ async function setupDatabase() {
         score: 0,
         animeId: anime1._id,
         mangaId: null,
+        imgUrl: "https://assets.rebelmouse.io/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpbWFnZSI6Imh0dHBzOi8vYXNzZXRzLnJibC5tcy8yMzUxODQzNC9vcmlnaW4uanBnIiwiZXhwaXJlc19hdCI6MTcxMzA0MDExN30.jxes-ujTVEw9EDWdFCXOaYz9ABsSrwKZsd0qZR58GWk/img.jpg?width=800&quality=80"
     }
     const newCharacter2 = {
         name: "Griffith",
         score: 0,
         animeId: null,
         mangaId: manga2,
+        imgUrl: "https://w.forfun.com/fetch/03/03a15727edfb426ab3c78cb63b613844.jpeg"
     }
     await Character.create(newCharacter1);
     await Character.create(newCharacter2);

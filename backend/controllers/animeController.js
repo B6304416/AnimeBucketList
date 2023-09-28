@@ -8,10 +8,7 @@ const router = express.Router();
 router.get('/', async (req, res) =>{
     try {
         const animes = await Anime.find({});
-        return res.status(200).json({
-            count: animes.length,
-            data: animes
-        });
+        return res.status(200).json(animes);
     } catch(error){
         console.log(error.message)
         res.status(500).send({message: error.message})
@@ -23,7 +20,7 @@ router.get('/:id',async (req, res) =>{
     try{
         const {id} = req.params;
         const anime = await Anime.findById(id);
-        return res.status(200).json({anime});
+        return res.status(200).json(anime);
     }catch(error){
         console.log(error.message)
         res.status(500).send({message: error.message})
@@ -50,7 +47,9 @@ router.post('/', adminVerify, async (req, res) =>{
             typeId: req.body.typeId, 
             studioId: req.body.studioId, 
             episode: req.body.episode, 
-            sourceId: req.body.sourceId
+            sourceId: req.body.sourceId,
+            genre: req.body.genre,
+            imgUrl: req.body.imgUrl,
         }
         const anime = await Anime.create(newAnime);
         return res.status(201).send(anime);

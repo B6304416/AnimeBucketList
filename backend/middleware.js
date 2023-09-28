@@ -18,9 +18,10 @@ const tokenVerify = (req, res, next) => {
 
 const adminVerify = async (req, res, next) => {
     const token = req.headers.authorization;
+    console.log(req)
     try {
         // console.log(req.user.userId)
-        const user = await User.findOne({_id: req.user.userId})
+        const user = await User.findOne({ _id: req.user.userId })
         // console.log(user)
         if (!token || !user.role) {
             throw new Error('Unauthorized');
@@ -39,7 +40,7 @@ const adminVerify = async (req, res, next) => {
             decoded = decodedToken; // Assign decodedToken to decoded
         }
         else if (user.role == 2) {
-            console.log(user.role+' You are not admin')
+            console.log(user.role + ' You are not admin')
             reject('UserRole is invalid');
         } else {
             reject('UserRole is invalid');
@@ -50,4 +51,20 @@ const adminVerify = async (req, res, next) => {
     }
 }
 
-export { tokenVerify, adminVerify };
+const postVerify = (req, res, next) => {
+    const token = req.header('Authorization'); // Assuming the token is in the Authorization header
+
+    if (!token) {
+        return res.status(401).json({ message: 'Unauthorized' });
+    }
+
+    try {
+        const decoded = jwt.verify(token, SECRET_KEY); // Replace with your secret key
+        req.userId = decoded.userId; // Extract userId from the token
+        next(); // Proceed to the next middleware or route handler
+    } catch (error) {
+        return res.status(401).json({ message: 'Invalid token' });
+    }
+};
+
+export { tokenVerify, adminVerify, postVerify };
