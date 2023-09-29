@@ -1,0 +1,137 @@
+<div class="bg-Black">
+    <div class="container pt-4 pb-5">
+        <div class="main-body">
+            <div class="row ">
+                <div class="col-lg-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="d-flex flex-column align-items-center text-center">
+                                <!-- รูปภาพเริ่มต้น -->
+                                <img *ngIf="!anime.get('imgUrl')?.value"
+                                    src="https://media.gq-magazin.de/photos/628e35d2be670efaab242579/16:9/w_2560%2Cc_limit/HunterxHunter-Aufmacher.jpg"
+                                    alt="Default Image" width="300">
+
+                                <!-- รูปภาพจริงๆ เมื่อมีค่า imgUrl -->
+                                <img *ngIf="anime.get('imgUrl')?.value" [src]="anime.get('imgUrl')?.value" alt="Admin"
+                                    width="300">
+                                <div class="mt-3">
+                                    <!-- แสดงค่า name ก่อนและหลังจากมีค่า -->
+                                    <h4 *ngIf="!anime.get('name')?.value">Anime Name</h4>
+                                    <h4 *ngIf="anime.get('name')?.value">{{ anime.get('name')?.value }}</h4>
+
+                                    <p class="text-secondary mb-1">Type: {{ anime.get('typeId')?.value }}</p>
+
+                                    <p class="text-secondary mb-1"> studio: {{
+                                        getStudioName(anime.get('studioId')?.value) }}</p>
+
+                                    <p class="text-secondary mb-1">episode: {{ anime.get('episode')?.value }}</p>
+                                    
+                                    <p class="text-muted font-size-sm">genre: {{ anime.get('genre')?.value }}</p>
+                                    
+                                </div>
+                            </div>
+                            <hr class="my-2">
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                                    <p class="text-secondary mb-1">เรื่องย่อ: {{ anime.get('synopsis')?.value }}</p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-8">
+                    <div class="card">
+                        <div class="card-body">
+                            <form [formGroup]="anime">
+                                <div class="row mb-3">
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">Anime Name</h6>
+                                    </div>
+                                    <div class="form-group col-sm-9 text-secondary">
+                                        <input type="text" class="form-control" formControlName="name">
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">Type</h6>
+                                    </div>
+                                    <div class="form-group col-sm-9 text-secondary">
+                                        <label class="form-check-label ml-4">
+                                            <input class="form-check-input" type="radio" name="typeId" value="Movie"
+                                                formControlName="typeId">
+                                            <span>Movie</span>
+                                        </label>
+                                        <label class="form-check-label ml-5">
+                                            <input class="form-check-input" type="radio" name="typeId" value="TV serie"
+                                                formControlName="typeId">
+                                            <span>TV Series</span>
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">Studio</h6>
+                                    </div>
+                                    <div class="form-group col-sm-9 text-secondary">
+                                        <select class="form-control" formControlName="studioId">
+                                            <option *ngFor="let studio of studioOptions" [value]="studio.id">{{
+                                                studio.name }}</option>
+                                        </select>
+                                    </div>
+
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">Episode</h6>
+                                    </div>
+                                    <div class="form-group col-sm-9 text-secondary">
+                                        <input type="text" class="form-control" formControlName="episode">
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">Genre</h6>
+                                    </div>
+                                    <div class="form-group col-sm-9 text-secondary">
+                                        <label class="form-check-label ml-4 spaced-label" *ngFor="let genreOption of genreOptions">
+                                          <input class="form-check-input" type="checkbox"
+                                            [value]="genreOption"
+                                            [checked]="isValidGenre(genreOption)"
+                                            (change)="toggleGenre(genreOption)">
+                                          <span>{{ genreOption }}</span>
+                                        </label>
+                                      </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">ImgUrl</h6>
+                                    </div>
+                                    <div class="form-group col-sm-9 text-secondary">
+                                        <input type="text" class="form-control" formControlName="imgUrl">
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">synopsis</h6>
+                                    </div>
+                                    <div class="col-sm-9 text-secondary">
+                                        <textarea class="form-control" formControlName="synopsis" rows="4"></textarea>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-sm-3"></div>
+                                    <div class="col-sm-9 text-secondary">
+                                        <input type="button" class="btn btn-primary px-4" value="Post">
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<router-outlet></router-outlet>
