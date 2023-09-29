@@ -33,7 +33,7 @@ export class PostAnimeComponent implements OnInit{
   //ตรวจ id กับ name studio
   getStudioName(studioId: string | null | undefined): string {
     if (!studioId) {
-      return 'Unknown Studio';
+      return 'Unknown';
     }
     const studio = this.studioOptions.find(s => s.id === studioId);
     return studio ? studio.name : 'Unknown Studio';
