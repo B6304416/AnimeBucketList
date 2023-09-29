@@ -12,6 +12,7 @@ import bookController from "./controllers/bookController.js";
 import authController from "./controllers/authController.js";
 import animeController from "./controllers/animeController.js";
 import animeReviewController from "./controllers/animeReviewController.js";
+import characterController from "./controllers/characterController.js";
 
 const app = express();
 
@@ -58,9 +59,10 @@ app.use('/book', tokenVerify, bookController);
 
 //Route for CRUD animes
 app.use('/anime', animeController);
-
 //Route for CRUD animes
 app.use('/anime_review', tokenVerify, animeReviewController);
+//Route for CRUD animes
+app.use('/character', characterController);
 
 //Connect database
 mongoose

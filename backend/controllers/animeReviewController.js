@@ -37,7 +37,6 @@ router.get('/rate', async (req, res) => {
             }
         ];
         const result = await AnimeReview.aggregate(pipeline);
-        const animeNames = result.map(item => item.animeName)
         return res.status(200).json({
             result
         });

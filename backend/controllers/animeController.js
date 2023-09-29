@@ -1,6 +1,6 @@
 import express from "express";
 import { Anime } from "../models/animeModel.js";
-import { adminVerify } from "../middleware.js";
+import { authMiddleware } from "../middleware.js";
 
 const router = express.Router();
 
@@ -8,6 +8,7 @@ const router = express.Router();
 router.get('/', async (req, res) =>{
     try {
         const animes = await Anime.find({});
+        // console.log(req)
         return res.status(200).json(animes);
     } catch(error){
         console.log(error.message)
@@ -28,7 +29,7 @@ router.get('/:id',async (req, res) =>{
 })
 
 //Route for Post a new Anime
-router.post('/', adminVerify, async (req, res) =>{
+router.post('/', authMiddleware, async (req, res) =>{
     try {
         if (
             !req.body.name ||
@@ -55,12 +56,13 @@ router.post('/', adminVerify, async (req, res) =>{
         return res.status(201).send(anime);
     } catch(error) {
         console.log(error.message);
+        console.log(req);
         res.status(500).send({message: error.message})
     }
 })
 
 //Route for Update a new Anime
-router.put('/:id', adminVerify, async (req, res) =>{
+router.put('/:id',authMiddleware, async (req, res) =>{
     try {
         
         if (
@@ -89,7 +91,7 @@ router.put('/:id', adminVerify, async (req, res) =>{
 })
 
 //Route for Delete a anime by ID
-router.delete('/:id', adminVerify, async (req, res) =>{
+router.delete('/:id',authMiddleware, async (req, res) =>{
     try{
         const {id} = req.params;
         const result = await Anime.findByIdAndRemove(id);
