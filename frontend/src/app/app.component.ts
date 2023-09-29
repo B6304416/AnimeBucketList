@@ -20,12 +20,12 @@ export class AppComponent implements OnInit {
     //   localStorage.clear();
     // });
 
-    const userId = localStorage.getItem('userId');
+    const token = sessionStorage.getItem('token');
 
-    if (!userId) {
+    if (!token) {
       this.router.navigate(['/login']);
     } else {
-      console.log('User is logged in with userId:', userId);
+      console.log('User is logged in with userId:', token);
     }
   }
 
