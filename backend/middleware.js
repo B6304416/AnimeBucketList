@@ -18,7 +18,7 @@ const tokenVerify = (req, res, next) => {
 
 const adminVerify = async (req, res, next) => {
     const token = req.headers.authorization;
-    console.log(req)
+    // console.log(req)
     try {
         // console.log(req.user.userId)
         const user = await User.findOne({ _id: req.user.userId })
@@ -51,20 +51,31 @@ const adminVerify = async (req, res, next) => {
     }
 }
 
-const postVerify = (req, res, next) => {
-    const token = req.header('Authorization'); // Assuming the token is in the Authorization header
 
-    if (!token) {
-        return res.status(401).json({ message: 'Unauthorized' });
-    }
-
+const authMiddleware = async (req, res, next) => {
     try {
-        const decoded = jwt.verify(token, SECRET_KEY); // Replace with your secret key
-        req.userId = decoded.userId; // Extract userId from the token
-        next(); // Proceed to the next middleware or route handler
+        await new Promise((resolve, reject) => {
+            tokenVerify(req, res, (error) => {
+                if (error) {
+                    reject(error);
+                }
+                resolve();
+            });
+        });
+
+        await new Promise((resolve, reject) => {
+            adminVerify(req, res, (adminError) => {
+                if (adminError) {
+                    reject(adminError);
+                }
+                resolve();
+            });
+        });
+
+        next(); // If both tokenVerify and adminVerify pass, proceed to the next middleware or route handler
     } catch (error) {
-        return res.status(401).json({ message: 'Invalid token' });
+        return res.status(401).json({ message: error.toString() });
     }
 };
 
-export { tokenVerify, adminVerify, postVerify };
+export { tokenVerify, adminVerify, authMiddleware };
