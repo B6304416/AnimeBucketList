@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -13,7 +14,7 @@ export class AppComponent implements OnInit {
   constructor(private http: HttpClient, private router: Router) { }
 
   ngOnInit(): void {
-    
+
     // window.addEventListener('beforeunload', function (event) {
     //   // Clear localStorage
     //   localStorage.clear();
@@ -26,6 +27,7 @@ export class AppComponent implements OnInit {
     } else {
       console.log('User is logged in with userId:', userId);
     }
-
   }
+
+
 }

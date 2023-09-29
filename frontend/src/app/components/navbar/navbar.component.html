@@ -32,6 +32,16 @@
         <li class="nav-item">
           <a class="nav-link disabled" aria-disabled="true">Disabled</a>
         </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            Admin
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <li><a class="dropdown-item" href="/postanime">Anime</a></li>
+            <li><a class="dropdown-item" href="#">Manga</a></li>
+          </ul>
+        </li>
       </ul>
 
       <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
@@ -42,6 +52,12 @@
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" routerLink="/login">Login</a>
         </li>
+        <!-- <li class="nav-item" *ngIf="!LoggedIn"> 
+          <a class="nav-link active" aria-current="page" routerLink="/login">Login</a>
+        </li>
+        <li class="nav-item" *ngIf="LoggedIn"> 
+          <a class="nav-link active" aria-current="page" (click)="logout()">Logout</a>
+        </li> -->
       </ul>
     </div>
   </div>
