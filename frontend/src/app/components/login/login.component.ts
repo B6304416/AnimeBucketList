@@ -23,16 +23,16 @@ export class LoginComponent implements OnInit {
   constructor(private http: HttpClient, private router: Router) {}
 
   ngOnInit(): void {
-    const url = 'http://localhost:5555/anime';
-    this.http.get<AnimeResponse>(url ).subscribe(
-      (res) => {
-        console.log('Response data:', res);
-        this.data = res.data.map(item => ' '+item.name+' '+ item.episode);
-      },
-      (error) => {
-        console.error('Error:', error);
-      }
-    );
+    // const url = 'http://localhost:5555/anime';
+    // this.http.get<AnimeResponse>(url ).subscribe(
+    //   (res) => {
+    //     console.log('Response data:', res);
+    //     this.data = res.data.map(item => ' '+item.name+' '+ item.episode);
+    //   },
+    //   (error) => {
+    //     console.error('Error:', error);
+    //   }
+    // );
   }
 
   onSubmit() {
@@ -44,7 +44,7 @@ export class LoginComponent implements OnInit {
           localStorage.setItem('userId', response.userId);
           sessionStorage.setItem('token', response.token);
           console.log('Login successful', response);
-          this.router.navigate(['/home']);
+          this.router.navigate(['/animelist']);
         },
         (error) => {
           console.error('Login error', error);
