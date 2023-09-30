@@ -26,16 +26,16 @@ export class PostAnimeComponent implements OnInit {
   ];
 
   genreOptions = [
-    'Action', 
-    'Sport', 
-    'Harem', 
-    'Adventure', 
+    'Action',
+    'Sport',
+    'Harem',
+    'Adventure',
     'Shoujo',
     'Isekai',
-    'Drama', 
-    'Shonen', 
+    'Drama',
+    'Shonen',
     'Comedy',
-    'Fantasy' ];
+    'Fantasy'];
 
   constructor(private http: HttpClient) { }
 
@@ -82,16 +82,18 @@ export class PostAnimeComponent implements OnInit {
       (response) => {
         // การจัดการกับการตอบสนองจากแบ็คเอนด์ (ตามความเหมาะสม)
         console.log('Anime posted successfully', response);
-        console.log(animeData)
+        alert('Anime posted successfully')
+
       },
       (error) => {
         // การจัดการเมื่อเกิดข้อผิดพลาดในการส่งข้อมูล
         console.error('Error posting anime', error);
-        console.log(animeData)
+        alert('Error: ' + error.message)
       }
     );
 
   }
+
 
 
 }
