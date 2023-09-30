@@ -4,7 +4,6 @@ import { SECRET_KEY } from "../config.js"
 
 import bcrypt from "bcryptjs"
 import jwt from "jsonwebtoken"
-import { tokenVerify } from "../middleware.js";
 
 const router = express.Router();
 
@@ -16,7 +15,8 @@ router.post('/signup', async (req, res) => {
             name: req.body.name,
             email: req.body.email,
             password: hashedPassword,
-            role: req.body.role
+            role: req.body.role,
+            favCharacter: null,
         }
         const user = await User.create(newUser);
         return res.status(201).send(user);

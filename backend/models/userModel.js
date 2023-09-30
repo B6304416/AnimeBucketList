@@ -19,6 +19,9 @@ const userSchema = mongoose.Schema(
             type: Number,
             required: true,
             enum: [1, 2]
+        },
+        favCharacter: {
+            type: mongoose.Schema.Types.ObjectId,
         }
     },
     {
