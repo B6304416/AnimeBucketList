@@ -12,12 +12,17 @@
 
     <div class="container">
         <div class="row">
-            <!-- Blog entries-->
-            <div class="col-md-8">
-                <div class="row" id="card-pop-character">
-                    
+            <div class="col-md-8" *ngFor="let character of popCharacter">
+                <div class="card mb-4">
+                  <a href="#!"><img class="card-img-top" [src]="character.imgUrl" alt="..." /></a>
+                  <div class="card-body">
+                    <div class="small text-muted">POPULAR CHARACTER</div>
+                    <h2 class="card-title h4">{{ character.name }}</h2>
+                    <p class="card-text">{{ character.score }} score</p>
+                    <a class="btn btn-primary" href="#!">Read more →</a>
+                  </div>
                 </div>
-            </div>
+              </div>
             <!-- Side widgets-->
             <div class="col-lg-4">
                 <!-- Search widget-->
@@ -65,11 +70,21 @@
             <!-- Nested row for non-featured blog posts-->
             <div class="container">
                 <h2>Anime List</h2>
-                <div class="row" id="card-anime">
-                    <!-- This is where the dynamically generated cards will be inserted by Angular -->
+                <div class="row">
+                    <div class="col-lg-4" *ngFor="let anime of data">
+                        <div class="card mb-4">
+                            <a href="#!"><img class="card-img-top card-img-test" [src]="anime.imgUrl" alt="..." /></a>
+                            <div class="card-body">
+                                <div class="small text-muted">{{ anime.genre }}</div>
+                                <h2 class="card-title h4">{{ anime.name }}</h2>
+                                <p class="card-text">{{ anime.episode }} episodes</p>
+                                <a class="btn btn-primary" href="#!">Read more →</a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-            
+
         </div>
     </div>
     <!-- Footer-->
