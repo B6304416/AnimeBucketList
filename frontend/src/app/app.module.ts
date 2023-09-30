@@ -10,6 +10,7 @@ import { HomeComponent } from './components/home/home.component';
 import { NavbarComponent } from './components/navbar/navbar.component'
 import { AnimelistComponent } from './components/animelist/animelist.component';
 import { PostAnimeComponent } from './components/post-anime/post-anime.component'
+import { SharedDataService } from './services/shared-data.service';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,7 @@ import { PostAnimeComponent } from './components/post-anime/post-anime.component
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [SharedDataService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
