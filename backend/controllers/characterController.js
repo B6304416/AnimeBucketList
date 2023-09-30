@@ -104,6 +104,7 @@ router.post('/', authMiddleware, async (req, res) => {
             animeId: req.body.animeId,
             mangaId: req.body.mangaId,
             imgUrl: req.body.imgUrl,
+            detail: req.body.detail,
         }
         const character = await Character.create(newCharacter);
         return res.status(201).send(character);

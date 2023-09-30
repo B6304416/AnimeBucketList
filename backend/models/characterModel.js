@@ -20,6 +20,9 @@ const characterSchema = mongoose.Schema(
         imgUrl: {
             type: String,
         },
+        detail:{
+            type: String,
+        }
     },
     {
         timestamps: true,
