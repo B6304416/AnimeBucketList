@@ -11,6 +11,7 @@ import { NavbarComponent } from './components/navbar/navbar.component'
 import { AnimelistComponent } from './components/animelist/animelist.component';
 import { PostAnimeComponent } from './components/post-anime/post-anime.component'
 import { SharedDataService } from './services/shared-data.service';
+import { MangalistComponent } from './components/mangalist/mangalist.component'
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { SharedDataService } from './services/shared-data.service';
     NavbarComponent,
     AnimelistComponent,
     PostAnimeComponent,
+    MangalistComponent,
   ],
   imports: [
     HttpClientModule,
