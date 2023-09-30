@@ -4,6 +4,11 @@
     background-size: cover;
     animation: slideImages 30s linear infinite;
 }
+.card-img-test{
+    width: 350px;
+    height: 200px;
+    object-fit: cover;
+}
 
 
 @keyframes slideImages {

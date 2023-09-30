@@ -6,6 +6,7 @@ import { AnimelistComponent } from './components/animelist/animelist.component'
 import { PostAnimeComponent } from './components/post-anime/post-anime.component';
 import { MangalistComponent } from './components/mangalist/mangalist.component';
 
+
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'home', component: HomeComponent },
@@ -13,7 +14,6 @@ const routes: Routes = [
   { path: 'mangalist', component: MangalistComponent },
   { path: 'postanime', component: PostAnimeComponent },
   { path: '', redirectTo: '/animelist', pathMatch: 'full' }, // Redirect to the login page by default
-  { path: '', redirectTo: '/mangalist', pathMatch: 'full' }, // Redirect to the login page by default
 ];
 
 @NgModule({
