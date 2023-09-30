@@ -36,11 +36,11 @@ const adminVerify = async (req, res, next) => {
         });
         let decoded; // Define decoded outside of the if condition
         if (user.role == 1) {
-            console.log(user.role)
+            // console.log(user.role)
             decoded = decodedToken; // Assign decodedToken to decoded
         }
         else if (user.role == 2) {
-            console.log(user.role + ' You are not admin')
+            // console.log(user.role + ' You are not admin')
             reject('UserRole is invalid');
         } else {
             reject('UserRole is invalid');

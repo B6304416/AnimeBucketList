@@ -70,8 +70,8 @@ export class AnimelistComponent implements OnInit {
     const card = document.createElement("div");
     card.className = "col-lg-4";
     card.innerHTML = `
-        <div class="card mb-4">
-            <a href="#!"><img class="card-img-top" src="${data.imgUrl}" alt="..." /></a>
+        <div class="card mb-4" >
+            <a href="#!"><img class="card-img-top " src="${data.imgUrl}" alt="..." /></a>
             <div class="card-body">
             <div class="small text-muted">${data.genre}</div>
             <h2 class="card-title h4">${data.name}</h2>

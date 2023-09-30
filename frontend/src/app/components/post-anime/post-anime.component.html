@@ -45,13 +45,23 @@
                                     <h4 *ngIf="!anime.get('name')?.value">Anime Name</h4>
                                     <h4 *ngIf="anime.get('name')?.value">{{ anime.get('name')?.value }}</h4>
 
-                                    <p class="text-secondary mb-1" style="text-align: left;">episode: {{ anime.get('episode')?.value }}</p>
+                                    <p class="text-secondary mb-1" style="text-align: left;">episode: {{
+                                        anime.get('episode')?.value }}</p>
 
-                                    <p class="text-secondary mb-1" style="text-align: left;"> studio: {{ getStudioName(anime.get('studioId')?.value) }}</p>
+                                    <p class="text-secondary mb-1" style="text-align: left;"> studio: {{
+                                        getStudioName(anime.get('studioId')?.value) }}</p>
 
-                                    <p class="text-secondary mb-1" style="text-align: left;">Type: {{ anime.get('typeId')?.value }}</p>
+                                    <p class="text-secondary mb-1" style="text-align: left;">Type: {{
+                                        anime.get('typeId')?.value === '6513dc34e62aa885492968ca' ? 'Movie' : 
+                                        anime.get('typeId')?.value === '6513dc34e62aa885492968c8' ? 'TV Series' : 'Unknown' }}</p>
 
-                                    <p class="text-muted font-size-sm" style="text-align: left;">genre: {{ anime.get('genre')?.value }}</p>
+                                    <p class="text-secondary mb-1" style="text-align: left;">Source: {{
+                                        anime.get('sourceId')?.value === '6513dc35e62aa885492968d0' ? 'Original' :
+                                        anime.get('sourceId')?.value === '6513dc35e62aa885492968ce' ? 'Light Novel' :
+                                        anime.get('sourceId')?.value === '6513dc34e62aa885492968cc' ? 'Manga' : 'Unknown' }}</p>
+                                          
+                                    <p class="text-muted font-size-sm" style="text-align: left;">genre: {{
+                                        anime.get('genre')?.value }}</p>
                                 </div>
                             </div>
                             <hr class="my-2">
@@ -87,7 +97,7 @@
                                         <h6 class="mb-0">Episode</h6>
                                     </div>
                                     <div class="form-group col-sm-9 text-secondary">
-                                        <input type="text" class="form-control" formControlName="episode">
+                                        <input type="number" class="form-control" formControlName="episode">
                                     </div>
                                 </div>
 
@@ -109,14 +119,37 @@
                                     </div>
                                     <div class="form-group col-sm-9 text-secondary">
                                         <label class="form-check-label ml-4">
-                                            <input class="form-check-input" type="radio" name="typeId" value="Movie"
+                                            <input class="form-check-input" type="radio" name="typeId" value="6513dc34e62aa885492968ca"
                                                 formControlName="typeId">
                                             <span>Movie</span>
                                         </label>
                                         <label class="form-check-label ml-5">
-                                            <input class="form-check-input" type="radio" name="typeId" value="TV serie"
+                                            <input class="form-check-input" type="radio" name="typeId" value="6513dc34e62aa885492968c8"
                                                 formControlName="typeId">
                                             <span>TV Series</span>
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">Source</h6>
+                                    </div>
+                                    <div class="form-group col-sm-9 text-secondary">
+                                        <label class="form-check-label ml-4">
+                                            <input class="form-check-input" type="radio" name="sourceId" value="6513dc35e62aa885492968d0"
+                                                formControlName="sourceId">
+                                            <span>Original</span>
+                                        </label>
+                                        <label class="form-check-label ml-5">
+                                            <input class="form-check-input" type="radio" name="sourceId" value="6513dc35e62aa885492968ce"
+                                                formControlName="sourceId">
+                                            <span>Light Novel</span>
+                                        </label>
+                                        <label class="form-check-label ml-5">
+                                            <input class="form-check-input" type="radio" name="sourceId" value="6513dc34e62aa885492968cc"
+                                                formControlName="sourceId">
+                                            <span>Manga</span>
                                         </label>
                                     </div>
                                 </div>
@@ -155,7 +188,8 @@
                                 <div class="row">
                                     <div class="col-sm-3"></div>
                                     <div class="col-sm-9 text-secondary">
-                                        <input type="button" class="btn btn-primary px-4" value="Post">
+                                        <input type="button" class="btn btn-primary px-4" value="Post"
+                                            (click)="submitAnime()">
                                     </div>
                                 </div>
                             </form>

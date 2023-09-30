@@ -5,6 +5,7 @@
     animation: slideImages 30s linear infinite;
 }
 
+
 @keyframes slideImages {
     0% {
         background-image: url('../../img/wallpaper1.jpg');
