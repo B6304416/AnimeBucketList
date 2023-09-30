@@ -1,6 +1,29 @@
 .bg-img {
-    width: max;
+    width: 100%;
     height: 300px;
-    background-image: url('../../img/wallpaper1.jpg'); /* Replace 'background-image.jpg' with the path to your image */
-    background-size: cover; /* This property specifies how the background image should be sized */
+    background-size: cover;
+    animation: slideImages 30s linear infinite;
+}
+
+@keyframes slideImages {
+    0% {
+        background-image: url('../../img/wallpaper1.jpg');
+        background-position: 0% 0%;
+    }
+    48% {
+        background-image: url('../../img/wallpaper1.jpg');
+        background-position: 0% 100%;
+    }
+    50% {
+        background-image: url('../../img/wallpaper3.jpg');
+        background-position: 0% 100%;
+    }
+    98% {
+        background-image: url('../../img/wallpaper3.jpg');
+        background-position: 0% 0%;
+    }
+    100% {
+        background-image: url('../../img/wallpaper1.jpg');
+        background-position: 0% 0%;
+    }
 }
