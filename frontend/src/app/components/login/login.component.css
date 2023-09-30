@@ -38,3 +38,6 @@
     background-position: center;
     background-repeat: no-repeat; 
 }
+.full-height {
+  height: 100vh; /* ความสูงเท่ากับหน้าจอ (viewport height) */
+}

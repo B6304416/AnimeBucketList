@@ -1,4 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
+
+@import '~@fortawesome/fontawesome-free/css/all.css';
+/* npm install --save @fortawesome/fontawesome-free */
+
 .bg-Black {
     background-color: #121212; 
   }

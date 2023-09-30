@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg bg-body-tertiary navbar-dark bg-dark">
+<nav class="navbar navbar-expand-lg bg-body-tertiary navbar-dark bg-dark" *ngIf="!isLoginPage">
   <div class="container-fluid">
     <a class="navbar-brand" routerLink="/animelist">Animelist</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
@@ -62,3 +62,4 @@
     </div>
   </div>
 </nav>
+

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { SharedDataService } from 'src/app/services/shared-data.service';
 
 interface AnimeResponse {
   count: number;
@@ -16,23 +17,20 @@ interface AnimeResponse {
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+
   data!: string[];
   email: string = '';
   password: string = '';
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+    private sharedDataService: SharedDataService
+  ) { }
 
-  ngOnInit(): void {
-    // const url = 'http://localhost:5555/anime';
-    // this.http.get<AnimeResponse>(url ).subscribe(
-    //   (res) => {
-    //     console.log('Response data:', res);
-    //     this.data = res.data.map(item => ' '+item.name+' '+ item.episode);
-    //   },
-    //   (error) => {
-    //     console.error('Error:', error);
-    //   }
-    // );
+  ngOnInit() {
+    // เรียกใช้ Service เพื่อกำหนดค่า
+    this.sharedDataService.setIsLoginPage(true);
   }
 
   onSubmit() {
