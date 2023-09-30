@@ -1,8 +1,34 @@
 import express from "express";
 import { Character } from "../models/characterModel.js";
-import { authMiddleware } from "../middleware.js";
+import { User } from "../models/userModel.js";
+import { authMiddleware, tokenVerify } from "../middleware.js";
 
 const router = express.Router();
+
+//Route for Vote for a Character
+router.get('/vote_character/:id', tokenVerify, async (req, res) => {
+    try {
+        const { id } = req.params;
+        const user = await User.findById(req.user.userId);
+
+        const oldCharacter = await Character.findById(user.favCharacter);
+        oldCharacter.score -= 1
+        console.log(user.favCharacter)
+        await oldCharacter.save();
+
+        const newCharacter = await Character.findById(id);
+        newCharacter.score += 1
+        user.favCharacter = newCharacter._id
+        console.log(user.favCharacter)
+        await newCharacter.save();
+
+        await user.save();
+        return res.status(200).json(newCharacter);
+    } catch (error) {
+        console.log(error.message)
+        res.status(500).send({ message: error.message })
+    }
+})
 
 //Route for Get rate of each animes
 router.get('/popular', async (req, res) => {
@@ -86,6 +112,7 @@ router.post('/', authMiddleware, async (req, res) => {
         res.status(500).send({ message: error.message })
     }
 })
+
 
 //Route for Update a new Character
 router.put('/:id', authMiddleware, async (req, res) => {
