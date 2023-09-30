@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 })
 export class AppComponent implements OnInit {
   title = 'frontend';
+  isLoginPage: boolean = false; 
 
   constructor(private http: HttpClient, private router: Router) { }
 
@@ -28,6 +29,7 @@ export class AppComponent implements OnInit {
       console.log('User is logged in with userId:', token);
     }
   }
+
 
 
 }

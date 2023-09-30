@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { SharedDataService } from 'src/app/services/shared-data.service';
 
 interface AnimeResponse {
   name: string;
@@ -27,10 +28,14 @@ export class AnimelistComponent implements OnInit {
   data: AnimeResponse[] = [];
   popCharacter: PopCharacterResponse[] = [];
 
-  constructor(private http: HttpClient, private router: Router) {
-  }
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+    private sharedDataService: SharedDataService
+  ) { }
 
   ngOnInit(): void {
+    this.sharedDataService.setIsLoginPage(false);
     const url = 'http://localhost:5555/anime';
     this.http.get<AnimeResponse[]>(url).subscribe(
       (res) => {
