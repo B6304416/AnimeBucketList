@@ -8,7 +8,8 @@ import { LoginComponent } from './components/login/login.component';
 import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { HomeComponent } from './components/home/home.component';
 import { NavbarComponent } from './components/navbar/navbar.component'
-import { AnimelistComponent } from './components/animelist/animelist.component'
+import { AnimelistComponent } from './components/animelist/animelist.component';
+import { MangalistComponent } from './components/mangalist/mangalist.component'
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { AnimelistComponent } from './components/animelist/animelist.component'
     HomeComponent,
     NavbarComponent,
     AnimelistComponent,
+    MangalistComponent,
   ],
   imports: [
     HttpClientModule,

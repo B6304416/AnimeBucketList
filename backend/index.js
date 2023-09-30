@@ -11,6 +11,7 @@ import dotenv from 'dotenv';
 import bookController from "./controllers/bookController.js";
 import authController from "./controllers/authController.js";
 import animeController from "./controllers/animeController.js";
+import mangaController from "./controllers/mangaController.js";
 import animeReviewController from "./controllers/animeReviewController.js";
 
 const app = express();
@@ -58,6 +59,9 @@ app.use('/book', tokenVerify, bookController);
 
 //Route for CRUD animes
 app.use('/anime', animeController);
+
+//Route for CRUD manga
+app.use('/manga', mangaController);
 
 //Route for CRUD animes
 app.use('/anime_review', tokenVerify, animeReviewController);
