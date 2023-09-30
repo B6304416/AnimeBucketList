@@ -33,13 +33,9 @@ router.get('/:id', async (req, res) => {
 
 //Route for Post a new Anime
 router.post('/', authMiddleware, async (req, res) => {
-    const typeId = req.body.typeId;
-    const studioId = req.body.studioId;
-    const sourceId = req.body.sourceId;
-    const typeObjectId = new ObjectId(typeId);
-    const studioObjectId = new ObjectId(studioId);
-    const sourceObjectId = new ObjectId(sourceId);
+
     try {
+        
         if (
             !req.body.name ||
             !req.body.typeId ||
@@ -52,6 +48,12 @@ router.post('/', authMiddleware, async (req, res) => {
                 req: req
             });
         }
+        const typeId = req.body.typeId;
+        const studioId = req.body.studioId;
+        const sourceId = req.body.sourceId;
+        const typeObjectId = new ObjectId(typeId);
+        const studioObjectId = new ObjectId(studioId);
+        const sourceObjectId = new ObjectId(sourceId);
 
         const newAnime = {
             name: req.body.name,

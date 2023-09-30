@@ -4,6 +4,7 @@ import { SECRET_KEY } from "../config.js"
 
 import bcrypt from "bcryptjs"
 import jwt from "jsonwebtoken"
+import { tokenVerify } from "../middleware.js";
 
 const router = express.Router();
 

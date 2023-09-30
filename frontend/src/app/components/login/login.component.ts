@@ -41,6 +41,7 @@ export class LoginComponent implements OnInit {
         (response: any) => {
           localStorage.setItem('userId', response.userId);
           sessionStorage.setItem('token', response.token);
+          sessionStorage.setItem('role', response.userRole);
           console.log('Login successful', response);
           this.router.navigate(['/animelist']);
         },
