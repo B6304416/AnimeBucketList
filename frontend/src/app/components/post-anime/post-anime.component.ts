@@ -83,6 +83,8 @@ export class PostAnimeComponent implements OnInit {
         // การจัดการกับการตอบสนองจากแบ็คเอนด์ (ตามความเหมาะสม)
         console.log('Anime posted successfully', response);
         alert('Anime posted successfully')
+        // เคลียร์ฟอร์ม
+      this.resetForm();
 
       },
       (error) => {
@@ -92,6 +94,10 @@ export class PostAnimeComponent implements OnInit {
       }
     );
 
+  }
+  resetForm() {
+    this.anime.reset(); // ล้างค่าในฟอร์ม
+    this.anime.setControl('genre', new FormArray([])); // ล้าง FormArray สำหรับ genre
   }
 
 

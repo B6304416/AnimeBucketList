@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Router } from '@angular/router';
+import { HttpClient  } from '@angular/common/http';
+
 import { SharedDataService } from 'src/app/services/shared-data.service';
 
 interface AnimeResponse {
@@ -30,7 +30,6 @@ export class AnimelistComponent implements OnInit {
 
   constructor(
     private http: HttpClient,
-    private router: Router,
     private sharedDataService: SharedDataService
   ) { }
 
