@@ -1,9 +1,45 @@
 import express from "express";
-import { Anime } from "../models/animeModel.js";
+import { Anime, AnimeStudio, AnimeSource, AnimeType } from "../models/animeModel.js";
 import { authMiddleware } from "../middleware.js";
 import { ObjectId } from 'mongodb';
 
 const router = express.Router();
+
+//Route for Get All Studios
+router.get('/studios', async (req, res) => {
+    try {
+        const studios = await AnimeStudio.find({});
+        // console.log(req)
+        return res.status(200).json(studios);
+    } catch (error) {
+        console.log(error.message)
+        res.status(500).send({ message: error.message })
+    }
+})
+
+//Route for Get All Types
+router.get('/types', async (req, res) => {
+    try {
+        const types = await AnimeType.find({});
+        // console.log(req)
+        return res.status(200).json(types);
+    } catch (error) {
+        console.log(error.message)
+        res.status(500).send({ message: error.message })
+    }
+})
+
+//Route for Get All Sources
+router.get('/sources', async (req, res) => {
+    try {
+        const sources = await AnimeSource.find({});
+        // console.log(req)
+        return res.status(200).json(sources);
+    } catch (error) {
+        console.log(error.message)
+        res.status(500).send({ message: error.message })
+    }
+})
 
 //Route for Get All animes
 router.get('/', async (req, res) => {
@@ -120,5 +156,7 @@ router.delete('/:id', authMiddleware, async (req, res) => {
         res.status(500).send({ message: error.message })
     }
 })
+
+
 
 export default router;
