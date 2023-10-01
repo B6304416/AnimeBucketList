@@ -31,6 +31,7 @@ export class AnimereviewComponent implements OnInit {
 
   reviewData: ReviewResponse[] = []
   animeData: AnimeResponse[] = []
+  avatarNumbers: number[] = [];
 
   review = new FormGroup({
     comment: new FormControl(''),
@@ -58,14 +59,14 @@ export class AnimereviewComponent implements OnInit {
     if (this.animeId !== null) {
       const reviewUrlbyId = `${this.reviewUrl}${this.animeId}`;
       const animeUrlbyId = `${this.animeUrl}${this.animeId}`;
-      
+
       this.http.get<ReviewResponse[]>(reviewUrlbyId, { headers }).subscribe(
         (res) => {
           this.reviewData = res
           console.log("review")
           console.log(this.reviewData);
         });
-        
+
       this.http.get<AnimeResponse[]>(animeUrlbyId).subscribe(
         (res) => {
           this.animeData = res
@@ -83,10 +84,35 @@ export class AnimereviewComponent implements OnInit {
     } else {
       console.error('Anime ID is null.');
     }
+    for (let i = 0; i < 100; i++) {
+      this.avatarNumbers.push(this.getRandomAvatarNumber(1, 7));
+    }
   }
-  getRandomNumber(min: number, max: number): number {
+
+  fetchReviewData() {
+    const token = sessionStorage.getItem('token');
+    const headers = new HttpHeaders({
+      'Authorization': 'Bearer ' + token
+    });
+  
+    const reviewUrlbyId = `${this.reviewUrl}${this.animeId}`;
+  
+    this.http.get<ReviewResponse[]>(reviewUrlbyId, { headers }).subscribe(
+      (res) => {
+        this.reviewData = res;
+        console.log("review");
+        console.log(this.reviewData);
+      },
+      (error) => {
+        console.error('Error:', error);
+      }
+    );
+  }
+
+  
+  getRandomAvatarNumber(min: number, max: number): number {
     return Math.floor(Math.random() * (max - min + 1)) + min;
-}
+  }
 
   submitAnime() {
     const review = this.review.value;
@@ -99,8 +125,8 @@ export class AnimereviewComponent implements OnInit {
     this.http.post('http://localhost:5555/anime_review', review, { headers, responseType: 'text' as 'json' }).subscribe(
       (response) => {
         console.log('Anime posted successfully', response);
-        alert('Anime posted successfully')
-        // this.resetForm();
+        this.resetForm();
+        this.fetchReviewData(); // เรียกดึงข้อมูล Anime ใหม่หลังจากการโพสต์ Anime สำเร็จ
 
       },
       (error) => {
@@ -108,9 +134,10 @@ export class AnimereviewComponent implements OnInit {
         alert('Error: ' + error.message)
       }
     );
-    // resetForm(); {
-    //   this.comment.reset(); 
-    // };
 
+
+  }
+  resetForm() {
+    this.review.reset();
   }
 }
