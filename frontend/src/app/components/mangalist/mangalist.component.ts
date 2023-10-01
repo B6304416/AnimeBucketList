@@ -4,8 +4,8 @@ import { Router } from '@angular/router';
 
 interface MangaResponse {
   name: string;
-  episode: number;
-  genre:string;
+  authorId: string;
+  genre: string;
   imgUrl:string;
 }
 
@@ -50,7 +50,7 @@ export class MangalistComponent implements OnInit {
             <div class="card-body">
             <div class="small text-muted">${data.genre}</div>
             <h2 class="card-title h4">${data.name}</h2>
-            <p class="card-text">${data.episode} episodes</p>
+            <p class="card-text">${data.authorId} author</p>
                 <a class="btn btn-primary" href="#!">Read more →</a>
             </div>
         </div>
