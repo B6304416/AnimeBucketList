@@ -12,7 +12,7 @@ const mangaSchema = mongoose.Schema(
             required: true,
         },
         genre: {
-            type: String,
+            type: Array,
         },
         imgUrl: {
             type: String,

@@ -1,0 +1,121 @@
+<div class="bg-Black">
+    <div class="container pt-4 pb-5">
+        <div class="main-body">
+            <div class="row ">
+                <div class="col-lg-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="d-flex flex-column align-items-center text-center">
+                                <div *ngIf="!manga.get('imgUrl')?.value">
+                                    <div class="spinner-grow text-primary" role="status">
+                                        <span class="sr-only">Loading...</span>
+                                    </div>
+                                    <div class="spinner-grow text-secondary" role="status">
+                                        <span class="sr-only">Loading...</span>
+                                    </div>
+                                    <div class="spinner-grow text-success" role="status">
+                                        <span class="sr-only">Loading...</span>
+                                    </div>
+                                    <div class="spinner-grow text-danger" role="status">
+                                        <span class="sr-only">Loading...</span>
+                                    </div>
+                                    <div class="spinner-grow text-warning" role="status">
+                                        <span class="sr-only">Loading...</span>
+                                    </div>
+                                    <div class="spinner-grow text-info" role="status">
+                                        <span class="sr-only">Loading...</span>
+                                    </div>
+                                    <div class="spinner-grow text-light" role="status">
+                                        <span class="sr-only">Loading...</span>
+                                    </div>
+                                    <div class="spinner-grow text-dark" role="status">
+                                        <span class="sr-only">Loading...</span>
+                                    </div>
+                                </div>
+
+                                <img *ngIf="manga.get('imgUrl')?.value" [src]="manga.get('imgUrl')?.value" alt="Admin"
+                                    width="300">
+                                <div class="mt-3">
+                                    <h4 *ngIf="!manga.get('name')?.value">Manga Name</h4>
+                                    <h4 *ngIf="manga.get('name')?.value">{{ manga.get('name')?.value }}</h4>
+
+                                    <p class="text-secondary mb-1" style="text-align: left;"> author: {{
+                                        getAuthorName(manga.get('authorId')?.value) }}</p>
+
+                                    <p class="text-muted font-size-sm" style="text-align: left;">genre: {{
+                                        manga.get('genre')?.value }}</p>
+                                </div>
+                            </div>
+                            <hr class="my-2">
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div class="col-lg-8">
+                    <div class="card">
+                        <div class="card-body">
+                            
+                            <form [formGroup]="manga">
+                                <div class="row mb-3">
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">Manga Name</h6>
+                                    </div>
+                                    <div class="form-group col-sm-9 text-secondary">
+                                        <input type="text" class="form-control" formControlName="name">
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">Author</h6>
+                                    </div>
+                                    <div class="form-group col-sm-9 text-secondary">
+                                        <select class="form-control" formControlName="authorId">
+                                            <option *ngFor="let author of authorOptions" [value]="author._id">{{
+                                                author.eng_name }}</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">Genre</h6>
+                                    </div>
+                                    <div class="form-group col-sm-9 text-secondary">
+                                        <label class="form-check-label ml-4 spaced-label"
+                                            *ngFor="let genreOption of genreOptions">
+                                            <input class="form-check-input" type="checkbox" [value]="genreOption"
+                                                [checked]="isValidGenre(genreOption)"
+                                                (change)="toggleGenre(genreOption)">
+                                            <span>{{ genreOption }}</span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">ImgUrl</h6>
+                                    </div>
+                                    <div class="form-group col-sm-9 text-secondary">
+                                        <input type="text" class="form-control" formControlName="imgUrl">
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-sm-3"></div>
+                                    <div class="col-sm-3 text-secondary">
+                                        <input type="button" class="btn btn-primary px-5 mb-4" value="Post"
+                                            (click)="submitManga()">
+                                    </div>
+                                    
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>  
+        </div>
+    </div>
+</div>
+<router-outlet></router-outlet>

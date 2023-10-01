@@ -2,40 +2,35 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormArray } from '@angular/forms';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
-interface StudioResponse {
+interface AuthorResponse {
   _id: string;
-  name: string;
+  eng_name: string;
 }
-
 @Component({
-  selector: 'app-post-anime',
-  templateUrl: './post-anime.component.html',
-  styleUrls: ['./post-anime.component.css']
+  selector: 'app-post-manga',
+  templateUrl: './post-manga.component.html',
+  styleUrls: ['./post-manga.component.css']
 })
-export class PostAnimeComponent implements OnInit {
+export class PostMangaComponent implements OnInit {
 
-  anime = new FormGroup({
+  manga = new FormGroup({
     name: new FormControl(''),
-    typeId: new FormControl(''),
-    studioId: new FormControl(''),
-    episode: new FormControl(null),
+    authorId: new FormControl(''),
     genre: new FormArray([]),
     imgUrl: new FormControl(''),
-    synopsis: new FormControl(''),
-    sourceId: new FormControl('')
   });
 
-  studioOptions: StudioResponse[] = [];
-  genreOptions: string [] = [];
+  authorOptions: AuthorResponse[] = [];
+  genreOptions: string[] = [];
 
   constructor(private http: HttpClient) { }
 
   ngOnInit(): void {
-    const studioUrl = 'http://localhost:5555/anime/studios';
-    this.http.get<StudioResponse[]>(studioUrl).subscribe(
+    const authorUrl = 'http://localhost:5555/manga/authors';
+    this.http.get<AuthorResponse[]>(authorUrl).subscribe(
       (res) => {
-        this.studioOptions = res
-        console.log(this.studioOptions)
+        this.authorOptions = res
+        console.log(this.authorOptions)
       },
       (error) => {
         console.error('Error:', error);
@@ -56,21 +51,21 @@ export class PostAnimeComponent implements OnInit {
   }
 
   //ตรวจ id กับ name studio
-  getStudioName(studioId: string | null | undefined): string {
-    if (!studioId) {
+  getAuthorName(authorId: string | null | undefined): string {
+    if (!authorId) {
       return 'Unknown';
     }
-    const studio = this.studioOptions.find(s => s._id === studioId);
-    return studio ? studio.name : 'Unknown Studio';
+    const studio = this.authorOptions.find(s => s._id === authorId);
+    return studio ? studio.eng_name : 'Unknown Author';
   }
 
   isValidGenre(genre: string): boolean {
-    const genreArray = this.anime.get('genre') as FormArray;
+    const genreArray = this.manga.get('genre') as FormArray;
     return genreArray.value.includes(genre);
   }
 
   toggleGenre(genre: string): void {
-    const genreArray = this.anime.get('genre') as FormArray;
+    const genreArray = this.manga.get('genre') as FormArray;
     if (genreArray.value.includes(genre)) {
       genreArray.removeAt(genreArray.value.indexOf(genre));
     } else {
@@ -78,30 +73,29 @@ export class PostAnimeComponent implements OnInit {
     }
   }
 
-  submitAnime() {
-    const animeData = this.anime.value;
+  submitManga() {
+    const mangaData = this.manga.value;
     const token = sessionStorage.getItem('token');
-
+    console.log(mangaData)
     const headers = new HttpHeaders({
       'Authorization': 'Bearer ' + token
     });
 
-    this.http.post('http://localhost:5555/anime', animeData, { headers, responseType: 'text' as 'json' }).subscribe(
+    this.http.post('http://localhost:5555/manga', mangaData, { headers}).subscribe(
       (response) => {
-        console.log('Anime posted successfully', response);
-        alert('Anime posted successfully')
+        console.log('Manga posted successfully', response);
+        alert('Manga posted successfully')
         this.resetForm();
-
       },
       (error) => {
-        console.error('Error posting anime', error);
+        console.error('Error posting manga', error);
         alert('Error: ' + error.message)
       }
     );
 
   }
   resetForm() {
-    this.anime.reset(); 
-    this.anime.setControl('genre', new FormArray([])); 
+    this.manga.reset();
+    this.manga.setControl('genre', new FormArray([]));
   }
 }

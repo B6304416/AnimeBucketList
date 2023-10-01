@@ -9,7 +9,6 @@ const router = express.Router();
 router.get('/studios', async (req, res) => {
     try {
         const studios = await AnimeStudio.find({});
-        // console.log(req)
         return res.status(200).json(studios);
     } catch (error) {
         console.log(error.message)

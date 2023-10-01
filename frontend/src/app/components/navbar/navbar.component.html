@@ -1,19 +1,22 @@
 <nav class="navbar navbar-expand-lg bg-body-tertiary navbar-dark bg-dark" *ngIf="!isLoginPage">
   <div class="container-fluid">
     <a class="navbar-brand" routerLink="/animelist">Animelist</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+    <!-- <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
       aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
-    </button>
-    <a class="navbar-brand" routerLink="/mangalist">Mangalist</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+    </button> -->
+    <!-- <a class="navbar-brand" routerLink="/mangalist">Mangalist</a> -->
+    <!-- <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
       aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
-    </button>
+    </button> -->
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
 
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" routerLink="/mangalist">Mangalist</a>
+        </li>
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" routerLink="/home">Character</a>
         </li>
@@ -45,7 +48,7 @@
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
             <li><a class="dropdown-item" href="/postanime">Anime</a></li>
-            <li><a class="dropdown-item" href="#">Manga</a></li>
+            <li><a class="dropdown-item" href="/postmanga">Manga</a></li>
           </ul>
         </li>
       </ul>

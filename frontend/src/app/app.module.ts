@@ -12,6 +12,7 @@ import { AnimelistComponent } from './components/animelist/animelist.component';
 import { PostAnimeComponent } from './components/post-anime/post-anime.component'
 import { SharedDataService } from './services/shared-data.service';
 import { AnimereviewComponent } from './components/animereview/animereview.component';
+import { PostMangaComponent } from './components/post-manga/post-manga.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { AnimereviewComponent } from './components/animereview/animereview.compo
     AnimelistComponent,
     PostAnimeComponent,
     AnimereviewComponent,
+    PostMangaComponent,
 
   ],
   imports: [
