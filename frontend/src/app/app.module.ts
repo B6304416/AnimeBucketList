@@ -15,6 +15,7 @@ import { AnimereviewComponent } from './components/animereview/animereview.compo
 
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
