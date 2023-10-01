@@ -1,1 +1,113 @@
-<p>animereview works!</p>
+<div class="bg-dark ">
+    <div class="container pt-3 ">
+        <div class="row">
+            <div class="col-md-4 ">
+                <div class="col-md-12" >
+                    <div class="card mb-4">
+                        <img class="card-img-top" [src]="animeData[0].imgUrl" alt="..." />
+                    </div>
+                    <div class="card mb-4">
+                        <div class="card-header">ลายละเอียด</div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <ul class="list-unstyled mb-0">
+                                        <li>Name: {{ animeData[0].name}}</li>
+                                        <li>Episodes: {{ animeData[0].episode}}</li>
+                                        <li>Studios: {{ animeData[0].genre}}</li>
+                                        <li>Source: {{ animeData[0].sourceId}}</li>
+                                        <li>Type: {{ animeData[0].typeId}}</li>
+                                        <li>Genres: {{ animeData[0].genre}}</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card mb-4">
+                        <div class="card-header">เรื่องย่อ</div>
+                        <div class="card-body">{{ animeData[0].synopsis || 'No synopsis available.' }}</div>
+                    </div>
+                </div>
+
+            </div>
+            <!-- Nested row for non-featured blog posts-->
+            <div class="col-md-8">
+                <div class="row">
+
+                    <div class="col-md-12">
+                        <div class="card mb-4">
+                            <div class="card-header">ลายละเอียด</div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <ul class="list-unstyled mb-0">
+                                            <li>Type: TV</li>
+                                            <li>Episodes: Unknown</li>
+                                            <li>Studios: LIDENFILMS</li>
+                                            <li>Source: Light novel</li>
+                                            <li>Genres: Action, Adventure, Fantasy</li>
+
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12">
+                        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"
+                            rel="stylesheet">
+                        <section class="content-item" id="comments">
+                            <div class="card mb-4">
+                                <div class="card-header">
+                                    <form>
+                                        <h3 class="pull-left">New Comment</h3>
+                                        <div class="rating pull-right"> 
+                                            <input type="radio" name="rating" value="5" id="5"><label for="5">☆</label>
+                                            <input type="radio" name="rating" value="4" id="4"><label for="4">☆</label> 
+                                            <input type="radio" name="rating" value="3" id="3"><label for="3">☆</label>
+                                            <input type="radio" name="rating" value="2" id="2"><label for="2">☆</label>
+                                            <input type="radio" name="rating" value="1" id="1"><label for="1">☆</label>
+                                        </div>
+                                        <fieldset>
+                                            <div class="row">
+                                                <div class="col-sm-3 col-lg-2 hidden-xs">
+                                                    <img class="img-responsive card-img-test"
+                                                        src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="">
+                                                </div>
+                                                <div class="form-group col-xs-12 col-sm-9 col-lg-10">
+                                                    <textarea class="form-control" id="message"
+                                                        placeholder="Your message" required=""></textarea>
+                                                </div>
+                                            </div>
+                                        </fieldset>
+                                        <button type="submit" class="btn btn-normal pull-right">Submit</button>
+                                    </form>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <h3>{{ reviewData.length }} Comments</h3>
+                                            <div *ngFor="let review of reviewData" class="media">
+                                                <a class="pull-left" href="#"><img class="media-object card-img-test"
+                                                        src="https://bootdey.com/img/Content/avatar/avatar1.png"
+                                                        alt=""></a>
+                                                <div class="media-body">
+                                                    <h4 class="media-heading">{{ review.userId }}</h4>
+                                                    <p class="fa fa-calendar"></p>{{ review.rate }}
+                                                    <p>{{ review.comment }}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>

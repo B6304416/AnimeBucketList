@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient  } from '@angular/common/http';
-import { Router} from '@angular/router';
+import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 import { SharedDataService } from 'src/app/services/shared-data.service';
+declare var window: any;
 
 interface AnimeResponse {
   _id: string;
@@ -62,8 +63,11 @@ export class AnimelistComponent implements OnInit {
     );
   }
 
-  onClick(animeId: string){
-    console.log('Clicked on anime with ID:', animeId)
+  onClick(animeId: string) {
+    console.log('Clicked on anime with ID:', animeId);
     this.router.navigate(['/animereview', animeId]);
+    // window.scrollTo({ top: 0, behavior: 'smooth' }); // เลื่อนไปที่ด้านบนสุดของหน้าเว็บ
+    window.scrollTo(0, 0); // กระโดดไปที่ด้านบนสุดของหน้าเว็บทันที
   }
+  
 }

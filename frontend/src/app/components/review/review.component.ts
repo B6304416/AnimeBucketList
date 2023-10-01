@@ -7,7 +7,6 @@ interface ReviewResponse {
   userId: string;
   rate: number;
   comment: string;
-
 }
 
 interface AnimeResponse {
@@ -16,20 +15,19 @@ interface AnimeResponse {
   episode: number;
   genre: string;
   imgUrl: string;
-  synopsis: string;
-  sourceId: string;
-  typeId: string;
+  synopsis: string; 
 }
 
 @Component({
-  selector: 'app-animereview',
-  templateUrl: './animereview.component.html',
-  styleUrls: ['./animereview.component.css']
+  selector: 'app-review',
+  templateUrl: './review.component.html',
+  styleUrls: ['./review.component.css']
 })
-export class AnimereviewComponent implements OnInit {
-
+export class ReviewComponent implements OnInit{
+  
   reviewData: ReviewResponse[] = []
   animeData: AnimeResponse[] = []
+  
 
   animeId: string | null;
   reviewUrl = 'http://localhost:5555/anime_review/rate/'
@@ -52,14 +50,13 @@ export class AnimereviewComponent implements OnInit {
       this.http.get<ReviewResponse[]>(reviewUrlbyId, { headers }).subscribe(
         (res) => {
           this.reviewData = res
-          console.log("review")
           console.log(this.reviewData);
         });
         
       this.http.get<AnimeResponse[]>(animeUrlbyId).subscribe(
         (res) => {
+          console.log('Response data:', res);
           this.animeData = res
-          console.log("anime")
           console.log(this.animeData)
         },
         (error) => {
