@@ -2,7 +2,7 @@
     <div class="container pt-3 ">
         <div class="row">
             <div class="col-md-4 ">
-                <div class="col-md-12" >
+                <div class="col-md-12">
                     <div class="card mb-4">
                         <img class="card-img-top" [src]="animeData[0].imgUrl" alt="..." />
                     </div>
@@ -37,23 +37,12 @@
 
                     <div class="col-md-12">
                         <div class="card mb-4">
-                            <div class="card-header">ลายละเอียด</div>
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col-sm-12">
-                                        <ul class="list-unstyled mb-0">
-                                            <li>Type: TV</li>
-                                            <li>Episodes: Unknown</li>
-                                            <li>Studios: LIDENFILMS</li>
-                                            <li>Source: Light novel</li>
-                                            <li>Genres: Action, Adventure, Fantasy</li>
-
-                                        </ul>
-                                    </div>
-                                </div>
+                            <div class="embed-responsive embed-responsive-16by9">
+                                <iframe src="https://www.youtube.com/embed/zntY4A4GPU0"></iframe>
                             </div>
                         </div>
                     </div>
+
 
                     <div class="col-md-12">
                         <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"
@@ -61,15 +50,22 @@
                         <section class="content-item" id="comments">
                             <div class="card mb-4">
                                 <div class="card-header">
-                                    <form>
+                                    <form [formGroup]="review">
                                         <h3 class="pull-left">New Comment</h3>
-                                        <div class="rating pull-right"> 
-                                            <input type="radio" name="rating" value="5" id="5"><label for="5">☆</label>
-                                            <input type="radio" name="rating" value="4" id="4"><label for="4">☆</label> 
-                                            <input type="radio" name="rating" value="3" id="3"><label for="3">☆</label>
-                                            <input type="radio" name="rating" value="2" id="2"><label for="2">☆</label>
-                                            <input type="radio" name="rating" value="1" id="1"><label for="1">☆</label>
+                                        <div class="rating pull-right">
+                                            <input type="radio" name="rate" [value]="5" id="5"
+                                                formControlName="rate"><label for="5">☆</label>
+                                            <input type="radio" name="rate" [value]="4" id="4"
+                                                formControlName="rate"><label for="4">☆</label>
+                                            <input type="radio" name="rate" [value]="3" id="3"
+                                                formControlName="rate"><label for="3">☆</label>
+                                            <input type="radio" name="rate" [value]="2" id="2"
+                                                formControlName="rate"><label for="2">☆</label>
+                                            <input type="radio" name="rate" [value]="1" id="1"
+                                                formControlName="rate"><label for="1">☆</label>
                                         </div>
+
+
                                         <fieldset>
                                             <div class="row">
                                                 <div class="col-sm-3 col-lg-2 hidden-xs">
@@ -78,11 +74,13 @@
                                                 </div>
                                                 <div class="form-group col-xs-12 col-sm-9 col-lg-10">
                                                     <textarea class="form-control" id="message"
-                                                        placeholder="Your message" required=""></textarea>
+                                                        placeholder="Your message" required=""
+                                                        formControlName="comment"></textarea>
                                                 </div>
                                             </div>
                                         </fieldset>
-                                        <button type="submit" class="btn btn-normal pull-right">Submit</button>
+                                        <button type="submit" class="btn btn-normal pull-right"
+                                            (click)="submitAnime()">Submit</button>
                                     </form>
                                 </div>
                                 <div class="card-body">
@@ -90,14 +88,25 @@
                                         <div class="col-sm-12">
                                             <h3>{{ reviewData.length }} Comments</h3>
                                             <div *ngFor="let review of reviewData" class="media">
-                                                <a class="pull-left" href="#"><img class="media-object card-img-test"
-                                                        src="https://bootdey.com/img/Content/avatar/avatar1.png"
-                                                        alt=""></a>
+                                                <a class="pull-left">
+                                                    <img class="media-object card-img-test"
+                                                         [src]="'https://bootdey.com/img/Content/avatar/avatar' + getRandomNumber(1, 7) + '.png'"
+                                                         alt="">
+                                                </a>
                                                 <div class="media-body">
-                                                    <h4 class="media-heading">{{ review.userId }}</h4>
-                                                    <p class="fa fa-calendar"></p>{{ review.rate }}
+                                                    <div class="media-heading">
+                                                        <div style="display: inline-block; font-weight: bold;">{{
+                                                            review.userId }}</div>
+                                                        <div style="float: right;">
+                                                            <span *ngFor="let i of [1, 2, 3, 4, 5]">
+                                                                <span class="fa"
+                                                                    [ngClass]="{'fa-star': i <= review.rate, 'fa-star-o': i > review.rate}"></span>
+                                                            </span>
+                                                        </div>
+                                                    </div>
                                                     <p>{{ review.comment }}</p>
                                                 </div>
+
                                             </div>
                                         </div>
                                     </div>

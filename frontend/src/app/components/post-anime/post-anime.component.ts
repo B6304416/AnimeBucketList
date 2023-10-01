@@ -25,18 +25,6 @@ export class PostAnimeComponent implements OnInit {
     sourceId: new FormControl('')
   });
 
-  genreOption = [
-    'Action',
-    'Sport',
-    'Harem',
-    'Adventure',
-    'Shoujo',
-    'Isekai',
-    'Drama',
-    'Shonen',
-    'Comedy',
-    'Fantasy'];
-
   studioOptions: StudioResponse[] = [];
   genreOptions: string [] = [];
 
@@ -55,7 +43,6 @@ export class PostAnimeComponent implements OnInit {
     );
 
     const genreUrl = 'http://localhost:5555/genre';
-
     this.http.get<{ name: string }[]>(genreUrl).subscribe(
       (res) => {
         this.genreOptions = res.map(item => item.name);
