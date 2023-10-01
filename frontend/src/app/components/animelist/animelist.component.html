@@ -14,15 +14,15 @@
         <div class="row">
             <div class="col-md-8" *ngFor="let character of popCharacter">
                 <div class="card mb-4">
-                  <a href="#!"><img class="card-img-top" [src]="character.imgUrl" alt="..." /></a>
-                  <div class="card-body">
-                    <div class="small text-muted">POPULAR CHARACTER</div>
-                    <h2 class="card-title h4">{{ character.name }}</h2>
-                    <p class="card-text">{{ character.score }} users favorite this character.</p>
-                    <a class="btn btn-primary" href="#!">Read more →</a>
-                  </div>
+                    <a href="#!"><img class="card-img-top" [src]="character.imgUrl" alt="..." /></a>
+                    <div class="card-body">
+                        <div class="small text-muted">POPULAR CHARACTER</div>
+                        <h2 class="card-title h4">{{ character.name }}</h2>
+                        <p class="card-text">{{ character.score }} users favorite this character.</p>
+                        <a class="btn btn-primary" href="#!">Read more →</a>
+                    </div>
                 </div>
-              </div>
+            </div>
             <!-- Side widgets-->
             <div class="col-lg-4">
                 <!-- Search widget-->
@@ -78,7 +78,7 @@
                                 <div class="small text-muted">{{ anime.genre }}</div>
                                 <h2 class="card-title h4">{{ anime.name }}</h2>
                                 <p class="card-text">{{ anime.episode }} episodes</p>
-                                <a class="btn btn-primary" href="#!">Read more →</a>
+                                <a class="btn btn-primary" (click)="onClick(anime._id)">Read more →</a>
                             </div>
                         </div>
                     </div>
