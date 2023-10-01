@@ -14,6 +14,7 @@ import animeController from "./controllers/animeController.js";
 import mangaController from "./controllers/mangaController.js";
 import animeReviewController from "./controllers/animeReviewController.js";
 import characterController from "./controllers/characterController.js";
+import genreController from "./controllers/genreController.js";
 
 const app = express();
 
@@ -64,8 +65,10 @@ app.use('/anime', animeController);
 app.use('/manga', mangaController);
 //Route for CRUD animes
 app.use('/anime_review', tokenVerify, animeReviewController);
-//Route for CRUD animes
+//Route for CRUD characters
 app.use('/character', characterController);
+//Route for CRUD genres
+app.use('/genre', genreController);
 
 //Connect database
 mongoose
