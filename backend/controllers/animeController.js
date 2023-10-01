@@ -22,7 +22,7 @@ router.get('/:id', async (req, res) => {
     try {
         const { id } = req.params;
         const anime = await Anime.findById(id);
-        return res.status(200).json(anime);
+        return res.status(200).json([anime]);
     } catch (error) {
         console.log(error.message)
         res.status(500).send({ message: error.message })
