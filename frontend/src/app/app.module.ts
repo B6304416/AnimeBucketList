@@ -14,6 +14,7 @@ import { SharedDataService } from './services/shared-data.service';
 
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -23,7 +24,6 @@ import { SharedDataService } from './services/shared-data.service';
     NavbarComponent,
     AnimelistComponent,
     PostAnimeComponent,
-
   ],
   imports: [
     HttpClientModule,
