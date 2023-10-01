@@ -2,6 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormArray } from '@angular/forms';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
+interface StudioResponse {
+  _id: string;
+  name: string;
+}
+
 @Component({
   selector: 'app-post-anime',
   templateUrl: './post-anime.component.html',
@@ -20,12 +25,7 @@ export class PostAnimeComponent implements OnInit {
     sourceId: new FormControl('')
   });
 
-  studioOptions = [
-    { id: '6513dc34e62aa885492968c6', name: 'Madhouse' },
-    { id: '6513dc33e62aa885492968c4', name: 'Bones' },
-  ];
-
-  genreOptions = [
+  genreOption = [
     'Action',
     'Sport',
     'Harem',
@@ -37,29 +37,53 @@ export class PostAnimeComponent implements OnInit {
     'Comedy',
     'Fantasy'];
 
+  studioOptions: StudioResponse[] = [];
+  genreOptions: string [] = [];
+
   constructor(private http: HttpClient) { }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    const studioUrl = 'http://localhost:5555/anime/studios';
+    this.http.get<StudioResponse[]>(studioUrl).subscribe(
+      (res) => {
+        this.studioOptions = res
+        console.log(this.studioOptions)
+      },
+      (error) => {
+        console.error('Error:', error);
+      }
+    );
+
+    const genreUrl = 'http://localhost:5555/genre';
+
+    this.http.get<{ name: string }[]>(genreUrl).subscribe(
+      (res) => {
+        this.genreOptions = res.map(item => item.name);
+        console.log(this.genreOptions);
+      },
+      (error) => {
+        console.error('Error:', error);
+      }
+    );
+
+  }
 
   //ตรวจ id กับ name studio
   getStudioName(studioId: string | null | undefined): string {
     if (!studioId) {
       return 'Unknown';
     }
-    const studio = this.studioOptions.find(s => s.id === studioId);
+    const studio = this.studioOptions.find(s => s._id === studioId);
     return studio ? studio.name : 'Unknown Studio';
   }
 
-  // เพิ่มเมทอดสำหรับการตรวจสอบความถูกต้องของ Radio Button หลายค่า
   isValidGenre(genre: string): boolean {
     const genreArray = this.anime.get('genre') as FormArray;
     return genreArray.value.includes(genre);
   }
 
-  // เพิ่มเมทอดสำหรับการเพิ่มหรือลบค่าใน FormArray
   toggleGenre(genre: string): void {
     const genreArray = this.anime.get('genre') as FormArray;
-
     if (genreArray.value.includes(genre)) {
       genreArray.removeAt(genreArray.value.indexOf(genre));
     } else {
@@ -69,26 +93,20 @@ export class PostAnimeComponent implements OnInit {
 
   submitAnime() {
     const animeData = this.anime.value;
-    // Replace 'YOUR_TOKEN' with your actual token
     const token = sessionStorage.getItem('token');
 
-    // Set up headers with the token
     const headers = new HttpHeaders({
       'Authorization': 'Bearer ' + token
     });
 
-    // ส่งข้อมูลไปยังแบ็คเอนด์
     this.http.post('http://localhost:5555/anime', animeData, { headers, responseType: 'text' as 'json' }).subscribe(
       (response) => {
-        // การจัดการกับการตอบสนองจากแบ็คเอนด์ (ตามความเหมาะสม)
         console.log('Anime posted successfully', response);
         alert('Anime posted successfully')
-        // เคลียร์ฟอร์ม
-      this.resetForm();
+        this.resetForm();
 
       },
       (error) => {
-        // การจัดการเมื่อเกิดข้อผิดพลาดในการส่งข้อมูล
         console.error('Error posting anime', error);
         alert('Error: ' + error.message)
       }
@@ -96,10 +114,7 @@ export class PostAnimeComponent implements OnInit {
 
   }
   resetForm() {
-    this.anime.reset(); // ล้างค่าในฟอร์ม
-    this.anime.setControl('genre', new FormArray([])); // ล้าง FormArray สำหรับ genre
+    this.anime.reset(); 
+    this.anime.setControl('genre', new FormArray([])); 
   }
-
-
-
 }
