@@ -3,14 +3,6 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { SharedDataService } from 'src/app/services/shared-data.service';
 
-interface AnimeResponse {
-  count: number;
-  data: {
-    name: string;
-    episode: number;
-  }[];
-}
-
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',

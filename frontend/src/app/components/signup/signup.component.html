@@ -1,0 +1,45 @@
+<div class="container-fluid bg-img full-height">
+    <div class="row">
+        <div class="col-md-4 offset-md-4">
+            <div class="card my-5">
+                <form class="card-body cardbody-color p-lg-5 text-center" (ngSubmit)="onSubmit()">
+                    <a routerLink="/animelist" class="btn btn-color px-5 mb-5 w-10 btn-home">
+                        <i class="fas fa-home"></i> Home
+                    </a>
+
+                    <div class="text-center">
+                        <img *ngIf="showOriginalImage;"
+                            src="https://im4.ezgif.com/tmp/ezgif-4-18b06f2679.gif"
+                            class="img-fluid profile-image-pic img-thumbnail rounded my-3" width="80%" height="100%"
+                            alt="profile">
+                    </div>
+                    <div class="text-center">
+                        <img *ngIf="!showOriginalImage;"
+                            src="https://im4.ezgif.com/tmp/ezgif-4-576ee79019.gif"
+                            class="img-fluid profile-image-pic img-thumbnail rounded my-3" width="80%" height="100%"
+                            alt="profile">
+                    </div>
+
+                    <div class="mb-3 form-group box">
+                        <input class="form-control" type="name" id="name" name="name" aria-describedby="name"
+                            placeholder="UserName" [(ngModel)]="name" required (input)="onInputChange()">
+                    </div>
+                    <div class="mb-3 form-group box">
+                        <input class="form-control" type="email" id="email" name="email" aria-describedby="emailHelp"
+                            placeholder="Email" [(ngModel)]="email" required (input)="onInputChange()">
+                    </div>
+                    <div class="mb-3 form-group box">
+                        <input class="form-control" type="password" id="password" name="password" placeholder="Password"
+                            [(ngModel)]="password" required (input)="onInputChange()">
+                    </div>
+
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-color px-5 mb-5 w-10">Signup</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+<router-outlet></router-outlet>

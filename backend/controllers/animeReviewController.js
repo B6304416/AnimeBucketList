@@ -1,5 +1,6 @@
 import express from "express";
 import { AnimeReview } from "../models/animeReviewModel.js";
+import { ObjectId } from 'mongodb';
 
 const router = express.Router();
 
@@ -43,6 +44,21 @@ router.get('/rate', async (req, res) => {
     } catch (error) {
         console.log(error.message)
         res.status(500).send({ message: error.message })
+    }
+});
+
+//Route for Get review by animeId
+router.get('/rate/:id', async (req, res) => {
+    try {
+        const { id } = req.params;
+        const animeObjectId = new ObjectId(id);
+        const comments = await AnimeReview.find({ animeId: animeObjectId });
+        return res.status(200).json(
+            comments
+        );
+    } catch (error) {
+        console.error(error.message);
+        res.status(500).send({ message: 'Server Error' });
     }
 });
 

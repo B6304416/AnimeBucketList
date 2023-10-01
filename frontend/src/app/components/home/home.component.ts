@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 interface BookResponse {
   count: number;
@@ -19,13 +20,18 @@ export class HomeComponent implements OnInit {
 
   data!: string[];
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private router: Router,) { }
 
   ngOnInit(): void {
+    const token = sessionStorage.getItem('token');
+
+    if (!token) {
+      this.router.navigate(['/login']);
+    } else {
+      console.log('User is logged in with userId:', token);
+    }
+
     const url = 'http://localhost:5555/book';
-    
-    // Replace 'YOUR_TOKEN' with your actual token
-    const token = sessionStorage.getItem('token');;
   
     // Set up headers with the token
     const headers = new HttpHeaders({

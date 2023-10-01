@@ -1,7 +1,6 @@
 import express from "express";
 import { Anime } from "../models/animeModel.js";
 import { authMiddleware } from "../middleware.js";
-import mongoose from "mongoose";
 import { ObjectId } from 'mongodb';
 
 const router = express.Router();
