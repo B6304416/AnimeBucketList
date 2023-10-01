@@ -11,6 +11,7 @@ import { NavbarComponent } from './components/navbar/navbar.component'
 import { AnimelistComponent } from './components/animelist/animelist.component';
 import { PostAnimeComponent } from './components/post-anime/post-anime.component'
 import { SharedDataService } from './services/shared-data.service';
+import { AnimereviewComponent } from './components/animereview/animereview.component';
 
 
 
@@ -23,6 +24,7 @@ import { SharedDataService } from './services/shared-data.service';
     NavbarComponent,
     AnimelistComponent,
     PostAnimeComponent,
+    AnimereviewComponent,
 
   ],
   imports: [

@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient  } from '@angular/common/http';
+import { Router} from '@angular/router';
 
 import { SharedDataService } from 'src/app/services/shared-data.service';
 
 interface AnimeResponse {
+  _id: string;
   name: string;
   episode: number;
   genre: string;
@@ -24,13 +26,13 @@ interface PopCharacterResponse {
 
 export class AnimelistComponent implements OnInit {
 
-  // data!: string;
   data: AnimeResponse[] = [];
   popCharacter: PopCharacterResponse[] = [];
 
   constructor(
     private http: HttpClient,
-    private sharedDataService: SharedDataService
+    private sharedDataService: SharedDataService,
+    private router: Router,
   ) { }
 
   ngOnInit(): void {
@@ -58,6 +60,10 @@ export class AnimelistComponent implements OnInit {
         console.error('Error:', error);
       }
     );
+  }
 
+  onClick(animeId: string){
+    console.log('Clicked on anime with ID:', animeId)
+    this.router.navigate(['/animereview', animeId]);
   }
 }

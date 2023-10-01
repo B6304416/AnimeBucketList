@@ -5,7 +5,7 @@ import { HomeComponent } from './components/home/home.component';
 import { AnimelistComponent } from './components/animelist/animelist.component'
 import { PostAnimeComponent } from './components/post-anime/post-anime.component';
 import { MangalistComponent } from './components/mangalist/mangalist.component';
-
+import { AnimereviewComponent } from './components/animereview/animereview.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -13,6 +13,7 @@ const routes: Routes = [
   { path: 'animelist', component: AnimelistComponent },
   { path: 'mangalist', component: MangalistComponent },
   { path: 'postanime', component: PostAnimeComponent },
+  { path: 'animereview/:id', component: AnimereviewComponent },
   { path: '', redirectTo: '/animelist', pathMatch: 'full' }, // Redirect to the login page by default
 ];
 
