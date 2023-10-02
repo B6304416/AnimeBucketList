@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, DoCheck } from '@angular/core';
 import { SharedDataService } from 'src/app/services/shared-data.service';
 import { Router } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
@@ -9,18 +9,9 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.css'],
 })
-export class SignUpComponent implements OnInit {
+export class SignUpComponent implements OnInit, DoCheck {
   showOriginalImage = true;
 
-  onInputChange() {
-    if (this.signupUser.get('name')?.value && this.signupUser.get('email')?.value && this.signupUser.get('password')?.value) {
-      this.showOriginalImage = false;
-    } else {
-      this.showOriginalImage = true;
-    }
-  }
-
-  
   signupUser = new FormGroup({
     name: new FormControl('', [Validators.required]),
     email: new FormControl('', [Validators.required, Validators.email]),
@@ -38,6 +29,10 @@ export class SignUpComponent implements OnInit {
     private router: Router,
     private sharedDataService: SharedDataService
   ) {}
+  
+  ngDoCheck(): void {
+    this.showOriginalImage = !this.signupUser.valid;
+  }
 
   ngOnInit() {
     // เรียกใช้ Service เพื่อกำหนดค่า
@@ -45,7 +40,7 @@ export class SignUpComponent implements OnInit {
   }
 
   onSubmit() {
-    
+    console.log(this.signupUser.valid)
     const data = {
       email: this.signupUser.get('email')?.value,
       password: this.signupUser.get('password')?.value,
@@ -58,9 +53,6 @@ export class SignUpComponent implements OnInit {
     this.http.post('http://localhost:5555/signup', data)
       .subscribe(
         (response: any) => {
-          // localStorage.setItem('userId', response.userId);
-          // sessionStorage.setItem('token', response.token);
-          // sessionStorage.setItem('role', response.userRole);
           console.log('Signup successful', response);
           this.router.navigate(['/login']);
         },

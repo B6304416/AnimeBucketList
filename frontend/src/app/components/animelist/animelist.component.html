@@ -1,16 +1,17 @@
 <body class="bg-dark">
-    <div class="bg-img"></div>
-    <header class="py-5 bg-dark border-bottom mb-4 ">
-        <div class="container">
-            <div class="text-center my-2">
-                <h1 class="fw-bolder text-success">Welcome to Anime bucket list!</h1>
-                <p class="lead mb-0 text-success">100 Anime to Watch Before You Die</p>
-            </div>
+    <div class="bg-img">
+        <div class="text-center">
+            <h1 class="title fw-bolder text-primary p-5 mt-auto ">Welcome to Anime bucket list!</h1>
+            <p class="title2 fw-bolder text-primary p-1">100 Anime to Watch Before You Die</p>
         </div>
-    </header>
+    </div>
+    <!-- <header class="py-5 bg-dark border-bottom mb-4 ">
+        <div class="container">
+        </div>
+    </header> -->
     <!-- Page content-->
 
-    <div class="container">
+    <div class="container p-4">
         <div class="row">
             <div class="col-md-8" *ngFor="let character of popCharacter">
                 <div class="card mb-4">
@@ -19,7 +20,7 @@
                         <div class="small text-muted">POPULAR CHARACTER</div>
                         <h2 class="card-title h4">{{ character.name }}</h2>
                         <p class="card-text">{{ character.score }} users favorite this character.</p>
-                        <a class="btn btn-primary" href="/review">Read more →</a>
+                        <a class="btn btn-primary" href="/#">Read more →</a>
                     </div>
                 </div>
             </div>
@@ -64,13 +65,21 @@
                     <div class="card-body">You can put anything you want inside of these side widgets. They are easy to
                         use, and feature the Bootstrap 5 card component!</div>
                 </div>
-                <button id="add-post-button" class="btn btn-primary">Add Post</button>
             </div>
-
+            
+            
             <!-- Nested row for non-featured blog posts-->
             <div class="container">
-                <h2>Anime List</h2>
-                <div class="row">
+                <div class="d-flex justify-content-end p-3">
+                    <h2 class="mt-2 mb-2 text-white">Anime List</h2>
+                    <button type="button" class="btn btn-secondary mt-2 mb-2 ml-auto" [class.btn-clicked]="isAllClicked" (click)="handleAllClick()">
+                        All
+                    </button>
+                    <button type="button" class="btn btn-secondary mt-2 mb-2 ml-2 mr-1" [class.btn-clicked]="isSortByScoreClicked" (click)="handleSortByScoreClick()">
+                        Sort by average score
+                    </button>                
+                </div>
+                <div class="row" *ngIf="isAllClicked">
                     <div class="col-lg-4" *ngFor="let anime of data">
                         <div class="card mb-4">
                             <img class="card-img-top card-img-test" [src]="anime.imgUrl" alt="..." />
@@ -79,12 +88,29 @@
                                 <h2 class="card-title h4">{{ anime.name }}</h2>
                                 <p class="card-text">{{ anime.episode }} episodes</p>
                                 <a class="btn btn-primary" (click)="onClick(anime._id)">Read more →</a>
-
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" *ngIf="isSortByScoreClicked">
+                    <div class="col-lg-4" *ngFor="let anime of animeData">
+                        <div class="card mb-4">
+                            <img class="card-img-top card-img-test" [src]="anime.animeImgUrl" alt="..." />
+                            <div class="card-body">
+                                <div class="small text-muted">{{ anime.animeGenre }}</div>
+                                <h2 class="card-title h4">{{ anime.animeName }}</h2>
+                                <p class="card-text">{{ anime.animeEpisode }} episodes</p>
+                                <p class="card-text">{{ anime.averageRate }} ⭐</p>
+                                <a class="btn btn-primary" (click)="onClick(anime._id)">Read more →</a>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+
+            <div class="container">
+                <h2>Anime List</h2>
+            </div> 
 
         </div>
     </div>
