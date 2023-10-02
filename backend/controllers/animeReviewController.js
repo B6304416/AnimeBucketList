@@ -1,11 +1,12 @@
 import express from "express";
 import { AnimeReview } from "../models/animeReviewModel.js";
+import { Anime, AnimeStudio, AnimeSource, AnimeType } from "../models/animeModel.js";
 import { ObjectId } from 'mongodb';
 
 const router = express.Router();
 
 //Route for Get rate of each animes
-router.get('/rate', async (req, res) => {
+router.get('/avg_rate', async (req, res) => {
     try {
         const pipeline = [
             {
@@ -33,14 +34,18 @@ router.get('/rate', async (req, res) => {
                     totalRate: 1,
                     countRate: 1,
                     averageRate: 1,
-                    animeName: '$animeDetails.name' 
+                    animeName: '$animeDetails.name' ,
+                    animeEpisode: '$animeDetails.episode' ,
+                    animeGenre: '$animeDetails.genre' ,
+                    animeImgUrl: '$animeDetails.imgUrl',
+                    animeSynopsis: '$animeDetails.synopsis',
                 }
             }
         ];
         const result = await AnimeReview.aggregate(pipeline);
-        return res.status(200).json({
+        return res.status(200).json(
             result
-        });
+        );
     } catch (error) {
         console.log(error.message)
         res.status(500).send({ message: error.message })

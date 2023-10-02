@@ -64,7 +64,7 @@ app.use('/anime', animeController);
 
 app.use('/manga', mangaController);
 //Route for CRUD animes
-app.use('/anime_review', tokenVerify, animeReviewController);
+app.use('/anime_review', animeReviewController);
 //Route for CRUD characters
 app.use('/character', characterController);
 //Route for CRUD genres
