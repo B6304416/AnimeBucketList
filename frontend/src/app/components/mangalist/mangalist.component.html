@@ -1,16 +1,21 @@
 <body class="bg-dark">
-    <div class="bg-img"></div>
-    <header class="py-5 bg-dark border-bottom mb-4 ">
-        <div class="container">
-            <div class="text-center my-2">
-                <h1 class="fw-bolder text-success">Welcome to Anime bucket list!</h1>
-                <p class="lead mb-0 text-success">100 Anime to Watch Before You Die</p>
-            </div>
+    <div class="bg-img">
+        <div class="text-center">
+            <h1 class="fw-bolder text-danger p-5 mt-auto display-3">
+                <strong>
+                    Welcome to Anime bucket list!
+                </strong>
+                <h2 class="fw-bolder text-danger p-1 mb-lg-4 ">
+                    <strong>
+                        100 Anime to Watch Before You Die
+                    </strong>
+                </h2>
+            </h1>
         </div>
-    </header>
+    </div>
     <!-- Page content-->
 
-    <div class="container">
+    <div class="container p-4">
         <div class="row">
             <div class="col-md-8" *ngFor="let character of popCharacter">
                 <div class="card mb-4">
@@ -19,57 +24,52 @@
                         <div class="small text-muted">POPULAR CHARACTER</div>
                         <h2 class="card-title h4">{{ character.name }}</h2>
                         <p class="card-text">{{ character.score }} users favorite this character.</p>
-                        <a class="btn btn-primary" href="/review">Read more →</a>
+                        <a class="btn btn-readmore" href="/review">Read more →</a>
                     </div>
                 </div>
             </div>
-            <!-- Side widgets-->
+
             <div class="col-lg-4">
-                <!-- Search widget-->
+
                 <div class="card mb-4">
-                    <div class="card-header">Search</div>
+                    <div class="card-header">Warning</div>
                     <div class="card-body">
-                        <div class="input-group">
-                            <input class="form-control" type="text" placeholder="Enter search term..."
-                                aria-label="Enter search term..." aria-describedby="button-search" />
-                            <button class="btn btn-primary" id="button-search" type="button">Go!</button>
-                        </div>
+                        Just put something here!
+                        Just put something here!
+                        Just put something here!
+                        Just put something here!
+                        Just put something here!
+                        Just put something here!
+                        Just put something here!
+                        Just put something here!
+                        Just put something here!
+                        Just put something here!
+                        Just put something here!
+                        Just put something here!
+                        Just put something here!
+                        Just put something here!
+                        Just put something here!
+                        Just put something here!
+                        Just put something here!
+                        Just put something here!
+                        Just put something here!
+                        Just put something here!
+                        Just put something here!
                     </div>
                 </div>
-                <!-- Categories widget-->
-                <div class="card mb-4">
-                    <div class="card-header">Categories</div>
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <ul class="list-unstyled mb-0">
-                                    <li><a href="#!">Web Design</a></li>
-                                    <li><a href="#!">HTML</a></li>
-                                    <li><a href="#!">Freebies</a></li>
-                                </ul>
-                            </div>
-                            <div class="col-sm-6">
-                                <ul class="list-unstyled mb-0">
-                                    <li><a href="#!">JavaScript</a></li>
-                                    <li><a href="#!">CSS</a></li>
-                                    <li><a href="#!">Tutorials</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Side widget-->
-                <div class="card mb-4">
-                    <div class="card-header">Side Widget</div>
-                    <div class="card-body">You can put anything you want inside of these side widgets. They are easy to
-                        use, and feature the Bootstrap 5 card component!</div>
-                </div>
-                <button id="add-post-button" class="btn btn-primary">Add Post</button>
             </div>
 
             <!-- Nested row for non-featured blog posts-->
             <div class="container">
-                <h2>Manga List</h2>
+                <div class="d-flex justify-content-end p-3">
+                    <h2 class="mt-2 mb-2 text-white">Manga List</h2>
+                    <button type="button" class="btn btn-secondary mt-2 mb-2 ml-auto" >
+                        All
+                    </button>
+                    <button type="button" class="btn btn-secondary mt-2 mb-2 ml-2 mr-1" >
+                        Sort by average score
+                    </button>                
+                </div>
                 <div class="row">
                     <div class="col-lg-4" *ngFor="let manga of data">
                         <div class="card mb-4">
@@ -77,9 +77,8 @@
                             <div class="card-body">
                                 <div class="small text-muted">{{ manga.genre }}</div>
                                 <h2 class="card-title h4">{{ manga.name }}</h2>
-                                <p class="card-text">{{ manga.episode }} episodes</p>
-                                <a class="btn btn-primary" (click)="onClick(manga._id)">Read more →</a>
-
+                                <p class="card-text">By  </p>
+                                <a class="btn btn-readmore" (click)="onClick(manga._id)">Read more →</a>
                             </div>
                         </div>
                     </div>
