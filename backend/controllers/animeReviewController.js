@@ -1,7 +1,24 @@
 import express from "express";
 import { AnimeReview } from "../models/animeReviewModel.js";
 import { ObjectId } from 'mongodb';
+import { authMiddleware } from "../middleware.js";
 const router = express.Router();
+
+//Route for Get review by animeId
+router.get('/rate/:id', async (req, res) => {
+    try {
+        
+        const { id } = req.params;
+        const animeObjectId = new ObjectId(id);
+        const comments = await AnimeReview.find({ animeId: animeObjectId });
+        return res.status(200).json(
+            comments
+        );
+    } catch (error) {
+        console.error(error.message);
+        res.status(500).send({ message: 'Server Error' });
+    }
+});
 
 //Route for Get rate of each animes
 router.get('/rate', async (req, res) => {
@@ -46,22 +63,6 @@ router.get('/rate', async (req, res) => {
     }
 });
 
-//Route for Get review by animeId
-router.get('/rate/:id', async (req, res) => {
-    try {
-        const { id } = req.params;
-        const animeObjectId = new ObjectId(id);
-        const comments = await AnimeReview.find({ animeId: animeObjectId });
-        return res.status(200).json(
-            comments
-        );
-    } catch (error) {
-        console.error(error.message);
-        res.status(500).send({ message: 'Server Error' });
-    }
-});
-
-
 //Route for Get All animeReviews
 router.get('/', async (req, res) => {
     try {
@@ -89,20 +90,26 @@ router.get('/:id', async (req, res) => {
     }
 })
 
-router.post('/', async (req, res) => {
+router.post('/', authMiddleware,async (req, res) => {
     try {
-        const { comment, rate, animeId } = req.body;
+        // const { comment, rate, animeId } = req.body;
+        const comment = req.body.comment;
+        const rate = req.body.rate;
+        const animeId = req.body.animeId;
+        const animeIdObjectId = new ObjectId(animeId);
         const userId = req.user.userId;
+        const userIdObjectId = new ObjectId(userId);
+
         if (!comment || !rate || !userId || !animeId) {
             return res.status(400).send({
                 message: 'Required fields are invalid or missing!',
             });
         }
         const newAnimeReview = {
-            comment,
-            rate,
-            userId,
-            animeId,
+            comment : comment,
+            rate : rate,
+            userId : userIdObjectId,
+            animeId : animeIdObjectId,
         };
         const animeReview = await AnimeReview.create(newAnimeReview);
         return res.status(201).send(animeReview);

@@ -9,7 +9,6 @@ interface ReviewResponse {
   userId: string;
   rate: number;
   comment: string;
-
 }
 
 interface AnimeResponse {
@@ -36,12 +35,12 @@ export class AnimereviewComponent implements OnInit {
   reviewData: ReviewResponse[] = []
   animeData: AnimeResponse[] = []
   avatarNumbers: number[] = [];
-  videoUrls?: any
+  // videoUrls?: any
 
   review = new FormGroup({
     comment: new FormControl(''),
     rate: new FormControl(0),
-    userId: new FormControl(''),
+    // userId: new FormControl(''),
     animeId: new FormControl(''),
   });
 
@@ -78,21 +77,17 @@ export class AnimereviewComponent implements OnInit {
           this.animeData = res
           console.log("anime")
           console.log(this.animeData)
-          // Check if animeData[0].videoUrl is valid
-          if (this.animeData.length > 0 && this.animeData[0].videoUrl) {
-            // Assuming animeData[0].videoUrl is a valid YouTube video ID
-            const videoUrl = `https://www.youtube.com/embed/${this.animeData[0].videoUrl}`;
-            // Sanitize the URL using DomSanitizer
-            const safeVideoUrl: SafeResourceUrl = this.sanitizer.bypassSecurityTrustResourceUrl(videoUrl);
-            this.videoUrls = safeVideoUrl;
-            // console.log(this.videoUrls)
-          } else {
-            console.error('Invalid or missing videoUrl in animeData[0].');
-          }
+          // if (this.animeData.length > 0 && this.animeData[0].videoUrl) {
+          //   const videoUrl = `https://www.youtube.com/embed/${this.animeData[0].videoUrl}`;
+          //   const safeVideoUrl: SafeResourceUrl = this.sanitizer.bypassSecurityTrustResourceUrl(videoUrl);
+          //   this.videoUrls = safeVideoUrl;
+          // } else {
+          //   console.error('Invalid or missing videoUrl in animeData[0].');
+          // }
 
           this.review.patchValue({
             animeId: this.animeData[0]._id, // Assuming there's at least one anime in the array
-            userId: user
+            // userId: user
           });
           const iframe = document.getElementById("animeTrailer") as HTMLIFrameElement;;
           if (iframe) {
@@ -143,13 +138,14 @@ export class AnimereviewComponent implements OnInit {
 
   submitAnime() {
     const review = this.review.value;
+    console.log('hahah',review)
     const token = sessionStorage.getItem('token');
     console.log(review)
     const headers = new HttpHeaders({
       'Authorization': 'Bearer ' + token
     });
 
-    this.http.post('http://localhost:5555/anime_review', review, { headers, responseType: 'text' as 'json' }).subscribe(
+    this.http.post('http://localhost:5555/anime_review', review, { headers }).subscribe(
       (response) => {
         console.log('Anime posted successfully', response);
         this.resetForm();
