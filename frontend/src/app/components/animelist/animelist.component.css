@@ -4,10 +4,29 @@
     background-size: cover;
     animation: slideImages 30s linear infinite;
 }
-.card-img-test{
-    width: 350px;
+
+.card-img-test {
+    width: auto;
     height: 200px;
     object-fit: cover;
+}
+
+.title {
+    font-size: 2.5rem; /* Adjust the size as needed */
+    font-weight: bold;
+    color: #007bff; /* Primary color */
+    padding: 5rem 0;
+    margin-top: auto;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: #000000;
+}
+.title2 {
+    font-size: 1.5rem; /* Adjust the size as needed */
+    font-weight: bold;
+    color: #007bff; /* Primary color */
+    padding: 1rem 0;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: #000000;
 }
 
 
@@ -16,20 +35,31 @@
         background-image: url('../../img/wallpaper1.jpg');
         background-position: 0% 0%;
     }
+
     48% {
         background-image: url('../../img/wallpaper1.jpg');
         background-position: 0% 100%;
     }
+
     50% {
         background-image: url('../../img/wallpaper3.jpg');
         background-position: 0% 100%;
     }
+
     98% {
         background-image: url('../../img/wallpaper3.jpg');
         background-position: 0% 0%;
     }
+
     100% {
         background-image: url('../../img/wallpaper1.jpg');
         background-position: 0% 0%;
     }
+}
+
+.btn-clicked {
+    background-color: #455eb0;
+    /* Change this to the desired color */
+    color: #ffffff;
+    /* Change this to the desired text color */
 }

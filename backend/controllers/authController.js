@@ -49,6 +49,7 @@ router.post('/login', async (req, res) => {
             token: token, 
             userId: req.session.userId,
             userRole: user.role,
+            userName: user.name
         });
     } catch (error) {
         console.log(error.message);

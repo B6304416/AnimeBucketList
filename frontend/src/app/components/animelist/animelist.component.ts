@@ -13,6 +13,18 @@ interface AnimeResponse {
   imgUrl: string;
 }
 
+interface AnimeRateResponse {
+  _id: string;
+  totalRate: number;
+  countRate: number;
+  averageRate: number;
+  animeName: string;
+  animeEpisode: number;
+  animeGenre: string;
+  animeImgUrl: string;
+  animeSynopsis: string;
+}
+
 interface PopCharacterResponse {
   name: string;
   score: number;
@@ -28,13 +40,16 @@ interface PopCharacterResponse {
 export class AnimelistComponent implements OnInit {
 
   data: AnimeResponse[] = [];
+  animeData: AnimeRateResponse[] = [];
   popCharacter: PopCharacterResponse[] = [];
+
 
   constructor(
     private http: HttpClient,
     private sharedDataService: SharedDataService,
     private router: Router,
   ) { }
+  
 
   ngOnInit(): void {
     this.sharedDataService.setIsLoginPage(false);
@@ -43,6 +58,22 @@ export class AnimelistComponent implements OnInit {
       (res) => {
         console.log('Response data:', res);
         this.data = res
+        console.log(this.data)
+      },
+      (error) => {
+        console.error('Error:', error);
+      }
+    );
+
+    const anime_url = 'http://localhost:5555/anime_review/avg_rate';
+    this.http.get<AnimeRateResponse[]>(anime_url).subscribe(
+      (res) => {
+        res.forEach(anime => {
+          anime.averageRate = parseFloat(anime.averageRate.toFixed(1));
+        });
+        // Sort the array by averageRate in ascending order
+        const sortedAnimeList = res.sort((a, b) => b.averageRate - a.averageRate);
+        this.animeData = sortedAnimeList
         console.log(this.data)
       },
       (error) => {
@@ -69,5 +100,18 @@ export class AnimelistComponent implements OnInit {
     // window.scrollTo({ top: 0, behavior: 'smooth' }); // เลื่อนไปที่ด้านบนสุดของหน้าเว็บ
     window.scrollTo(0, 0); // กระโดดไปที่ด้านบนสุดของหน้าเว็บทันที
   }
-  
+
+  isAllClicked = true;
+  isSortByScoreClicked = false;
+
+  handleAllClick() {
+    this.isAllClicked = !this.isAllClicked;
+    this.isSortByScoreClicked = false;
+  }
+
+  handleSortByScoreClick() {
+    this.isSortByScoreClicked = !this.isSortByScoreClicked;
+    this.isAllClicked = false;
+  }
+
 }
