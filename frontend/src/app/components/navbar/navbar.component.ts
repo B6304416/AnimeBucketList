@@ -56,6 +56,7 @@ export class NavbarComponent implements OnInit, DoCheck {
     sessionStorage.removeItem('token');
     sessionStorage.removeItem('role');
     sessionStorage.removeItem('refresh');
+    sessionStorage.removeItem('username');
     console.log(this.isLoggedIn)
     // อัปเดตค่า isLoggedIn เป็น false ใน Local Storage
     localStorage.setItem('isLoggedIn', 'false');
