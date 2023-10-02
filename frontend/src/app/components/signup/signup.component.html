@@ -22,7 +22,7 @@
                     
                     <div class="form-group">
                       <!-- <label for="name">ชื่อ:</label> -->
-                      <input type="text" class="form-control" id="name" formControlName="name" placeholder="UserName" required >
+                      <input type="text" class="form-control" id="name" formControlName="name" placeholder="user name" required >
                       <div *ngIf="signupUser.get('name')?.hasError('required') && signupUser.get('name')?.touched" class="alert alert-danger">
                         Please enter your name.
                       </div>
