@@ -1,8 +1,7 @@
 import express from "express";
 import { AnimeReview } from "../models/animeReviewModel.js";
-import { Anime, AnimeStudio, AnimeSource, AnimeType } from "../models/animeModel.js";
 import { ObjectId } from 'mongodb';
-import { authMiddleware, tokenVerify } from "../middleware.js";
+import { tokenVerify } from "../middleware.js";
 
 const router = express.Router();
 
