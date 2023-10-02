@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FormGroup, FormControl } from '@angular/forms';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 interface ReviewResponse {
   animeId: string;
@@ -17,6 +18,7 @@ interface AnimeResponse {
   episode: number;
   genre: string;
   imgUrl: string;
+  videoUrl: string;
   synopsis: string;
   sourceId: string;
   typeId: string;
@@ -29,9 +31,11 @@ interface AnimeResponse {
 })
 export class AnimereviewComponent implements OnInit {
 
+  randomAvatarNumber?: number;
   reviewData: ReviewResponse[] = []
   animeData: AnimeResponse[] = []
   avatarNumbers: number[] = [];
+  videoUrls?: any
 
   review = new FormGroup({
     comment: new FormControl(''),
@@ -44,15 +48,17 @@ export class AnimereviewComponent implements OnInit {
   reviewUrl = 'http://localhost:5555/anime_review/rate/'
   animeUrl = 'http://localhost:5555/anime/';
 
-  constructor(private route: ActivatedRoute, private http: HttpClient) {
+  constructor(private route: ActivatedRoute, private http: HttpClient, private sanitizer: DomSanitizer) {
     this.animeId = this.route.snapshot.paramMap.get('id');
   }
 
 
   ngOnInit(): void {
     // this.comment.userId = '561'
+    this.randomAvatarNumber = this.getRandomAvatarNumber(1, 8);
     const token = sessionStorage.getItem('token');
     const user = localStorage.getItem('userId');
+
     const headers = new HttpHeaders({
       'Authorization': 'Bearer ' + token
     });
@@ -72,6 +78,18 @@ export class AnimereviewComponent implements OnInit {
           this.animeData = res
           console.log("anime")
           console.log(this.animeData)
+          // Check if animeData[0].videoUrl is valid
+          if (this.animeData.length > 0 && this.animeData[0].videoUrl) {
+            // Assuming animeData[0].videoUrl is a valid YouTube video ID
+            const videoUrl = `https://www.youtube.com/embed/${this.animeData[0].videoUrl}`;
+            // Sanitize the URL using DomSanitizer
+            const safeVideoUrl: SafeResourceUrl = this.sanitizer.bypassSecurityTrustResourceUrl(videoUrl);
+            this.videoUrls = safeVideoUrl;
+            // console.log(this.videoUrls)
+          } else {
+            console.error('Invalid or missing videoUrl in animeData[0].');
+          }
+
           this.review.patchValue({
             animeId: this.animeData[0]._id, // Assuming there's at least one anime in the array
             userId: user
@@ -94,9 +112,9 @@ export class AnimereviewComponent implements OnInit {
     const headers = new HttpHeaders({
       'Authorization': 'Bearer ' + token
     });
-  
+
     const reviewUrlbyId = `${this.reviewUrl}${this.animeId}`;
-  
+
     this.http.get<ReviewResponse[]>(reviewUrlbyId, { headers }).subscribe(
       (res) => {
         this.reviewData = res;
@@ -108,8 +126,6 @@ export class AnimereviewComponent implements OnInit {
       }
     );
   }
-
-  
   getRandomAvatarNumber(min: number, max: number): number {
     return Math.floor(Math.random() * (max - min + 1)) + min;
   }

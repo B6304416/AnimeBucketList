@@ -97,6 +97,7 @@ router.post('/', authMiddleware, async (req, res) => {
             episode: req.body.episode,
             genre: req.body.genre,
             imgUrl: req.body.imgUrl,
+            videoUrl: req.body.videoUrl,
             synopsis: req.body.synopsis,
         }
         const anime = await Anime.create(newAnime);

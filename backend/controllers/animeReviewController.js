@@ -1,13 +1,11 @@
 import express from "express";
 import { AnimeReview } from "../models/animeReviewModel.js";
-import { Anime, AnimeStudio, AnimeSource, AnimeType } from "../models/animeModel.js";
 import { ObjectId } from 'mongodb';
-import { authMiddleware, tokenVerify } from "../middleware.js";
 
 const router = express.Router();
 
 //Route for Get rate of each animes
-router.get('/avg_rate', async (req, res) => {
+router.get('/rate', async (req, res) => {
     try {
         const pipeline = [
             {
@@ -35,18 +33,14 @@ router.get('/avg_rate', async (req, res) => {
                     totalRate: 1,
                     countRate: 1,
                     averageRate: 1,
-                    animeName: '$animeDetails.name' ,
-                    animeEpisode: '$animeDetails.episode' ,
-                    animeGenre: '$animeDetails.genre' ,
-                    animeImgUrl: '$animeDetails.imgUrl',
-                    animeSynopsis: '$animeDetails.synopsis',
+                    animeName: '$animeDetails.name' 
                 }
             }
         ];
         const result = await AnimeReview.aggregate(pipeline);
-        return res.status(200).json(
+        return res.status(200).json({
             result
-        );
+        });
     } catch (error) {
         console.log(error.message)
         res.status(500).send({ message: error.message })
@@ -96,7 +90,7 @@ router.get('/:id', async (req, res) => {
     }
 })
 
-router.post('/',tokenVerify, async (req, res) => {
+router.post('/', async (req, res) => {
     try {
         const { comment, rate, animeId } = req.body;
         const userId = req.user.userId;
