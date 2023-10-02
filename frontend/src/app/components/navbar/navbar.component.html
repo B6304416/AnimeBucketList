@@ -49,17 +49,14 @@
       </ul>
 
       <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-        <form class="d-flex" role="search">
-          <button class="btn btn-outline-warning my-2 my-sm-0 mr-2" type="button">{{name}}</button>
-        </form>
-        <li class="nav-item" *ngIf="!isLoggedIn"> 
+        <button class="btn btn-outline-primary my-2 my-sm-0 mr-2 "  type="button" *ngIf="isLoggedIn">{{name}}</button>
+        <li class="nav-item" *ngIf="!isLoggedIn">
           <button class="btn btn-outline-success my-2 my-sm-0 " routerLink="/login">Login</button>
         </li>
-        <li class="nav-item" *ngIf="isLoggedIn"> 
+        <li class="nav-item" *ngIf="isLoggedIn">
           <button class="btn btn-outline-danger my-2 my-sm-0 " (click)="logout()">Logout</button>
         </li>
       </ul>
     </div>
   </div>
 </nav>
-
