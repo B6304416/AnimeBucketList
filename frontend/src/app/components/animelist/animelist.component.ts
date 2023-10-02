@@ -11,6 +11,9 @@ interface AnimeResponse {
   episode: number;
   genre: string;
   imgUrl: string;
+  type: string;
+  studio: string;
+  source: string;
 }
 
 interface AnimeRateResponse {
@@ -53,7 +56,7 @@ export class AnimelistComponent implements OnInit {
 
   ngOnInit(): void {
     this.sharedDataService.setIsLoginPage(false);
-    const url = 'http://localhost:5555/anime';
+    const url = 'http://localhost:5555/anime/detail';
     this.http.get<AnimeResponse[]>(url).subscribe(
       (res) => {
         console.log('Response data:', res);

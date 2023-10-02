@@ -18,10 +18,11 @@ interface AnimeResponse {
   episode: number;
   genre: string;
   imgUrl: string;
-  videoUrl: string;
+  trailerUrl: string;
   synopsis: string;
-  sourceId: string;
-  typeId: string;
+  type: string;
+  studio: string;
+  source: string;
 }
 
 @Component({
@@ -46,7 +47,7 @@ export class AnimereviewComponent implements OnInit {
 
   animeId: string | null;
   reviewUrl = 'http://localhost:5555/anime_review/rate/'
-  animeUrl = 'http://localhost:5555/anime/';
+  animeUrl = 'http://localhost:5555/anime/detail/';
 
   constructor(private route: ActivatedRoute, private http: HttpClient, private sanitizer: DomSanitizer) {
     this.animeId = this.route.snapshot.paramMap.get('id');
@@ -55,7 +56,6 @@ export class AnimereviewComponent implements OnInit {
 
   ngOnInit(): void {
     // this.comment.userId = '561'
-    this.randomAvatarNumber = this.getRandomAvatarNumber(1, 8);
     const token = sessionStorage.getItem('token');
     const user = localStorage.getItem('userId');
 
@@ -94,6 +94,13 @@ export class AnimereviewComponent implements OnInit {
             animeId: this.animeData[0]._id, // Assuming there's at least one anime in the array
             userId: user
           });
+          const iframe = document.getElementById("animeTrailer") as HTMLIFrameElement;;
+          if (iframe) {
+            console.log(this.animeData[0].trailerUrl)
+            iframe.src = this.animeData[0].trailerUrl;
+          } else {
+            console.warn("");
+          }
         },
         (error) => {
           console.error('Error:', error);
@@ -105,6 +112,8 @@ export class AnimereviewComponent implements OnInit {
     for (let i = 0; i < 100; i++) {
       this.avatarNumbers.push(this.getRandomAvatarNumber(1, 7));
     }
+
+
   }
 
   fetchReviewData() {
@@ -126,6 +135,8 @@ export class AnimereviewComponent implements OnInit {
       }
     );
   }
+
+  
   getRandomAvatarNumber(min: number, max: number): number {
     return Math.floor(Math.random() * (max - min + 1)) + min;
   }

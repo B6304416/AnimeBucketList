@@ -1,7 +1,6 @@
 import express from "express";
 import { AnimeReview } from "../models/animeReviewModel.js";
 import { ObjectId } from 'mongodb';
-
 const router = express.Router();
 
 //Route for Get rate of each animes

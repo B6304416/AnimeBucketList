@@ -35,7 +35,9 @@ const animeSchema = mongoose.Schema(
         synopsis: {
             type: String,
         },
-
+        trailerUrl: {
+            type: String,
+        },
     },
     {
         timestamps: true,
