@@ -19,26 +19,10 @@
                             class="img-fluid profile-image-pic img-thumbnail rounded my-3" width="80%" height="100%"
                             alt="profile">
                     </div>
-
-
-                    <!-- <div class="mb-3 form-group box">
-                        <input class="form-control" type="name" id="name" name="name" aria-describedby="name"
-                            placeholder="UserName" [(ngModel)]="name" required (input)="onInputChange()">
-                    </div>
-                    <div class="mb-3 form-group box">
-                        <input class="form-control" type="email" id="email" name="email" aria-describedby="emailHelp"
-                            placeholder="Email" [(ngModel)]="email" required (input)="onInputChange()">
-                    </div>
-                    <div class="mb-3 form-group box">
-                        <input class="form-control" type="password" id="password" name="password" placeholder="Password"
-                            [(ngModel)]="password" required (input)="onInputChange()">
-                    </div> -->
-                    
-
                     
                     <div class="form-group">
                       <!-- <label for="name">ชื่อ:</label> -->
-                      <input type="text" class="form-control" id="name" formControlName="name" placeholder="UserName" required (input)="onInputChange()">
+                      <input type="text" class="form-control" id="name" formControlName="name" placeholder="UserName" required >
                       <div *ngIf="signupUser.get('name')?.hasError('required') && signupUser.get('name')?.touched" class="alert alert-danger">
                         Please enter your name.
                       </div>
@@ -46,7 +30,7 @@
                 
                     <div class="form-group">
                       <!-- <label for="email">อีเมล:</label> -->
-                      <input type="email" class="form-control" id="email" formControlName="email" placeholder="email" required (input)="onInputChange()">
+                      <input type="email" class="form-control" id="email" formControlName="email" placeholder="email" required >
                       <!-- แสดงข้อความแจ้งเตือน validate email -->
                       <div *ngIf="signupUser.get('email')?.hasError('required') && signupUser.get('email')?.touched" class="alert alert-danger">
                         Please enter your email.
@@ -58,7 +42,7 @@
                 
                     <div class="form-group">
                       <!-- <label for="password">รหัสผ่าน:</label> -->
-                      <input type="password" class="form-control" id="password" formControlName="password" placeholder="password" required (input)="onInputChange()">
+                      <input type="password" class="form-control" id="password" formControlName="password" placeholder="password" required>
                       <!-- แสดงข้อความแจ้งเตือน validate password -->
                       <div *ngIf="signupUser.get('password')?.hasError('required') && signupUser.get('password')?.touched" class="alert alert-danger">
                         Please enter your password.
@@ -71,7 +55,6 @@
                     <div class="form-group">
                         <button type="submit" class="btn btn-color px-5 mb-5 w-10">Signup</button>
                     </div>
-                     
                 </form>
             </div>
 
