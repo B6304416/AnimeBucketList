@@ -20,8 +20,7 @@ export class LoginComponent implements OnInit {
     private sharedDataService: SharedDataService
   ) { }
 
-  ngOnInit() {
-    // เรียกใช้ Service เพื่อกำหนดค่า
+  ngOnInit(): void {
     this.sharedDataService.setIsLoginPage(true);
   }
 
@@ -32,8 +31,12 @@ export class LoginComponent implements OnInit {
       .subscribe(
         (response: any) => {
           localStorage.setItem('userId', response.userId);
+          localStorage.setItem('isLoggedIn', 'true');
           sessionStorage.setItem('token', response.token);
           sessionStorage.setItem('role', response.userRole);
+          sessionStorage.setItem('refresh', 'true');
+          sessionStorage.setItem('username', response.userName);
+          
           console.log('Login successful', response);
           this.router.navigate(['/animelist']);
         },

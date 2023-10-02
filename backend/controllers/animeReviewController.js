@@ -1,6 +1,7 @@
 import express from "express";
 import { AnimeReview } from "../models/animeReviewModel.js";
 import { ObjectId } from 'mongodb';
+import { authMiddleware, tokenVerify } from "../middleware.js";
 
 const router = express.Router();
 
@@ -90,7 +91,7 @@ router.get('/:id', async (req, res) => {
     }
 })
 
-router.post('/', async (req, res) => {
+router.post('/',tokenVerify, async (req, res) => {
     try {
         const { comment, rate, animeId } = req.body;
         const userId = req.user.userId;
