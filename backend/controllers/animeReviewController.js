@@ -7,12 +7,38 @@ const router = express.Router();
 //Route for Get review by animeId
 router.get('/rate/:id', async (req, res) => {
     try {
-        
         const { id } = req.params;
         const animeObjectId = new ObjectId(id);
-        const comments = await AnimeReview.find({ animeId: animeObjectId });
+        const pipeline = [
+            {
+                $match: {
+                    animeId: animeObjectId
+                }
+            },
+            {
+                $lookup: {
+                    from: 'users', // Assuming your collection name for types is 'types'
+                    localField: 'userId',
+                    foreignField: '_id',
+                    as: 'user'
+                }
+            },
+            {
+                $unwind: '$user'
+            },
+            {
+                $project: {
+                    _id: 1,
+                    comment: 1,
+                    rate: 1,
+                    user: '$user.name' ,
+                }
+            }
+            // Add more stages if needed
+        ];
+        const result = await AnimeReview.aggregate(pipeline);
         return res.status(200).json(
-            comments
+            result
         );
     } catch (error) {
         console.error(error.message);

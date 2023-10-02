@@ -5,8 +5,8 @@ import { FormGroup, FormControl } from '@angular/forms';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 interface ReviewResponse {
-  animeId: string;
-  userId: string;
+  // animeId: string;
+  user: string;
   rate: number;
   comment: string;
 }
