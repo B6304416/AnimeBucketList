@@ -8,6 +8,7 @@ html, body {
   margin: 0;
   padding: 0;
   background-color: rgba(52, 58, 64, 1) !important;
+  font-family:'Shippori Antique', sans-serif !important;
 }
 
 .bg-Black {

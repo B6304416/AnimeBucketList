@@ -2,6 +2,10 @@ import express from "express";
 import { Character } from "../models/characterModel.js";
 import { User } from "../models/userModel.js";
 import { authMiddleware, tokenVerify } from "../middleware.js";
+import { upload } from "../uploadImg.js";
+import { ObjectId } from 'mongodb';
+// import fs from 'fs';
+// import path from 'path';
 
 const router = express.Router();
 
@@ -36,18 +40,18 @@ router.get('/popular', async (req, res) => {
         const pipeline = [
             {
                 $group: {
-                    _id: null, // Group all documents into a single group
-                    maxScore: { $max: '$score' }, // Calculate the maximum score
+                    _id: null,
+                    maxScore: { $max: '$score' },
                 },
             },
             {
                 $lookup: {
-                    from: 'characters', // Your collection name
-                    let: { maxScore: '$maxScore' }, // Define a variable to hold the maximum score
+                    from: 'characters',
+                    let: { maxScore: '$maxScore' },
                     pipeline: [
                         {
                             $match: {
-                                $expr: { $eq: ['$score', '$$maxScore'] }, // Find documents where score matches the maximum score
+                                $expr: { $eq: ['$score', '$$maxScore'] },
                             },
                         },
                     ],
@@ -80,7 +84,7 @@ router.get('/:id', async (req, res) => {
     try {
         const { id } = req.params;
         const character = await Character.findById(id);
-        return res.status(200).json(character);
+        return res.status(200).json([character]);
     } catch (error) {
         console.log(error.message)
         res.status(500).send({ message: error.message })
@@ -88,8 +92,10 @@ router.get('/:id', async (req, res) => {
 })
 
 //Route for Post a new Character
-router.post('/', authMiddleware, async (req, res) => {
+router.post('/', upload.single('imgProfile'), async (req, res) => {
     try {
+        console.log(req.body.animeId)
+        console.log(req.body.mangaId)
         if (
             !req.body.name
         ) {
@@ -100,11 +106,23 @@ router.post('/', authMiddleware, async (req, res) => {
         }
         const newCharacter = {
             name: req.body.name,
-            score: req.body.score,
-            animeId: req.body.animeId,
-            mangaId: req.body.mangaId,
-            imgUrl: req.body.imgUrl,
+            score: 0,
             detail: req.body.detail,
+        }
+        if (req.body.animeId != 'null'){
+            const animeId = req.body.animeId;
+            var animeObjectId = new ObjectId(animeId);
+            newCharacter.animeId = animeObjectId
+            console.log(req.body.animeId)
+        } 
+        if(req.body.mangaId != 'null'){
+            const mangaId = req.body.mangaId;
+            var mangaObjectId = new ObjectId(mangaId);
+            newCharacter.animeId = mangaObjectId
+            console.log(req.body.mangaId)
+        }
+        if (req.file) {
+            newCharacter.imgProfile = '/uploads/' + req.file.filename;
         }
         const character = await Character.create(newCharacter);
         return res.status(201).send(character);
@@ -140,10 +158,23 @@ router.put('/:id', authMiddleware, async (req, res) => {
     }
 })
 
-//Route for Delete a Character by ID
-router.delete('/:id', authMiddleware, async (req, res) => {
+// const __filename = new URL(import.meta.url).pathname;
+// const __dirname = path.dirname(__filename);
+
+//Route for Delete a Character by ID ยังลบรูปด้วยไม่ได้
+router.delete('/:id', async (req, res) => {
     try {
         const { id } = req.params;
+        // const character = await Character.findById(id);
+        // if (character.imgProfile) {
+        //     const imagePath = path.join(__dirname, '..', character.imgProfile);
+        //     try {
+        //         await fsPromises.unlink(imagePath);
+        //         console.log('Image file deleted successfully');
+        //     } catch (err) {
+        //         console.error('Error deleting image file:', err);
+        //     }
+        // }
         const result = await Character.findByIdAndRemove(id);
         if (!result) {
             return res.status(404).json({ message: 'character not found' })

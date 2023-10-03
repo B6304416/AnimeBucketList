@@ -5,11 +5,9 @@ const characterSchema = mongoose.Schema(
         name: {
             type: String,
             required: true,
-            unique: true
         },
         score: {
             type: Number,
-            required: true,
         },
         animeId: {
             type: mongoose.Schema.Types.ObjectId,
@@ -17,10 +15,13 @@ const characterSchema = mongoose.Schema(
         mangaId: {
             type: mongoose.Schema.Types.ObjectId,
         },
-        imgUrl: {
+        // imgUrl: {
+        //     type: String,
+        // },
+        detail:{
             type: String,
         },
-        detail:{
+        imgProfile: {
             type: String,
         }
     },

@@ -16,6 +16,7 @@ import { ReviewComponent } from './components/review/review.component';
 import { PostMangaComponent } from './components/post-manga/post-manga.component';
 import { MangalistComponent } from './components/mangalist/mangalist.component';
 import { AnimetableComponent } from './components/animetable/animetable.component';
+import { PostCharacterComponent } from './components/post-character/post-character.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { AnimetableComponent } from './components/animetable/animetable.componen
     PostMangaComponent,
     MangalistComponent,
     AnimetableComponent,
+    PostCharacterComponent,
 
   ],
   imports: [
