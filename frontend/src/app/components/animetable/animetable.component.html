@@ -1,6 +1,6 @@
 <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"> -->
 <div>
-    <div class="container py-5">
+    <div class="container py-3">
         <div class="row">
             <div class="col-md-offset-1 col-md-12">
                 <div class="panel">
@@ -27,13 +27,13 @@
                         <table class="table table-hover">
                             <thead>
                                 <tr>
-                                    <th>Photo</th>
+                                    <th>Cover</th>
                                     <th>Name</th>
-                                    <th>genre</th>
-                                    <th>source</th>
-                                    <th>studio</th>
-                                    <th>episode</th>
-                                    <th>type</th>
+                                    <th>Type</th>
+                                    <th>Source</th>
+                                    <th>Studio</th>
+                                    <th>Episode</th>
+                                    <th>Genre</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -47,15 +47,15 @@
                                     <td>{{anime.name}}</td>
                                     <td>{{anime.type}}</td>
                                     <td>{{anime.source}}</td>
-                                    <td>{{anime.source}}</td>
-                                    <td>{{anime.source}}</td>
+                                    <td>{{anime.studio}}</td>
+                                    <td>{{anime.episode}}</td>
                                     <td>{{anime.genre}}</td>
                                     <td>
                                         <ul class="action-list">
-                                            <li><a href="#" class="btn btn-primary mr-1"><i class="fa fa-pencil-alt"></i></a>
+                                            <li><a (click)="onClick(anime._id)" class="btn btn-warning mr-1"><i class="fa fa-pencil-alt"></i></a>
 
                                             </li>
-                                            <li><a href="#" class="btn btn-danger"><i class="fa fa-trash"></i></a>
+                                            <li><a (click)="deleteAnime()" class="btn btn-danger"><i class="fa fa-trash"></i></a>
 
                                             </li>
                                         </ul>

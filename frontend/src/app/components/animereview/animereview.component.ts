@@ -48,7 +48,11 @@ export class AnimereviewComponent implements OnInit {
   reviewUrl = 'http://localhost:5555/anime_review/rate/'
   animeUrl = 'http://localhost:5555/anime/detail/';
 
-  constructor(private route: ActivatedRoute, private http: HttpClient, private sanitizer: DomSanitizer) {
+  constructor(
+    private route: ActivatedRoute, 
+    private http: HttpClient, 
+    private sanitizer: DomSanitizer
+    ) {
     this.animeId = this.route.snapshot.paramMap.get('id');
   }
 
@@ -56,6 +60,7 @@ export class AnimereviewComponent implements OnInit {
   ngOnInit(): void {
     // this.comment.userId = '561'
     this.randomAvatarNumber = this.getRandomAvatarNumber(1, 9);
+
     const token = sessionStorage.getItem('token');
     const user = localStorage.getItem('userId');
 
