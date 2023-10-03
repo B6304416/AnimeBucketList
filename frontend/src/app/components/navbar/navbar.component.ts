@@ -11,7 +11,6 @@ import { Router } from '@angular/router';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit, DoCheck {
-  userRole: string | undefined;
 
   isLoginPage: boolean = false;
   isLoggedIn: boolean = true;
@@ -40,12 +39,13 @@ export class NavbarComponent implements OnInit, DoCheck {
   }
   checkUserRole(): boolean {
     const role = sessionStorage.getItem('role');
-
     if (role === '1') {
       return true;
     } else {
       return false;
     }
+    
+
   }
 
   logout(): void {

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormArray } from '@angular/forms';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 interface AuthorResponse {
   _id: string;
@@ -23,7 +24,7 @@ export class PostMangaComponent implements OnInit {
   authorOptions: AuthorResponse[] = [];
   genreOptions: string[] = [];
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private router: Router,) { }
 
   ngOnInit(): void {
     const authorUrl = 'http://localhost:5555/manga/authors';
@@ -47,6 +48,13 @@ export class PostMangaComponent implements OnInit {
         console.error('Error:', error);
       }
     );
+
+    const role = sessionStorage.getItem('role');
+    if (role !== "1") {
+      this.router.navigate(['/login']);
+    } else {
+      console.log('Users cannot access the admin section.');
+    };
 
   }
 

@@ -46,7 +46,9 @@
       </ul>
 
       <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-        <button class="btn btn-outline-primary my-2 my-sm-0 mr-2 "  type="button" *ngIf="isLoggedIn">{{name}}</button>
+        <button class="btn my-2 my-sm-0 mr-2 "
+          [ngClass]="{'btn-outline-primary': !checkUserRole(), 'btn-outline-warning': checkUserRole()}" type="button"
+          *ngIf="isLoggedIn">{{name}}</button>
         <li class="nav-item" *ngIf="!isLoggedIn">
           <button class="btn btn-outline-success my-2 my-sm-0 " routerLink="/login">Login</button>
         </li>
