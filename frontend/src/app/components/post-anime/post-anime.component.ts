@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormArray } from '@angular/forms';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 interface StudioResponse {
   _id: string;
@@ -29,7 +30,7 @@ export class PostAnimeComponent implements OnInit {
   studioOptions: StudioResponse[] = [];
   genreOptions: string [] = [];
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private router: Router,) { }
 
   ngOnInit(): void {
     const studioUrl = 'http://localhost:5555/anime/studios';
@@ -53,6 +54,13 @@ export class PostAnimeComponent implements OnInit {
         console.error('Error:', error);
       }
     );
+
+    const role = sessionStorage.getItem('role');
+    if (role !== "1") {
+      this.router.navigate(['/login']);
+    } else {
+      console.log('Users cannot access the admin section.');
+    };
 
   }
 

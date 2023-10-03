@@ -8,12 +8,12 @@ nav{
     background-color: #121212;
 }
 
-.btn-outline-primary:disabled{
+/* .btn-outline-primary:disabled{
     color:#007bff;
     background-color:transparent;
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* สร้างกรอบเรืองแสง */
-    text-shadow: 1px 1px 2px rgba(0, 123, 255, 0); /* เพิ่มความคมชัดให้ข้อความ */
-}
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); 
+    text-shadow: 1px 1px 2px rgba(0, 123, 255, 0); 
+} */
 .btn-outline-primary {
     /* border: 1px solid #007bff; เพิ่มเส้นขอบสีน้ำเงิน */
     pointer-events: none; /* ไม่อนุญาตให้ปุ่มรับการคลิก */
