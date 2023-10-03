@@ -55,6 +55,7 @@ export class AnimereviewComponent implements OnInit {
 
   ngOnInit(): void {
     // this.comment.userId = '561'
+    this.randomAvatarNumber = this.getRandomAvatarNumber(1, 9);
     const token = sessionStorage.getItem('token');
     const user = localStorage.getItem('userId');
 
@@ -105,7 +106,7 @@ export class AnimereviewComponent implements OnInit {
       console.error('Anime ID is null.');
     }
     for (let i = 0; i < 100; i++) {
-      this.avatarNumbers.push(this.getRandomAvatarNumber(1, 7));
+      this.avatarNumbers.push(this.getRandomAvatarNumber(1, 9));
     }
 
 
@@ -131,13 +132,13 @@ export class AnimereviewComponent implements OnInit {
     );
   }
 
-  
   getRandomAvatarNumber(min: number, max: number): number {
     return Math.floor(Math.random() * (max - min + 1)) + min;
   }
 
   submitAnime() {
     const review = this.review.value;
+    console.log('hahah', review)
     console.log('hahah',review)
     const token = sessionStorage.getItem('token');
     console.log(review)
