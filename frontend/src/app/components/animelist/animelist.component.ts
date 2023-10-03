@@ -3,7 +3,6 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 
 import { SharedDataService } from 'src/app/services/shared-data.service';
-declare var window: any;
 
 interface AnimeResponse {
   _id: string;

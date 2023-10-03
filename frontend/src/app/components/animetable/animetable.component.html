@@ -1,0 +1,91 @@
+<!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+<div>
+    <div class="container py-5">
+        <div class="row">
+            <div class="col-md-offset-1 col-md-12">
+                <div class="panel">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-sm-5 col-xs-12">
+                                <h4 class="title">Anime <span>List</span></h4>
+                            </div>
+                            <div class="col-sm-7 col-xs-12 text-right">
+                                <!-- <div class="btn_group mr-2">
+                                    <span class="label label-danger mr-1">Filter:</span>
+                                    <button type="button" class="btn btn-warning mx-1" title="Blocked"><i
+                                            class="fa fa-ban"></i></button>
+                                    <button type="button" class="btn btn-success mx-1" title="Active"><i
+                                            class="fa fa-check-square"></i></button>
+                                </div> -->
+                                <a href="#" class="btn add-new"><i class="fa fa-plus-circle"></i>
+                                    Add New
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-body table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Photo</th>
+                                    <th>Name</th>
+                                    <th>genre</th>
+                                    <th>source</th>
+                                    <th>studio</th>
+                                    <th>episode</th>
+                                    <th>type</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let anime of data">
+                                    <td>
+                                        <div class="user_img">
+                                            <img [src]="anime.imgUrl" alt="">
+                                        </div>
+                                    </td>
+                                    <td>{{anime.name}}</td>
+                                    <td>{{anime.type}}</td>
+                                    <td>{{anime.source}}</td>
+                                    <td>{{anime.source}}</td>
+                                    <td>{{anime.source}}</td>
+                                    <td>{{anime.genre}}</td>
+                                    <td>
+                                        <ul class="action-list">
+                                            <li><a href="#" class="btn btn-primary mr-1"><i class="fa fa-pencil-alt"></i></a>
+
+                                            </li>
+                                            <li><a href="#" class="btn btn-danger"><i class="fa fa-trash"></i></a>
+
+                                            </li>
+                                        </ul>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="panel-footer">
+                        <!-- <div class="row">
+                            <div class="col col-sm-6 col-xs-8">Showing <b>5</b> out of <b>25</b> entries</div>
+                            <div class="col-sm-12">
+                                <ul class="pagination hidden-xs">
+                                    <li><a href="#">Prev</a></li>
+                                    <li class="active"><a href="#">1</a></li>
+                                    <li><a href="#">2</a></li>
+                                    <li><a href="#">3</a></li>
+                                    <li><a href="#">4</a></li>
+                                    <li><a href="#">5</a></li>
+                                    <li><a href="#">Next</a></li>
+                                </ul>
+                                <ul class="pagination visible-xs">
+                                    <li><a href="#">1</a></li>
+                                    <li><a href="#">></a></li>
+                                </ul>
+                            </div>
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
