@@ -8,7 +8,6 @@ const router = express.Router();
 //Route for Get detail of each animes
 router.get('/detail', async (req, res) => {
     try {
-        const { id } = req.params;
         const pipeline = [
             {
                 $lookup: {
@@ -232,7 +231,7 @@ router.post('/', authMiddleware, async (req, res) => {
             episode: req.body.episode,
             genre: req.body.genre,
             imgUrl: req.body.imgUrl,
-            videoUrl: req.body.videoUrl,
+            trailerUrl: req.body.trailerUrl,
             synopsis: req.body.synopsis,
         }
         const anime = await Anime.create(newAnime);

@@ -85,7 +85,7 @@
                                         {{ manga.name }}
                                     </strong>
                                 </h2>
-                                <p class="card-text">By </p>
+                                <p class="card-text">By {{ manga.author }}</p>
                                 <a class="btn btn-readmore" (click)="onClick(manga._id)">Read more →</a>
                             </div>
                         </div>
@@ -102,9 +102,8 @@
                                         {{ manga.mangaName }}
                                     </strong>
                                 </h2>
-                                <!-- <p class="card-text">{{ manga.mangaEpisode }} episodes</p> -->
                                 <p class="card-text">{{ manga.averageRate }} ⭐</p>
-                                <a class="btn btn-primary" (click)="onClick(manga._id)">Read more →</a>
+                                <a class="btn btn-readmore" (click)="onClick(manga._id)">Read more →</a>
                             </div>
                         </div>
                     </div>

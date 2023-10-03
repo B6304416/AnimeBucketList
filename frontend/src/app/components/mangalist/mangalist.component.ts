@@ -8,9 +8,9 @@ declare var window: any;
 interface MangaResponse {
   _id: string;
   name: string;
-  episode: number;
   genre: string;
   imgUrl: string;
+  author: string;
 }
 
 interface MangaRateResponse {
@@ -49,10 +49,9 @@ export class MangalistComponent implements OnInit {
 
   ngOnInit(): void {
     this.sharedDataService.setIsLoginPage(false);
-    const url = 'http://localhost:5555/manga';
+    const url = 'http://localhost:5555/manga/detail';
     this.http.get<MangaResponse[]>(url).subscribe(
       (res) => {
-        console.log('Response data:', res);
         this.data = res
         console.log(this.data)
       },

@@ -71,13 +71,14 @@ export class AnimelistComponent implements OnInit {
     const anime_url = 'http://localhost:5555/anime_review/avg_rate';
     this.http.get<AnimeRateResponse[]>(anime_url).subscribe(
       (res) => {
+        console.log('res',res)
         res.forEach(anime => {
           anime.averageRate = parseFloat(anime.averageRate.toFixed(1));
         });
         // Sort the array by averageRate in ascending order
         const sortedAnimeList = res.sort((a, b) => b.averageRate - a.averageRate);
         this.animeData = sortedAnimeList
-        console.log(this.data)
+        console.log('data',this.animeData)
       },
       (error) => {
         console.error('Error:', error);

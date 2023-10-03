@@ -4,6 +4,51 @@ import { ObjectId } from 'mongodb';
 import { authMiddleware } from "../middleware.js";
 const router = express.Router();
 
+//Route for Get rate of each animes
+router.get('/avg_rate', async (req, res) => {
+    try {
+        const pipeline = [
+            {
+                $group: {
+                    _id: '$animeId',
+                    totalRate: { $sum: '$rate' },
+                    countRate: { $count: {} },
+                    averageRate: { $avg: '$rate' },
+                }
+            },
+            {
+                $lookup: {
+                    from: 'animes', 
+                    localField: '_id',
+                    foreignField: '_id',
+                    as: 'animeDetails'
+                }
+            },
+            {
+                $unwind: '$animeDetails'
+            },
+            {
+                $project: {
+                    _id: 1,
+                    totalRate: 1,
+                    countRate: 1,
+                    averageRate: 1,
+                    animeName: '$animeDetails.name',
+                    animeImgUrl: '$animeDetails.imgUrl',
+                    animeEpisode: '$animeDetails.episode' 
+                }
+            }
+        ];
+        const result = await AnimeReview.aggregate(pipeline);
+        return res.status(200).json(
+            result
+        );
+    } catch (error) {
+        console.log(error.message)
+        res.status(500).send({ message: error.message })
+    }
+});
+
 //Route for Get review by animeId
 router.get('/rate/:id', async (req, res) => {
     try {
@@ -43,49 +88,6 @@ router.get('/rate/:id', async (req, res) => {
     } catch (error) {
         console.error(error.message);
         res.status(500).send({ message: 'Server Error' });
-    }
-});
-
-//Route for Get rate of each animes
-router.get('/rate', async (req, res) => {
-    try {
-        const pipeline = [
-            {
-                $group: {
-                    _id: '$animeId',
-                    totalRate: { $sum: '$rate' },
-                    countRate: { $count: {} },
-                    averageRate: { $avg: '$rate' },
-                }
-            },
-            {
-                $lookup: {
-                    from: 'animes', 
-                    localField: '_id',
-                    foreignField: '_id',
-                    as: 'animeDetails'
-                }
-            },
-            {
-                $unwind: '$animeDetails'
-            },
-            {
-                $project: {
-                    _id: 1,
-                    totalRate: 1,
-                    countRate: 1,
-                    averageRate: 1,
-                    animeName: '$animeDetails.name' 
-                }
-            }
-        ];
-        const result = await AnimeReview.aggregate(pipeline);
-        return res.status(200).json({
-            result
-        });
-    } catch (error) {
-        console.log(error.message)
-        res.status(500).send({ message: error.message })
     }
 });
 

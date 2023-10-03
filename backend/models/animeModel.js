@@ -29,9 +29,6 @@ const animeSchema = mongoose.Schema(
         imgUrl: {
             type: String,
         },
-        videoUrl: {
-            type: String,
-        },
         synopsis: {
             type: String,
         },

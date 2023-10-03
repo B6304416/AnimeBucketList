@@ -17,6 +17,9 @@ const mangaSchema = mongoose.Schema(
         imgUrl: {
             type: String,
         },
+        synopsis: {
+            type: String,
+        },
     },
     {
         timestamps: true,
