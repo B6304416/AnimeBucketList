@@ -44,8 +44,6 @@ export class AnimetableComponent implements OnInit{
   onClick(animeId: string) {
     console.log('Clicked on anime with ID:', animeId);
     this.router.navigate(['/updateanime', animeId]);
-    // window.scrollTo({ top: 0, behavior: 'smooth' }); // เลื่อนไปที่ด้านบนสุดของหน้าเว็บ
-    window.scrollTo(0, 0); // กระโดดไปที่ด้านบนสุดของหน้าเว็บทันที
   }
 
   deleteAnime(animeId: string) {
@@ -58,7 +56,7 @@ export class AnimetableComponent implements OnInit{
       (response) => {
         console.log('Anime deleted successfully', response);
         alert('Anime deleted successfully');
-        this.router.navigate(['/anime-list']); // หลังจากลบเสร็จให้เปลี่ยนเส้นทางไปยังหน้ารายการ Anime หรือหน้าอื่นที่เหมาะสม
+        // this.router.navigate(['/anime-list']); // หลังจากลบเสร็จให้เปลี่ยนเส้นทางไปยังหน้ารายการ Anime หรือหน้าอื่นที่เหมาะสม
       },
       (error) => {
         console.error('Error deleting anime', error);
