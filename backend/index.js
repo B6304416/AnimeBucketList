@@ -36,6 +36,8 @@ app.use(
     })
 )
 
+app.use('/uploads', express.static('uploads'));
+
 app.use(
     session({
         secret: SECRET_KEY,

@@ -8,7 +8,7 @@ import { MangalistComponent } from './components/mangalist/mangalist.component';
 import { AnimereviewComponent } from './components/animereview/animereview.component';
 import { SignUpComponent } from './components/signup/signup.component';
 import { ReviewComponent } from './components/review/review.component';
-
+import { PostCharacterComponent } from './components/post-character/post-character.component';
 
 import { PostMangaComponent } from './components/post-manga/post-manga.component';
 
@@ -21,6 +21,7 @@ const routes: Routes = [
   { path: 'postanime', component: PostAnimeComponent },
   { path: 'review', component: ReviewComponent },
   { path: 'postmanga', component: PostMangaComponent },
+  { path: 'postcharacter', component: PostCharacterComponent },
   { path: 'animereview/:id', component: AnimereviewComponent },
   { path: '', redirectTo: '/animelist', pathMatch: 'full' }, // Redirect to the login page by default
 ];

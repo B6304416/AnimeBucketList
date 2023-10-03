@@ -53,7 +53,6 @@ export class PostAnimeComponent implements OnInit {
         console.error('Error:', error);
       }
     );
-
   }
 
   //ตรวจ id กับ name studio
