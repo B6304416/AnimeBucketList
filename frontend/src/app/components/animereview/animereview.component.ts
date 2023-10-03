@@ -5,11 +5,10 @@ import { FormGroup, FormControl } from '@angular/forms';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 interface ReviewResponse {
-  animeId: string;
-  userId: string;
+  // animeId: string;
+  user: string;
   rate: number;
   comment: string;
-
 }
 
 interface AnimeResponse {
@@ -18,10 +17,11 @@ interface AnimeResponse {
   episode: number;
   genre: string;
   imgUrl: string;
-  videoUrl: string;
+  trailerUrl: string;
   synopsis: string;
-  sourceId: string;
-  typeId: string;
+  type: string;
+  studio: string;
+  source: string;
 }
 
 @Component({
@@ -35,12 +35,12 @@ export class AnimereviewComponent implements OnInit {
   reviewData: ReviewResponse[] = []
   animeData: AnimeResponse[] = []
   avatarNumbers: number[] = [];
-  videoUrls?: any
+  // videoUrls?: any
 
   review = new FormGroup({
     comment: new FormControl(''),
     rate: new FormControl(0),
-    userId: new FormControl(''),
+    // userId: new FormControl(''),
     animeId: new FormControl(''),
   });
 
@@ -55,7 +55,7 @@ export class AnimereviewComponent implements OnInit {
 
   ngOnInit(): void {
     // this.comment.userId = '561'
-    this.randomAvatarNumber = this.getRandomAvatarNumber(1, 8);
+    this.randomAvatarNumber = this.getRandomAvatarNumber(1, 9);
     const token = sessionStorage.getItem('token');
     const user = localStorage.getItem('userId');
 
@@ -78,21 +78,21 @@ export class AnimereviewComponent implements OnInit {
           this.animeData = res
           console.log("anime")
           console.log(this.animeData)
-          // Check if animeData[0].videoUrl is valid
-          if (this.animeData.length > 0 && this.animeData[0].videoUrl) {
-            // Assuming animeData[0].videoUrl is a valid YouTube video ID
-            const videoUrl = `https://www.youtube.com/embed/${this.animeData[0].videoUrl}`;
-            // Sanitize the URL using DomSanitizer
-            const safeVideoUrl: SafeResourceUrl = this.sanitizer.bypassSecurityTrustResourceUrl(videoUrl);
-            this.videoUrls = safeVideoUrl;
-            // console.log(this.videoUrls)
-          } else {
-            console.error('Invalid or missing videoUrl in animeData[0].');
-          }
+          // // // Check if animeData[0].videoUrl is valid
+          // // if (this.animeData.length > 0 && this.animeData[0].videoUrl) {
+          // //   // Assuming animeData[0].videoUrl is a valid YouTube video ID
+          // //   const videoUrl = `https://www.youtube.com/embed/${this.animeData[0].videoUrl}`;
+          // //   // Sanitize the URL using DomSanitizer
+          // //   const safeVideoUrl: SafeResourceUrl = this.sanitizer.bypassSecurityTrustResourceUrl(videoUrl);
+          // //   this.videoUrls = safeVideoUrl;
+          // //   // console.log(this.videoUrls)
+          // } else {
+          //   console.error('Invalid or missing videoUrl in animeData[0].');
+          // }
 
           this.review.patchValue({
             animeId: this.animeData[0]._id, // Assuming there's at least one anime in the array
-            userId: user
+            // userId: user
           });
         },
         (error) => {
@@ -103,7 +103,7 @@ export class AnimereviewComponent implements OnInit {
       console.error('Anime ID is null.');
     }
     for (let i = 0; i < 100; i++) {
-      this.avatarNumbers.push(this.getRandomAvatarNumber(1, 7));
+      this.avatarNumbers.push(this.getRandomAvatarNumber(1, 9));
     }
   }
 
@@ -126,19 +126,22 @@ export class AnimereviewComponent implements OnInit {
       }
     );
   }
+
+
   getRandomAvatarNumber(min: number, max: number): number {
     return Math.floor(Math.random() * (max - min + 1)) + min;
   }
 
   submitAnime() {
     const review = this.review.value;
+    console.log('hahah', review)
     const token = sessionStorage.getItem('token');
     console.log(review)
     const headers = new HttpHeaders({
       'Authorization': 'Bearer ' + token
     });
 
-    this.http.post('http://localhost:5555/anime_review', review, { headers, responseType: 'text' as 'json' }).subscribe(
+    this.http.post('http://localhost:5555/anime_review', review, { headers }).subscribe(
       (response) => {
         console.log('Anime posted successfully', response);
         this.resetForm();

@@ -1,4 +1,4 @@
-<div class="bg-dark ">
+<div class="bg-dark page-body">
     <div class="container pt-3 ">
         <div class="row">
             <div class="col-md-4 ">
@@ -15,10 +15,10 @@
                                         <li>Name: {{ animeData[0].name}}</li>
                                         <li>Episodes: {{ animeData[0].episode}}</li>
                                         <li>Studios: {{ animeData[0].genre}}</li>
-                                        <li>Source: {{ animeData[0].sourceId}}</li>
-                                        <li>Type: {{ animeData[0].typeId}}</li>
+                                        <li>Source: {{ animeData[0].source}}</li>
+                                        <li>Type: {{ animeData[0].type}}</li>
                                         <li>Genres: {{ animeData[0].genre}}</li>
-                                        <li>video: {{ animeData[0].videoUrl}}</li>
+                                        <!-- <li>video: {{ animeData[0].trailerUrl}}</li> -->
                                     </ul>
                                 </div>
                             </div>
@@ -27,7 +27,8 @@
 
                     <div class="card mb-4">
                         <div class="card-header">เรื่องย่อ</div>
-                        <div class="card-body" *ngIf="animeData[0]">{{ animeData[0].synopsis || 'No synopsis available.' }}</div>
+                        <div class="card-body" *ngIf="animeData[0]">{{ animeData[0].synopsis || 'No synopsis available.'
+                            }}</div>
                     </div>
                 </div>
 
@@ -39,7 +40,10 @@
                     <div class="col-md-12">
                         <div class="card mb-4">
                             <div class="embed-responsive embed-responsive-16by9">
-                                <iframe [src]="videoUrls"></iframe>
+                                <!-- <iframe [src]="videoUrls"></iframe> -->
+                                <!-- <iframe src="https://www.youtube.com/embed/zntY4A4GPU0"></iframe> -->
+                                <!-- <iframe  src="https://www.youtube.com/embed/QczGoCmX-pI" ></iframe> -->
+                                <iframe src='' id="animeTrailer"></iframe>
                             </div>
                         </div>
                     </div>
@@ -70,9 +74,9 @@
                                         <fieldset>
                                             <div class="row">
                                                 <div class="col-sm-3 col-lg-2 hidden-xs">
-                                                    <img class="img-responsive card-img-test"
-                                                         [src]="'https://bootdey.com/img/Content/avatar/avatar' + randomAvatarNumber + '.png'" alt="">
-                                                  </div>                                                  
+                                                    <img class="img-responsive card-img-test rounded-circle"
+                                                         [src]="'https://cdn.pic.in.th/file/picinth/anime-profile-' + randomAvatarNumber + '.jpeg'" alt="">
+                                                </div>
                                                 <div class="form-group col-xs-12 col-sm-9 col-lg-10">
                                                     <textarea class="form-control" id="message"
                                                         placeholder="Your message" required=""
@@ -91,12 +95,13 @@
                                             <div *ngFor="let review of reviewData; let i = index" class="media">
                                                 <a class="pull-left">
                                                     <img class="media-object card-img-test"
-                                                         [src]="'https://bootdey.com/img/Content/avatar/avatar' + avatarNumbers[i] + '.png'" alt="">
+                                                        [src]="'https://bootdey.com/img/Content/avatar/avatar' + avatarNumbers[i] + '.png'"
+                                                        alt="">
                                                 </a>
                                                 <div class="media-body">
                                                     <div class="media-heading">
                                                         <div style="display: inline-block; font-weight: bold;">{{
-                                                            review.userId }}</div>
+                                                            review.user }}</div>
                                                         <div style="float: right;">
                                                             <span *ngFor="let i of [1, 2, 3, 4, 5]">
                                                                 <span class="fa"
