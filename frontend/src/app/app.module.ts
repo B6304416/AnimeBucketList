@@ -16,11 +16,8 @@ import { ReviewComponent } from './components/review/review.component';
 import { PostMangaComponent } from './components/post-manga/post-manga.component';
 import { MangalistComponent } from './components/mangalist/mangalist.component';
 import { AnimetableComponent } from './components/animetable/animetable.component';
-<<<<<<< HEAD
 import { UpdateAnimeComponent } from './components/update-anime/update-anime.component';
-=======
 import { PostCharacterComponent } from './components/post-character/post-character.component';
->>>>>>> 9449d368707d7cdb0d517a0b97ef7e79d3218df7
 
 @NgModule({
   declarations: [
@@ -36,11 +33,8 @@ import { PostCharacterComponent } from './components/post-character/post-charact
     PostMangaComponent,
     MangalistComponent,
     AnimetableComponent,
-<<<<<<< HEAD
     UpdateAnimeComponent,
-=======
     PostCharacterComponent,
->>>>>>> 9449d368707d7cdb0d517a0b97ef7e79d3218df7
 
   ],
   imports: [
