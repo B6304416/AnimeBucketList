@@ -21,7 +21,7 @@ export class PostAnimeComponent implements OnInit {
     episode: new FormControl(null),
     genre: new FormArray([]),
     imgUrl: new FormControl(''),
-    videoUrl: new FormControl(''),
+    trailerUrl: new FormControl(''),
     synopsis: new FormControl(''),
     sourceId: new FormControl('')
   });

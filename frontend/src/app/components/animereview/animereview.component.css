@@ -1,3 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Shippori+Antique&display=swap');
+
+.page-body{
+    font-family:'Shippori Antique', sans-serif;
+}
+
 .card-img-test{
     width: 70px;
     height: 70px;

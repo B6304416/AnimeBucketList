@@ -58,3 +58,11 @@ body{
     /* Change this to the desired text color */
 }
 
+.card-detail{
+    display: flex;
+    justify-content: space-between;
+}
+
+.left-info, .right-info {
+    width: auto; /* Adjust the width as needed */
+}

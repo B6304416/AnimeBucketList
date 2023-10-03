@@ -5,6 +5,140 @@ import { ObjectId } from 'mongodb';
 
 const router = express.Router();
 
+//Route for Get detail of each animes
+router.get('/detail', async (req, res) => {
+    try {
+        const pipeline = [
+            {
+                $lookup: {
+                    from: 'animetypes', // Assuming your collection name for types is 'types'
+                    localField: 'typeId',
+                    foreignField: '_id',
+                    as: 'type'
+                }
+            },
+            {
+                $lookup: {
+                    from: 'animestudios', // Assuming your collection name for studios is 'studios'
+                    localField: 'studioId',
+                    foreignField: '_id',
+                    as: 'studio'
+                }
+            },
+            {
+                $lookup: {
+                    from: 'animesources', // Assuming your collection name for sources is 'sources'
+                    localField: 'sourceId',
+                    foreignField: '_id',
+                    as: 'source'
+                }
+            },
+            {
+                $unwind: '$type'
+            },
+            {
+                $unwind: '$studio'
+            },
+            {
+                $unwind: '$source'
+            },
+            {
+                $project: {
+                    _id: 1,
+                    name: 1,
+                    episode: 1,
+                    genre: 1,
+                    imgUrl: 1,
+                    synopsis: 1,
+                    type: '$type.name' ,
+                    studio: '$studio.name' ,
+                    source: '$source.name' ,
+                }
+            }
+            // Add more stages if needed
+        ];
+        
+        const result = await Anime.aggregate(pipeline);
+        return res.status(200).json(
+            result
+        );
+    } catch (error) {
+        console.log(error.message)
+        res.status(500).send({ message: error.message })
+    }
+});
+
+//Route for Get detail of each animes
+router.get('/detail/:id', async (req, res) => {
+    try {
+        const { id } = req.params;
+        const animeObjectId = new ObjectId(id);
+        const pipeline = [
+            {
+                $match: {
+                    _id: animeObjectId
+                }
+            },
+            {
+                $lookup: {
+                    from: 'animetypes', // Assuming your collection name for types is 'types'
+                    localField: 'typeId',
+                    foreignField: '_id',
+                    as: 'type'
+                }
+            },
+            {
+                $lookup: {
+                    from: 'animestudios', // Assuming your collection name for studios is 'studios'
+                    localField: 'studioId',
+                    foreignField: '_id',
+                    as: 'studio'
+                }
+            },
+            {
+                $lookup: {
+                    from: 'animesources', // Assuming your collection name for sources is 'sources'
+                    localField: 'sourceId',
+                    foreignField: '_id',
+                    as: 'source'
+                }
+            },
+            {
+                $unwind: '$type'
+            },
+            {
+                $unwind: '$studio'
+            },
+            {
+                $unwind: '$source'
+            },
+            {
+                $project: {
+                    _id: 1,
+                    name: 1,
+                    episode: 1,
+                    genre: 1,
+                    imgUrl: 1,
+                    synopsis: 1,
+                    trailerUrl: 1,
+                    type: '$type.name' ,
+                    studio: '$studio.name' ,
+                    source: '$source.name' ,
+                }
+            }
+            // Add more stages if needed
+        ];
+        
+        const result = await Anime.aggregate(pipeline);
+        return res.status(200).json(
+            result
+        );
+    } catch (error) {
+        console.log(error.message)
+        res.status(500).send({ message: error.message })
+    }
+});
+
 //Route for Get All Studios
 router.get('/studios', async (req, res) => {
     try {
@@ -97,7 +231,7 @@ router.post('/', authMiddleware, async (req, res) => {
             episode: req.body.episode,
             genre: req.body.genre,
             imgUrl: req.body.imgUrl,
-            videoUrl: req.body.videoUrl,
+            trailerUrl: req.body.trailerUrl,
             synopsis: req.body.synopsis,
         }
         const anime = await Anime.create(newAnime);

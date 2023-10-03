@@ -1,76 +1,3 @@
-// import { Component, OnInit } from '@angular/core';
-// import { HttpClient } from '@angular/common/http';
-// import { Router } from '@angular/router';
-
-// interface MangaResponse {
-//   name: string;
-//   authorId: string;
-//   genre: string;
-//   imgUrl:string;
-// }
-
-// @Component({
-//   selector: 'app-mangalist',
-//   templateUrl: './mangalist.component.html',
-//   styleUrls: ['./mangalist.component.css']
-// })
-
-// export class MangalistComponent implements OnInit {
-
-//   // data!: string;
-//   data: MangaResponse[] = [];
-
-//   constructor(private http: HttpClient, private router: Router) {
-//   }
-
-//   ngOnInit(): void {
-//     const url = 'http://localhost:5555/manga';
-//     this.http.get<MangaResponse[]>(url).subscribe(
-//       (res) => {
-//         console.log('Response data:', res);
-//         this.data = res
-//         console.log(this.data)
-//         this.addNewPost();
-//       },
-//       (error) => {
-//         console.error('Error:', error);
-//       }
-//     );
-
-//   }
-
-//   // Function to create a new card element
-//   createCard(data: MangaResponse): HTMLElement {
-//     console.log("data")
-//     const card = document.createElement("div");
-//     card.className = "col-lg-4";
-//     card.innerHTML = `
-//         <div class="card mb-4">
-//             <a href="#!"><img class="card-img-top" src="${data.imgUrl}" alt="..." /></a>
-//             <div class="card-body">
-//             <div class="small text-muted">${data.genre}</div>
-//             <h2 class="card-title h4">${data.name}</h2>
-//             <p class="card-text">${data.authorId} author</p>
-//                 <a class="btn btn-primary" href="#!">Read more →</a>
-//             </div>
-//         </div>
-//     `;
-//     return card;
-//   }
-
-//   addNewPost(): void {
-//     const MangaResponse = document.getElementById("card-anime");
-//     if (MangaResponse) {
-//       this.data.forEach((item) => {
-//         const newCard = this.createCard(item);
-//         MangaResponse.appendChild(newCard);
-//       })
-//     }
-//   }
-// }
-
-
-
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
@@ -81,9 +8,19 @@ declare var window: any;
 interface MangaResponse {
   _id: string;
   name: string;
-  episode: number;
   genre: string;
   imgUrl: string;
+  author: string;
+}
+
+interface MangaRateResponse {
+  _id: string;
+  totalRate: number;
+  countRate: number;
+  averageRate: number;
+  mangaName: string;
+  mangaGenre: string;
+  mangaImgUrl: string;
 }
 
 interface PopCharacterResponse {
@@ -101,6 +38,7 @@ interface PopCharacterResponse {
 export class MangalistComponent implements OnInit {
 
   data: MangaResponse[] = [];
+  mangaData: MangaRateResponse[] = [];
   popCharacter: PopCharacterResponse[] = [];
 
   constructor(
@@ -111,11 +49,26 @@ export class MangalistComponent implements OnInit {
 
   ngOnInit(): void {
     this.sharedDataService.setIsLoginPage(false);
-    const url = 'http://localhost:5555/manga';
+    const url = 'http://localhost:5555/manga/detail';
     this.http.get<MangaResponse[]>(url).subscribe(
       (res) => {
-        console.log('Response data:', res);
         this.data = res
+        console.log(this.data)
+      },
+      (error) => {
+        console.error('Error:', error);
+      }
+    );
+
+    const manga_url = 'http://localhost:5555/manga/avg_rate';
+    this.http.get<MangaRateResponse[]>(manga_url).subscribe(
+      (res) => {
+        res.forEach(manga => {
+          manga.averageRate = parseFloat(manga.averageRate.toFixed(1));
+        });
+        // Sort the array by averageRate in ascending order
+        const sortedMangaList = res.sort((a, b) => b.averageRate - a.averageRate);
+        this.mangaData = sortedMangaList
         console.log(this.data)
       },
       (error) => {
@@ -137,10 +90,24 @@ export class MangalistComponent implements OnInit {
   }
 
   onClick(animeId: string) {
-    console.log('Clicked on anime with ID:', animeId);
+    console.log('Clicked on manga with ID:', animeId);
     this.router.navigate(['/animereview', animeId]);
     // window.scrollTo({ top: 0, behavior: 'smooth' }); // เลื่อนไปที่ด้านบนสุดของหน้าเว็บ
     window.scrollTo(0, 0); // กระโดดไปที่ด้านบนสุดของหน้าเว็บทันที
   }
   
+  
+  isAllClicked = true;
+  isSortByScoreClicked = false;
+
+  handleAllClick() {
+    this.isAllClicked = !this.isAllClicked;
+    this.isSortByScoreClicked = false;
+  }
+
+  handleSortByScoreClick() {
+    this.isSortByScoreClicked = !this.isSortByScoreClicked;
+    this.isAllClicked = false;
+  }
+
 }

@@ -1,9 +1,93 @@
 import express from "express";
 import { Manga, Author } from "../models/mangaModel.js";
+import { MangaReview } from "../models/mangaReviewModel.js";
 import { authMiddleware } from "../middleware.js";
 import { ObjectId } from 'mongodb';
 
 const router = express.Router();
+
+//Route for Get detail of each animes
+router.get('/detail', async (req, res) => {
+    try {
+        const pipeline = [
+            {
+                $lookup: {
+                    from: 'authors', // Assuming your collection name for types is 'types'
+                    localField: 'authorId',
+                    foreignField: '_id',
+                    as: 'author'
+                }
+            },
+            {
+                $unwind: '$author'
+            },
+            {
+                $project: {
+                    _id: 1,
+                    name: 1,
+                    genre: 1,
+                    imgUrl: 1,
+                    author: '$author.eng_name' ,
+                }
+            }
+            // Add more stages if needed
+        ];
+        
+        const result = await Manga.aggregate(pipeline);
+        return res.status(200).json(
+            result
+        );
+    } catch (error) {
+        console.log(error.message)
+        res.status(500).send({ message: error.message })
+    }
+});
+
+
+//Route for Get rate of each mangas
+router.get('/avg_rate', async (req, res) => {
+    try {
+        const pipeline = [
+            {
+                $group: {
+                    _id: '$mangaId',
+                    totalRate: { $sum: '$rate' },
+                    countRate: { $count: {} },
+                    averageRate: { $avg: '$rate' },
+                }
+            },
+            {
+                $lookup: {
+                    from: 'mangas', 
+                    localField: '_id',
+                    foreignField: '_id',
+                    as: 'mangaDetails'
+                }
+            },
+            {
+                $unwind: '$mangaDetails'
+            },
+            {
+                $project: {
+                    _id: 1,
+                    totalRate: 1,
+                    countRate: 1,
+                    averageRate: 1,
+                    mangaName: '$mangaDetails.name' ,
+                    mangaGenre: '$mangaDetails.genre' ,
+                    mangaImgUrl: '$mangaDetails.imgUrl',
+                }
+            }
+        ];
+        const result = await MangaReview.aggregate(pipeline);
+        return res.status(200).json(
+            result
+        );
+    } catch (error) {
+        console.log(error.message)
+        res.status(500).send({ message: error.message })
+    }
+});
 
 //Route for Get All authors
 router.get('/authors', async (req, res) => {

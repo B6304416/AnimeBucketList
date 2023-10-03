@@ -29,13 +29,12 @@ const animeSchema = mongoose.Schema(
         imgUrl: {
             type: String,
         },
-        videoUrl: {
-            type: String,
-        },
         synopsis: {
             type: String,
         },
-
+        trailerUrl: {
+            type: String,
+        },
     },
     {
         timestamps: true,

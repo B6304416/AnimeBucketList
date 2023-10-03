@@ -1,7 +1,9 @@
-body{
-    background: #121212;
-    margin-top:20px;
+@import url('https://fonts.googleapis.com/css2?family=Shippori+Antique&display=swap');
+
+.page-body{
+    font-family:'Shippori Antique', sans-serif;
 }
+
 .card {
     position: relative;
     display: flex;
