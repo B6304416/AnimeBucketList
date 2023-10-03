@@ -28,6 +28,10 @@ export class AnimetableComponent implements OnInit{
   ) { }
 
   ngOnInit(): void {
+    this.fetchData()
+  }
+  
+  fetchData(): void {
     const url = 'http://localhost:5555/anime/detail';
     this.http.get<AnimeResponse[]>(url).subscribe(
       (res) => {
@@ -56,6 +60,7 @@ export class AnimetableComponent implements OnInit{
       (response) => {
         console.log('Anime deleted successfully', response);
         alert('Anime deleted successfully');
+        this.fetchData();
         // this.router.navigate(['/anime-list']); // หลังจากลบเสร็จให้เปลี่ยนเส้นทางไปยังหน้ารายการ Anime หรือหน้าอื่นที่เหมาะสม
       },
       (error) => {
@@ -64,6 +69,7 @@ export class AnimetableComponent implements OnInit{
       }
     );
   }
+
   
 
 }
