@@ -40,7 +40,7 @@ router.get('/detail', async (req, res) => {
                     _id: 1,
                     name: 1,
                     score: 1,
-                    imgUrl: 1,
+                    imgProfile: 1,
                     anime: '$anime.name' ,
                     manga: '$manga.name' ,
 

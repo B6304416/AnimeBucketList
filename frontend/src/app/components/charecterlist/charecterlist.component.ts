@@ -5,11 +5,11 @@ import { Router } from '@angular/router';
 import { SharedDataService } from 'src/app/services/shared-data.service';
 declare var window: any;
 
-interface CharecterResponse {
+interface CharacterResponse {
   _id: string;
   name: string;
   score: number;
-  imgUrl: string;
+  imgProfile: string;
   anime: string;
   manga: string;
 }
@@ -38,8 +38,10 @@ interface CharecterRateResponse {
 
 export class CharecterlistComponent implements OnInit {
 
-  data: CharecterResponse[] = [];
+  data: CharacterResponse[] = [];
   mangaData: CharecterRateResponse[] = [];
+  characters: any[] = [];
+
   // popCharacter: PopCharacterResponse[] = [];
 
   constructor(
@@ -48,13 +50,18 @@ export class CharecterlistComponent implements OnInit {
     private router: Router,
   ) { }
 
+  baseUrl: string = 'http://localhost:5555';
+
   ngOnInit(): void {
     this.sharedDataService.setIsLoginPage(false);
     const url = 'http://localhost:5555/character/detail';
-    this.http.get<CharecterResponse[]>(url).subscribe(
+    this.http.get<CharacterResponse[]>(url).subscribe(
       (res) => {
-        this.data = res
-        console.log(this.data)
+        this.characters = res.map(character => ({
+          ...character,
+          imgProfile: this.baseUrl + character.imgProfile
+        }));
+        console.log(this.characters);
       },
       (error) => {
         console.error('Error:', error);

@@ -21,10 +21,10 @@
                     </div>
         
                       <div class="row">
-                        <div class="col-lg-4 col-md-6 col-sm-12" *ngFor="let character of data">
+                        <div class="col-lg-4 col-md-6 col-sm-12" *ngFor="let character of characters">
                           <div class="d-flex h-100">
                             <div class="card mb-4 flex-fill">
-                              <img class="card-img-top card-img-test" [src]="character.imgUrl" alt="..." />
+                              <img class="card-img-top card-img-test" [src]="character.imgProfile" alt="..." />
                               <div class="card-body">
                                 <h5 class="card-title">{{ character.name }}</h5>
                                 <ul class="list-unstyled">
