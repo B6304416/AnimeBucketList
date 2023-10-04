@@ -1,121 +1,121 @@
-<body class="bg-dark">
-    <div class="bg-img">
-        <div class="text-center">
-            <h1 class="fw-bolder text-danger p-5 mt-auto display-3">
+<div class="bg-img">
+    <div class="text-center">
+        <h1 class="fw-bolder text-danger p-5 mt-auto display-3">
+            <strong>
+                Welcome to Anime bucket list!
+            </strong>
+            <h2 class="fw-bolder text-danger p-1 mb-lg-4 ">
                 <strong>
-                    Welcome to Anime bucket list!
+                    100 Anime to Watch Before You Die
                 </strong>
-                <h2 class="fw-bolder text-danger p-1 mb-lg-4 ">
-                    <strong>
-                        100 Anime to Watch Before You Die
-                    </strong>
-                </h2>
-            </h1>
-        </div>
+            </h2>
+        </h1>
     </div>
-    <!-- Page content-->
+</div>
+<!-- Page content-->
 
-    <div class="container p-4">
-        <div class="row">
-            <div class="col-md-8" *ngFor="let character of popCharacter">
-                <div class="card mb-4">
-                    <a href="#!"><img class="card-img-top" [src]="character.imgUrl" alt="..." /></a>
-                    <div class="card-body">
-                        <div class="small text-muted">POPULAR CHARACTER</div>
-                        <h2 class="card-title h4">
-                            <strong>
-                                {{ character.name }}
-                            </strong>
-                        </h2>
-                        <p class="card-text">{{ character.score }} users favorite this character.</p>
-                        <a class="btn btn-readmore" href="/review">Read more →</a>
-                    </div>
+<div class="container p-4">
+    <div class="row">
+        <div class="col-md-8" *ngFor="let character of popCharacter">
+            <div class="card mb-4">
+                <a href="#!"><img class="card-img-top" [src]="character.imgUrl" alt="..." /></a>
+                <div class="card-body">
+                    <div class="small text-muted">POPULAR CHARACTER</div>
+                    <h2 class="card-title h4">
+                        <strong>
+                            {{ character.name }}
+                        </strong>
+                    </h2>
+                    <p class="card-text">{{ character.score }} users favorite this character.</p>
+                    <a class="btn btn-readmore" href="/review">Read more →</a>
                 </div>
             </div>
-
-            <div class="col-lg-4">
-
-                <div class="card mb-4">
-                    <div class="card-header">Warning</div>
-                    <div class="card-body">
-                        Just put something here!
-                        Just put something here!
-                        Just put something here!
-                        Just put something here!
-                        Just put something here!
-                        Just put something here!
-                        Just put something here!
-                        Just put something here!
-                        Just put something here!
-                        Just put something here!
-                        Just put something here!
-                        Just put something here!
-                        Just put something here!
-                        Just put something here!
-                        Just put something here!
-                        Just put something here!
-                        Just put something here!
-                        Just put something here!
-                        Just put something here!
-                        Just put something here!
-                        Just put something here!
-                    </div>
-                </div>
-            </div>
-
-            <!-- Nested row for non-featured blog posts-->
-            <div class="container">
-                <div class="d-flex justify-content-end p-3">
-                    <h2 class="mt-2 mb-2 text-white">Manga List</h2>
-                    <button type="button" class="btn btn-secondary mt-2 mb-2 ml-auto" [class.btn-clicked]="isAllClicked" (click)="handleAllClick()">
-                        All
-                    </button>
-                    <button type="button" class="btn btn-secondary mt-2 mb-2 ml-2 mr-1" [class.btn-clicked]="isSortByScoreClicked" (click)="handleSortByScoreClick()">
-                        Sort by average score
-                    </button>
-                </div>
-                <div class="row" *ngIf="isAllClicked">
-                    <div class="col-lg-4" *ngFor="let manga of data">
-                        <div class="card mb-4">
-                            <img class="card-img-top card-img-test" [src]="manga.imgUrl" alt="..." />
-                            <div class="card-body">
-                                <div class="small text-muted">{{ manga.genre }}</div>
-                                <h2 class="card-title h4 mb-1">
-                                    <strong>
-                                        {{ manga.name }}
-                                    </strong>
-                                </h2>
-                                <p class="card-text">By {{ manga.author }}</p>
-                                <a class="btn btn-readmore" (click)="onClick(manga._id)">Read more →</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row" *ngIf="isSortByScoreClicked">
-                    <div class="col-lg-4" *ngFor="let manga of mangaData">
-                        <div class="card mb-4">
-                            <img class="card-img-top card-img-test" [src]="manga.mangaImgUrl" alt="..." />
-                            <div class="card-body">
-                                <div class="small text-muted">{{ manga.mangaGenre }}</div>
-                                <h2 class="card-title h4 mb-1">
-                                    <strong>
-                                        {{ manga.mangaName }}
-                                    </strong>
-                                </h2>
-                                <p class="card-text">{{ manga.averageRate }} ⭐</p>
-                                <a class="btn btn-readmore" (click)="onClick(manga._id)">Read more →</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
         </div>
-    </div>
-    <!-- Footer-->
-    <footer class="py-5 bg-dark">
+
+        <div class="col-lg-4">
+
+            <div class="card mb-4">
+                <div class="card-header">Warning</div>
+                <div class="card-body">
+                    Just put something here!
+                    Just put something here!
+                    Just put something here!
+                    Just put something here!
+                    Just put something here!
+                    Just put something here!
+                    Just put something here!
+                    Just put something here!
+                    Just put something here!
+                    Just put something here!
+                    Just put something here!
+                    Just put something here!
+                    Just put something here!
+                    Just put something here!
+                    Just put something here!
+                    Just put something here!
+                    Just put something here!
+                    Just put something here!
+                    Just put something here!
+                    Just put something here!
+                    Just put something here!
+                </div>
+            </div>
+        </div>
+
+        <!-- Nested row for non-featured blog posts-->
         <div class="container">
-            <p class="m-0 text-center text-white">โง่</p>
+            <div class="d-flex justify-content-end p-3">
+                <h2 class="mt-2 mb-2 text-white">Manga List</h2>
+                <button type="button" class="btn btn-secondary mt-2 mb-2 ml-auto" [class.btn-clicked]="isAllClicked"
+                    (click)="handleAllClick()">
+                    All
+                </button>
+                <button type="button" class="btn btn-secondary mt-2 mb-2 ml-2 mr-1"
+                    [class.btn-clicked]="isSortByScoreClicked" (click)="handleSortByScoreClick()">
+                    Sort by average score
+                </button>
+            </div>
+            <div class="row" *ngIf="isAllClicked">
+                <div class="col-lg-4" *ngFor="let manga of data">
+                    <div class="card mb-4">
+                        <img class="card-img-top card-img-test" [src]="manga.imgUrl" alt="..." />
+                        <div class="card-body">
+                            <div class="small text-muted">{{ manga.genre }}</div>
+                            <h2 class="card-title h4 mb-1">
+                                <strong>
+                                    {{ manga.name }}
+                                </strong>
+                            </h2>
+                            <p class="card-text">By {{ manga.author }}</p>
+                            <a class="btn btn-readmore" (click)="onClick(manga._id)">Read more →</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row" *ngIf="isSortByScoreClicked">
+                <div class="col-lg-4" *ngFor="let manga of mangaData">
+                    <div class="card mb-4">
+                        <img class="card-img-top card-img-test" [src]="manga.mangaImgUrl" alt="..." />
+                        <div class="card-body">
+                            <div class="small text-muted">{{ manga.mangaGenre }}</div>
+                            <h2 class="card-title h4 mb-1">
+                                <strong>
+                                    {{ manga.mangaName }}
+                                </strong>
+                            </h2>
+                            <p class="card-text">{{ manga.averageRate }} ⭐</p>
+                            <a class="btn btn-readmore" (click)="onClick(manga._id)">Read more →</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-    </footer>
-</body>
+
+    </div>
+</div>
+<!-- Footer-->
+<footer class="py-5 bg-dark">
+    <div class="container">
+        <p class="m-0 text-center text-white">โง่</p>
+    </div>
+</footer>

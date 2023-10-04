@@ -36,13 +36,13 @@
                                 <img *ngIf="manga.get('imgUrl')?.value" [src]="manga.get('imgUrl')?.value" alt="Admin"
                                     width="300">
                                 <div class="mt-3">
-                                    <h4 *ngIf="!manga.get('name')?.value">Manga Name</h4>
+                                    <h4 *ngIf="!manga.get('name')?.value" class="text-white">Manga Name</h4>
                                     <h4 *ngIf="manga.get('name')?.value">{{ manga.get('name')?.value }}</h4>
 
-                                    <p class="text-secondary mb-1" style="text-align: left;"> author: {{
+                                    <p class="text-secondary mb-1" style="text-align: left;"> Author: {{
                                         getAuthorName(manga.get('authorId')?.value) }}</p>
 
-                                    <p class="text-muted font-size-sm" style="text-align: left;">genre: {{
+                                    <p class="text-muted font-size-sm" style="text-align: left;">Genre: {{
                                         manga.get('genre')?.value }}</p>
                                 </div>
                             </div>
