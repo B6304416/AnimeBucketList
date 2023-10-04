@@ -30,4 +30,6 @@ const characterSchema = mongoose.Schema(
     }
 );
 
+
+
 export const Character = mongoose.model('Character', characterSchema);
