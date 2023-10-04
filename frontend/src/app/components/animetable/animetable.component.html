@@ -50,8 +50,8 @@
                                                         class="fa fa-pencil-alt"></i></a>
                                             </li>
                                             <li>
-                                                <a (click)="confirmDelete(anime._id, anime.name)" class="btn btn-danger"><i 
-                                                    class="fa fa-trash"></i></a>
+                                                <a (click)="confirmDelete(anime._id, anime.name)"
+                                                    class="btn btn-danger"><i class="fa fa-trash"></i></a>
                                             </li>
                                         </ul>
                                     </td>
@@ -69,8 +69,8 @@
 
 <!-- Modal สำหรับการยืนยันการลบ -->
 
-<div class="modal mt-5" id="deleteConfirmationModal" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document">
+<div class="modal " id="deleteConfirmationModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog vertical-center" role="document">
         <div class="modal-content ">
             <div class="modal-header alert-warning">
                 <h5 class="modal-title">Confirm Delete</h5>
@@ -79,9 +79,9 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body">
-                Are you sure you want to delete <span class="alert-link">{{ animeName }}?</span>
-              </div>              
+            <div class="modal-body ">
+                    Are you sure you want to delete <span class="alert-link">{{ animeName }}?</span>
+            </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal"
                     (click)="animeToDelete = null">Cancel</button>

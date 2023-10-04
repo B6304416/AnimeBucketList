@@ -210,8 +210,8 @@
     </div>
 </div>
 <div class="alert-container">
-    <div class="alert alert-primary" role="alert" *ngIf="showAlert">
+    <div [ngClass]="alertClass" role="alert" *ngIf="showAlert">
       {{ alertMessage }}
     </div>
   </div>
-  <button (click)="showAlertMessage()">Show Alert</button>
+  

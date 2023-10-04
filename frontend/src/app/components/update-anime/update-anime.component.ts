@@ -92,7 +92,7 @@ export class UpdateAnimeComponent implements OnInit {
           this.animeData = res;
 
           // นำข้อมูลที่ดึงมาใส่ใน form anime
-          const animeResponse = this.animeData[0]; 
+          const animeResponse = this.animeData[0];
 
           // ตรวจสอบ genre และตั้งค่า checkbox ตาม genre ใน animeResponse.genre
           Array.from(animeResponse.genre).forEach((genre: string) => {
@@ -101,8 +101,8 @@ export class UpdateAnimeComponent implements OnInit {
 
           this.anime.patchValue({
             name: animeResponse.name,
-            studioId: animeResponse.studioId, 
-            episode: animeResponse.episode, 
+            studioId: animeResponse.studioId,
+            episode: animeResponse.episode,
             imgUrl: animeResponse.imgUrl,
             trailerUrl: animeResponse.trailerUrl,
             synopsis: animeResponse.synopsis,
@@ -148,27 +148,42 @@ export class UpdateAnimeComponent implements OnInit {
     }
   }
 
-UpdateAnime() {
-  const animeData = this.anime.value;
-  const token = sessionStorage.getItem('token');
+  UpdateAnime() {
+    const animeData = this.anime.value;
+    const token = sessionStorage.getItem('token');
 
-  const headers = new HttpHeaders({
-    'Authorization': 'Bearer ' + token
-  });
+    const headers = new HttpHeaders({
+      'Authorization': 'Bearer ' + token
+    });
 
-  const animeId = this.animeId; // รับค่า animeId จาก route parameter
+    const animeId = this.animeId; // รับค่า animeId จาก route parameter
 
-  // ส่งค่า animeData และใช้ HTTP PUT เพื่ออัปเดต Anime ที่มี animeId ตามที่ระบุ
-  this.http.put(`http://localhost:5555/anime/${animeId}`, animeData, { headers, responseType: 'text' as 'json' }).subscribe(
-    (response) => {
-      console.log('Anime updated successfully', response);
-      alert('Anime updated successfully');
-    },
-    (error) => {
-      console.error('Error updating anime', error);
-      alert('Error: ' + error.message);
-    }
-  );
-}
+    // ส่งค่า animeData และใช้ HTTP PUT เพื่ออัปเดต Anime ที่มี animeId ตามที่ระบุ
+    this.http.put(`http://localhost:5555/anime/${animeId}`, animeData, { headers, responseType: 'text' as 'json' }).subscribe(
+      (response) => {
+        console.log('Anime updated successfully', response);
+        this.showAlertMessage('Update successfully',true)
+      },
+      (error) => {
+        console.error('Error updating anime', error);
+        this.showAlertMessage('Error: ' + error.message,false)
+      }
+    );
+  }
+
+  showAlert: boolean = false; 
+  alertMessage: string = "alert—check it out!";
+  alertClass: string = '';
+  showAlertMessage(message: string, isSuccess: boolean) {
+    this.alertMessage = message;
+    this.alertClass = isSuccess ? 'alert alert-success' : 'alert alert-warning';
+
+    this.showAlert = true; // แสดง alert
+
+    // หลังจาก 3 วินาที ซ่อน alert ลง
+    setTimeout(() => {
+      this.showAlert = false;
+    }, 3000);
+  }
 
 }

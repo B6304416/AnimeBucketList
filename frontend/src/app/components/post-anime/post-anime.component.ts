@@ -28,7 +28,7 @@ export class PostAnimeComponent implements OnInit {
   });
 
   studioOptions: StudioResponse[] = [];
-  genreOptions: string [] = [];
+  genreOptions: string[] = [];
 
   constructor(private http: HttpClient, private router: Router,) { }
 
@@ -98,27 +98,29 @@ export class PostAnimeComponent implements OnInit {
     this.http.post('http://localhost:5555/anime', animeData, { headers, responseType: 'text' as 'json' }).subscribe(
       (response) => {
         console.log('Anime posted successfully', response);
-        alert('Anime posted successfully')
         this.resetForm();
-
+        this.showAlertMessage('Anime posted successfully',true)
       },
       (error) => {
         console.error('Error posting anime', error);
-        alert('Error: ' + error.message)
+        this.showAlertMessage('Error: ' + error.message,false)
       }
     );
 
   }
   resetForm() {
-    this.anime.reset(); 
-    this.anime.setControl('genre', new FormArray([])); 
+    this.anime.reset();
+    this.anime.setControl('genre', new FormArray([]));
   }
 
-  showAlert: boolean = false; // ตัวแปรสำหรับควบคุมการแสดง alert
-  alertMessage: string = "A simple primary alert—check it out!";
+  showAlert: boolean = false; 
+  alertMessage: string = "alert—check it out!";
+  alertClass: string = ''; // ตัวแปรสำหรับกำหนดคลาส CSS ของ alert
 
-  // ฟังก์ชันสำหรับแสดง alert และซ่อนไว้หลังจากเวลาที่กำหนด
-  showAlertMessage() {
+  showAlertMessage(message: string, isSuccess: boolean) {
+    this.alertMessage = message;
+    this.alertClass = isSuccess ? 'alert alert-success' : 'alert alert-warning';
+
     this.showAlert = true; // แสดง alert
 
     // หลังจาก 3 วินาที ซ่อน alert ลง
