@@ -5,6 +5,56 @@ import { authMiddleware, tokenVerify } from "../middleware.js";
 
 const router = express.Router();
 
+router.get('/detail', async (req, res) => {
+    try {
+        const pipeline = [
+            {
+                $lookup: {
+                    from: 'animes', // Assuming your collection name for types is 'types'
+                    localField: 'animeId',
+                    foreignField: '_id',
+                    as: 'anime'
+                }
+            },
+            {
+                $lookup: {
+                    from: 'mangas', // Assuming your collection name for studios is 'studios'
+                    localField: 'mangaId',
+                    foreignField: '_id',
+                    as: 'manga'
+                }
+            },
+
+            // {
+            //     $unwind: '$anime'
+            // },
+            // {
+            //     $unwind: '$manga'
+            // },
+            {
+                $project: {
+                    _id: 1,
+                    name: 1,
+                    score: 1,
+                    imgUrl: 1,
+                    anime: '$anime.name' ,
+                    manga: '$manga.name' ,
+
+                }
+            }
+
+        ];
+        
+        const result = await Character.aggregate(pipeline);
+        return res.status(200).json(
+            result
+        );
+    } catch (error) {
+        console.log(error.message)
+        res.status(500).send({ message: error.message })
+    }
+});
+
 //Route for Vote for a Character
 router.get('/vote_character/:id', tokenVerify, async (req, res) => {
     try {
@@ -74,6 +124,8 @@ router.get('/', async (req, res) => {
         res.status(500).send({ message: error.message })
     }
 })
+
+
 
 //Route for Get a Character by ID
 router.get('/:id', async (req, res) => {

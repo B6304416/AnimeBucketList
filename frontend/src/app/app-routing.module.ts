@@ -11,6 +11,7 @@ import { ReviewComponent } from './components/review/review.component';
 
 
 import { PostMangaComponent } from './components/post-manga/post-manga.component';
+import { CharecterlistComponent } from './components/charecterlist/charecterlist.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -18,6 +19,7 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'animelist', component: AnimelistComponent },
   { path: 'mangalist', component: MangalistComponent },
+  { path: 'charecterlist', component: CharecterlistComponent },
   { path: 'postanime', component: PostAnimeComponent },
   { path: 'review', component: ReviewComponent },
   { path: 'postmanga', component: PostMangaComponent },
