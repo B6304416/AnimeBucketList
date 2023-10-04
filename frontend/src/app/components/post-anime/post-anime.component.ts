@@ -113,4 +113,17 @@ export class PostAnimeComponent implements OnInit {
     this.anime.reset(); 
     this.anime.setControl('genre', new FormArray([])); 
   }
+
+  showAlert: boolean = false; // ตัวแปรสำหรับควบคุมการแสดง alert
+  alertMessage: string = "A simple primary alert—check it out!";
+
+  // ฟังก์ชันสำหรับแสดง alert และซ่อนไว้หลังจากเวลาที่กำหนด
+  showAlertMessage() {
+    this.showAlert = true; // แสดง alert
+
+    // หลังจาก 3 วินาที ซ่อน alert ลง
+    setTimeout(() => {
+      this.showAlert = false;
+    }, 3000);
+  }
 }

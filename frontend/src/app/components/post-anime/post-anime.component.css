@@ -7,7 +7,17 @@
 .imgrounded {
   border-radius: 20px; /* ปรับค่าตามที่คุณต้องการสำหรับขอบโค้ง */
 }
-
+.container {
+  /* รูปแบบของ container อื่น ๆ */
+  position: relative; /* ตั้งค่าเป็น relative เพื่อให้ alert-container อ้างถึงตำแหน่งใน container */
+}
+.alert-container {
+  position: fixed; /* ตั้งค่าเป็น fixed เพื่อควบคุมตำแหน่งของ alerts ในหน้าจอ */
+  top: 90%; /* ตำแหน่งด้านบนที่ 50% ของหน้าจอ */
+  left: 50%; /* ตำแหน่งด้านซ้ายที่ 50% ของหน้าจอ */
+  transform: translate(-50%, -50%); /* ใช้ transform เพื่อย้าย alert ให้อยู่กลาง */
+  z-index: 1000; /* ตั้งค่า z-index ให้มากกว่า container อื่น ๆ เพื่อให้แสดงเหนือ container */
+}
 
 .card {
     position: relative;

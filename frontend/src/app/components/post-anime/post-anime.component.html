@@ -209,4 +209,9 @@
         </div>
     </div>
 </div>
-<router-outlet></router-outlet>
+<div class="alert-container">
+    <div class="alert alert-primary" role="alert" *ngIf="showAlert">
+      {{ alertMessage }}
+    </div>
+  </div>
+  <button (click)="showAlertMessage()">Show Alert</button>
