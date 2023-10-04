@@ -1,15 +1,14 @@
 <nav class="navbar navbar-expand-lg navbar-dark custom-bg-color" *ngIf="!isLoginPage">
   <div class="container-fluid">
-    <a class="navbar-brand" routerLink="/animelist">Animelist</a>
-
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <a class="navbar-brand navlist" routerLink="/animelist">Animelist</a>
+    <a class="nav-link active navlist" aria-current="page" routerLink="/mangalist">Mangalist</a>
+    <a class="nav-link active navlist" aria-current="page" routerLink="/home">Character</a>
+    <!-- <div class="collapse navbar-collapse" > -->
       <ul class="navbar-nav mr-auto">
-
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" routerLink="/mangalist">Mangalist</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" routerLink="/home">Character</a>
+          <a class="nav-link active" aria-current="page" routerLink="/charecterlist">Character</a>
         </li>
 
         <!-- <li class="nav-item">
@@ -46,10 +45,11 @@
         </li>
       </ul>
 
-      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-        <button class="btn my-2 my-sm-0 mr-2 "
-          [ngClass]="{'btn-outline-primary': !checkUserRole(), 'btn-outline-warning': checkUserRole()}" type="button"
-          *ngIf="isLoggedIn">{{name}}</button>
+      <button class="btn my-2 my-sm-0 mr-2 "
+        [ngClass]="{'btn-outline-primary': !checkUserRole(), 'btn-outline-warning': checkUserRole()}" type="button"
+        *ngIf="isLoggedIn">{{name}}
+      </button>
+      <ul class="navbar-nav my-2 my-sm-0 mr-2">
         <li class="nav-item" *ngIf="!isLoggedIn">
           <button class="btn btn-outline-success my-2 my-sm-0 " routerLink="/login">Login</button>
         </li>
@@ -57,6 +57,6 @@
           <button class="btn btn-outline-danger my-2 my-sm-0 " (click)="logout()">Logout</button>
         </li>
       </ul>
-    </div>
+    <!-- </div> -->
   </div>
 </nav>

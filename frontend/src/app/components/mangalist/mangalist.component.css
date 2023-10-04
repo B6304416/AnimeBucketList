@@ -1,6 +1,6 @@
 .bg-img {
     width: 100%;
-    height: 250px;
+    height: auto;
     background-size: cover;
     animation: slideImages 30s linear infinite;
 }

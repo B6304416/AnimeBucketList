@@ -1,6 +1,6 @@
 <div class="bg-img">
     <div class="text-center">
-        <h1 class="fw-bolder text-danger p-5 mt-auto display-3">
+        <h1 class="fw-bolder text-danger p-5 mt-auto display-3 title-text">
             <strong>
                 Welcome to Anime bucket list!
             </strong>
@@ -15,82 +15,35 @@
 
 <div class="container p-4">
     <div class="row">
-        <div class="col-md-8" *ngFor="let character of popCharacter">
+        <div class="col-md-7">
             <div class="card mb-4">
-                <a href="#!"><img class="card-img-top" [src]="character.imgUrl" alt="..." /></a>
+                <a href="#!"><img class="card-img-top" [src]="animeData[0].animeImgUrl" alt="..." /></a>
                 <div class="card-body">
-                    <div class="small text-muted">POPULAR CHARACTER</div>
-                    <h2 class="card-title h4">
-                        <strong>
-                            {{ character.name }}
-                        </strong>
-                    </h2>
-                    <p class="card-text">{{ character.score }} users favorite this character.</p>
-                    <a class="btn btn-readmore" href="/#">Read more →</a>
+                    <div class="small text-muted ">HIGH AVERAGE SCORE</div>
+                    <div class="card-detail">
+                        <h2 class="card-title h3 mt-1">
+                            <strong>
+                                {{ animeData[0].animeName }}
+                            </strong>
+                            <p class="card-text h5 mt-2">score: ⭐{{ animeData[0].averageRate }}</p>
+                        </h2>
+                        <a class="btn btn-readmore-avg" href="/#">Read more →</a>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <div class="col-lg-4">
-
-            <!-- <div class="card mb-4">
-                    <div class="card-header">Search</div>
-                    <div class="card-body">
-                        <div class="input-group">
-                            <input class="form-control" type="text" placeholder="Enter search term..."
-                                aria-label="Enter search term..." aria-describedby="button-search" />
-                            <button class="btn btn-primary" id="button-search" type="button">Go!</button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card mb-4">
-                    <div class="card-header">Categories</div>
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <ul class="list-unstyled mb-0">
-                                    <li><a href="#!">Web Design</a></li>
-                                    <li><a href="#!">HTML</a></li>
-                                    <li><a href="#!">Freebies</a></li>
-                                </ul>
-                            </div>
-                            <div class="col-sm-6">
-                                <ul class="list-unstyled mb-0">
-                                    <li><a href="#!">JavaScript</a></li>
-                                    <li><a href="#!">CSS</a></li>
-                                    <li><a href="#!">Tutorials</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div> -->
-
+        <div class="col-md-5">
             <div class="card mb-4">
-                <div class="card-header">Warning</div>
-                <div class="card-body">
-                    Just put something here!
-                    Just put something here!
-                    Just put something here!
-                    Just put something here!
-                    Just put something here!
-                    Just put something here!
-                    Just put something here!
-                    Just put something here!
-                    Just put something here!
-                    Just put something here!
-                    Just put something here!
-                    Just put something here!
-                    Just put something here!
-                    Just put something here!
-                    Just put something here!
-                    Just put something here!
-                    Just put something here!
-                    Just put something here!
-                    Just put something here!
-                    Just put something here!
-                    Just put something here!
+                <div class="card-header">
+                    <div>
+                        Genre: {{ animeData[0].animeGenre }}
+                    </div>
+                    <div>
+                        Episodes: {{ animeData[0].animeEpisode }}
+                    </div>
                 </div>
+                <div class="card-body">เรื่องย่อ: &nbsp;&nbsp;{{animeData[0].animeSynopsis}}</div>
             </div>
         </div>
 
@@ -151,7 +104,7 @@
                                     <p class="card-text">{{ anime.animeEpisode }} episodes</p>
                                 </div>
                             </div>
-                            <a class="btn btn-primary" (click)="onClick(anime._id)">Read more →</a>
+                            <a class="btn btn-readmore" (click)="onClick(anime._id)">Read more →</a>
                         </div>
                     </div>
                 </div>

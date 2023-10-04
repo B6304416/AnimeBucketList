@@ -15,6 +15,7 @@ import { AnimereviewComponent } from './components/animereview/animereview.compo
 import { ReviewComponent } from './components/review/review.component';
 import { PostMangaComponent } from './components/post-manga/post-manga.component';
 import { MangalistComponent } from './components/mangalist/mangalist.component';
+import { CharecterlistComponent } from './components/charecterlist/charecterlist.component';
 import { AnimetableComponent } from './components/animetable/animetable.component';
 import { UpdateAnimeComponent } from './components/update-anime/update-anime.component';
 import { PostCharacterComponent } from './components/post-character/post-character.component';
@@ -32,6 +33,7 @@ import { PostCharacterComponent } from './components/post-character/post-charact
     ReviewComponent,
     PostMangaComponent,
     MangalistComponent,
+    CharecterlistComponent,
     AnimetableComponent,
     UpdateAnimeComponent,
     PostCharacterComponent,
