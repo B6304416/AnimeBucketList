@@ -12,57 +12,9 @@
         </h1>
     </div>
 </div>
-<!-- Page content-->
 
 <div class="container p-4">
     <div class="row">
-        <div class="col-md-8" *ngFor="let character of popCharacter">
-            <div class="card mb-4">
-                <a href="#!"><img class="card-img-top" [src]="character.imgUrl" alt="..." /></a>
-                <div class="card-body">
-                    <div class="small text-muted">POPULAR CHARACTER</div>
-                    <h2 class="card-title h4">
-                        <strong>
-                            {{ character.name }}
-                        </strong>
-                    </h2>
-                    <p class="card-text">{{ character.score }} users favorite this character.</p>
-                    <a class="btn btn-readmore" href="/review">Read more →</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-lg-4">
-
-            <div class="card mb-4">
-                <div class="card-header">Warning</div>
-                <div class="card-body">
-                    Just put something here!
-                    Just put something here!
-                    Just put something here!
-                    Just put something here!
-                    Just put something here!
-                    Just put something here!
-                    Just put something here!
-                    Just put something here!
-                    Just put something here!
-                    Just put something here!
-                    Just put something here!
-                    Just put something here!
-                    Just put something here!
-                    Just put something here!
-                    Just put something here!
-                    Just put something here!
-                    Just put something here!
-                    Just put something here!
-                    Just put something here!
-                    Just put something here!
-                    Just put something here!
-                </div>
-            </div>
-        </div>
-
-        <!-- Nested row for non-featured blog posts-->
         <div class="container">
             <div class="d-flex justify-content-end p-3">
                 <h2 class="mt-2 mb-2 text-white">Manga List</h2>
@@ -76,7 +28,7 @@
                 </button>
             </div>
             <div class="row" *ngIf="isAllClicked">
-                <div class="col-lg-4" *ngFor="let manga of data">
+                <div class="col-lg-3" *ngFor="let manga of data">
                     <div class="card mb-4">
                         <img class="card-img-top card-img-test" [src]="manga.imgUrl" alt="..." />
                         <div class="card-body">
@@ -93,7 +45,7 @@
                 </div>
             </div>
             <div class="row" *ngIf="isSortByScoreClicked">
-                <div class="col-lg-4" *ngFor="let manga of mangaData">
+                <div class="col-lg-3" *ngFor="let manga of mangaData">
                     <div class="card mb-4">
                         <img class="card-img-top card-img-test" [src]="manga.mangaImgUrl" alt="..." />
                         <div class="card-body">

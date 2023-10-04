@@ -27,7 +27,7 @@ router.get('/detail', async (req, res) => {
                     name: 1,
                     genre: 1,
                     imgUrl: 1,
-                    author: '$author.eng_name' ,
+                    author: '$author.eng_name',
                 }
             }
             // Add more stages if needed
@@ -76,6 +76,7 @@ router.get('/avg_rate', async (req, res) => {
                     mangaName: '$mangaDetails.name' ,
                     mangaGenre: '$mangaDetails.genre' ,
                     mangaImgUrl: '$mangaDetails.imgUrl',
+                    mangaSynopsis: '$mangaDetails.synopsis',
                 }
             }
         ];
