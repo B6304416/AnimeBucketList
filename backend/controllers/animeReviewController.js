@@ -35,7 +35,9 @@ router.get('/avg_rate', async (req, res) => {
                     averageRate: 1,
                     animeName: '$animeDetails.name',
                     animeImgUrl: '$animeDetails.imgUrl',
-                    animeEpisode: '$animeDetails.episode' 
+                    animeEpisode: '$animeDetails.episode',
+                    animeSynopsis: '$animeDetails.synopsis',
+                    animeGenre: '$animeDetails.genre',
                 }
             }
         ];

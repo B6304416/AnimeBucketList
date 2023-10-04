@@ -14,6 +14,7 @@ import { UpdateAnimeComponent } from './components/update-anime/update-anime.com
 import { PostCharacterComponent } from './components/post-character/post-character.component';
 
 import { PostMangaComponent } from './components/post-manga/post-manga.component';
+import { CharecterlistComponent } from './components/charecterlist/charecterlist.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -22,6 +23,7 @@ const routes: Routes = [
   { path: 'animelist', component: AnimelistComponent },
   { path: 'animetable', component: AnimetableComponent },
   { path: 'mangalist', component: MangalistComponent },
+  { path: 'charecterlist', component: CharecterlistComponent },
   { path: 'postanime', component: PostAnimeComponent },
   { path: 'review', component: ReviewComponent },
   { path: 'postmanga', component: PostMangaComponent },
