@@ -10,14 +10,7 @@
                                 <h4 class="title">Anime <span>List</span></h4>
                             </div>
                             <div class="col-sm-7 col-xs-12 text-right">
-                                <!-- <div class="btn_group mr-2">
-                                    <span class="label label-danger mr-1">Filter:</span>
-                                    <button type="button" class="btn btn-warning mx-1" title="Blocked"><i
-                                            class="fa fa-ban"></i></button>
-                                    <button type="button" class="btn btn-success mx-1" title="Active"><i
-                                            class="fa fa-check-square"></i></button>
-                                </div> -->
-                                <a href="#" class="btn add-new"><i class="fa fa-plus-circle"></i>
+                                <a href="/postanime" class="btn add-new"><i class="fa fa-plus-circle"></i>
                                     Add New
                                 </a>
                             </div>
@@ -52,11 +45,13 @@
                                     <td>{{anime.genre}}</td>
                                     <td>
                                         <ul class="action-list">
-                                            <li><a (click)="onClick(anime._id)" class="btn btn-warning mr-1"><i class="fa fa-pencil-alt"></i></a>
-
+                                            <li>
+                                                <a (click)="onClick(anime._id)" class="btn btn-warning mr-1"><i
+                                                        class="fa fa-pencil-alt"></i></a>
                                             </li>
-                                            <li><a (click)="deleteAnime(anime._id)" class="btn btn-danger"><i class="fa fa-trash"></i></a>
-
+                                            <li>
+                                                <a (click)="confirmDelete(anime._id, anime.name)" class="btn btn-danger"><i 
+                                                    class="fa fa-trash"></i></a>
                                             </li>
                                         </ul>
                                     </td>
@@ -65,26 +60,32 @@
                         </table>
                     </div>
                     <div class="panel-footer">
-                        <!-- <div class="row">
-                            <div class="col col-sm-6 col-xs-8">Showing <b>5</b> out of <b>25</b> entries</div>
-                            <div class="col-sm-12">
-                                <ul class="pagination hidden-xs">
-                                    <li><a href="#">Prev</a></li>
-                                    <li class="active"><a href="#">1</a></li>
-                                    <li><a href="#">2</a></li>
-                                    <li><a href="#">3</a></li>
-                                    <li><a href="#">4</a></li>
-                                    <li><a href="#">5</a></li>
-                                    <li><a href="#">Next</a></li>
-                                </ul>
-                                <ul class="pagination visible-xs">
-                                    <li><a href="#">1</a></li>
-                                    <li><a href="#">></a></li>
-                                </ul>
-                            </div>
-                        </div> -->
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal สำหรับการยืนยันการลบ -->
+
+<div class="modal mt-5" id="deleteConfirmationModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content ">
+            <div class="modal-header alert-warning">
+                <h5 class="modal-title">Confirm Delete</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+                    (click)="animeToDelete = null">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to delete <span class="alert-link">{{ animeName }}?</span>
+              </div>              
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                    (click)="animeToDelete = null">Cancel</button>
+                <button type="button" class="btn btn-danger" (click)="deleteConfirmed()">Delete</button>
             </div>
         </div>
     </div>

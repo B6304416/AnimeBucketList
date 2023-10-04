@@ -4,7 +4,7 @@
             <div class="row ">
                 <div class="col-lg-4">
                     <div class="card">
-                        <div class="card-body">
+                        <div class="card-body text-white">
                             <div class="d-flex flex-column align-items-center text-center">
                                 <!-- รูปภาพเริ่มต้น -->
                                 <!-- <img *ngIf="!anime.get('imgUrl')?.value"
@@ -14,7 +14,7 @@
                                     <div class="spinner-grow text-primary" role="status">
                                         <span class="sr-only">Loading...</span>
                                     </div>
-                                    <div class="spinner-grow text-secondary" role="status">
+                                    <div class="spinner-grow " role="status">
                                         <span class="sr-only">Loading...</span>
                                     </div>
                                     <div class="spinner-grow text-success" role="status">
@@ -42,25 +42,25 @@
                                     width="300" class="imgrounded">
                                 <div class="mt-3">
                                     <!-- แสดงค่า name ก่อนและหลังจากมีค่า -->
-                                    <h4 *ngIf="!anime.get('name')?.value" class="text-white">Anime Name</h4>
-                                    <h4 *ngIf="anime.get('name')?.value">{{ anime.get('name')?.value }}</h4>
+                                    <h4 *ngIf="!anime.get('name')?.value" >Anime Name</h4>
+                                    <h4 *ngIf="anime.get('name')?.value" >{{ anime.get('name')?.value }}</h4>
 
-                                    <p class="text-secondary mb-1" style="text-align: left;">Episode: {{
+                                    <p class="mb-1" style="text-align: left;">Episode: {{
                                         anime.get('episode')?.value }}</p>
 
-                                    <p class="text-secondary mb-1" style="text-align: left;"> Studio: {{
+                                    <p class=" mb-1" style="text-align: left;"> Studio: {{
                                         getStudioName(anime.get('studioId')?.value) }}</p>
 
-                                    <p class="text-secondary mb-1" style="text-align: left;">Type: {{
+                                    <p class=" mb-1" style="text-align: left;">Type: {{
                                         anime.get('typeId')?.value === '6513dc34e62aa885492968ca' ? 'Movie' : 
                                         anime.get('typeId')?.value === '6513dc34e62aa885492968c8' ? 'TV Series' : 'Unknown' }}</p>
 
-                                    <p class="text-secondary mb-1" style="text-align: left;">Source: {{
+                                    <p class=" mb-1" style="text-align: left;">Source: {{
                                         anime.get('sourceId')?.value === '6513dc35e62aa885492968d0' ? 'Original' :
                                         anime.get('sourceId')?.value === '6513dc35e62aa885492968ce' ? 'Light Novel' :
                                         anime.get('sourceId')?.value === '6513dc34e62aa885492968cc' ? 'Manga' : 'Unknown' }}</p>
                                     
-                                    <p class="text-muted font-size-sm" style="text-align: left;">Genre: {{
+                                    <p class="font-size-sm" style="text-align: left;">Genre: {{
                                         anime.get('genre')?.value }}</p>
                                 </div>
                             </div>
@@ -81,14 +81,14 @@
 
                 <div class="col-lg-8">
                     <div class="card">
-                        <div class="card-body">
+                        <div class="card-body text-white">
                             
                             <form [formGroup]="anime">
                                 <div class="row mb-3">
                                     <div class="col-sm-3">
                                         <h6 class="mb-0">Anime Name</h6>
                                     </div>
-                                    <div class="form-group col-sm-9 text-secondary">
+                                    <div class="form-group col-sm-9 ">
                                         <input type="text" class="form-control" formControlName="name">
                                     </div>
                                 </div>
@@ -97,7 +97,7 @@
                                     <div class="col-sm-3">
                                         <h6 class="mb-0">Episode</h6>
                                     </div>
-                                    <div class="form-group col-sm-9 text-secondary">
+                                    <div class="form-group col-sm-9 ">
                                         <input type="number" class="form-control" formControlName="episode">
                                     </div>
                                 </div>
@@ -106,7 +106,7 @@
                                     <div class="col-sm-3">
                                         <h6 class="mb-0">Studio</h6>
                                     </div>
-                                    <div class="form-group col-sm-9 text-secondary">
+                                    <div class="form-group col-sm-9 ">
                                         <select class="form-control" formControlName="studioId">
                                             <option *ngFor="let studio of studioOptions" [value]="studio._id">{{
                                                 studio.name }}</option>
@@ -118,7 +118,7 @@
                                     <div class="col-sm-3">
                                         <h6 class="mb-0">Type</h6>
                                     </div>
-                                    <div class="form-group col-sm-9 text-secondary">
+                                    <div class="form-group col-sm-9">
                                         <label class="form-check-label ml-4">
                                             <input class="form-check-input" type="radio" name="typeId" value="6513dc34e62aa885492968ca"
                                                 formControlName="typeId">
@@ -136,7 +136,7 @@
                                     <div class="col-sm-3">
                                         <h6 class="mb-0">Source</h6>
                                     </div>
-                                    <div class="form-group col-sm-9 text-secondary">
+                                    <div class="form-group col-sm-9">
                                         <label class="form-check-label ml-4">
                                             <input class="form-check-input" type="radio" name="sourceId" value="6513dc35e62aa885492968d0"
                                                 formControlName="sourceId">
@@ -159,7 +159,7 @@
                                     <div class="col-sm-3">
                                         <h6 class="mb-0">Genre</h6>
                                     </div>
-                                    <div class="form-group col-sm-9 text-secondary">
+                                    <div class="form-group col-sm-9">
                                         <label class="form-check-label ml-4 spaced-label"
                                             *ngFor="let genreOption of genreOptions">
                                             <input class="form-check-input" type="checkbox" [value]="genreOption"
@@ -173,7 +173,7 @@
                                     <div class="col-sm-3">
                                         <h6 class="mb-0">ImgUrl</h6>
                                     </div>
-                                    <div class="form-group col-sm-9 text-secondary">
+                                    <div class="form-group col-sm-9 ">
                                         <input type="text" class="form-control" formControlName="imgUrl">
                                     </div>
                                 </div>
@@ -181,7 +181,7 @@
                                     <div class="col-sm-3">
                                         <h6 class="mb-0">TrailerUrl</h6>
                                     </div>
-                                    <div class="form-group col-sm-9 text-secondary">
+                                    <div class="form-group col-sm-9 ">
                                         <input type="text" class="form-control" formControlName="trailerUrl">
                                     </div>
                                 </div>
@@ -189,15 +189,14 @@
                                     <div class="col-sm-3">
                                         <h6 class="mb-0">synopsis</h6>
                                     </div>
-                                    <div class="col-sm-9 text-secondary">
+                                    <div class="col-sm-9 ">
                                         <textarea class="form-control" formControlName="synopsis" rows="4"></textarea>
                                     </div>
                                 </div>
 
                                 <div class="row">
-                                    <div class="col-sm-3"></div>
-                                    <div class="col-sm-3 text-secondary">
-                                        <input type="button" class="btn btn-primary px-5 mb-4" value="Post"
+                                    <div class="col-sm-12">
+                                        <input type="button" class="btn btn-warning px-5 mb-4 float-right" value="Post"
                                             (click)="submitAnime()">
                                     </div>
                                     

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
+declare var $: any; // ประกาศตัวแปร $ เพื่อใช้งาน jQuery
 
 interface AnimeResponse {
   _id: string;
@@ -21,6 +22,8 @@ interface AnimeResponse {
 export class AnimetableComponent implements OnInit{
 
   data: AnimeResponse[] = [];
+  animeToDelete: any; // เก็บ anime ที่ต้องการลบ
+  animeName?: string;
 
   constructor(
     private http: HttpClient,
@@ -50,26 +53,35 @@ export class AnimetableComponent implements OnInit{
     this.router.navigate(['/updateanime', animeId]);
   }
 
-  deleteAnime(animeId: string) {
-    const token = sessionStorage.getItem('token');
-    const headers = new HttpHeaders({
-      'Authorization': 'Bearer ' + token
-    });
-    // ส่ง HTTP DELETE เพื่อลบ Anime ที่มี animeId ที่ระบุ
-    this.http.delete(`http://localhost:5555/anime/${animeId}`, { headers }).subscribe(
-      (response) => {
-        console.log('Anime deleted successfully', response);
-        alert('Anime deleted successfully');
-        this.fetchData();
-        // this.router.navigate(['/anime-list']); // หลังจากลบเสร็จให้เปลี่ยนเส้นทางไปยังหน้ารายการ Anime หรือหน้าอื่นที่เหมาะสม
-      },
-      (error) => {
-        console.error('Error deleting anime', error);
-        alert('Error: ' + error.message);
-      }
-    );
+  // เมื่อคลิกปุ่มลบ
+  confirmDelete(id: string, name: string) {
+    this.animeToDelete = id; 
+    this.animeName = name;
+    $('#deleteConfirmationModal').modal('show'); // เปิด Modal ด้วย jQuery
+    // console.log('Deleting anime:', this.animeToDelete);
   }
-
-  
+  // เมื่อยืนยันการลบ
+  deleteConfirmed() {
+    if (this.animeToDelete) {
+      const token = sessionStorage.getItem('token');
+      const headers = new HttpHeaders({
+        'Authorization': 'Bearer ' + token
+      });
+      // ส่ง HTTP DELETE เพื่อลบ Anime ที่มี animeId ที่ระบุ
+      this.http.delete(`http://localhost:5555/anime/${this.animeToDelete}`, { headers }).subscribe(
+        (response) => {
+          console.log('Anime deleted successfully', response);
+          this.fetchData();
+          // this.router.navigate(['/anime-list']); // หลังจากลบเสร็จให้เปลี่ยนเส้นทางไปยังหน้ารายการ Anime หรือหน้าอื่นที่เหมาะสม
+        },
+        (error) => {
+          console.error('Error deleting anime', error);
+          alert('Error: ' + error.message);
+        }
+      );
+      this.animeToDelete = null;
+      $('#deleteConfirmationModal').modal('hide'); // ปิด Modal ด้วย jQuery
+    }
+  }
 
 }
