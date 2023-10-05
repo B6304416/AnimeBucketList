@@ -89,9 +89,9 @@ export class MangalistComponent implements OnInit {
     );
   }
 
-  onClick(animeId: string) {
-    console.log('Clicked on manga with ID:', animeId);
-    this.router.navigate(['/animereview', animeId]);
+  onClick(mangaId: string) {
+    console.log('Clicked on manga with ID:', mangaId);
+    this.router.navigate(['/mangareview', mangaId]);
     // window.scrollTo({ top: 0, behavior: 'smooth' }); // เลื่อนไปที่ด้านบนสุดของหน้าเว็บ
     window.scrollTo(0, 0); // กระโดดไปที่ด้านบนสุดของหน้าเว็บทันที
   }

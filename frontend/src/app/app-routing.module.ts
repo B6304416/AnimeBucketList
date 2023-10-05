@@ -16,6 +16,7 @@ import { PostCharacterComponent } from './components/post-character/post-charact
 import { PostMangaComponent } from './components/post-manga/post-manga.component';
 import { CharecterlistComponent } from './components/charecterlist/charecterlist.component';
 import { CharacterlistComponent } from './components/characterlist/characterlist.component';
+import { MangareviewComponent } from './components/mangareview/mangareview.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -31,6 +32,7 @@ const routes: Routes = [
   { path: 'postmanga', component: PostMangaComponent },
   { path: 'postcharacter', component: PostCharacterComponent },
   { path: 'animereview/:id', component: AnimereviewComponent },
+  { path: 'mangareview/:id', component: MangareviewComponent },
   { path: 'updateanime/:id', component: UpdateAnimeComponent },
   { path: '', redirectTo: '/animelist', pathMatch: 'full' }, // Redirect to the login page by default
 ];

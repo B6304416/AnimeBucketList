@@ -13,6 +13,7 @@ import authController from "./controllers/authController.js";
 import animeController from "./controllers/animeController.js";
 import mangaController from "./controllers/mangaController.js";
 import animeReviewController from "./controllers/animeReviewController.js";
+import mangaReviewController from "./controllers/mangaReviewController.js";
 import characterController from "./controllers/characterController.js";
 import genreController from "./controllers/genreController.js";
 
@@ -67,6 +68,8 @@ app.use('/anime', animeController);
 app.use('/manga', mangaController);
 //Route for CRUD animes
 app.use('/anime_review', animeReviewController);
+//Route for CRUD mangas
+app.use('/manga_review', mangaReviewController);
 //Route for CRUD characters
 app.use('/character', characterController);
 //Route for CRUD genres

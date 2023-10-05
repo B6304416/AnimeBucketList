@@ -1,0 +1,117 @@
+<div class="bg-dark page-body">
+    <div class="container pt-3 ">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="col-md-12 sticky-top">
+                  <div class="card mb-4" *ngIf="mangaData[0]">
+                    <img class="card-img-top" [src]="mangaData[0].imgUrl" alt="..." />
+                  </div>
+                  <div class="card mb-4 ">
+                    <div class="card-header">ลายละเอียด</div>
+                    <div class="card-body">
+                      <div class="row" *ngIf="mangaData[0]">
+                        <div class="col-sm-12">
+                          <ul class="list-unstyled mb-0">
+                            <li>Name: {{ mangaData[0].name}}</li>
+                            <li>Author: {{ mangaData[0].author}}</li>
+                            <li>Genres: {{ mangaData[0].genre}}</li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+              
+                  <!-- <div class="card mb-4">
+                    <div class="card-header">เรื่องย่อ</div>
+                    <div class="card-body" *ngIf="mangaData[0]">{{ mangaData[0].synopsis || 'No synopsis available.' }}</div>
+                  </div> -->
+                </div>
+              </div>
+              
+            <!-- Nested row for non-featured blog posts-->
+            <div class="col-md-8">
+                <div class="row">
+
+                    <!-- <div class="col-md-12">
+                        <div class="card mb-4">
+                            <div class="embed-responsive embed-responsive-16by9">
+                                <iframe src='' id="mangaTrailer"></iframe>
+                            </div>
+                        </div>
+                    </div> -->
+
+
+                    <div class="col-md-12">
+                        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"
+                            rel="stylesheet">
+                        <section class="content-item" id="comments">
+                            <div class="card mb-4">
+                                <div class="card-header">
+                                    <form [formGroup]="review">
+                                        <h3 class="pull-left">New Comment</h3>
+                                        <div class="rating pull-right">
+                                            <input type="radio" name="rate" [value]="5" id="5"
+                                                formControlName="rate"><label for="5">☆</label>
+                                            <input type="radio" name="rate" [value]="4" id="4"
+                                                formControlName="rate"><label for="4">☆</label>
+                                            <input type="radio" name="rate" [value]="3" id="3"
+                                                formControlName="rate"><label for="3">☆</label>
+                                            <input type="radio" name="rate" [value]="2" id="2"
+                                                formControlName="rate"><label for="2">☆</label>
+                                            <input type="radio" name="rate" [value]="1" id="1"
+                                                formControlName="rate"><label for="1">☆</label>
+                                        </div>
+
+
+                                        <fieldset>
+                                            <div class="row">
+                                                <div class="col-sm-3 col-lg-2 hidden-xs">
+                                                    <img class="img-responsive card-img-test rounded-circle"
+                                                        [src]="'https://cdn.pic.in.th/file/picinth/anime-profile-' + randomAvatarNumber + '.jpeg'"
+                                                        alt="">
+                                                </div>
+                                                <div class="form-group col-xs-12 col-sm-9 col-lg-10">
+                                                    <textarea class="form-control" id="message"
+                                                        placeholder="Your message" required=""
+                                                        formControlName="comment"></textarea>
+                                                </div>
+                                            </div>
+                                        </fieldset>
+                                        <button type="submit" class="btn btn-normal pull-right"
+                                            (click)="submitManga()">Submit</button>
+                                    </form>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <h3>{{ reviewData.length }} Comments</h3>
+                                            <div *ngFor="let review of reviewData; let i = index" class="media">
+                                                <a class="pull-left">
+                                                    <img class="media-object card-img-test"
+                                                        [src]="'https://cdn.pic.in.th/file/picinth/anime-profile-' + avatarNumbers[i] + '.jpeg'"
+                                                        alt="">
+                                                </a>
+                                                <div class="media-body">
+                                                    <div class="media-heading">
+                                                        <div style="display: inline-block; font-weight: bold;">{{
+                                                            review.user }}</div>
+                                                        <div style="float: right;">
+                                                            <span *ngFor="let i of [1, 2, 3, 4, 5]">
+                                                                <span class="fa"
+                                                                    [ngClass]="{'fa-star': i <= review.rate, 'fa-star-o': i > review.rate}"></span>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                    <p>{{ review.comment }}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

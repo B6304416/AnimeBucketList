@@ -43,6 +43,61 @@ router.get('/detail', async (req, res) => {
     }
 });
 
+router.get('/detail/:id', async (req, res) => {
+    try {
+        const { id } = req.params;
+        const mangaObjectId = new ObjectId(id);
+        const pipeline = [
+            {
+                $match: {
+                    _id: mangaObjectId
+                }
+            },
+            {
+                $lookup: {
+                    from: 'authors', // Assuming your collection name for types is 'types'
+                    localField: 'authorId',
+                    foreignField: '_id',
+                    as: 'author'
+                }
+            },
+            
+            
+            {
+                $unwind: '$author'
+            },
+            // {
+            //     $unwind: '$studio'
+            // },
+            // {
+            //     $unwind: '$source'
+            // },
+            {
+                $project: {
+                    _id: 1,
+                    name: 1,
+                    // episode: 1,
+                    genre: 1,
+                    imgUrl: 1,
+                    // synopsis: 1,
+                    // trailerUrl: 1,
+                    author: '$author.eng_name' ,
+                    // studio: '$studio.name' ,
+                    // source: '$source.name' ,
+                }
+            }
+            // Add more stages if needed
+        ];
+        
+        const result = await Manga.aggregate(pipeline);
+        return res.status(200).json(
+            result
+        );
+    } catch (error) {
+        console.log(error.message)
+        res.status(500).send({ message: error.message })
+    }
+});
 
 //Route for Get rate of each mangas
 router.get('/avg_rate', async (req, res) => {
