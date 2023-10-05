@@ -21,6 +21,8 @@ import { UpdateAnimeComponent } from './components/update-anime/update-anime.com
 import { PostCharacterComponent } from './components/post-character/post-character.component';
 import { CharacterlistComponent } from './components/characterlist/characterlist.component';
 import { MangareviewComponent } from './components/mangareview/mangareview.component';
+import { FromAnimeComponent } from './components/child/from-anime/from-anime.component';
+import { FromMangaComponent } from './components/child/from-manga/from-manga.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +43,8 @@ import { MangareviewComponent } from './components/mangareview/mangareview.compo
     PostCharacterComponent,
     CharacterlistComponent,
     MangareviewComponent,
+    FromAnimeComponent,
+    FromMangaComponent,
 
   ],
   imports: [

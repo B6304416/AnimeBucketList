@@ -1,0 +1,17 @@
+
+.card-img-top {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+}
+
+.btn-readmore {
+    background-color: #b13e49;
+    color: #ffffff;
+    padding: 5px;
+    font-size: 15px;
+}
+
+.btn-readmore:hover{
+    background-color: #792f36;
+}

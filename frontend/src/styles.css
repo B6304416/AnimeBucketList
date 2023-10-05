@@ -1,5 +1,5 @@
-/* You can add global styles to this file, and also import other style files */
-@import url('https://fonts.googleapis.com/css2?family=Shippori+Antique&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Prompt&family=Shippori+Antique&display=swap'); */
+@import url('https://fonts.googleapis.com/css2?family=Prompt:wght@500&family=Shippori+Antique&display=swap');
 @import '~@fortawesome/fontawesome-free/css/all.css';
 /* npm install --save @fortawesome/fontawesome-free */
 
@@ -8,7 +8,7 @@ html, body {
   margin: 0;
   padding: 0;
   background-color: rgba(52, 58, 64, 1) !important;
-  font-family:'Shippori Antique', sans-serif !important;
+  font-family:'Shippori Antique', 'Prompt' !important;
 }
 
 .bg-Black {

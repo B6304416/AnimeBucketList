@@ -28,13 +28,6 @@ router.get('/detail', async (req, res) => {
                     as: 'manga'
                 }
             },
-
-            // {
-            //     $unwind: '$anime'
-            // },
-            // {
-            //     $unwind: '$manga'
-            // },
             {
                 $project: {
                     _id: 1,
@@ -42,6 +35,8 @@ router.get('/detail', async (req, res) => {
                     score: 1,
                     detail: 1,
                     imgProfile: 1,
+                    animeId: 1,
+                    mangaId: 1,
                     anime: '$anime.name' ,
                     manga: '$manga.name' ,
                 }
@@ -127,8 +122,6 @@ router.get('/', async (req, res) => {
         res.status(500).send({ message: error.message })
     }
 })
-
-
 
 //Route for Get a Character by ID
 router.get('/:id', async (req, res) => {
