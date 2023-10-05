@@ -83,8 +83,8 @@
                                                 </div>
                                             </div>
                                         </fieldset>
-                                        <button type="submit" class="btn btn-normal pull-right"
-                                            (click)="submitAnime()">Submit</button>
+                                        <button type="submit" class="btn btn-primary pull-right " [ngClass]="{'btncomment btn-danger': review.get('comment')?.hasError('forbiddenWord') }" (click)="submitAnime()">Submit</button>
+
                                     </form>
                                 </div>
                                 <div class="card-body">

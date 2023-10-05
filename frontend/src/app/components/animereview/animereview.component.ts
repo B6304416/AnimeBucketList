@@ -36,9 +36,9 @@ export class AnimereviewComponent implements OnInit {
   animeData: AnimeResponse[] = []
   avatarNumbers: number[] = [];
   // videoUrls?: any
-  forbiddenWords = ['เหี้ย','ห่า','สัด','ควย','หี','หำ','หัม','กระดอ','จิ๋ม','จู๋','เจี๊ยว','พ่อมึงตาย','แม่มึงตาย','เย็ด','ดอกทอง',
-  'ควาย','กะหรี่','แมงดา','หน้าตัวเมีย','สถุน','สวะ','ส้นตีน','หมอย','ร่าน','เงี่ยน','ไพร่','สลัม','ถ่อย','ตอแหล','เสือก','หน้าด้าน',
-  'แม่ง','แตด','ไอ้','ชิบหาย',
+  forbiddenWords = ['เหี้ย', 'ห่า', 'สัด', 'ควย', 'หี', 'หำ', 'หัม', 'กระดอ', 'จิ๋ม', 'จู๋', 'เจี๊ยว', 'พ่อมึงตาย', 'แม่มึงตาย', 'เย็ด', 'ดอกทอง',
+    'ควาย', 'กะหรี่', 'แมงดา', 'หน้าตัวเมีย', 'สถุน', 'สวะ', 'ส้นตีน', 'หมอย', 'ร่าน', 'เงี่ยน', 'ไพร่', 'สลัม', 'ถ่อย', 'ตอแหล', 'เสือก', 'หน้าด้าน',
+    'แม่ง', 'แตด', 'ไอ้', 'ชิบหาย',
   ];
 
   review = new FormGroup({
@@ -53,10 +53,10 @@ export class AnimereviewComponent implements OnInit {
   animeUrl = 'http://localhost:5555/anime/detail/';
 
   constructor(
-    private route: ActivatedRoute, 
-    private http: HttpClient, 
+    private route: ActivatedRoute,
+    private http: HttpClient,
     private sanitizer: DomSanitizer
-    ) {
+  ) {
     this.animeId = this.route.snapshot.paramMap.get('id');
   }
 
@@ -100,13 +100,7 @@ export class AnimereviewComponent implements OnInit {
           this.animeData = res
           console.log("anime")
           console.log(this.animeData)
-          // if (this.animeData.length > 0 && this.animeData[0].videoUrl) {
-          //   const videoUrl = `https://www.youtube.com/embed/${this.animeData[0].videoUrl}`;
-          //   const safeVideoUrl: SafeResourceUrl = this.sanitizer.bypassSecurityTrustResourceUrl(videoUrl);
-          //   this.videoUrls = safeVideoUrl;
-          // } else {
-          //   console.error('Invalid or missing videoUrl in animeData[0].');
-          // }
+
 
           this.review.patchValue({
             animeId: this.animeData[0]._id, // Assuming there's at least one anime in the array
@@ -161,7 +155,7 @@ export class AnimereviewComponent implements OnInit {
   submitAnime() {
     const review = this.review.value;
     console.log('hahah', review)
-    console.log('hahah',review)
+    console.log('hahah', review)
     const token = sessionStorage.getItem('token');
     console.log(review)
     const headers = new HttpHeaders({
@@ -181,9 +175,9 @@ export class AnimereviewComponent implements OnInit {
       }
     );
 
-
   }
   resetForm() {
     this.review.reset();
   }
+
 }

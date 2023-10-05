@@ -4,6 +4,17 @@
     font-family:'Shippori Antique', sans-serif;
 }
 
+.btncomment {
+	transition: transform 0.3s ease;
+	transform: translateX(0);
+	/* pointer-events: none; */
+
+}
+
+.btncomment:hover {
+	transform: translate(-150px, 0px);
+}
+
 .card-img-test{
     width: 70px;
     height: 70px;
