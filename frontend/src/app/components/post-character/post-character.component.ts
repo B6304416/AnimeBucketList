@@ -101,8 +101,8 @@ export class PostCharacterComponent implements OnInit {
     if (charData.name && charData.detail && charData.animeId && charData.mangaId) {
       formData.append('name', charData.name);
       formData.append('detail', charData.detail);
-      formData.append('animeId', charData.animeId);
       formData.append('mangaId', charData.mangaId);
+      formData.append('animeId', charData.animeId);
     }
     if (this.selectedFile) {
       formData.append('imgProfile', this.selectedFile, this.selectedFile.name);
@@ -114,7 +114,7 @@ export class PostCharacterComponent implements OnInit {
       (response) => {
         console.log('Character posted successfully', response);
         alert('Character posted successfully')
-        // this.resetForm();
+        this.resetForm();
       },
       (error) => {
         console.error('Error posting character', error);

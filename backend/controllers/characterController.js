@@ -40,10 +40,10 @@ router.get('/detail', async (req, res) => {
                     _id: 1,
                     name: 1,
                     score: 1,
+                    detail: 1,
                     imgProfile: 1,
                     anime: '$anime.name' ,
                     manga: '$manga.name' ,
-
                 }
             }
 
@@ -60,22 +60,21 @@ router.get('/detail', async (req, res) => {
 });
 
 //Route for Vote for a Character
-router.get('/vote_character/:id', tokenVerify, async (req, res) => {
+router.get('/like/:id', tokenVerify, async (req, res) => {
     try {
         const { id } = req.params;
         const user = await User.findById(req.user.userId);
-
         const oldCharacter = await Character.findById(user.favCharacter);
-        oldCharacter.score -= 1
-        console.log(user.favCharacter)
-        await oldCharacter.save();
-
+        if(oldCharacter){
+            oldCharacter.score -= 1
+            await oldCharacter.save();
+        }
+        // console.log(user.favCharacter)
         const newCharacter = await Character.findById(id);
         newCharacter.score += 1
         user.favCharacter = newCharacter._id
-        console.log(user.favCharacter)
+        // console.log(user.favCharacter)
         await newCharacter.save();
-
         await user.save();
         return res.status(200).json(newCharacter);
     } catch (error) {
@@ -170,7 +169,7 @@ router.post('/', upload.single('imgProfile'), async (req, res) => {
         if(req.body.mangaId != 'null'){
             const mangaId = req.body.mangaId;
             var mangaObjectId = new ObjectId(mangaId);
-            newCharacter.animeId = mangaObjectId
+            newCharacter.mangaId = mangaObjectId
             console.log(req.body.mangaId)
         }
         if (req.file) {
