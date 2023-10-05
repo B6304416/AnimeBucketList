@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit {
       .subscribe(
         (response: any) => {
           localStorage.setItem('userId', response.userId);
-          localStorage.setItem('isLoggedIn', 'true');
+          sessionStorage.setItem('isLoggedIn', 'true');
           sessionStorage.setItem('token', response.token);
           sessionStorage.setItem('role', response.userRole);
           sessionStorage.setItem('refresh', 'true');

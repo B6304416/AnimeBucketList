@@ -28,7 +28,7 @@ export class NavbarComponent implements OnInit, DoCheck {
     });  
   }
   ngDoCheck(): void {
-    const LoggedIn = localStorage.getItem('isLoggedIn');
+    const LoggedIn = sessionStorage.getItem('isLoggedIn');
     this.name = sessionStorage.getItem('username');
     // ตรวจสอบค่า isLoggedIn
     if (LoggedIn === 'true') {
@@ -59,7 +59,7 @@ export class NavbarComponent implements OnInit, DoCheck {
     sessionStorage.removeItem('username');
     console.log(this.isLoggedIn)
     // อัปเดตค่า isLoggedIn เป็น false ใน Local Storage
-    localStorage.setItem('isLoggedIn', 'false');
+    sessionStorage.setItem('isLoggedIn', 'false');
     // this.checkForLoginChange();
   }
 
