@@ -117,7 +117,7 @@ router.get('/:id',async (req, res) =>{
     try{
         const {id} = req.params;
         const manga = await Manga.findById(id);
-        return res.status(200).json(manga);
+        return res.status(200).json([manga]);
     }catch(error){
         console.log(error.message)
         res.status(500).send({message: error.message})
