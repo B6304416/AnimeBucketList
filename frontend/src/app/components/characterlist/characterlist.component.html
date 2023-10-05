@@ -1,0 +1,93 @@
+<div class="bg-img">
+  <div class="text-center">
+    <h1 class="fw-bolder text-danger p-5 mt-auto display-3 title-text">
+      <strong>
+        Welcome to Anime bucket list!
+      </strong>
+      <h2 class="fw-bolder text-danger p-1 mb-lg-4 ">
+        <strong>
+          100 Anime to Watch Before You Die
+        </strong>
+      </h2>
+    </h1>
+  </div>
+</div>
+
+<div class="container p-4">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="card mb-4">
+        <a href="#!"><img class="card-img-top" [src]="sortedCharacters[0].imgProfile" alt="..." /></a>
+        <div class="card-body">
+          <div class="small text-muted ">MOST POPULAR CHARACTER </div>
+          <div class="card-detail">
+            <h2 class="card-title h3 mt-1">
+              <strong>
+                {{ sortedCharacters[0].name }}
+              </strong>
+              <p class="card-text h5 mt-3">score: ⭐{{ sortedCharacters[0].score }}</p>
+            </h2>
+            <a class="btn btn-readmore-top" (click)="onLike(sortedCharacters[0]._id, sortedCharacters[0].name)">Like</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="card mb-4">
+        <div class="card-header">
+          <p *ngIf="sortedCharacters[0].anime != ''" class="card-text mb-0">Anime: {{ sortedCharacters[0].anime }} </p>
+          <p *ngIf="sortedCharacters[0].manga != ''" class="card-text mb-0">Manga: {{ sortedCharacters[0].manga }}</p>
+          <p *ngIf="sortedCharacters[0].anime == ''" class="card-text text-muted mb-0">Not from any anime </p>
+          <p *ngIf="sortedCharacters[0].manga == ''" class="card-text text-muted mb-0">Not from any manga </p>
+
+        </div>
+        <div class="card-body">รายละเอียด: &nbsp;&nbsp;{{sortedCharacters[0].detail}}</div>
+      </div>
+    </div>
+
+
+    <!-- Nested row for non-featured blog posts-->
+    <div class="container">
+      <h2 class="mt-2 mb-2 p-3 text-white">Character List</h2>
+      <div class="row">
+        <div class="col-lg-4" *ngFor="let character of sortedCharacters; let i = index">
+          <div class="card mb-4">
+            <img class="card-img-top card-img-list" [src]="character.imgProfile" alt="..." />
+            <div class="card-body">
+              <div class="d-flex justify-content-between">
+                <div class="small text-muted mb-0">Rank {{ i + 1 }}</div>
+                <div class="medium text-muted mb-0">score:⭐ {{ character.score }}</div>
+              </div>
+              <h2 class="card-title h4 mb-2 mt-0">
+                <strong>
+                  {{ character.name }}
+                </strong>
+              </h2>
+              <p *ngIf="character.anime != ''" class="card-text mb-0">Anime: {{ character.anime }} </p>
+              <p *ngIf="character.manga != ''" class="card-text mb-0">Manga: {{ character.manga }}</p>
+              <p *ngIf="character.anime == ''" class="card-text text-muted mb-0">Not from any anime </p>
+              <p *ngIf="character.manga == ''" class="card-text text-muted mb-0">Not from any manga </p>
+              <a class="btn btn-readmore" (click)="onLike(character._id, character.name)">Like</a>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="alert-container">
+  <div [ngClass]="alertClass" role="alert" *ngIf="showAlert">
+    {{ alertMessage }}
+  </div>
+</div>
+<!-- Footer-->
+<footer class="py-5 bg-dark">
+  <div class="container">
+    <p class="m-0 text-center text-white">โง่</p>
+  </div>
+</footer>

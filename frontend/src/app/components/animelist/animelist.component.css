@@ -53,7 +53,7 @@
     
 }
 
-.btn-readmore-avg{
+.btn-readmore-top{
     background-color: #b13e49;
     color: #ffffff;
     text-align: center;
@@ -65,6 +65,13 @@
     bottom: 20px;
     right: 20px;
 }
+.btn-readmore-top:hover{
+    background-color: #792f36;
+}
+.btn-readmore:hover{
+    background-color: #792f36;
+}
+
 
 .card-detail{
     display: flex;

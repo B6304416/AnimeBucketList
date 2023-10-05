@@ -2,7 +2,7 @@
     width: 100%;
     height: auto;
     background-size: cover;
-    animation: slideImages 30s linear infinite;
+    animation: slideImages 60s linear infinite;
 }
 
 .card-img-test{
@@ -13,23 +13,17 @@
 
 @keyframes slideImages {
     0% {
-        background-image: url('../../img/manga.jpg');
+        background-image: url('../../img/allcharacter3.jpeg');
         background-position: 0% 0%;
     }
-    48% {
-        background-image: url('../../img/manga.jpg');
-        background-position: 0% 100%;
-    }
+
     50% {
-        background-image: url('../../img/manga3.jpg');
+        background-image: url('../../img/allcharacter3.jpeg');
         background-position: 0% 100%;
     }
-    98% {
-        background-image: url('../../img/manga3.jpg');
-        background-position: 0% 0%;
-    }
+
     100% {
-        background-image: url('../../img/manga.jpg');
+        background-image: url('../../img/allcharacter3.jpeg');
         background-position: 0% 0%;
     }
 }
@@ -46,4 +40,8 @@
     /* Change this to the desired color */
     color: #ffffff;
     /* Change this to the desired text color */
+}
+
+.btn-readmore:hover{
+    background-color: #792f36;
 }
