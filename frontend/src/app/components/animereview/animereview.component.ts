@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, ValidatorFn, AbstractControl } from '@angular/forms';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 interface ReviewResponse {
@@ -36,9 +36,13 @@ export class AnimereviewComponent implements OnInit {
   animeData: AnimeResponse[] = []
   avatarNumbers: number[] = [];
   // videoUrls?: any
+  forbiddenWords = ['เหี้ย','ห่า','สัด','ควย','หี','หำ','หัม','กระดอ','จิ๋ม','จู๋','เจี๊ยว','พ่อมึงตาย','แม่มึงตาย','เย็ด','ดอกทอง',
+  'ควาย','กะหรี่','แมงดา','หน้าตัวเมีย','สถุน','สวะ','ส้นตีน','หมอย','ร่าน','เงี่ยน','ไพร่','สลัม','ถ่อย','ตอแหล','เสือก','หน้าด้าน',
+  'แม่ง','แตด','ไอ้','ชิบหาย',
+  ];
 
   review = new FormGroup({
-    comment: new FormControl(''),
+    comment: new FormControl('', [this.forbiddenWordsValidator(this.forbiddenWords),]),
     rate: new FormControl(0),
     // userId: new FormControl(''),
     animeId: new FormControl(''),
@@ -56,6 +60,19 @@ export class AnimereviewComponent implements OnInit {
     this.animeId = this.route.snapshot.paramMap.get('id');
   }
 
+  forbiddenWordsValidator(forbiddenWords: string[]): ValidatorFn {
+    return (control: AbstractControl): { [key: string]: any } | null => {
+      const value = control.value as string;
+      if (value) {
+        for (const word of forbiddenWords) {
+          if (value.toLowerCase().includes(word.toLowerCase())) {
+            return { forbiddenWord: { value: control.value } };
+          }
+        }
+      }
+      return null;
+    };
+  }
 
   ngOnInit(): void {
     // this.comment.userId = '561'

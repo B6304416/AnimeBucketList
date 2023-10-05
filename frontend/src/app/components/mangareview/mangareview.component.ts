@@ -1,8 +1,9 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { AbstractControl, ValidatorFn } from '@angular/forms';
 
 interface ReviewResponse {
   // animeId: string;
@@ -27,35 +28,52 @@ interface MangaResponse {
 @Component({
   selector: 'app-mangareview',
   templateUrl: './mangareview.component.html',
-  styleUrls: ['./mangareview.component.css']
+  styleUrls: ['./mangareview.component.css'],
 })
 export class MangareviewComponent implements OnInit {
-
   randomAvatarNumber?: number;
-  reviewData: ReviewResponse[] = []
-  mangaData: MangaResponse[] = []
+  reviewData: ReviewResponse[] = [];
+  mangaData: MangaResponse[] = [];
   avatarNumbers: number[] = [];
   // videoUrls?: any
 
+  forbiddenWords = ['เหี้ย','ห่า','สัด','ควย','หี','หำ','หัม','กระดอ','จิ๋ม','จู๋','เจี๊ยว','พ่อมึงตาย','แม่มึงตาย','เย็ด','ดอกทอง',
+  'ควาย','กะหรี่','แมงดา','หน้าตัวเมีย','สถุน','สวะ','ส้นตีน','หมอย','ร่าน','เงี่ยน','ไพร่','สลัม','ถ่อย','ตอแหล','เสือก','หน้าด้าน',
+  'แม่ง','แตด','ไอ้','ชิบหาย',
+  ];
+
   review = new FormGroup({
-    comment: new FormControl(''),
+    comment: new FormControl('', [this.forbiddenWordsValidator(this.forbiddenWords),]),
     rate: new FormControl(0),
     // userId: new FormControl(''),
     mangaId: new FormControl(''),
   });
 
   mangaId: string | null;
-  reviewUrl = 'http://localhost:5555/manga_review/rate/'
+  reviewUrl = 'http://localhost:5555/manga_review/rate/';
   mangaUrl = 'http://localhost:5555/manga/detail/';
 
   constructor(
-    private route: ActivatedRoute, 
-    private http: HttpClient, 
+    private route: ActivatedRoute,
+    private http: HttpClient,
     private sanitizer: DomSanitizer
-    ) {
+  ) {
     this.mangaId = this.route.snapshot.paramMap.get('id');
   }
 
+  forbiddenWordsValidator(forbiddenWords: string[]): ValidatorFn {
+    return (control: AbstractControl): { [key: string]: any } | null => {
+      const value = control.value as string;
+      if (value) {
+        for (const word of forbiddenWords) {
+          if (value.toLowerCase().includes(word.toLowerCase())) {
+            return { forbiddenWord: { value: control.value } };
+          }
+        }
+      }
+      return null;
+    };
+  }
 
   ngOnInit(): void {
     // this.comment.userId = '561'
@@ -65,24 +83,25 @@ export class MangareviewComponent implements OnInit {
     const user = localStorage.getItem('userId');
 
     const headers = new HttpHeaders({
-      'Authorization': 'Bearer ' + token
+      Authorization: 'Bearer ' + token,
     });
     if (this.mangaId !== null) {
       const reviewUrlbyId = `${this.reviewUrl}${this.mangaId}`;
       const mangaUrlbyId = `${this.mangaUrl}${this.mangaId}`;
 
-      this.http.get<ReviewResponse[]>(reviewUrlbyId, { headers }).subscribe(
-        (res) => {
-          this.reviewData = res
-          console.log("review")
+      this.http
+        .get<ReviewResponse[]>(reviewUrlbyId, { headers })
+        .subscribe((res) => {
+          this.reviewData = res;
+          console.log('review');
           console.log(this.reviewData);
         });
 
       this.http.get<MangaResponse[]>(mangaUrlbyId).subscribe(
         (res) => {
-          this.mangaData = res
-          console.log("manga")
-          console.log(this.mangaData)
+          this.mangaData = res;
+          console.log('manga');
+          console.log(this.mangaData);
           // if (this.animeData.length > 0 && this.animeData[0].videoUrl) {
           //   const videoUrl = `https://www.youtube.com/embed/${this.animeData[0].videoUrl}`;
           //   const safeVideoUrl: SafeResourceUrl = this.sanitizer.bypassSecurityTrustResourceUrl(videoUrl);
@@ -113,14 +132,12 @@ export class MangareviewComponent implements OnInit {
     for (let i = 0; i < 100; i++) {
       this.avatarNumbers.push(this.getRandomAvatarNumber(1, 9));
     }
-
-
   }
 
   fetchReviewData() {
     const token = sessionStorage.getItem('token');
     const headers = new HttpHeaders({
-      'Authorization': 'Bearer ' + token
+      Authorization: 'Bearer ' + token,
     });
 
     const reviewUrlbyId = `${this.reviewUrl}${this.mangaId}`;
@@ -128,7 +145,7 @@ export class MangareviewComponent implements OnInit {
     this.http.get<ReviewResponse[]>(reviewUrlbyId, { headers }).subscribe(
       (res) => {
         this.reviewData = res;
-        console.log("review");
+        console.log('review');
         console.log(this.reviewData);
       },
       (error) => {
@@ -143,28 +160,27 @@ export class MangareviewComponent implements OnInit {
 
   submitManga() {
     const review = this.review.value;
-    console.log('hahah', review)
-    console.log('hahah',review)
+    console.log('hahah', review);
+    console.log('hahah', review);
     const token = sessionStorage.getItem('token');
-    console.log(review)
+    console.log(review);
     const headers = new HttpHeaders({
-      'Authorization': 'Bearer ' + token
+      Authorization: 'Bearer ' + token,
     });
 
-    this.http.post('http://localhost:5555/manga_review', review, { headers }).subscribe(
-      (response) => {
-        console.log('Manga posted successfully', response);
-        this.resetForm();
-        this.fetchReviewData(); // เรียกดึงข้อมูล Anime ใหม่หลังจากการโพสต์ Anime สำเร็จ
-
-      },
-      (error) => {
-        console.error('Error posting manga', error);
-        alert('Error: ' + error.message)
-      }
-    );
-
-
+    this.http
+      .post('http://localhost:5555/manga_review', review, { headers })
+      .subscribe(
+        (response) => {
+          console.log('Manga posted successfully', response);
+          this.resetForm();
+          this.fetchReviewData(); // เรียกดึงข้อมูล Anime ใหม่หลังจากการโพสต์ Anime สำเร็จ
+        },
+        (error) => {
+          console.error('Error posting manga', error);
+          alert('Error: ' + error.message);
+        }
+      );
   }
   resetForm() {
     this.review.reset();

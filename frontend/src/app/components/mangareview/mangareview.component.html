@@ -74,6 +74,9 @@
                                                     <textarea class="form-control" id="message"
                                                         placeholder="Your message" required=""
                                                         formControlName="comment"></textarea>
+                                                        <div *ngIf="review.get('comment')?.hasError('forbiddenWord') && review.get('comment')?.touched" class="text-danger">
+                                                            ไม่หยาบนะจ๊ะ!!!
+                                                        </div>
                                                 </div>
                                             </div>
                                         </fieldset>
