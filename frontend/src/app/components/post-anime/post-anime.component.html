@@ -88,9 +88,18 @@
                                     <div class="col-sm-3">
                                         <h6 class="mb-0">Anime Name</h6>
                                     </div>
-                                    <div class="form-group col-sm-9 ">
+                                    <div class="form-group col-sm-9">
                                         <input type="text" class="form-control" formControlName="name">
+                                        <div [ngSwitch]="true">
+                                            <div *ngSwitchCase="anime.get('name')?.hasError('required') && anime.get('name')?.touched" class="text-warning">
+                                                Name is required.
+                                            </div>
+                                            <div *ngSwitchCase="anime.get('name')?.hasError('maxlength') && anime.get('name')?.touched" class="text-warning">
+                                                Name should not exceed 64 characters.
+                                            </div>
+                                        </div>
                                     </div>
+                                    
                                 </div>
 
                                 <div class="row mb-3">
@@ -99,6 +108,12 @@
                                     </div>
                                     <div class="form-group col-sm-9 ">
                                         <input type="number" class="form-control" formControlName="episode">
+                                        <div *ngIf="anime.get('episode')?.hasError('required') && anime.get('name')?.touched" class="text-warning">
+                                            episode is required.
+                                        </div>
+                                        <div *ngIf="anime.get('episode')?.hasError('min') && anime.get('episode')?.touched" class="text-warning">
+                                            episode should be at least 1.
+                                        </div>
                                     </div>
                                 </div>
 
@@ -111,6 +126,9 @@
                                             <option *ngFor="let studio of studioOptions" [value]="studio._id">{{
                                                 studio.name }}</option>
                                         </select>
+                                        <div *ngIf="anime.get('studioId')?.hasError('required') && anime.get('studioId')?.touched" class="text-warning">
+                                            studioId is required.
+                                        </div>
                                     </div>
                                 </div>
 
@@ -167,6 +185,9 @@
                                                 (change)="toggleGenre(genreOption)">
                                             <span>{{ genreOption }}</span>
                                         </label>
+                                        <div *ngIf="anime.get('genre')?.hasError('required') && anime.get('genre')?.touched" class="text-warning">
+                                            genre is required.
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="row mb-3">
@@ -183,6 +204,13 @@
                                     </div>
                                     <div class="form-group col-sm-9 ">
                                         <input type="text" class="form-control" formControlName="trailerUrl">
+                                        <div *ngIf="anime.get('trailerUrl')?.hasError('required') && anime.get('trailerUrl')?.touched" class="text-warning">
+                                            trailerUrl is required.
+                                        </div>
+                                        <div *ngIf="anime.get('trailerUrl')?.hasError('pattern') && anime.get('trailerUrl')?.touched" class="text-warning">
+                                            Invalid YouTube URL format. <br>
+                                            (https://www.youtube.com/watch?v=...)
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="row mb-4">
@@ -191,6 +219,12 @@
                                     </div>
                                     <div class="col-sm-9 ">
                                         <textarea class="form-control" formControlName="synopsis" rows="4"></textarea>
+                                        <div *ngIf="anime.get('synopsis')?.hasError('required') && anime.get('synopsis')?.touched" class="text-warning">
+                                            synopsis is required.
+                                        </div>
+                                        <div *ngIf="anime.get('synopsis')?.hasError('minlength') && anime.get('synopsis')?.touched" class="text-warning">
+                                            Synopsis should be at least 10 characters. 
+                                        </div>
                                     </div>
                                 </div>
 

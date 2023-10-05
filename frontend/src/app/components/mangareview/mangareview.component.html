@@ -3,31 +3,28 @@
         <div class="row">
             <div class="col-md-4">
                 <div class="col-md-12 sticky-top">
-                  <div class="card mb-4" *ngIf="animeData[0]">
-                    <img class="card-img-top" [src]="animeData[0].imgUrl" alt="..." />
+                  <div class="card mb-4" *ngIf="mangaData[0]">
+                    <img class="card-img-top" [src]="mangaData[0].imgUrl" alt="..." />
                   </div>
                   <div class="card mb-4 ">
                     <div class="card-header">ลายละเอียด</div>
                     <div class="card-body">
-                      <div class="row" *ngIf="animeData[0]">
+                      <div class="row" *ngIf="mangaData[0]">
                         <div class="col-sm-12">
                           <ul class="list-unstyled mb-0">
-                            <li>Name: {{ animeData[0].name}}</li>
-                            <li>Episodes: {{ animeData[0].episode}}</li>
-                            <li>Studios: {{ animeData[0].genre}}</li>
-                            <li>Source: {{ animeData[0].source}}</li>
-                            <li>Type: {{ animeData[0].type}}</li>
-                            <li>Genres: {{ animeData[0].genre}}</li>
+                            <li>Name: {{ mangaData[0].name}}</li>
+                            <li>Author: {{ mangaData[0].author}}</li>
+                            <li>Genres: {{ mangaData[0].genre}}</li>
                           </ul>
                         </div>
                       </div>
                     </div>
                   </div>
               
-                  <div class="card mb-4">
+                  <!-- <div class="card mb-4">
                     <div class="card-header">เรื่องย่อ</div>
-                    <div class="card-body" *ngIf="animeData[0]">{{ animeData[0].synopsis || 'No synopsis available.' }}</div>
-                  </div>
+                    <div class="card-body" *ngIf="mangaData[0]">{{ mangaData[0].synopsis || 'No synopsis available.' }}</div>
+                  </div> -->
                 </div>
               </div>
               
@@ -35,13 +32,13 @@
             <div class="col-md-8">
                 <div class="row">
 
-                    <div class="col-md-12">
+                    <!-- <div class="col-md-12">
                         <div class="card mb-4">
                             <div class="embed-responsive embed-responsive-16by9">
-                                <iframe src='' id="animeTrailer"></iframe>
+                                <iframe src='' id="mangaTrailer"></iframe>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
 
 
                     <div class="col-md-12">
@@ -84,7 +81,7 @@
                                             </div>
                                         </fieldset>
                                         <button type="submit" class="btn btn-normal pull-right"
-                                            (click)="submitAnime()">Submit</button>
+                                            (click)="submitManga()">Submit</button>
                                     </form>
                                 </div>
                                 <div class="card-body">

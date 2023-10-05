@@ -1,0 +1,135 @@
+.bg-img {
+    width: 100%;
+    height: auto;
+    background-size: cover;
+    animation: slideImages 30s linear infinite;
+}
+
+.card-img-top {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+}
+
+.card-img-list {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+}
+
+@keyframes slideImages {
+    0% {
+        background-image: url('../../img/manga3.jpg');
+        background-position: 0% 0%;
+    }
+    48% {
+        background-image: url('../../img/manga3.jpg');
+        background-position: 0% 100%;
+    }
+    50% {
+        background-image: url('../../img/manga.jpg');
+        background-position: 0% 100%;
+    }
+    98% {
+        background-image: url('../../img/manga.jpg');
+        background-position: 0% 0%;
+    }
+    100% {
+        background-image: url('../../img/manga3.jpg');
+        background-position: 0% 0%;
+    }
+}
+
+.btn-clicked {
+    background-color: #b13e49;
+    /* Change this to the desired color */
+    color: #ffffff;
+    /* Change this to the desired text color */
+}
+
+/* .btn-readmore {
+    background-color: #b13e49;
+    color: #ffffff;
+} */
+
+.btn-readmore-top {
+    background-color: #b13e49;
+    color: #ffffff;
+    text-align: center;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    width: 100px;
+    /* Set the width to the desired value */
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+}
+.btn-readmore-top-fav {
+    background-color: #2f2f2f;
+    color: #ffffff;
+    text-align: center;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    width: 270px;
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+}
+
+.btn-readmore {
+    background-color: #b13e49;
+    color: #ffffff;
+    text-align: center;
+    display: inline-flex;
+    align-items: center;
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+}
+
+.btn-readmore-fav {
+    background-color: #2f2f2f;
+    color: #ffffff;
+    text-align: center;
+    display: inline-flex;
+    align-items: center;
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    
+}
+
+.btn-readmore-top:hover{
+    background-color: #792f36;
+}
+.btn-readmore:hover{
+    background-color: #792f36;
+}
+
+.card-detail {
+    display: flex;
+    justify-content: space-between;
+}
+
+.left-info,
+.right-info {
+    width: auto;
+    /* Adjust the width as needed */
+}
+
+.alert-container {
+    position: fixed;
+    /* ตั้งค่าเป็น fixed เพื่อควบคุมตำแหน่งของ alerts ในหน้าจอ */
+    top: 50%;
+    /* ตำแหน่งด้านบนที่ 50% ของหน้าจอ */
+    left: 50%;
+    /* ตำแหน่งด้านซ้ายที่ 50% ของหน้าจอ */
+    transform: translate(-50%, -50%);
+    /* ใช้ transform เพื่อย้าย alert ให้อยู่กลาง */
+    z-index: 1000;
+    /* ตั้งค่า z-index ให้มากกว่า container อื่น ๆ เพื่อให้แสดงเหนือ container */
+}

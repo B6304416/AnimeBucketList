@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, FormArray } from '@angular/forms';
+import { FormControl, FormGroup, FormArray, Validators} from '@angular/forms';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 
@@ -16,15 +16,15 @@ interface StudioResponse {
 export class PostAnimeComponent implements OnInit {
 
   anime = new FormGroup({
-    name: new FormControl(''),
-    typeId: new FormControl(''),
-    studioId: new FormControl(''),
-    episode: new FormControl(null),
-    genre: new FormArray([]),
+    name: new FormControl('', [Validators.required, Validators.maxLength(64)]),
+    typeId: new FormControl('', [Validators.required]),
+    studioId: new FormControl('', [Validators.required]),
+    episode: new FormControl(null, [Validators.required, Validators.min(1)]),
+    genre: new FormArray([], [Validators.required]),
     imgUrl: new FormControl(''),
-    trailerUrl: new FormControl(''),
-    synopsis: new FormControl(''),
-    sourceId: new FormControl('')
+    trailerUrl: new FormControl('', [Validators.required, Validators.pattern(/^(https?:\/\/)?(www\.)?youtube\.com\/watch\?v=[\w-]+(&\S+)?$/)]),
+    synopsis: new FormControl('', [Validators.required, Validators.minLength(10)]),
+    sourceId: new FormControl('', [Validators.required]),
   });
 
   studioOptions: StudioResponse[] = [];
@@ -99,11 +99,11 @@ export class PostAnimeComponent implements OnInit {
       (response) => {
         console.log('Anime posted successfully', response);
         this.resetForm();
-        this.showAlertMessage('Anime posted successfully',true)
+        this.showAlertMessage('Anime posted successfully', true)
       },
       (error) => {
         console.error('Error posting anime', error);
-        this.showAlertMessage('Error: ' + error.message,false)
+        this.showAlertMessage('Error: ' + error.message, false)
       }
     );
 
@@ -113,16 +113,14 @@ export class PostAnimeComponent implements OnInit {
     this.anime.setControl('genre', new FormArray([]));
   }
 
-  showAlert: boolean = false; 
+  showAlert: boolean = false;
   alertMessage: string = "alert—check it out!";
   alertClass: string = ''; // ตัวแปรสำหรับกำหนดคลาส CSS ของ alert
 
   showAlertMessage(message: string, isSuccess: boolean) {
     this.alertMessage = message;
     this.alertClass = isSuccess ? 'alert alert-success' : 'alert alert-warning';
-
     this.showAlert = true; // แสดง alert
-
     // หลังจาก 3 วินาที ซ่อน alert ลง
     setTimeout(() => {
       this.showAlert = false;
