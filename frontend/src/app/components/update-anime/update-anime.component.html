@@ -118,17 +118,16 @@
                                     <div class="col-sm-3">
                                         <h6 class="mb-0">Type</h6>
                                     </div>
-                                    <div class="form-group col-sm-9 ">
-                                        <label class="form-check-label ms-4">
-                                            <input class="form-check-input" type="radio" name="typeId" value="6513dc34e62aa885492968ca"
-                                                formControlName="typeId">
-                                            <span>Movie</span>
-                                        </label>
-                                        <label class="form-check-label ms-5">
-                                            <input class="form-check-input" type="radio" name="typeId" value="6513dc34e62aa885492968c8"
-                                                formControlName="typeId">
-                                            <span>TV Series</span>
-                                        </label>
+                                    <div class="form-group col-sm-9">
+                                        <input type="radio" class="btn-check " name="typeId" id="Movie"
+                                            autocomplete="off" value="6513dc34e62aa885492968ca"
+                                            formControlName="typeId">
+                                        <label class="btn btn-outline-light me-2" for="Movie">Movie</label>
+
+                                        <input type="radio" class="btn-check " name="typeId" id="TV" autocomplete="off"
+                                            value="6513dc34e62aa885492968c8" formControlName="typeId">
+                                        <label class="btn btn-outline-light me-2" for="TV">TV
+                                            Series</label>
                                     </div>
                                 </div>
 
@@ -136,22 +135,23 @@
                                     <div class="col-sm-3">
                                         <h6 class="mb-0">Source</h6>
                                     </div>
-                                    <div class="form-group col-sm-9 ">
-                                        <label class="form-check-label ms-4">
-                                            <input class="form-check-input" type="radio" name="sourceId" value="6513dc35e62aa885492968d0"
-                                                formControlName="sourceId">
-                                            <span>Original</span>
-                                        </label>
-                                        <label class="form-check-label ms-5">
-                                            <input class="form-check-input" type="radio" name="sourceId" value="6513dc35e62aa885492968ce"
-                                                formControlName="sourceId">
-                                            <span>Light Novel</span>
-                                        </label>
-                                        <label class="form-check-label ms-5">
-                                            <input class="form-check-input" type="radio" name="sourceId" value="6513dc34e62aa885492968cc"
-                                                formControlName="sourceId">
-                                            <span>Manga</span>
-                                        </label>
+                                    <div class="form-group col-sm-9">
+
+                                        <input type="radio" class="btn-check " name="sourceId" id="Original"
+                                            autocomplete="off" value="6513dc35e62aa885492968d0"
+                                            formControlName="sourceId">
+                                        <label class="btn btn-outline-light me-2" for="Original">Original</label>
+
+                                        <input type="radio" class="btn-check " name="sourceId" id="Novel"
+                                            autocomplete="off" value="6513dc35e62aa885492968ce"
+                                            formControlName="sourceId">
+                                        <label class="btn btn-outline-light me-2" for="Novel">Light Novel</label>
+
+                                        <input type="radio" class="btn-check " name="sourceId" id="Manga"
+                                            autocomplete="off" value="6513dc34e62aa885492968cc"
+                                            formControlName="sourceId">
+                                        <label class="btn btn-outline-light me-2" for="Manga">Manga</label>
+
                                     </div>
                                 </div>
 
@@ -160,12 +160,13 @@
                                         <h6 class="mb-0">Genre</h6>
                                     </div>
                                     <div class="form-group col-sm-9 ">
-                                        <label class="form-check-label ms-4 spaced-label"
-                                            *ngFor="let genreOption of genreOptions">
-                                            <input class="form-check-input" type="checkbox" [value]="genreOption"
+                                        <label class="btn btn-outline-light me-2"
+                                            *ngFor="let genreOption of genreOptions"
+                                            [class.active]="isValidGenre(genreOption)">
+                                            <input class="btn-check" type="checkbox" [value]="genreOption"
                                                 [checked]="isValidGenre(genreOption)"
                                                 (change)="toggleGenre(genreOption)">
-                                            <span>{{ genreOption }}</span>
+                                            {{ genreOption }}
                                         </label>
                                     </div>
                                 </div>
