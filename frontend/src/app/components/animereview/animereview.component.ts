@@ -79,7 +79,7 @@ export class AnimereviewComponent implements OnInit {
     this.randomAvatarNumber = this.getRandomAvatarNumber(1, 9);
 
     const token = sessionStorage.getItem('token');
-    const user = localStorage.getItem('userId');
+    const user = sessionStorage.getItem('userId');
 
     const headers = new HttpHeaders({
       'Authorization': 'Bearer ' + token

@@ -30,7 +30,7 @@ export class LoginComponent implements OnInit {
     this.http.post('http://localhost:5555/login', credentials)
       .subscribe(
         (response: any) => {
-          localStorage.setItem('userId', response.userId);
+          sessionStorage.setItem('userId', response.userId);
           sessionStorage.setItem('isLoggedIn', 'true');
           sessionStorage.setItem('token', response.token);
           sessionStorage.setItem('role', response.userRole);

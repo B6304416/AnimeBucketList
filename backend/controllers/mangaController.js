@@ -2,6 +2,7 @@ import express from "express";
 import { Manga, Author } from "../models/mangaModel.js";
 import { MangaReview } from "../models/mangaReviewModel.js";
 import { authMiddleware } from "../middleware.js";
+import { upload } from "../uploadImg.js";
 import { ObjectId } from 'mongodb';
 
 const router = express.Router();
@@ -12,7 +13,7 @@ router.get('/detail', async (req, res) => {
         const pipeline = [
             {
                 $lookup: {
-                    from: 'authors', // Assuming your collection name for types is 'types'
+                    from: 'authors', 
                     localField: 'authorId',
                     foreignField: '_id',
                     as: 'author'
@@ -27,6 +28,7 @@ router.get('/detail', async (req, res) => {
                     name: 1,
                     genre: 1,
                     imgUrl: 1,
+                    imgCover: 1,
                     author: '$author.eng_name',
                 }
             }
@@ -55,7 +57,7 @@ router.get('/detail/:id', async (req, res) => {
             },
             {
                 $lookup: {
-                    from: 'authors', // Assuming your collection name for types is 'types'
+                    from: 'authors', 
                     localField: 'authorId',
                     foreignField: '_id',
                     as: 'author'
@@ -66,27 +68,16 @@ router.get('/detail/:id', async (req, res) => {
             {
                 $unwind: '$author'
             },
-            // {
-            //     $unwind: '$studio'
-            // },
-            // {
-            //     $unwind: '$source'
-            // },
             {
                 $project: {
                     _id: 1,
                     name: 1,
-                    // episode: 1,
                     genre: 1,
                     imgUrl: 1,
-                    // synopsis: 1,
-                    // trailerUrl: 1,
-                    author: '$author.eng_name' ,
-                    // studio: '$studio.name' ,
-                    // source: '$source.name' ,
+                    imgCover: 1,
+                    author: '$author.eng_name',
                 }
             }
-            // Add more stages if needed
         ];
         
         const result = await Manga.aggregate(pipeline);
@@ -131,6 +122,7 @@ router.get('/avg_rate', async (req, res) => {
                     mangaName: '$mangaDetails.name' ,
                     mangaGenre: '$mangaDetails.genre' ,
                     mangaImgUrl: '$mangaDetails.imgUrl',
+                    mangaImgCover: '$mangaDetails.imgCover',
                     mangaSynopsis: '$mangaDetails.synopsis',
                 }
             }
@@ -180,7 +172,7 @@ router.get('/:id',async (req, res) =>{
 })
 
 //Route for Post a new manga
-router.post('/', authMiddleware, async (req, res) =>{
+router.post('/', [upload.single('imgProfile'), authMiddleware], async (req, res) =>{
     try {
         if (
             !req.body.name ||
@@ -198,7 +190,10 @@ router.post('/', authMiddleware, async (req, res) =>{
             name: req.body.name, 
             authorId: authorObjectId,
             genre: req.body.genre,
-            imgUrl: req.body.imgUrl
+            // imgUrl: req.body.imgUrl
+        }
+        if (req.file) {
+            newManga.imgCover = '/uploads/' + req.file.filename;
         }
         const manga = await Manga.create(newManga);
         return res.status(201).send(manga);

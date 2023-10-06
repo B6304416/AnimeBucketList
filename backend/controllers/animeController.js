@@ -2,6 +2,7 @@ import express from "express";
 import { Anime, AnimeStudio, AnimeSource, AnimeType } from "../models/animeModel.js";
 import { authMiddleware } from "../middleware.js";
 import { ObjectId } from 'mongodb';
+import { upload } from "../uploadImg.js";
 
 const router = express.Router();
 
@@ -49,6 +50,7 @@ router.get('/detail', async (req, res) => {
                     episode: 1,
                     genre: 1,
                     imgUrl: 1,
+                    imgCover: 1,
                     synopsis: 1,
                     type: '$type.name' ,
                     studio: '$studio.name' ,
@@ -119,6 +121,7 @@ router.get('/detail/:id', async (req, res) => {
                     episode: 1,
                     genre: 1,
                     imgUrl: 1,
+                    imgCover: 1,
                     synopsis: 1,
                     trailerUrl: 1,
                     type: '$type.name' ,
@@ -200,7 +203,7 @@ router.get('/:id', async (req, res) => {
 
 
 //Route for Post a new Anime
-router.post('/', authMiddleware, async (req, res) => {
+router.post('/', [upload.single('imgProfile'), authMiddleware], async (req, res) => {
 
     try {
         
@@ -230,19 +233,17 @@ router.post('/', authMiddleware, async (req, res) => {
             sourceId: sourceObjectId,
             episode: req.body.episode,
             genre: req.body.genre,
-            imgUrl: req.body.imgUrl,
+            // imgUrl: req.body.imgUrl,
             trailerUrl: req.body.trailerUrl,
             synopsis: req.body.synopsis,
+        }
+        if (req.file) {
+            newAnime.imgCover = '/uploads/' + req.file.filename;
         }
         const anime = await Anime.create(newAnime);
         return res.status(201).send(anime);
     } catch (error) {
         console.log(error.message);
-        // console.log(req);
-        // console.log(typeId)
-        // console.log(studioId)
-        // console.log(typeObjectId)
-        // console.log(studioObjectId)
         res.status(500).send({ message: error.message })
     }
 })
