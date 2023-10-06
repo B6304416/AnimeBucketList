@@ -1,0 +1,89 @@
+<!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+<div>
+    <div class="container py-3">
+        <div class="row">
+            <div class="col-md-offset-1 col-md-12">
+                <div class="panel">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-sm-5 col-xs-12">
+                                <h4 class="title">Anime <span>List</span></h4>
+                            </div>
+                            <div class="col-sm-7 col-xs-12 text-right">
+                                <a href="/postcharacter" class="btn add-new"><i class="fa fa-plus-circle"></i>
+                                    Add New
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-body table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Cover</th>
+                                    <th>Name</th>
+                                    <th>Anime</th>
+                                    <th>Manga</th>
+                                    <th>Detail</th>
+                                    <th style="width: 10%;">Action</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let data of data">
+                                    <td>
+                                        <div class="user_img">
+                                            <img [src]="data.imgProfile" alt="">
+                                        </div>
+                                    </td>
+                                    <td>{{data.name}}</td>
+                                    <td>{{data.anime}}</td>
+                                    <td>{{data.manga}}</td>
+                                    <td>{{data.detail}}</td>
+                                    <td>
+                                        <ul class="action-list">
+                                            <li>
+                                                <a (click)="onClick(data._id)" class="btn btn-warning mr-1"><i
+                                                        class="fa fa-pencil-alt"></i></a>
+                                            </li>
+                                            <li>
+                                                <a (click)="confirmDelete(data._id, data.name)"
+                                                    class="btn btn-danger"><i class="fa fa-trash"></i></a>
+                                            </li>
+                                        </ul>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="panel-footer">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal สำหรับการยืนยันการลบ -->
+
+<div class="modal " id="deleteConfirmationModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog vertical-center" role="document">
+        <div class="modal-content ">
+            <div class="modal-header alert-warning">
+                <h5 class="modal-title">Confirm Delete</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+                    (click)="animeToDelete = null">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body ">
+                    Are you sure you want to delete <span class="alert-link">{{ animeName }}?</span>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                    (click)="animeToDelete = null">Cancel</button>
+                <button type="button" class="btn btn-danger" (click)="deleteConfirmed()">Delete</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -10,7 +10,7 @@ import { SignUpComponent } from './components/signup/signup.component';
 import { ReviewComponent } from './components/review/review.component';
 import { AnimetableComponent } from './components/animetable/animetable.component';
 import { UpdateAnimeComponent } from './components/update-anime/update-anime.component';
-
+import { TableCharacterComponent } from './components/table-character/table-character.component';
 import { PostCharacterComponent } from './components/post-character/post-character.component';
 
 import { PostMangaComponent } from './components/post-manga/post-manga.component';
@@ -24,6 +24,7 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'animelist', component: AnimelistComponent },
   { path: 'animetable', component: AnimetableComponent },
+  { path: 'tablecharacter', component: TableCharacterComponent },
   { path: 'mangalist', component: MangalistComponent },
   { path: 'charecterlist', component: CharecterlistComponent },
   { path: 'characterlist', component: CharacterlistComponent },
