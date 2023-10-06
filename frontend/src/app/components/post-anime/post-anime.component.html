@@ -6,42 +6,16 @@
                     <div class="card">
                         <div class="card-body text-white">
                             <div class="d-flex flex-column align-items-center text-center">
-                                <!-- รูปภาพเริ่มต้น -->
-                                <!-- <img *ngIf="!anime.get('imgUrl')?.value"
-                                    src=""
-                                    alt="Default Image" width="300"> -->
-                                <div *ngIf="!anime.get('imgUrl')?.value">
-                                    <div class="spinner-grow text-primary" role="status">
-                                        <span class="sr-only">Loading...</span>
-                                    </div>
-                                    <div class="spinner-grow " role="status">
-                                        <span class="sr-only">Loading...</span>
-                                    </div>
-                                    <div class="spinner-grow text-success" role="status">
-                                        <span class="sr-only">Loading...</span>
-                                    </div>
-                                    <div class="spinner-grow text-danger" role="status">
-                                        <span class="sr-only">Loading...</span>
-                                    </div>
-                                    <div class="spinner-grow text-warning" role="status">
-                                        <span class="sr-only">Loading...</span>
-                                    </div>
-                                    <div class="spinner-grow text-info" role="status">
-                                        <span class="sr-only">Loading...</span>
-                                    </div>
-                                    <div class="spinner-grow text-light" role="status">
-                                        <span class="sr-only">Loading...</span>
-                                    </div>
-                                    <div class="spinner-grow text-dark" role="status">
+                                <div *ngIf="!anime.get('imgCover')?.value">
+                                    <div class="spinner-border p-4" style="width: 3rem; height: 3rem;" role="status">
                                         <span class="sr-only">Loading...</span>
                                     </div>
                                 </div>
-
-                                <!-- รูปภาพจริงๆ เมื่อมีค่า imgUrl -->
-                                <img *ngIf="anime.get('imgUrl')?.value" [src]="anime.get('imgUrl')?.value" alt="Admin"
-                                    width="300" class="imgrounded">
+                                <div *ngIf="cover" class="mt-3 cover">
+                                    <img [src]="cover" alt="Selected Image"
+                                        style="max-width: 100%; max-height: 200px;">
+                                </div>
                                 <div class="mt-3">
-                                    <!-- แสดงค่า name ก่อนและหลังจากมีค่า -->
                                     <h4 *ngIf="!anime.get('name')?.value" >Anime Name</h4>
                                     <h4 *ngIf="anime.get('name')?.value" >{{ anime.get('name')?.value }}</h4>
 
@@ -190,14 +164,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row mb-3">
-                                    <div class="col-sm-3">
-                                        <h6 class="mb-0">ImgUrl</h6>
-                                    </div>
-                                    <div class="form-group col-sm-9 ">
-                                        <input type="text" class="form-control" formControlName="imgUrl">
-                                    </div>
-                                </div>
+
                                 <div class="row mb-3">
                                     <div class="col-sm-3">
                                         <h6 class="mb-0">TrailerUrl</h6>
@@ -224,6 +191,18 @@
                                         </div>
                                         <div *ngIf="anime.get('synopsis')?.hasError('minlength') && anime.get('synopsis')?.touched" class="text-warning">
                                             Synopsis should be at least 10 characters. 
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">Manga Cover</h6>
+                                    </div>
+                                    <div class="form-group col-sm-9 text-secondary">
+                                        <div class="form-group col-sm-9 text-secondary">
+                                            <input type="file" id="fileInput" formControlName="imgCover"
+                                                (change)="onFileSelected($event)">
                                         </div>
                                     </div>
                                 </div>

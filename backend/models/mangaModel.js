@@ -20,6 +20,9 @@ const mangaSchema = mongoose.Schema(
         synopsis: {
             type: String,
         },
+        imgCover: {
+            type: String,
+        }
     },
     {
         timestamps: true,
