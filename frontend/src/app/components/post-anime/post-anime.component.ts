@@ -25,12 +25,27 @@ export class PostAnimeComponent implements OnInit {
     trailerUrl: new FormControl('', [Validators.required, Validators.pattern(/^(https?:\/\/)?(www\.)?youtube\.com\/watch\?v=[\w-]+(&\S+)?$/)]),
     synopsis: new FormControl('', [Validators.required, Validators.minLength(10)]),
     sourceId: new FormControl('', [Validators.required]),
+    imgCover: new FormControl(null as File | null),
   });
 
   studioOptions: StudioResponse[] = [];
   genreOptions: string[] = [];
+  selectedFile: File | null = null;
+  cover?: string | ArrayBuffer | null = null;
 
   constructor(private http: HttpClient, private router: Router,) { }
+
+  onFileSelected(event : any){
+    const file: File = event.target.files[0];
+    if (file) {
+      this.selectedFile = file;
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        this.cover = e.target?.result;
+      };
+      reader.readAsDataURL(file);
+    }
+  }
 
   ngOnInit(): void {
     const studioUrl = 'http://localhost:5555/anime/studios';
@@ -89,16 +104,38 @@ export class PostAnimeComponent implements OnInit {
 
   submitAnime() {
     const animeData = this.anime.value;
+    const formData = new FormData();
+  
+    if (animeData.name && animeData.typeId && animeData.studioId && 
+      animeData.episode && animeData.sourceId && animeData.synopsis && animeData.trailerUrl) {
+      formData.append('name', animeData.name);
+      formData.append('typeId', animeData.typeId);
+      formData.append('studioId', animeData.studioId);
+      formData.append('episode', animeData.episode);
+      formData.append('sourceId', animeData.sourceId);
+      formData.append('synopsis', animeData.synopsis);
+      formData.append('trailerUrl', animeData.trailerUrl);
+    }
+
+    const genres = this.anime.get('genre')!.value as string[];
+    genres.forEach((genre, index) => {
+      formData.append(`genre[${index}]`, genre);
+    });
+  
     const token = sessionStorage.getItem('token');
+  
+    if (this.selectedFile) {
+      formData.append('imgProfile', this.selectedFile, this.selectedFile.name);
+    }
 
     const headers = new HttpHeaders({
       'Authorization': 'Bearer ' + token
     });
 
-    this.http.post('http://localhost:5555/anime', animeData, { headers, responseType: 'text' as 'json' }).subscribe(
+    this.http.post('http://localhost:5555/anime', formData, { headers}).subscribe(
       (response) => {
         console.log('Anime posted successfully', response);
-        this.resetForm();
+        // this.resetForm();
         this.showAlertMessage('Anime posted successfully', true)
       },
       (error) => {
@@ -111,6 +148,7 @@ export class PostAnimeComponent implements OnInit {
   resetForm() {
     this.anime.reset();
     this.anime.setControl('genre', new FormArray([]));
+    this.cover = null;
   }
 
   showAlert: boolean = false;

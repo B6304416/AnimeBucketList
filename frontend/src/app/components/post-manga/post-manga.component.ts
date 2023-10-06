@@ -19,12 +19,27 @@ export class PostMangaComponent implements OnInit {
     authorId: new FormControl(''),
     genre: new FormArray([]),
     imgUrl: new FormControl(''),
+    imgCover: new FormControl(null as File | null),
   });
 
   authorOptions: AuthorResponse[] = [];
   genreOptions: string[] = [];
+  selectedFile: File | null = null;
+  cover?: string | ArrayBuffer | null = null;
 
   constructor(private http: HttpClient, private router: Router,) { }
+
+  onFileSelected(event : any){
+    const file: File = event.target.files[0];
+    if (file) {
+      this.selectedFile = file;
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        this.cover = e.target?.result;
+      };
+      reader.readAsDataURL(file);
+    }
+  }
 
   ngOnInit(): void {
     const authorUrl = 'http://localhost:5555/manga/authors';
@@ -83,27 +98,45 @@ export class PostMangaComponent implements OnInit {
 
   submitManga() {
     const mangaData = this.manga.value;
+    const formData = new FormData();
+  
+    if (mangaData.name && mangaData.authorId) {
+      formData.append('name', mangaData.name);
+      formData.append('authorId', mangaData.authorId);
+    }
+
+    const genres = this.manga.get('genre')!.value as string[];
+    genres.forEach((genre, index) => {
+      formData.append(`genre[${index}]`, genre);
+    });
+  
     const token = sessionStorage.getItem('token');
-    console.log(mangaData)
+  
+    if (this.selectedFile) {
+      formData.append('imgProfile', this.selectedFile, this.selectedFile.name);
+    }
+  
     const headers = new HttpHeaders({
       'Authorization': 'Bearer ' + token
     });
-
-    this.http.post('http://localhost:5555/manga', mangaData, { headers}).subscribe(
+  
+    this.http.post('http://localhost:5555/manga', formData, { headers }).subscribe(
       (response) => {
         console.log('Manga posted successfully', response);
-        alert('Manga posted successfully')
-        this.resetForm();
+        alert('Manga posted successfully');
+        // this.resetForm();
       },
       (error) => {
         console.error('Error posting manga', error);
-        alert('Error: ' + error.message)
+        alert('Error: ' + error.message);
       }
     );
-
   }
+  
   resetForm() {
     this.manga.reset();
     this.manga.setControl('genre', new FormArray([]));
+    this.cover = null;
   }
 }
+
