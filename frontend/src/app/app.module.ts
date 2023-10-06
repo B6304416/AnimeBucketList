@@ -23,6 +23,7 @@ import { CharacterlistComponent } from './components/characterlist/characterlist
 import { MangareviewComponent } from './components/mangareview/mangareview.component';
 import { FromAnimeComponent } from './components/child/from-anime/from-anime.component';
 import { FromMangaComponent } from './components/child/from-manga/from-manga.component';
+import { TableCharacterComponent } from './components/table-character/table-character.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +46,7 @@ import { FromMangaComponent } from './components/child/from-manga/from-manga.com
     MangareviewComponent,
     FromAnimeComponent,
     FromMangaComponent,
+    TableCharacterComponent,
 
   ],
   imports: [
