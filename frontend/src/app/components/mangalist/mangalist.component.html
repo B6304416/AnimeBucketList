@@ -1,6 +1,6 @@
 <div class="bg-img">
-    <div class="text-center">
-        <h1 class="fw-bolder text-danger p-5 mt-auto display-3">
+    <div class="text-center p-1">
+        <h1 class="fw-bolder text-danger p-5 mt-5 display-3 title-text">
             <strong>
                 Welcome to Anime bucket list!
             </strong>
@@ -30,7 +30,8 @@
             <div class="row" *ngIf="isAllClicked">
                 <div class="col-lg-3" *ngFor="let manga of data">
                     <div class="card mb-4">
-                        <img class="card-img-top card-img-test" [src]="manga.imgUrl" alt="..." />
+                        <img class="card-img-top card-img-test" *ngIf="manga.imgCover != 'http://localhost:5555undefined'" [src]="manga.imgCover" alt="..." />
+                        <img class="card-img-top card-img-test" *ngIf="manga.imgCover == 'http://localhost:5555undefined'" [src]="manga.imgUrl" alt="..." />
                         <div class="card-body">
                             <div class="small text-muted">{{ manga.genre }}</div>
                             <h2 class="card-title h4 mb-1">
@@ -47,7 +48,8 @@
             <div class="row" *ngIf="isSortByScoreClicked">
                 <div class="col-lg-3" *ngFor="let manga of mangaData">
                     <div class="card mb-4">
-                        <img class="card-img-top card-img-test" [src]="manga.mangaImgUrl" alt="..." />
+                        <img class="card-img-top card-img-test" *ngIf="manga.mangaImgCover != 'http://localhost:5555undefined'" [src]="manga.mangaImgCover"  alt="..." />
+                        <img class="card-img-top card-img-test" *ngIf="manga.mangaImgCover == 'http://localhost:5555undefined'" [src]="manga.mangaImgUrl" alt="..." />
                         <div class="card-body">
                             <div class="small text-muted">{{ manga.mangaGenre }}</div>
                             <h2 class="card-title h4 mb-1">

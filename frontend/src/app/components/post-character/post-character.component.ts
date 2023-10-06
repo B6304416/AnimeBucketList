@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormArray } from '@angular/forms';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
-interface dataResponse {
+interface AnimeResponse {
   _id: string | null;
   name: string;
 }
@@ -27,7 +27,7 @@ export class PostCharacterComponent implements OnInit {
     imgProfile: new FormControl(null as File | null),
   });
 
-  animeOptions: dataResponse[] = [];
+  animeOptions: AnimeResponse[] = [];
   mangaOptions: MangaResponse[] = [];
   
 
@@ -49,9 +49,10 @@ export class PostCharacterComponent implements OnInit {
     }
     // this.selectedFile = <File>event.target.files[0]
   }
+
   ngOnInit(): void {
     const animeUrl = 'http://localhost:5555/anime/detail/';
-    this.http.get<dataResponse[]>(animeUrl).subscribe(
+    this.http.get<AnimeResponse[]>(animeUrl).subscribe(
       (res) => {
         this.animeOptions = [
           { _id: null, name: 'Not from anime' },  

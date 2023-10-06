@@ -48,7 +48,7 @@ export class CharacterlistComponent implements OnInit {
   }
 
   // favChar = sessionStorage.getItem('favCharacter');
-  userId = localStorage.getItem('userId');
+  userId = sessionStorage.getItem('userId');
 
   fetchData(){
     console.log('user',this.userId)

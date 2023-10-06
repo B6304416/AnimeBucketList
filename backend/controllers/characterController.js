@@ -136,7 +136,7 @@ router.get('/:id', async (req, res) => {
 })
 
 //Route for Post a new Character
-router.post('/', upload.single('imgProfile'), async (req, res) => {
+router.post('/', [upload.single('imgProfile'), authMiddleware], async (req, res) => {
     try {
         console.log(req.body.animeId)
         console.log(req.body.mangaId)

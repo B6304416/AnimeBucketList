@@ -14,15 +14,15 @@ interface CharacterResponse {
   manga: string;
 }
 
-interface CharecterRateResponse {
-  _id: string;
-  totalRate: number;
-  countRate: number;
-  averageRate: number;
-  mangaName: string;
-  mangaGenre: string;
-  mangaImgUrl: string;
-}
+// interface CharecterRateResponse {
+//   _id: string;
+//   totalRate: number;
+//   countRate: number;
+//   averageRate: number;
+//   mangaName: string;
+//   mangaGenre: string;
+//   mangaImgUrl: string;
+// }
 
 // interface PopCharacterResponse {
 //   name: string;
@@ -39,7 +39,7 @@ interface CharecterRateResponse {
 export class CharecterlistComponent implements OnInit {
 
   data: CharacterResponse[] = [];
-  mangaData: CharecterRateResponse[] = [];
+  // mangaData: CharecterRateResponse[] = [];
   characters: any[] = [];
 
   // popCharacter: PopCharacterResponse[] = [];
@@ -68,33 +68,21 @@ export class CharecterlistComponent implements OnInit {
       }
     );
 
-    const manga_url = 'http://localhost:5555/charecter/avg_rate';
-    this.http.get<CharecterRateResponse[]>(manga_url).subscribe(
-      (res) => {
-        res.forEach(manga => {
-          manga.averageRate = parseFloat(manga.averageRate.toFixed(1));
-        });
-        // Sort the array by averageRate in ascending order
-        const sortedMangaList = res.sort((a, b) => b.averageRate - a.averageRate);
-        this.mangaData = sortedMangaList
-        console.log(this.data)
-      },
-      (error) => {
-        console.error('Error:', error);
-      }
-    );
-
-    // const char_url = 'http://localhost:5555/character/popular';
-    // this.http.get<PopCharacterResponse[]>(char_url).subscribe(
+    // const manga_url = 'http://localhost:5555/charecter/avg_rate';
+    // this.http.get<CharecterRateResponse[]>(manga_url).subscribe(
     //   (res) => {
-    //     console.log('Response data:', res);
-    //     this.popCharacter = res
-    //     console.log(this.popCharacter)
+    //     res.forEach(manga => {
+    //       manga.averageRate = parseFloat(manga.averageRate.toFixed(1));
+    //     });
+    //     const sortedMangaList = res.sort((a, b) => b.averageRate - a.averageRate);
+    //     this.mangaData = sortedMangaList
+    //     console.log(this.data)
     //   },
     //   (error) => {
     //     console.error('Error:', error);
     //   }
     // );
+
   }
 
   onClick(animeId: string) {
