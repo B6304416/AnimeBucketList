@@ -79,9 +79,12 @@ export class AnimetableComponent implements OnInit{
           alert('Error: ' + error.message);
         }
       );
-      this.animeToDelete = null;
-      $('#deleteConfirmationModal').modal('hide'); // ปิด Modal ด้วย jQuery
+      this.closeModal()
     }
+  }
+  closeModal() {
+    $('#deleteConfirmationModal').modal('hide');
+    this.animeToDelete = null
   }
 
 }

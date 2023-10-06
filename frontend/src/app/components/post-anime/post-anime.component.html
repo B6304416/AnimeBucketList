@@ -42,8 +42,8 @@
                                     width="300" class="imgrounded">
                                 <div class="mt-3">
                                     <!-- แสดงค่า name ก่อนและหลังจากมีค่า -->
-                                    <h4 *ngIf="!anime.get('name')?.value" >Anime Name</h4>
-                                    <h4 *ngIf="anime.get('name')?.value" >{{ anime.get('name')?.value }}</h4>
+                                    <h4 *ngIf="!anime.get('name')?.value">Anime Name</h4>
+                                    <h4 *ngIf="anime.get('name')?.value">{{ anime.get('name')?.value }}</h4>
 
                                     <p class="mb-1" style="text-align: left;">Episode: {{
                                         anime.get('episode')?.value }}</p>
@@ -52,14 +52,16 @@
                                         getStudioName(anime.get('studioId')?.value) }}</p>
 
                                     <p class=" mb-1" style="text-align: left;">Type: {{
-                                        anime.get('typeId')?.value === '6513dc34e62aa885492968ca' ? 'Movie' : 
-                                        anime.get('typeId')?.value === '6513dc34e62aa885492968c8' ? 'TV Series' : 'Unknown' }}</p>
+                                        anime.get('typeId')?.value === '6513dc34e62aa885492968ca' ? 'Movie' :
+                                        anime.get('typeId')?.value === '6513dc34e62aa885492968c8' ? 'TV Series' :
+                                        'Unknown' }}</p>
 
                                     <p class=" mb-1" style="text-align: left;">Source: {{
                                         anime.get('sourceId')?.value === '6513dc35e62aa885492968d0' ? 'Original' :
                                         anime.get('sourceId')?.value === '6513dc35e62aa885492968ce' ? 'Light Novel' :
-                                        anime.get('sourceId')?.value === '6513dc34e62aa885492968cc' ? 'Manga' : 'Unknown' }}</p>
-                                    
+                                        anime.get('sourceId')?.value === '6513dc34e62aa885492968cc' ? 'Manga' :
+                                        'Unknown' }}</p>
+
                                     <p class="font-size-sm" style="text-align: left;">Genre: {{
                                         anime.get('genre')?.value }}</p>
                                 </div>
@@ -82,7 +84,7 @@
                 <div class="col-lg-8">
                     <div class="card">
                         <div class="card-body text-white">
-                            
+
                             <form [formGroup]="anime">
                                 <div class="row mb-3">
                                     <div class="col-sm-3">
@@ -91,15 +93,17 @@
                                     <div class="form-group col-sm-9">
                                         <input type="text" class="form-control" formControlName="name">
                                         <div [ngSwitch]="true">
-                                            <div *ngSwitchCase="anime.get('name')?.hasError('required') && anime.get('name')?.touched" class="text-warning">
+                                            <div *ngSwitchCase="anime.get('name')?.hasError('required') && anime.get('name')?.touched"
+                                                class="text-warning">
                                                 Name is required.
                                             </div>
-                                            <div *ngSwitchCase="anime.get('name')?.hasError('maxlength') && anime.get('name')?.touched" class="text-warning">
+                                            <div *ngSwitchCase="anime.get('name')?.hasError('maxlength') && anime.get('name')?.touched"
+                                                class="text-warning">
                                                 Name should not exceed 64 characters.
                                             </div>
                                         </div>
                                     </div>
-                                    
+
                                 </div>
 
                                 <div class="row mb-3">
@@ -108,10 +112,12 @@
                                     </div>
                                     <div class="form-group col-sm-9 ">
                                         <input type="number" class="form-control" formControlName="episode">
-                                        <div *ngIf="anime.get('episode')?.hasError('required') && anime.get('name')?.touched" class="text-warning">
+                                        <div *ngIf="anime.get('episode')?.hasError('required') && anime.get('name')?.touched"
+                                            class="text-warning">
                                             episode is required.
                                         </div>
-                                        <div *ngIf="anime.get('episode')?.hasError('min') && anime.get('episode')?.touched" class="text-warning">
+                                        <div *ngIf="anime.get('episode')?.hasError('min') && anime.get('episode')?.touched"
+                                            class="text-warning">
                                             episode should be at least 1.
                                         </div>
                                     </div>
@@ -126,7 +132,8 @@
                                             <option *ngFor="let studio of studioOptions" [value]="studio._id">{{
                                                 studio.name }}</option>
                                         </select>
-                                        <div *ngIf="anime.get('studioId')?.hasError('required') && anime.get('studioId')?.touched" class="text-warning">
+                                        <div *ngIf="anime.get('studioId')?.hasError('required') && anime.get('studioId')?.touched"
+                                            class="text-warning">
                                             studioId is required.
                                         </div>
                                     </div>
@@ -137,16 +144,15 @@
                                         <h6 class="mb-0">Type</h6>
                                     </div>
                                     <div class="form-group col-sm-9">
-                                        <label class="form-check-label ml-4">
-                                            <input class="btn-check" type="radio" name="typeId" value="6513dc34e62aa885492968ca"
-                                                formControlName="typeId">
-                                            <span>Movie</span>
-                                        </label>
-                                        <label class="form-check-label ml-5">
-                                            <input class="btn-check" type="radio" name="typeId" value="6513dc34e62aa885492968c8"
-                                                formControlName="typeId">
-                                            <span>TV Series</span>
-                                        </label>
+                                        <input type="radio" class="btn-check " name="typeId" id="Movie"
+                                            autocomplete="off" value="6513dc34e62aa885492968ca"
+                                            formControlName="typeId">
+                                        <label class="btn btn-outline-light me-2" for="Movie">Movie</label>
+
+                                        <input type="radio" class="btn-check " name="typeId" id="TV" autocomplete="off"
+                                            value="6513dc34e62aa885492968c8" formControlName="typeId">
+                                        <label class="btn btn-outline-light me-2" for="TV">TV
+                                            Series</label>
                                     </div>
                                 </div>
 
@@ -155,21 +161,22 @@
                                         <h6 class="mb-0">Source</h6>
                                     </div>
                                     <div class="form-group col-sm-9">
-                                        <label class="form-check-label ml-4">
-                                            <input class="form-check-input" type="radio" name="sourceId" value="6513dc35e62aa885492968d0"
-                                                formControlName="sourceId">
-                                            <span>Original</span>
-                                        </label>
-                                        <label class="form-check-label ml-5">
-                                            <input class="form-check-input" type="radio" name="sourceId" value="6513dc35e62aa885492968ce"
-                                                formControlName="sourceId">
-                                            <span>Light Novel</span>
-                                        </label>
-                                        <label class="form-check-label ml-5">
-                                            <input class="form-check-input" type="radio" name="sourceId" value="6513dc34e62aa885492968cc"
-                                                formControlName="sourceId">
-                                            <span>Manga</span>
-                                        </label>
+
+                                        <input type="radio" class="btn-check " name="sourceId" id="Original"
+                                            autocomplete="off" value="6513dc35e62aa885492968d0"
+                                            formControlName="sourceId">
+                                        <label class="btn btn-outline-light me-2" for="Original">Original</label>
+
+                                        <input type="radio" class="btn-check " name="sourceId" id="Novel"
+                                            autocomplete="off" value="6513dc35e62aa885492968ce"
+                                            formControlName="sourceId">
+                                        <label class="btn btn-outline-light me-2" for="Novel">Light Novel</label>
+
+                                        <input type="radio" class="btn-check " name="sourceId" id="Manga"
+                                            autocomplete="off" value="6513dc34e62aa885492968cc"
+                                            formControlName="sourceId">
+                                        <label class="btn btn-outline-light me-2" for="Manga">Manga</label>
+
                                     </div>
                                 </div>
 
@@ -178,14 +185,25 @@
                                         <h6 class="mb-0">Genre</h6>
                                     </div>
                                     <div class="form-group col-sm-9">
-                                        <label class="form-check-label ml-4 spaced-label"
+
+                                        <label class="btn btn-outline-light me-2"
+                                            *ngFor="let genreOption of genreOptions"
+                                            [class.active]="isValidGenre(genreOption)">
+                                            <input class="btn-check" type="checkbox" [value]="genreOption"
+                                                [checked]="isValidGenre(genreOption)"
+                                                (change)="toggleGenre(genreOption)">
+                                            {{ genreOption }}
+                                        </label>
+
+                                        <!-- <label class="form-check-label ms-4 spaced-label"
                                             *ngFor="let genreOption of genreOptions">
                                             <input class="form-check-input" type="checkbox" [value]="genreOption"
                                                 [checked]="isValidGenre(genreOption)"
                                                 (change)="toggleGenre(genreOption)">
                                             <span>{{ genreOption }}</span>
-                                        </label>
-                                        <div *ngIf="anime.get('genre')?.hasError('required') && anime.get('genre')?.touched" class="text-warning">
+                                        </label> -->
+                                        <div *ngIf="anime.get('genre')?.hasError('required') && anime.get('genre')?.touched"
+                                            class="text-warning">
                                             genre is required.
                                         </div>
                                     </div>
@@ -204,10 +222,12 @@
                                     </div>
                                     <div class="form-group col-sm-9 ">
                                         <input type="text" class="form-control" formControlName="trailerUrl">
-                                        <div *ngIf="anime.get('trailerUrl')?.hasError('required') && anime.get('trailerUrl')?.touched" class="text-warning">
+                                        <div *ngIf="anime.get('trailerUrl')?.hasError('required') && anime.get('trailerUrl')?.touched"
+                                            class="text-warning">
                                             trailerUrl is required.
                                         </div>
-                                        <div *ngIf="anime.get('trailerUrl')?.hasError('pattern') && anime.get('trailerUrl')?.touched" class="text-warning">
+                                        <div *ngIf="anime.get('trailerUrl')?.hasError('pattern') && anime.get('trailerUrl')?.touched"
+                                            class="text-warning">
                                             Invalid YouTube URL format. <br>
                                             (https://www.youtube.com/watch?v=...)
                                         </div>
@@ -219,36 +239,38 @@
                                     </div>
                                     <div class="col-sm-9 ">
                                         <textarea class="form-control" formControlName="synopsis" rows="4"></textarea>
-                                        <div *ngIf="anime.get('synopsis')?.hasError('required') && anime.get('synopsis')?.touched" class="text-warning">
+                                        <div *ngIf="anime.get('synopsis')?.hasError('required') && anime.get('synopsis')?.touched"
+                                            class="text-warning">
                                             synopsis is required.
                                         </div>
-                                        <div *ngIf="anime.get('synopsis')?.hasError('minlength') && anime.get('synopsis')?.touched" class="text-warning">
-                                            Synopsis should be at least 10 characters. 
+                                        <div *ngIf="anime.get('synopsis')?.hasError('minlength') && anime.get('synopsis')?.touched"
+                                            class="text-warning">
+                                            Synopsis should be at least 10 characters.
                                         </div>
                                     </div>
                                 </div>
 
                                 <div class="row">
                                     <div class="col-sm-3">
-                                        <a href="/animetable" type="button" class="btn btn-warning px-5 mb-4" value="Back">Back</a>
+                                        <a href="/animetable" type="button" class="btn btn-warning px-5 mb-4"
+                                            value="Back">Back</a>
                                     </div>
                                     <div class="col-sm-9">
-                                        <input type="button" class="btn btn-warning px-5 mb-4 float-right" value="Post"
+                                        <input type="button" class="btn btn-warning px-5 mb-4 float-end" value="Post"
                                             (click)="submitAnime()">
                                     </div>
-                                    
+
                                 </div>
                             </form>
                         </div>
                     </div>
                 </div>
-            </div>  
+            </div>
         </div>
     </div>
 </div>
 <div class="alert-container">
     <div [ngClass]="alertClass" role="alert" *ngIf="showAlert">
-      {{ alertMessage }}
+        {{ alertMessage }}
     </div>
-  </div>
-  
+</div>

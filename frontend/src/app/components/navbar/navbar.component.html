@@ -1,29 +1,33 @@
-<nav class="navbar navbar-expand-lg navbar-dark custom-bg-color sticky-top" *ngIf="!isLoginPage">
+<nav class="navbar navbar-expand-lg bg-body-tertiary navbar-dark custom-bg-color" *ngIf="!isLoginPage">
   <div class="container-fluid">
-    <a class="navbar-brand navlist" routerLink="/animelist">Animelist</a>
-    <a class="nav-link active navlist" aria-current="page" routerLink="/mangalist">Mangalist</a>
-    <a class="nav-link active navlist" aria-current="page" routerLink="/characterlist">Characterlist</a>
-    <!-- <a class="nav-link active navlist" aria-current="page" routerLink="/home">Character</a> -->
-    <!-- <div class="collapse navbar-collapse" > -->
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item dropdown" *ngIf="checkUserRole()">
-          <a class="text-warning nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
-            aria-haspopup="true" aria-expanded="false">
+    <a class="navbar-brand" href="/animelist">Animelist</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="/mangalist">Mangalist</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/characterlist">Characterlist</a>
+        </li>
+        <li class="nav-item dropdown"  *ngIf="checkUserRole()">
+          <a class="nav-link dropdown-toggle text-warning" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Admin
           </a>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          <ul class="dropdown-menu">
             <li><a class="dropdown-item" href="/animetable">Anime</a></li>
             <li><a class="dropdown-item" href="/postmanga">Manga</a></li>
             <li><a class="dropdown-item" href="/tablecharacter">Character</a></li>
           </ul>
         </li>
       </ul>
-
-      <button class="btn my-2 my-sm-0 mr-2 "
+      <button class="btn my-2 my-sm-0 me-2 "
         [ngClass]="{'btn-outline-primary': !checkUserRole(), 'btn-outline-warning': checkUserRole()}" type="button"
         *ngIf="isLoggedIn">{{name}}
       </button>
-      <ul class="navbar-nav my-2 my-sm-0 mr-2">
+      <ul class="navbar-nav my-2 my-sm-0 me-2">
         <li class="nav-item" *ngIf="!isLoggedIn">
           <button class="btn btn-outline-success my-2 my-sm-0 " routerLink="/login">Login</button>
         </li>
@@ -31,6 +35,6 @@
           <button class="btn btn-outline-danger my-2 my-sm-0 " (click)="logout()">Logout</button>
         </li>
       </ul>
-    <!-- </div> -->
+    </div>
   </div>
 </nav>
