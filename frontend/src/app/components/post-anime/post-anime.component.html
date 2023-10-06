@@ -169,14 +169,6 @@
                                                 (change)="toggleGenre(genreOption)">
                                             {{ genreOption }}
                                         </label>
-
-                                        <!-- <label class="form-check-label ms-4 spaced-label"
-                                            *ngFor="let genreOption of genreOptions">
-                                            <input class="form-check-input" type="checkbox" [value]="genreOption"
-                                                [checked]="isValidGenre(genreOption)"
-                                                (change)="toggleGenre(genreOption)">
-                                            <span>{{ genreOption }}</span>
-                                        </label> -->
                                         <div *ngIf="anime.get('genre')?.hasError('required') && anime.get('genre')?.touched"
                                             class="text-warning">
                                             genre is required.
