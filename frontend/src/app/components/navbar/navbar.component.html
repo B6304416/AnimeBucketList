@@ -1,10 +1,8 @@
-<nav class="navbar navbar-expand-lg navbar-dark custom-bg-color sticky-top" *ngIf="!isLoginPage">
+<nav class="navbar navbar-expand-lg navbar-dark custom-bg-color fixed-top" *ngIf="!isLoginPage">
   <div class="container-fluid">
     <a class="navbar-brand navlist" routerLink="/animelist">Animelist</a>
     <a class="nav-link active navlist" aria-current="page" routerLink="/mangalist">Mangalist</a>
     <a class="nav-link active navlist" aria-current="page" routerLink="/characterlist">Characterlist</a>
-    <!-- <a class="nav-link active navlist" aria-current="page" routerLink="/home">Character</a> -->
-    <!-- <div class="collapse navbar-collapse" > -->
       <ul class="navbar-nav mr-auto">
         <li class="nav-item dropdown" *ngIf="checkUserRole()">
           <a class="text-warning nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
@@ -31,6 +29,5 @@
           <button class="btn btn-outline-danger my-2 my-sm-0 " (click)="logout()">Logout</button>
         </li>
       </ul>
-    <!-- </div> -->
   </div>
 </nav>
