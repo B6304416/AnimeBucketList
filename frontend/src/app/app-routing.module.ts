@@ -18,6 +18,7 @@ import { CharecterlistComponent } from './components/charecterlist/charecterlist
 import { CharacterlistComponent } from './components/characterlist/characterlist.component';
 import { MangareviewComponent } from './components/mangareview/mangareview.component';
 import { MangatableComponent } from './components/mangatable/mangatable.component';
+import { UpdateCharacterComponent } from './components/update-character/update-character.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -37,6 +38,7 @@ const routes: Routes = [
   { path: 'animereview/:id', component: AnimereviewComponent },
   { path: 'mangareview/:id', component: MangareviewComponent },
   { path: 'updateanime/:id', component: UpdateAnimeComponent },
+  { path: 'updatecharacter/:id', component: UpdateCharacterComponent },
   { path: '', redirectTo: '/animelist', pathMatch: 'full' }, // Redirect to the login page by default
 ];
 

@@ -6,15 +6,15 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="d-flex flex-column align-items-center text-center pt-4">
-                                <div *ngIf="!character.get('imgProfile')?.value">
+                                <!-- <div *ngIf="!character.get('imgProfile')?.value">
                                     <div class="spinner-border p-4" style="width: 3rem; height: 3rem;" role="status">
                                         <span class="sr-only">Loading...</span>
                                     </div>
-                                </div>
-                                <div *ngIf="profile" class="mt-3 profile">
-                                    <img [src]="profile" alt="Selected Image"
-                                        style="max-width: 100%; max-height: 200px;">
-                                </div>
+                                </div> -->
+                                <img [src]="imgProfile" alt="Selected Image"
+                                    style="max-width: 100%; max-height: 200px;">
+                                <!-- <div *ngIf="profile" class="mt-3 profile">
+                                </div> -->
                                 <div class="mt-4">
                                     <h4 *ngIf="!character.get('name')?.value">Character Name</h4>
                                     <h4 *ngIf="character.get('name')?.value">{{ character.get('name')?.value }}</h4>
@@ -98,7 +98,7 @@
                                     </div>
                                 </div>
 
-                                <div class="row mb-3">
+                                <!-- <div class="row mb-3">
                                     <div class="col-sm-3">
                                         <h6 class="mb-0">Character Profile</h6>
                                     </div>
@@ -112,7 +112,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </div> -->
 
                                 <div class="row">
                                     <div class="col-sm-3"></div>
@@ -129,6 +129,10 @@
             </div>
         </div>
     </div>
-    <div class="container pt-5 pb-3"></div>
+</div>
+<div class="alert-container">
+    <div [ngClass]="alertClass" role="alert" *ngIf="showAlert">
+        {{ alertMessage }}
+    </div>
 </div>
 <router-outlet></router-outlet>
