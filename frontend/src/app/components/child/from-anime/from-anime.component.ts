@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 interface AnimeResponse {
@@ -18,17 +18,23 @@ interface AnimeResponse {
   styleUrls: ['./from-anime.component.css']
 })
 
-export class FromAnimeComponent implements OnInit {
+export class FromAnimeComponent implements OnInit, OnChanges {
   
   @Input() fromAnimeId!: string|null;
   data: AnimeResponse[] = [];
 
   constructor(private http: HttpClient){}
 
-  ngOnInit(): void {
+  ngOnChanges(): void {
     if(this.fromAnimeId){
       this.fetchData();
     }
+  }
+
+  ngOnInit(): void {
+    // if(this.fromAnimeId){
+    //   this.fetchData();
+    // }
   }
 
   fetchData(){
