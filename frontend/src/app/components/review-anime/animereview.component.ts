@@ -79,6 +79,7 @@ export class AnimereviewComponent implements OnInit {
 
     const token = sessionStorage.getItem('token');
     const user = sessionStorage.getItem('userId');
+    
 
     const headers = new HttpHeaders({
       'Authorization': 'Bearer ' + token
@@ -98,11 +99,8 @@ export class AnimereviewComponent implements OnInit {
         (res) => {
           this.animeData = res.map(anime => ({
             ...anime,
-            imgCover: this.baseUrl + anime.imgCover,
-            
-          })) 
-          console.log(this.animeData[0].imgCover),
-          this.animeData = res
+            imgCover: 'http://localhost:5555' + anime.imgCover
+          }))
           console.log("anime")
           console.log(this.animeData)
 

@@ -18,8 +18,7 @@
         <div class="col-md-7" *ngIf="animeData[0]">
             <div class="card mb-4">
                 <!-- <a href="#!"><img class="card-img-top" [src]="animeData[0].animeImgUrl" alt="..." /></a> -->
-                <img class="card-img-top card-img-top" *ngIf="animeData[0].animeImgCover != 'http://localhost:5555undefined'"[src]="animeData[0].animeImgCover" alt="..." />
-                <img class="card-img-top card-img-top" *ngIf="animeData[0].animeImgCover == 'http://localhost:5555undefined'"[src]="animeData[0].animeImgUrl" alt="..." />
+                <img class="card-img-top card-img-top" [src]="animeData[0].animeImgCover" alt="..." (click)="onClick(animeData[0]._id)"/>
                 <div class="card-body">
                     <div class="small text-muted ">HIGH AVERAGE SCORE</div>
                     <div class="card-detail">
@@ -29,7 +28,7 @@
                             </strong>
                             <p class="card-text h5 mt-2">score: ⭐{{ animeData[0].averageRate }}</p>
                         </h2>
-                        <a class="btn btn-readmore-top" href="/#">Read more →</a>
+                        <a class="btn btn-readmore-top" (click)="onClick(animeData[0]._id)" >Read more →</a>
                     </div>
                 </div>
             </div>
@@ -66,6 +65,7 @@
             <div class="row" *ngIf="isAllClicked">
                 <div class="col-lg-4" *ngFor="let anime of data">
                     <div class="card mb-4">
+                        <img class="card-img-top card-img-test" *ngIf="anime.imgCover == 'http://localhost:5555undefined'" [src]="anime.imgUrl" alt="..." />
                         <img class="card-img-top card-img-test" *ngIf="anime.imgCover != 'http://localhost:5555undefined'" [src]="anime.imgCover" alt="..." />
                         <div class="card-body">
                             <div class="small text-muted">{{ anime.genre }}</div>
@@ -90,7 +90,7 @@
             <div class="row" *ngIf="isSortByScoreClicked">
                 <div class="col-lg-4" *ngFor="let anime of animeData">
                     <div class="card mb-4">
-                        <img class="card-img-top card-img-test" [src]="anime.animeImgCover" alt="..." />
+                        <img class="card-img-top card-img-test" [src]="anime.animeImgCover" alt="..." (click)="onClick(anime._id)"/>
                         <div class="card-body">
                             <div class="small text-muted">{{ anime.animeGenre }}</div>
                             <h2 class="card-title h4 mb-1">

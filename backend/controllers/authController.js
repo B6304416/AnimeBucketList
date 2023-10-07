@@ -43,7 +43,7 @@ router.post('/login', async (req, res) => {
                 message: "The email or password may been wrong!",
             });
         }
-        const token = jwt.sign({ userId: user._id }, SECRET_KEY, { expiresIn: '1h' });
+        const token = jwt.sign({ userId: user._id }, SECRET_KEY, { expiresIn: '24h' });
         req.session.userId = user._id
         return res.status(200).json({
             token: token,
