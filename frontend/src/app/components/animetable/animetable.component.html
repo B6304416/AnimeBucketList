@@ -1,5 +1,5 @@
 <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"> -->
-<div>
+<div class="top-margin">
     <div class="container py-3">
         <div class="row">
             <div class="col-md-offset-1 col-md-12">
@@ -34,7 +34,9 @@
                                 <tr *ngFor="let anime of data">
                                     <td>
                                         <div class="user_img">
-                                            <img [src]="anime.imgUrl" alt="">
+                                            <!-- <img *ngClass="anime.imgCover" [src]="anime.imgCover" alt="..." /> -->
+                                            <img *ngIf="anime.imgCover != 'http://localhost:5555undefined'"[src]="anime.imgCover" alt="..." />
+                                            <img *ngIf="anime.imgCover == 'http://localhost:5555undefined'"[src]="anime.imgUrl" alt="..." />
                                         </div>
                                     </td>
                                     <td>{{anime.name}}</td>

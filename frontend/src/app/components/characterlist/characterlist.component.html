@@ -1,4 +1,4 @@
-<div class="bg-img">
+<div class="bg-img ">
   <div class="text-center p-1">
     <h1 class="fw-bolder text-danger p-5 mt-5 display-3 title-text">
       <strong>
@@ -27,8 +27,8 @@
               </strong>
               <p class="card-text h5 mt-3">score: ⭐{{ sortedCharacters[0].score }}</p>
             </h2>
-            <a *ngIf="userId && (sortedCharacters[0]._id == currentUser[0].favCharacter)" class="btn btn-readmore-top-fav"
-              (click)="onLike(sortedCharacters[0]._id, sortedCharacters[0].name)">
+            <a *ngIf="userId && (sortedCharacters[0]._id == currentUser[0].favCharacter)"
+              class="btn btn-readmore-top-fav" (click)="onLike(sortedCharacters[0]._id, sortedCharacters[0].name)">
               This is your favorite character
             </a>
             <a *ngIf="userId && (sortedCharacters[0]._id != currentUser[0].favCharacter)" class="btn btn-readmore-top"
@@ -43,15 +43,22 @@
     <div class="col-md-6">
       <div class="card mb-0">
         <div class="card-header">
-          <p *ngIf="sortedCharacters[0].anime != ''" class="card-text mb-0">Anime: {{ sortedCharacters[0].anime }} </p>
+          <p *ngIf="sortedCharacters[0].anime != ''" class="card-text mb-0">Anime: {{ sortedCharacters[0].anime }}
+          </p>
           <p *ngIf="sortedCharacters[0].manga != ''" class="card-text mb-0">Manga: {{ sortedCharacters[0].manga }}</p>
           <p *ngIf="sortedCharacters[0].anime == ''" class="card-text text-muted mb-0">Not from any anime </p>
           <p *ngIf="sortedCharacters[0].manga == ''" class="card-text text-muted mb-0">Not from any manga </p>
         </div>
         <div class="card-body">รายละเอียด: &nbsp;&nbsp;{{sortedCharacters[0].detail}}</div>
         <div class="row justify-content-center">
-          <app-from-manga #fromMangaComponent *ngIf="sortedCharacters[0].mangaId != null" [fromMangaId]="fromMangaId"></app-from-manga>
-          <app-from-anime #fromAnimeComponent *ngIf="sortedCharacters[0].animeId != null" [fromAnimeId]="fromAnimeId"></app-from-anime>
+          <div class="col-md-4 text-center" *ngIf="fromMangaId">
+            <app-from-manga #fromMangaComponent *ngIf="sortedCharacters[0].mangaId != null"
+              [fromMangaId]="fromMangaId"></app-from-manga>
+          </div>
+          <div class="col-md-8 text-center" *ngIf="fromAnimeId">
+            <app-from-anime #fromAnimeComponent *ngIf="sortedCharacters[0].animeId != null"
+              [fromAnimeId]="fromAnimeId"></app-from-anime>
+          </div>
         </div>
       </div>
     </div>
@@ -86,13 +93,12 @@
             </div>
           </div>
         </div>
-
-
       </div>
     </div>
 
   </div>
 </div>
+
 
 <div class="alert-container">
   <div [ngClass]="alertClass" role="alert" *ngIf="showAlert">

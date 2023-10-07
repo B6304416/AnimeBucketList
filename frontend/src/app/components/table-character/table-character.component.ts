@@ -23,8 +23,8 @@ interface CharacterResponse {
 export class TableCharacterComponent implements OnInit{
 
   data: CharacterResponse[] = [];
-  animeToDelete: any; // เก็บ anime ที่ต้องการลบ
-  animeName?: string;
+  characterToDelete: any; 
+  characterName?: string;
   baseUrl: string = 'http://localhost:5555';
 
   constructor(
@@ -55,38 +55,35 @@ export class TableCharacterComponent implements OnInit{
     );
   }
 
-  onClick(animeId: string) {
-    console.log('Clicked on anime with ID:', animeId);
-    this.router.navigate(['/updateanime', animeId]);
+  onClick(characterId: string) {
+    console.log('Clicked on character with ID:', characterId);
+    this.router.navigate(['/updatecharacter', characterId]);
   }
 
   // เมื่อคลิกปุ่มลบ
   confirmDelete(id: string, name: string) {
-    this.animeToDelete = id; 
-    this.animeName = name;
+    this.characterToDelete = id; 
+    this.characterName = name;
     $('#deleteConfirmationModal').modal('show'); // เปิด Modal ด้วย jQuery
-    // console.log('Deleting anime:', this.animeToDelete);
   }
   // เมื่อยืนยันการลบ
   deleteConfirmed() {
-    if (this.animeToDelete) {
+    if (this.characterToDelete) {
       const token = sessionStorage.getItem('token');
       const headers = new HttpHeaders({
         'Authorization': 'Bearer ' + token
       });
-      // ส่ง HTTP DELETE เพื่อลบ Anime ที่มี animeId ที่ระบุ
-      this.http.delete(`http://localhost:5555/anime/${this.animeToDelete}`, { headers }).subscribe(
+      this.http.delete(`http://localhost:5555/character/${this.characterToDelete}`, { headers }).subscribe(
         (response) => {
-          console.log('Anime deleted successfully', response);
+          console.log('Character deleted successfully', response);
           this.fetchData();
-          // this.router.navigate(['/anime-list']); // หลังจากลบเสร็จให้เปลี่ยนเส้นทางไปยังหน้ารายการ Anime หรือหน้าอื่นที่เหมาะสม
         },
         (error) => {
-          console.error('Error deleting anime', error);
+          console.error('Error deleting character', error);
           alert('Error: ' + error.message);
         }
       );
-      this.animeToDelete = null;
+      this.characterToDelete = null;
       $('#deleteConfirmationModal').modal('hide'); // ปิด Modal ด้วย jQuery
     }
   }

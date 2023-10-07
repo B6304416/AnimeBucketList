@@ -7,10 +7,14 @@ html, body {
   height: 100%;
   margin: 0;
   padding: 0;
-  background-color: rgba(52, 58, 64, 1) !important;
+  background-color: rgba(33, 37, 41, 1) !important;
   font-family:'Shippori Antique', 'Prompt' !important;
+}
+.top-margin {
+  margin-top: 55px;
 }
 
 .bg-Black {
     background-color: #121212; 
   }
+
