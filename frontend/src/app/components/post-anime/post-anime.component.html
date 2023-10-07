@@ -218,10 +218,10 @@
                                         <div class="form-group col-sm-9 text-secondary">
                                             <input type="file" id="fileInput" formControlName="imgCover"
                                                 (change)="onFileSelected($event)">
-                                                <div *ngIf="anime?.get('imgCover')?.hasError('required') && anime?.get('imgCover')?.touched" class="alert alert-danger">
+                                                <div *ngIf="anime?.get('imgCover')?.hasError('required') && anime?.get('imgCover')?.touched" class="text-warning">
                                                     Cover Image is required.
                                                 </div>
-                                                <div *ngIf="anime?.get('imgCover')?.hasError('pattern') && anime?.get('imgCover')?.touched && anime?.get('imgCover')?.dirty" class="alert alert-danger">
+                                                <div *ngIf="anime?.get('imgCover')?.hasError('pattern') && anime?.get('imgCover')?.touched && anime?.get('imgCover')?.dirty" class="text-warning">
                                                     Only png and jpg image supported.
                                                 </div> 
                                         </div>
