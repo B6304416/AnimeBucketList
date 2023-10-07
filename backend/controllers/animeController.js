@@ -153,6 +153,27 @@ router.get('/studios', async (req, res) => {
     }
 })
 
+router.post('/studio', async (req, res) =>{
+    try {
+        if (
+            !req.body.name 
+        ){
+            return res.status(400).send({
+                message: 'required field invalid!',
+                req:req
+            });
+        }
+        const newStudio = {
+            name: req.body.name, 
+        }
+        const studio = await AnimeStudio.create(newStudio);
+        return res.status(201).send(studio);
+    } catch(error) {
+        console.log(error.message);
+        res.status(500).send({message: error.message})
+    }
+})
+
 //Route for Get All Types
 router.get('/types', async (req, res) => {
     try {
