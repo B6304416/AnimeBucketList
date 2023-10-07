@@ -5,7 +5,6 @@ import { FormGroup, FormControl, ValidatorFn, AbstractControl } from '@angular/f
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 interface ReviewResponse {
-  // animeId: string;
   user: string;
   rate: number;
   comment: string;
@@ -35,7 +34,6 @@ export class AnimereviewComponent implements OnInit {
   reviewData: ReviewResponse[] = []
   animeData: AnimeResponse[] = []
   avatarNumbers: number[] = [];
-  // videoUrls?: any
   forbiddenWords = ['เหี้ย', 'ห่า', 'สัด', 'ควย', 'หี', 'หำ', 'หัม', 'กระดอ', 'จิ๋ม', 'จู๋', 'เจี๊ยว', 'พ่อมึงตาย', 'แม่มึงตาย', 'เย็ด', 'ดอกทอง',
     'ควาย', 'กะหรี่', 'แมงดา', 'หน้าตัวเมีย', 'สถุน', 'สวะ', 'ส้นตีน', 'หมอย', 'ร่าน', 'เงี่ยน', 'ไพร่', 'สลัม', 'ถ่อย', 'ตอแหล', 'เสือก', 'หน้าด้าน',
     'แม่ง', 'แตด', 'ไอ้', 'ชิบหาย',
@@ -100,8 +98,10 @@ export class AnimereviewComponent implements OnInit {
         (res) => {
           this.animeData = res.map(anime => ({
             ...anime,
-            imgCover: this.baseUrl + anime.imgCover
+            imgCover: this.baseUrl + anime.imgCover,
+            
           })) 
+          console.log(this.animeData[0].imgCover),
           this.animeData = res
           console.log("anime")
           console.log(this.animeData)
