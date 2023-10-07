@@ -1,31 +1,25 @@
-import { Component, OnInit, DoCheck } from '@angular/core';
+import { Component, OnInit, DoCheck} from '@angular/core';
 import { SharedDataService } from 'src/app/services/shared-data.service';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Router } from '@angular/router';
-
-
 
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css']
 })
-export class NavbarComponent implements OnInit, DoCheck {
+export class NavbarComponent implements OnInit, DoCheck{
 
-  isLoginPage: boolean = false;
+  shownavar: boolean = false;
   isLoggedIn: boolean = true;
   name: string | null = "";
 
   constructor(
-    private sharedDataService: SharedDataService,
-    private http: HttpClient) { }
+    private sharedDataService: SharedDataService) { }
 
   ngOnInit(): void {
-    // ใช้ Service เพื่อรับข้อมูล
     this.sharedDataService.isLoginPage$.subscribe(value => {
-      this.isLoginPage = value;
-      // console.log(value)
-    });  
+      this.shownavar = value;
+      console.log("login oninit "+value)
+    });
   }
   ngDoCheck(): void {
     const LoggedIn = sessionStorage.getItem('isLoggedIn');
@@ -36,6 +30,7 @@ export class NavbarComponent implements OnInit, DoCheck {
     } else {
       this.isLoggedIn = false;
     }
+    
   }
   checkUserRole(): boolean {
     const role = sessionStorage.getItem('role');
@@ -44,8 +39,6 @@ export class NavbarComponent implements OnInit, DoCheck {
     } else {
       return false;
     }
-    
-
   }
 
   logout(): void {
@@ -57,8 +50,6 @@ export class NavbarComponent implements OnInit, DoCheck {
     sessionStorage.removeItem('role');
     sessionStorage.removeItem('refresh');
     sessionStorage.removeItem('username');
-    console.log(this.isLoggedIn)
-    // อัปเดตค่า isLoggedIn เป็น false ใน Local Storage
     sessionStorage.setItem('isLoggedIn', 'false');
     // this.checkForLoginChange();
   }
