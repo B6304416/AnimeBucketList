@@ -38,7 +38,7 @@ export class LoginComponent implements OnInit {
           sessionStorage.setItem('username', response.userName);
           sessionStorage.setItem('favCharacter', response.favCharacter);
           console.log('Login successful', response);
-          this.router.navigate(['/animelist']);
+          this.router.navigate(['/listanime']);
           this.sharedDataService.setIsLoginPage(false);
         },
         (error) => {

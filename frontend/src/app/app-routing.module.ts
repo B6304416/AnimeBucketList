@@ -2,44 +2,39 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './components/login/login.component';
 import { HomeComponent } from './components/home/home.component';
-import { AnimelistComponent } from './components/animelist/animelist.component'
+import { AnimelistComponent } from './components/list-anime/animelist.component'
 import { PostAnimeComponent } from './components/post-anime/post-anime.component';
-import { MangalistComponent } from './components/mangalist/mangalist.component';
-import { AnimereviewComponent } from './components/animereview/animereview.component';
+import { MangalistComponent } from './components/list-manga/mangalist.component';
+import { AnimereviewComponent } from './components/review-anime/animereview.component';
 import { SignUpComponent } from './components/signup/signup.component';
-import { ReviewComponent } from './components/review/review.component';
-import { AnimetableComponent } from './components/animetable/animetable.component';
+import { AnimetableComponent } from './components/table-anime/animetable.component';
 import { UpdateAnimeComponent } from './components/update-anime/update-anime.component';
 import { TableCharacterComponent } from './components/table-character/table-character.component';
 import { PostCharacterComponent } from './components/post-character/post-character.component';
-
 import { PostMangaComponent } from './components/post-manga/post-manga.component';
-import { CharecterlistComponent } from './components/charecterlist/charecterlist.component';
-import { CharacterlistComponent } from './components/characterlist/characterlist.component';
-import { MangareviewComponent } from './components/mangareview/mangareview.component';
-import { MangatableComponent } from './components/mangatable/mangatable.component';
+import { CharacterlistComponent } from './components/list-character/characterlist.component';
+import { MangareviewComponent } from './components/review-manga/mangareview.component';
+import { MangatableComponent } from './components/table-manga/mangatable.component';
 import { UpdateCharacterComponent } from './components/update-character/update-character.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignUpComponent },
   { path: 'home', component: HomeComponent },
-  { path: 'animelist', component: AnimelistComponent },
-  { path: 'animetable', component: AnimetableComponent },
+  { path: 'listanime', component: AnimelistComponent },
+  { path: 'listmanga', component: MangalistComponent },
+  { path: 'listcharacter', component: CharacterlistComponent },
+  { path: 'tableanime', component: AnimetableComponent },
+  { path: 'tablemanga', component: MangatableComponent },
   { path: 'tablecharacter', component: TableCharacterComponent },
-  { path: 'mangalist', component: MangalistComponent },
-  { path: 'mangatable', component: MangatableComponent },
-  { path: 'charecterlist', component: CharecterlistComponent },
-  { path: 'characterlist', component: CharacterlistComponent },
   { path: 'postanime', component: PostAnimeComponent },
-  { path: 'review', component: ReviewComponent },
   { path: 'postmanga', component: PostMangaComponent },
   { path: 'postcharacter', component: PostCharacterComponent },
   { path: 'animereview/:id', component: AnimereviewComponent },
   { path: 'mangareview/:id', component: MangareviewComponent },
   { path: 'updateanime/:id', component: UpdateAnimeComponent },
   { path: 'updatecharacter/:id', component: UpdateCharacterComponent },
-  { path: '', redirectTo: '/animelist', pathMatch: 'full' }, // Redirect to the login page by default
+  { path: '', redirectTo: '/listanime', pathMatch: 'full' }, // Redirect to the login page by default
 ];
 
 @NgModule({
