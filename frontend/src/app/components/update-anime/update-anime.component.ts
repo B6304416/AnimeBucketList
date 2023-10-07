@@ -13,7 +13,7 @@ interface AnimeResponse {
   name: string;
   episode: number;
   genre: string;
-  imgUrl: string;
+  imgCover: string;
   trailerUrl: string;
   synopsis: string;
   typeId: string;
@@ -34,14 +34,14 @@ export class UpdateAnimeComponent implements OnInit {
     studioId: new FormControl(''),
     episode: new FormControl(0),
     genre: new FormArray([]),
-    imgUrl: new FormControl(''),
     trailerUrl: new FormControl(''),
     synopsis: new FormControl(''),
-    sourceId: new FormControl('')
+    sourceId: new FormControl(''),
   });
   animeData: AnimeResponse[] = []
   studioOptions: StudioResponse[] = [];
   genreOptions: string[] = [];
+  baseUrl: string = 'http://localhost:5555';
 
   animeUrl = 'http://localhost:5555/anime/';
   animeId: string | null;
@@ -89,6 +89,10 @@ export class UpdateAnimeComponent implements OnInit {
       const animeUrlbyId = `${this.animeUrl}${this.animeId}`;
       this.http.get<AnimeResponse[]>(animeUrlbyId).subscribe(
         (res) => {
+          res = res.map(anime => ({
+            ...anime,
+            imgCover: this.baseUrl + anime.imgCover
+          })) 
           this.animeData = res;
 
           // นำข้อมูลที่ดึงมาใส่ใน form anime
@@ -103,7 +107,6 @@ export class UpdateAnimeComponent implements OnInit {
             name: animeResponse.name,
             studioId: animeResponse.studioId,
             episode: animeResponse.episode,
-            imgUrl: animeResponse.imgUrl,
             trailerUrl: animeResponse.trailerUrl,
             synopsis: animeResponse.synopsis,
             sourceId: animeResponse.sourceId,

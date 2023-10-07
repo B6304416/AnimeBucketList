@@ -34,7 +34,9 @@
                                 <tr *ngFor="let anime of data">
                                     <td>
                                         <div class="user_img">
-                                            <img [src]="anime.imgUrl" alt="">
+                                            <!-- <img *ngClass="anime.imgCover" [src]="anime.imgCover" alt="..." /> -->
+                                            <img *ngIf="anime.imgCover != 'http://localhost:5555undefined'"[src]="anime.imgCover" alt="..." />
+                                            <img *ngIf="anime.imgCover == 'http://localhost:5555undefined'"[src]="anime.imgUrl" alt="..." />
                                         </div>
                                     </td>
                                     <td>{{anime.name}}</td>
