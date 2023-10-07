@@ -124,16 +124,28 @@ export class PostMangaComponent implements OnInit {
     const headers = new HttpHeaders({
       'Authorization': 'Bearer ' + token
     });
+    
+    if (this.manga.get('name')?.hasError('required') ||
+      this.manga.get('authorId')?.hasError('required') ||
+      this.manga.get('genre')?.hasError('required') ||
+      this.manga.get('imgUrl')?.hasError('required') ||
+      this.manga.get('imgCover')?.hasError('required') ||
+      this.manga.get('imgCover')?.hasError('pattern')
+      ) {
+        
+        this.showAlertMessage('Error: Please enter valid data.' , false)
+      return;
+    }
   
     this.http.post('http://localhost:5555/manga', formData, { headers }).subscribe(
       (response) => {
         console.log('Manga posted successfully', response);
-        alert('Manga posted successfully');
         // this.resetForm();
+        this.showAlertMessage('Manga posted successfully', true)
       },
       (error) => {
         console.error('Error posting manga', error);
-        alert('Error: ' + error.message);
+        this.showAlertMessage('Error: ' + error.message, false)
       }
     );
   }
@@ -142,6 +154,20 @@ export class PostMangaComponent implements OnInit {
     this.manga.reset();
     this.manga.setControl('genre', new FormArray([]));
     this.cover = null;
+  }
+
+  showAlert: boolean = false;
+  alertMessage: string = "alert—check it out!";
+  alertClass: string = ''; // ตัวแปรสำหรับกำหนดคลาส CSS ของ alert
+
+  showAlertMessage(message: string, isSuccess: boolean) {
+    this.alertMessage = message;
+    this.alertClass = isSuccess ? 'alert alert-success' : 'alert alert-warning';
+    this.showAlert = true; // แสดง alert
+    // หลังจาก 3 วินาที ซ่อน alert ลง
+    setTimeout(() => {
+      this.showAlert = false;
+    }, 3000);
   }
 }
 
