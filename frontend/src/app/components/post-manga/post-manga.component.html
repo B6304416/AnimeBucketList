@@ -44,6 +44,9 @@
                                     </div>
                                     <div class="form-group col-sm-9 text-secondary">
                                         <input type="text" class="form-control" formControlName="name">
+                                        <div *ngIf="manga.get('name')?.hasError('required') && manga.get('name')?.touched" class="alert alert-danger">
+                                            Please enter manga's name.
+                                        </div>
                                     </div>
                                 </div>
 
@@ -56,6 +59,9 @@
                                             <option *ngFor="let author of authorOptions" [value]="author._id">{{
                                                 author.eng_name }}</option>
                                         </select>
+                                        <div *ngIf="manga.get('authorId')?.hasError('required') && manga.get('authorId')?.touched" class="alert alert-danger">
+                                            Please select author.
+                                        </div>
                                     </div>
                                 </div>
 
@@ -70,6 +76,9 @@
                                                 [checked]="isValidGenre(genreOption)"
                                                 (change)="toggleGenre(genreOption)">
                                             <span>{{ genreOption }}</span>
+                                            <div *ngIf="manga.get('genre')?.hasError('required') && manga.get('genre')?.touched" class="alert alert-danger">
+                                                Please select genre.
+                                            </div>
                                         </label>
                                     </div>
                                 </div>
@@ -80,8 +89,21 @@
                                     </div>
                                     <div class="form-group col-sm-9 text-secondary">
                                         <div class="form-group col-sm-9 text-secondary">
-                                            <input type="file" id="fileInput" formControlName="imgCover"
-                                                (change)="onFileSelected($event)">
+                                            <input type="file" id="fileInput" formControlName="imgCover" (change)="onFileSelected($event)">
+                                                <!-- <div *ngIf="manga?.get('imgCover')?.invalid && manga?.get('imgCover')?.touched" >
+                                                    <div *ngIf="manga?.get('imgCover')?.hasError('required')" class="alert alert-danger">
+                                                      Cover Image is required.
+                                                    </div>
+                                                    <div *ngIf="manga?.get('imgCover')?.hasError('invalidExtension')" class="alert alert-danger">
+                                                      Invalid file extension. Supported extensions: jpg, jpeg, png.
+                                                    </div>
+                                                  </div>   -->
+                                            <div *ngIf="manga?.get('imgCover')?.hasError('required') && manga?.get('imgCover')?.touched" class="alert alert-danger">
+                                                Cover Image is required.
+                                            </div>
+                                            <div *ngIf="manga?.get('imgCover')?.hasError('pattern') && manga?.get('imgCover')?.touched && manga?.get('imgCover')?.dirty" class="alert alert-danger">
+                                                Only png and jpg image supported.
+                                            </div> 
                                         </div>
                                     </div>
                                 </div>

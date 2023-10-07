@@ -212,12 +212,18 @@
 
                                 <div class="row mb-3">
                                     <div class="col-sm-3">
-                                        <h6 class="mb-0">Manga Cover</h6>
+                                        <h6 class="mb-0">Anime Cover</h6>
                                     </div>
                                     <div class="form-group col-sm-9 text-secondary">
                                         <div class="form-group col-sm-9 text-secondary">
                                             <input type="file" id="fileInput" formControlName="imgCover"
                                                 (change)="onFileSelected($event)">
+                                                <div *ngIf="anime?.get('imgCover')?.hasError('required') && anime?.get('imgCover')?.touched" class="alert alert-danger">
+                                                    Cover Image is required.
+                                                </div>
+                                                <div *ngIf="anime?.get('imgCover')?.hasError('pattern') && anime?.get('imgCover')?.touched && anime?.get('imgCover')?.dirty" class="alert alert-danger">
+                                                    Only png and jpg image supported.
+                                                </div> 
                                         </div>
                                     </div>
                                 </div>

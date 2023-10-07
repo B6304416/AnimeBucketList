@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, FormArray } from '@angular/forms';
+import { FormControl, FormGroup, FormArray, Validators, AbstractControl } from '@angular/forms';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 
@@ -15,11 +15,15 @@ interface AuthorResponse {
 export class PostMangaComponent implements OnInit {
 
   manga = new FormGroup({
-    name: new FormControl(''),
-    authorId: new FormControl(''),
-    genre: new FormArray([]),
-    imgUrl: new FormControl(''),
-    imgCover: new FormControl(null as File | null),
+    name: new FormControl('', [Validators.required]),
+    authorId: new FormControl('', [Validators.required]),
+    genre: new FormArray([], [Validators.required]),
+    imgUrl: new FormControl('', [Validators.required]),
+    // imgCover: new FormControl(null as File | null, [Validators.required]),
+    imgCover: new FormControl(null, [
+      Validators.required,
+      Validators.pattern(/\.(jpg|png)$/i) // เพิ่ม Validators.pattern สำหรับระบุนามสกุลไฟล์
+    ]),
   });
 
   authorOptions: AuthorResponse[] = [];
@@ -99,6 +103,7 @@ export class PostMangaComponent implements OnInit {
   submitManga() {
     const mangaData = this.manga.value;
     const formData = new FormData();
+    // this.submitted = true;
   
     if (mangaData.name && mangaData.authorId) {
       formData.append('name', mangaData.name);
