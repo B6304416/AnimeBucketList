@@ -110,6 +110,9 @@
                                                 class="text-warning">
                                                 this field is required.
                                             </div>
+                                            <div *ngIf="character?.get('imgProfile')?.hasError('pattern') && character?.get('imgProfile')?.touched && character?.get('imgProfile')?.dirty" class="text-warning">
+                                                Only png and jpg image supported.
+                                            </div> 
                                         </div>
                                     </div>
                                 </div>

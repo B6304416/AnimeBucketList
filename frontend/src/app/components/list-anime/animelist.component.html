@@ -15,7 +15,7 @@
 
 <div class="container p-4">
     <div class="row">
-        <div class="col-md-7">
+        <div class="col-md-7" *ngIf="animeData[0]">
             <div class="card mb-4">
                 <!-- <a href="#!"><img class="card-img-top" [src]="animeData[0].animeImgUrl" alt="..." /></a> -->
                 <img class="card-img-top card-img-top" *ngIf="animeData[0].animeImgCover != 'http://localhost:5555undefined'"[src]="animeData[0].animeImgCover" alt="..." />
@@ -35,7 +35,7 @@
             </div>
         </div>
 
-        <div class="col-md-5">
+        <div class="col-md-5" *ngIf="animeData[0]">
             <div class="card mb-4">
                 <div class="card-header">
                     <div>

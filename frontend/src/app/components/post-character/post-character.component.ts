@@ -24,7 +24,7 @@ export class PostCharacterComponent implements OnInit {
     detail: new FormControl('', [Validators.required]),
     animeId: new FormControl('', [Validators.required]),
     mangaId: new FormControl('', [Validators.required]),
-    imgProfile: new FormControl(null as File | null, [Validators.required]),
+    imgProfile: new FormControl(null as File | null, [Validators.required, Validators.pattern(/\.(jpg|png)$/i)]),
   });
 
   animeOptions: AnimeResponse[] = [];
