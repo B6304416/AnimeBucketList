@@ -8,6 +8,7 @@ interface AnimeResponse {
   name: string;
   episode: number;
   genre: string;
+  imgCover: string;
   imgUrl: string;
   type: string;
   studio: string;
@@ -24,6 +25,7 @@ export class AnimetableComponent implements OnInit{
   data: AnimeResponse[] = [];
   animeToDelete: any; // เก็บ anime ที่ต้องการลบ
   animeName?: string;
+  baseUrl: string = 'http://localhost:5555';
 
   constructor(
     private http: HttpClient,
@@ -38,7 +40,11 @@ export class AnimetableComponent implements OnInit{
     const url = 'http://localhost:5555/anime/detail';
     this.http.get<AnimeResponse[]>(url).subscribe(
       (res) => {
-        console.log('Response data:', res);
+        res = res.map(anime => ({
+          ...anime,
+          imgCover: this.baseUrl + anime.imgCover
+        })) 
+        // console.log('Response data:', res);
         this.data = res
         console.log(this.data)
       },

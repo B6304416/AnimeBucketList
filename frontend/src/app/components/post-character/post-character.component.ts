@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, FormArray } from '@angular/forms';
+import { FormControl, FormGroup, FormArray, Validators } from '@angular/forms';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 interface AnimeResponse {
@@ -20,11 +20,11 @@ interface MangaResponse {
 export class PostCharacterComponent implements OnInit {
 
   character = new FormGroup({
-    name: new FormControl(''),
-    detail: new FormControl(''),
-    animeId: new FormControl(''),
-    mangaId: new FormControl(''),
-    imgProfile: new FormControl(null as File | null),
+    name: new FormControl('', [Validators.required]),
+    detail: new FormControl('', [Validators.required]),
+    animeId: new FormControl('', [Validators.required]),
+    mangaId: new FormControl('', [Validators.required]),
+    imgProfile: new FormControl(null as File | null, [Validators.required]),
   });
 
   animeOptions: AnimeResponse[] = [];
