@@ -99,6 +99,7 @@ export class PostCharacterComponent implements OnInit {
     const charData = this.character.value;
     const token = sessionStorage.getItem('token');
     const formData = new FormData();
+    
     if (charData.name && charData.detail && charData.animeId && charData.mangaId) {
       formData.append('name', charData.name);
       formData.append('detail', charData.detail);
@@ -111,20 +112,48 @@ export class PostCharacterComponent implements OnInit {
     const headers = new HttpHeaders({
       'Authorization': 'Bearer ' + token
     });
+
+    if (this.character.get('name')?.hasError('required') ||
+      this.character.get('score')?.hasError('required') ||
+      this.character.get('mangaId')?.hasError('required') ||
+      this.character.get('animeId')?.hasError('required') ||
+      this.character.get('detail')?.hasError('required') ||
+      this.character.get('imgProfile')?.hasError('required') || 
+      this.character.get('imgProfile')?.hasError('pattern')
+      ) {
+        
+        this.showAlertMessage('Error: Please enter valid data.' , false)
+      return;
+    }
+    
     this.http.post('http://localhost:5555/character', formData, { headers }).subscribe(
       (response) => {
         console.log('Character posted successfully', response);
-        alert('Character posted successfully')
-        this.resetForm();
+        // this.resetForm();
+        this.showAlertMessage('Character posted successfully', true)
       },
       (error) => {
         console.error('Error posting character', error);
-        alert('Error: ' + error.message)
+        this.showAlertMessage('Error: ' + error.message, false)
       }
     );
   }
   resetForm() {
     this.character.reset();
     this.profile = null;
+  }
+
+  showAlert: boolean = false;
+  alertMessage: string = "alert—check it out!";
+  alertClass: string = ''; // ตัวแปรสำหรับกำหนดคลาส CSS ของ alert
+
+  showAlertMessage(message: string, isSuccess: boolean) {
+    this.alertMessage = message;
+    this.alertClass = isSuccess ? 'alert alert-success' : 'alert alert-warning';
+    this.showAlert = true; // แสดง alert
+    // หลังจาก 3 วินาที ซ่อน alert ลง
+    setTimeout(() => {
+      this.showAlert = false;
+    }, 3000);
   }
 }

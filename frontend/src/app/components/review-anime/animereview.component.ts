@@ -16,7 +16,7 @@ interface AnimeResponse {
   name: string;
   episode: number;
   genre: string;
-  imgUrl: string;
+  imgCover: string;
   trailerUrl: string;
   synopsis: string;
   type: string;
@@ -51,6 +51,7 @@ export class AnimereviewComponent implements OnInit {
   animeId: string | null;
   reviewUrl = 'http://localhost:5555/anime_review/rate/'
   animeUrl = 'http://localhost:5555/anime/detail/';
+  baseUrl: string = 'http://localhost:5555';
 
   constructor(
     private route: ActivatedRoute,
@@ -97,6 +98,10 @@ export class AnimereviewComponent implements OnInit {
 
       this.http.get<AnimeResponse[]>(animeUrlbyId).subscribe(
         (res) => {
+          this.animeData = res.map(anime => ({
+            ...anime,
+            imgCover: this.baseUrl + anime.imgCover
+          })) 
           this.animeData = res
           console.log("anime")
           console.log(this.animeData)
