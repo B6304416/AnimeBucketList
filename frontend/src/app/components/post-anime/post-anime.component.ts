@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, FormArray, Validators} from '@angular/forms';
+import { FormControl, FormGroup, FormArray, Validators } from '@angular/forms';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 
@@ -39,7 +39,7 @@ export class PostAnimeComponent implements OnInit {
 
   constructor(private http: HttpClient, private router: Router,) { }
 
-  onFileSelected(event : any){
+  onFileSelected(event: any) {
     const file: File = event.target.files[0];
     if (file) {
       this.selectedFile = file;
@@ -109,8 +109,8 @@ export class PostAnimeComponent implements OnInit {
   submitAnime() {
     const animeData = this.anime.value;
     const formData = new FormData();
-  
-    if (animeData.name && animeData.typeId && animeData.studioId && 
+
+    if (animeData.name && animeData.typeId && animeData.studioId &&
       animeData.episode && animeData.sourceId && animeData.synopsis && animeData.trailerUrl) {
       formData.append('name', animeData.name);
       formData.append('typeId', animeData.typeId);
@@ -125,9 +125,9 @@ export class PostAnimeComponent implements OnInit {
     genres.forEach((genre, index) => {
       formData.append(`genre[${index}]`, genre);
     });
-  
+
     const token = sessionStorage.getItem('token');
-  
+
     if (this.selectedFile) {
       formData.append('imgProfile', this.selectedFile, this.selectedFile.name);
     }
@@ -136,7 +136,26 @@ export class PostAnimeComponent implements OnInit {
       'Authorization': 'Bearer ' + token
     });
 
-    this.http.post('http://localhost:5555/anime', formData, { headers}).subscribe(
+    if (this.anime.get('name')?.hasError('required') ||
+      this.anime.get('name')?.hasError('maxlength') ||
+      this.anime.get('episode')?.hasError('required') ||
+      this.anime.get('episode')?.hasError('min') ||
+      this.anime.get('studioId')?.hasError('required') ||
+      this.anime.get('typeId')?.hasError('required') ||
+      this.anime.get('sourceId')?.hasError('required') ||
+      this.anime.get('genre')?.hasError('required') ||
+      this.anime.get('trailerUrl')?.hasError('required') || 
+      this.anime.get('trailerUrl')?.hasError('pattern') ||
+      this.anime.get('synopsis')?.hasError('required') || 
+      this.anime.get('synopsis')?.hasError('minlength') ||
+      this.anime.get('imgCover')?.hasError('required') || 
+      this.anime.get('imgCover')?.hasError('pattern')) {
+        
+        this.showAlertMessage('Error: Please enter valid data.' , false)
+      return;
+    }
+
+    this.http.post('http://localhost:5555/anime', formData, { headers }).subscribe(
       (response) => {
         console.log('Anime posted successfully', response);
         // this.resetForm();
