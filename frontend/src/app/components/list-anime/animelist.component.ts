@@ -2,14 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 
-import { SharedDataService } from 'src/app/services/shared-data.service';
-
 interface AnimeResponse {
   _id: string;
   name: string;
   episode: number;
   genre: string;
-  imgUrl: string;
   imgCover: string;
   type: string;
   studio: string;

@@ -66,7 +66,6 @@
             <div class="row" *ngIf="isAllClicked">
                 <div class="col-lg-4" *ngFor="let anime of data">
                     <div class="card mb-4">
-                        <img class="card-img-top card-img-test" *ngIf="anime.imgCover == 'http://localhost:5555undefined'" [src]="anime.imgUrl" alt="..." />
                         <img class="card-img-top card-img-test" *ngIf="anime.imgCover != 'http://localhost:5555undefined'" [src]="anime.imgCover" alt="..." />
                         <div class="card-body">
                             <div class="small text-muted">{{ anime.genre }}</div>
@@ -91,8 +90,7 @@
             <div class="row" *ngIf="isSortByScoreClicked">
                 <div class="col-lg-4" *ngFor="let anime of animeData">
                     <div class="card mb-4">
-                        <img class="card-img-top card-img-test" *ngIf="anime.animeImgCover != 'http://localhost:5555undefined'" [src]="anime.animeImgCover" alt="..." />
-                        <img class="card-img-top card-img-test" *ngIf="anime.animeImgCover == 'http://localhost:5555undefined'" [src]="anime.animeImgUrl" alt="..." />
+                        <img class="card-img-top card-img-test" [src]="anime.animeImgCover" alt="..." />
                         <div class="card-body">
                             <div class="small text-muted">{{ anime.animeGenre }}</div>
                             <h2 class="card-title h4 mb-1">
