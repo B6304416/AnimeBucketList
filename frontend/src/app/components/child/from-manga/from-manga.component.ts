@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 
 interface MangaResponse {
   _id: string;
@@ -13,17 +13,23 @@ interface MangaResponse {
   templateUrl: './from-manga.component.html',
   styleUrls: ['./from-manga.component.css']
 })
-export class FromMangaComponent implements OnInit {
+export class FromMangaComponent implements OnInit,OnChanges {
   
   @Input() fromMangaId!: string|null;
   data: MangaResponse[] = [];
 
   constructor(private http: HttpClient){}
 
-  ngOnInit(): void {
+  ngOnChanges(): void {
     if(this.fromMangaId){
       this.fetchData();
     }
+  }
+
+  ngOnInit(): void {
+    // if(this.fromMangaId){
+    //   this.fetchData();
+    // }
   }
   fetchData(){
     const url = 'http://localhost:5555/manga/'+this.fromMangaId;

@@ -50,8 +50,12 @@
         </div>
         <div class="card-body">รายละเอียด: &nbsp;&nbsp;{{sortedCharacters[0].detail}}</div>
         <div class="row justify-content-center">
-          <app-from-manga #fromMangaComponent *ngIf="sortedCharacters[0].mangaId != null" [fromMangaId]="fromMangaId"></app-from-manga>
-          <app-from-anime #fromAnimeComponent *ngIf="sortedCharacters[0].animeId != null" [fromAnimeId]="fromAnimeId"></app-from-anime>
+          <div class="col-md-4 text-center" *ngIf="fromMangaId">
+            <app-from-manga #fromMangaComponent *ngIf="sortedCharacters[0].mangaId != null" [fromMangaId]="fromMangaId"></app-from-manga>
+          </div>
+          <div class="col-md-8 text-center" *ngIf="fromAnimeId">
+            <app-from-anime #fromAnimeComponent *ngIf="sortedCharacters[0].animeId != null" [fromAnimeId]="fromAnimeId"></app-from-anime>
+          </div>
         </div>
       </div>
     </div>
