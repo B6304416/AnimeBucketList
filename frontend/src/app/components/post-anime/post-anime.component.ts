@@ -25,7 +25,11 @@ export class PostAnimeComponent implements OnInit {
     trailerUrl: new FormControl('', [Validators.required, Validators.pattern(/^(https?:\/\/)?(www\.)?youtube\.com\/embed\/(?<videoId>[\w\-]+)$/)]),
     synopsis: new FormControl('', [Validators.required, Validators.minLength(10)]),
     sourceId: new FormControl('', [Validators.required]),
-    imgCover: new FormControl(null as File | null),
+    // imgCover: new FormControl(null as File | null),
+    imgCover: new FormControl(null, [
+      Validators.required,
+      Validators.pattern(/\.(jpg|png)$/i) // เพิ่ม Validators.pattern สำหรับระบุนามสกุลไฟล์
+    ]),
   });
 
   studioOptions: StudioResponse[] = [];
