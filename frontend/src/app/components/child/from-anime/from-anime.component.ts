@@ -6,7 +6,7 @@ interface AnimeResponse {
   name: string;
   episode: number;
   genre: string;
-  imgUrl: string;
+  imgCover: string;
   type: string;
   studio: string;
   source: string;
@@ -36,12 +36,15 @@ export class FromAnimeComponent implements OnInit, OnChanges {
     //   this.fetchData();
     // }
   }
-
+  baseUrl: string = 'http://localhost:5555';
   fetchData(){
     const url = 'http://localhost:5555/anime/detail/'+this.fromAnimeId;
     this.http.get<AnimeResponse[]>(url).subscribe(
       (res) => {
-        this.data = res
+        this.data = res.map(anime => ({
+          ...anime,
+          imgCover: this.baseUrl + anime.imgCover
+        })) 
         console.log('child anime ',this.data)
       },
       (error) => {

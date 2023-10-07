@@ -5,7 +5,7 @@ interface MangaResponse {
   _id: string;
   name: string;
   genre: string;
-  imgUrl: string;
+  imgCover: string;
 }
 
 @Component({
@@ -31,11 +31,16 @@ export class FromMangaComponent implements OnInit,OnChanges {
     //   this.fetchData();
     // }
   }
+
+  baseUrl: string = 'http://localhost:5555';
   fetchData(){
     const url = 'http://localhost:5555/manga/'+this.fromMangaId;
     this.http.get<MangaResponse[]>(url).subscribe(
       (res) => {
-        this.data = res
+        this.data = res.map(manga => ({
+          ...manga,
+          imgCover: this.baseUrl + manga.imgCover
+        })) 
         console.log('manga is :',this.data)
       },
       (error) => {
