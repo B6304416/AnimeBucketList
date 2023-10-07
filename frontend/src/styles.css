@@ -9,6 +9,8 @@ html, body {
   padding: 0;
   background-color: rgba(33, 37, 41, 1) !important;
   font-family:'Shippori Antique', 'Prompt' !important;
+}
+.top-margin {
   margin-top: 55px;
 }
 
