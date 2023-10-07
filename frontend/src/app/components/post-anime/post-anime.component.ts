@@ -22,7 +22,7 @@ export class PostAnimeComponent implements OnInit {
     episode: new FormControl(null, [Validators.required, Validators.min(1)]),
     genre: new FormArray([], [Validators.required]),
     imgUrl: new FormControl(''),
-    trailerUrl: new FormControl('', [Validators.required, Validators.pattern(/^(https?:\/\/)?(www\.)?youtube\.com\/watch\?v=[\w-]+(&\S+)?$/)]),
+    trailerUrl: new FormControl('', [Validators.required, Validators.pattern(/^(https?:\/\/)?(www\.)?youtube\.com\/embed\/(?<videoId>[\w\-]+)$/)]),
     synopsis: new FormControl('', [Validators.required, Validators.minLength(10)]),
     sourceId: new FormControl('', [Validators.required]),
     imgCover: new FormControl(null as File | null),
