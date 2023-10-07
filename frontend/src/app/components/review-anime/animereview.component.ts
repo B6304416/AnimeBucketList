@@ -16,7 +16,7 @@ interface AnimeResponse {
   name: string;
   episode: number;
   genre: string;
-  imgUrl: string;
+  imgCover: string;
   trailerUrl: string;
   synopsis: string;
   type: string;
@@ -80,6 +80,7 @@ export class AnimereviewComponent implements OnInit {
 
     const token = sessionStorage.getItem('token');
     const user = sessionStorage.getItem('userId');
+    
 
     const headers = new HttpHeaders({
       'Authorization': 'Bearer ' + token
@@ -97,7 +98,10 @@ export class AnimereviewComponent implements OnInit {
 
       this.http.get<AnimeResponse[]>(animeUrlbyId).subscribe(
         (res) => {
-          this.animeData = res
+          this.animeData = res.map(anime => ({
+            ...anime,
+            imgCover: 'http://localhost:5555' + anime.imgCover
+          }))
           console.log("anime")
           console.log(this.animeData)
 

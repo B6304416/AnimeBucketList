@@ -158,7 +158,7 @@ export class PostAnimeComponent implements OnInit {
     this.http.post('http://localhost:5555/anime', formData, { headers }).subscribe(
       (response) => {
         console.log('Anime posted successfully', response);
-        // this.resetForm();
+        this.resetForm();
         this.showAlertMessage('Anime posted successfully', true)
       },
       (error) => {
