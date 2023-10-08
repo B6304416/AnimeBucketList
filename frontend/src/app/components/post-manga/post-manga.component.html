@@ -103,12 +103,15 @@
                                 </div>
 
                                 <div class="row">
-                                    <div class="col-sm-3"></div>
-                                    <div class="col-sm-3 text-secondary">
-                                        <input type="button" class="btn btn-primary px-5 mb-4" value="Post"
+                                    <div class="col-sm-3">
+                                        <a href="/tablemanga" type="button" class="btn btn-warning px-5 mb-4"
+                                            value="Back">Back</a>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <input type="button" class="btn btn-warning px-5 mb-4 float-end" value="Post"
                                             (click)="submitManga()">
                                     </div>
-                                    
+
                                 </div>
                             </form>
                         </div>
@@ -120,4 +123,8 @@
     <div class="container pt-5 pb-5"></div>
     <div class="container pt-5 pb-5"></div>
 </div>
-<router-outlet></router-outlet>
+<div class="alert-container">
+    <div [ngClass]="alertClass" role="alert" *ngIf="showAlert">
+        {{ alertMessage }}
+    </div>
+</div>
