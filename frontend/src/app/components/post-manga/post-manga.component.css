@@ -4,37 +4,46 @@
     font-family:'Shippori Antique', sans-serif;
 }
 
+.container {
+  /* รูปแบบของ container อื่น ๆ */
+  position: relative; /* ตั้งค่าเป็น relative เพื่อให้ alert-container อ้างถึงตำแหน่งใน container */
+}
+.alert-container {
+  position: fixed; /* ตั้งค่าเป็น fixed เพื่อควบคุมตำแหน่งของ alerts ในหน้าจอ */
+  top: 92%; /* ตำแหน่งด้านบนที่ 50% ของหน้าจอ */
+  left: 50%; /* ตำแหน่งด้านซ้ายที่ 50% ของหน้าจอ */
+  transform: translate(-50%, -50%); /* ใช้ transform เพื่อย้าย alert ให้อยู่กลาง */
+  z-index: 1000; /* ตั้งค่า z-index ให้มากกว่า container อื่น ๆ เพื่อให้แสดงเหนือ container */
+}
+
 .card {
     position: relative;
     display: flex;
     flex-direction: column;
     min-width: 0;
     word-wrap: break-word;
-    background-color: #683e8e;
+    background-color:  #c82333ec;
     background-clip: border-box;
     border: 0 solid transparent;
-    border-radius: .25rem;
+    border-radius: 20px;
     margin-bottom: 1.5rem;
     /* box-shadow: 0 2px 6px 0 rgb(218 218 253 / 65%), 0 2px 6px 0 rgb(206 206 238 / 54%); */
 }
-
 .me-2 {
-    margin-right: .5rem !important;
+    margin-right: .5rem!important;
 }
-
-.bg-Black h4,
-h5,
-h6 {
-    color: #fff;
-    /* สีข้อความหัวเรื่อง h4 ในส่วนของ HTML ที่มีคลาส bg-Black */
+.bg-Black h4,h5,h6{
+  color: #fff; /* สีข้อความหัวเรื่อง h4 ในส่วนของ HTML ที่มีคลาส bg-Black */
 }
 
 .bg-Black p {
-    color: #e40707;
-    /* สีข้อความย่อย p ในส่วนของ HTML ที่มีคลาส bg-Black */
+  color: #e40707; /* สีข้อความย่อย p ในส่วนของ HTML ที่มีคลาส bg-Black */
 }
 
 .spaced-label {
-    margin-right: 25px;
-    /* ปรับระยะห่าง checkbox */
-}
+    margin-right: 25px; /* ปรับระยะห่าง checkbox */
+  }
+
+
+  
+  

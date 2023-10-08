@@ -4,9 +4,6 @@
     font-family:'Shippori Antique', sans-serif;
 }
 
-.imgrounded {
-  border-radius: 20px; /* ปรับค่าตามที่คุณต้องการสำหรับขอบโค้ง */
-}
 .container {
   /* รูปแบบของ container อื่น ๆ */
   position: relative; /* ตั้งค่าเป็น relative เพื่อให้ alert-container อ้างถึงตำแหน่งใน container */
