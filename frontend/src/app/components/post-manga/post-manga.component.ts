@@ -140,7 +140,7 @@ export class PostMangaComponent implements OnInit {
     this.http.post('http://localhost:5555/manga', formData, { headers }).subscribe(
       (response) => {
         console.log('Manga posted successfully', response);
-        // this.resetForm();
+        this.resetForm();
         this.showAlertMessage('Manga posted successfully', true)
       },
       (error) => {
@@ -148,6 +148,8 @@ export class PostMangaComponent implements OnInit {
         this.showAlertMessage('Error: ' + error.message, false)
       }
     );
+    console.log("submit work")
+
   }
   
   resetForm() {
