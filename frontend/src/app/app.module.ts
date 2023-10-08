@@ -24,6 +24,7 @@ import { FromMangaComponent } from './components/child/from-manga/from-manga.com
 import { TableCharacterComponent } from './components/table-character/table-character.component';
 import { MangatableComponent } from './components/table-manga/mangatable.component';
 import { UpdateCharacterComponent } from './components/update-character/update-character.component';
+import { UpdateMangaComponent } from './components/update-manga/update-manga.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
@@ -48,6 +49,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
     TableCharacterComponent,
     MangatableComponent,
     UpdateCharacterComponent,
+    UpdateMangaComponent,
 
   ],
   imports: [
