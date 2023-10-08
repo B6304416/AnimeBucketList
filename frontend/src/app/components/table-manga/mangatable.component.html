@@ -15,7 +15,7 @@
                                     <input class="form-control me-2 " type="search" placeholder="search" [(ngModel)]="searchQuery" (input)="onSearchChange()" />
                                 </div>
                                 <div class="col-sm-4">
-                                    <a href="/postanime" class="btn add-new"><i class="fa fa-plus-circle"></i>
+                                    <a href="/postmanga" class="btn add-new"><i class="fa fa-plus-circle"></i>
                                     Add New
                                 </a>
                                 </div>
@@ -37,7 +37,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr *ngFor="let manga of filteredData | paginate: { itemsPerPage: 5, currentPage: p }">
+                                <tr *ngFor="let manga of filteredData | paginate: { itemsPerPage: 6, currentPage: p }">
                                     <td>
                                         <div class="user_img">
                                             <img *ngIf="manga.imgCover != 'http://localhost:5555undefined'"[src]="manga.imgCover" alt="..." />

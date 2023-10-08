@@ -40,9 +40,9 @@ export class MangatableComponent implements OnInit{
     const url = 'http://localhost:5555/manga/detail';
     this.http.get<MangaResponse[]>(url).subscribe(
       (res) => {
-        res = res.map(anime => ({
-          ...anime,
-          imgCover: this.baseUrl + anime.imgCover
+        res = res.map(manga => ({
+          ...manga,
+          imgCover: this.baseUrl + manga.imgCover
         }))
         console.log('Response data:', res);
         this.data = res
@@ -55,9 +55,9 @@ export class MangatableComponent implements OnInit{
     );
   }
 
-  onClick(animeId: string) {
-    console.log('Clicked on manga with ID:', animeId);
-    this.router.navigate(['/updateanime', animeId]);
+  onClick(mangaId: string) {
+    console.log('Clicked on manga with ID:', mangaId);
+    this.router.navigate(['/updatemanga', mangaId]);
   }
 
   // เมื่อคลิกปุ่มลบ
@@ -81,7 +81,7 @@ export class MangatableComponent implements OnInit{
           this.fetchData();
         },
         (error) => {
-          console.error('Error deleting anime', error);
+          console.error('Error deleting manga', error);
           alert('Error: ' + error.message);
         }
       );
