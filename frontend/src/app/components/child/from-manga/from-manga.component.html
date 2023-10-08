@@ -4,12 +4,12 @@
         <div class="card-body">
             <div class="small text-muted">From manga</div>
             <div class="card-detail">
-                <h2 class="card-title h5 mt-1"> <!-- Changed to h5 for smaller title -->
+                <h2 class="card-title h5 mt-1">
                     <strong>
                         {{data[0].name}}
                     </strong>
                 </h2>
-                <a class="btn btn-sm btn-readmore" href="/#">Read more →</a> <!-- Added 'btn-sm' for a smaller button -->
+                <a class="btn btn-sm btn-readmore" (click)="onClick(data[0]._id)">Read more →</a>
             </div>
         </div>
         

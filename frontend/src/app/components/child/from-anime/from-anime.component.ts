@@ -1,5 +1,6 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 interface AnimeResponse {
   _id: string;
@@ -23,7 +24,7 @@ export class FromAnimeComponent implements OnInit, OnChanges {
   @Input() fromAnimeId!: string|null;
   data: AnimeResponse[] = [];
 
-  constructor(private http: HttpClient){}
+  constructor(private http: HttpClient, private router: Router){}
 
   ngOnChanges(): void {
     if(this.fromAnimeId){
@@ -51,5 +52,11 @@ export class FromAnimeComponent implements OnInit, OnChanges {
         console.error('Error:', error);
       }
     );
+  }
+
+  onClick(animeId: string) {
+    console.log('Clicked on anime with ID:', animeId);
+    this.router.navigate(['/animereview', animeId]);
+    window.scrollTo(0, 0); 
   }
 }
