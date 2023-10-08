@@ -5,7 +5,7 @@
                 <div class="col-lg-4">
                     <div class="card">
                         <div class="card-body text-white">
-                            <div class="d-flex flex-column align-items-center text-center">
+                            <div class="d-flex flex-column align-items-center text-center ">
                                 <div *ngIf="!anime.get('imgCover')?.value">
                                     <div class="spinner-border p-4" style="width: 3rem; height: 3rem;" role="status">
                                         <span class="sr-only">Loading...</span>
@@ -13,7 +13,7 @@
                                 </div>
                                 <div *ngIf="cover" class="mt-3 cover">
                                     <img [src]="cover" alt="Selected Image"
-                                        style="max-width: 100%; max-height: 200px;">
+                                        style="max-width: 100%; max-height: 200px; border-radius: 20px;">
                                 </div>
                                 <div class="mt-3">
                                     <!-- แสดงค่า name ก่อนและหลังจากมีค่า -->
@@ -122,11 +122,11 @@
                                         <input type="radio" class="btn-check " name="typeId" id="Movie"
                                             autocomplete="off" value="6513dc34e62aa885492968ca"
                                             formControlName="typeId">
-                                        <label class="btn btn-outline-light me-2" for="Movie">Movie</label>
+                                        <label class="btn btn-outline-primary me-2" for="Movie">Movie</label>
 
                                         <input type="radio" class="btn-check " name="typeId" id="TV" autocomplete="off"
                                             value="6513dc34e62aa885492968c8" formControlName="typeId">
-                                        <label class="btn btn-outline-light me-2" for="TV">TV
+                                        <label class="btn btn-outline-primary me-2" for="TV">TV
                                             Series</label>
                                     </div>
                                 </div>
@@ -140,17 +140,17 @@
                                         <input type="radio" class="btn-check " name="sourceId" id="Original"
                                             autocomplete="off" value="6513dc35e62aa885492968d0"
                                             formControlName="sourceId">
-                                        <label class="btn btn-outline-light me-2" for="Original">Original</label>
+                                        <label class="btn btn-outline-success me-2" for="Original">Original</label>
 
                                         <input type="radio" class="btn-check " name="sourceId" id="Novel"
                                             autocomplete="off" value="6513dc35e62aa885492968ce"
                                             formControlName="sourceId">
-                                        <label class="btn btn-outline-light me-2" for="Novel">Light Novel</label>
+                                        <label class="btn btn-outline-success me-2" for="Novel">Light Novel</label>
 
                                         <input type="radio" class="btn-check " name="sourceId" id="Manga"
                                             autocomplete="off" value="6513dc34e62aa885492968cc"
                                             formControlName="sourceId">
-                                        <label class="btn btn-outline-light me-2" for="Manga">Manga</label>
+                                        <label class="btn btn-outline-success me-2" for="Manga">Manga</label>
 
                                     </div>
                                 </div>
@@ -161,7 +161,7 @@
                                     </div>
                                     <div class="form-group col-sm-9">
 
-                                        <label class="btn btn-outline-light me-2"
+                                        <label class="btn btn-outline-warning me-2 mb-2"
                                             *ngFor="let genreOption of genreOptions"
                                             [class.active]="isValidGenre(genreOption)">
                                             <input class="btn-check" type="checkbox" [value]="genreOption"

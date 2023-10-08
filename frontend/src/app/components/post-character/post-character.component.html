@@ -4,8 +4,8 @@
             <div class="row ">
                 <div class="col-lg-4">
                     <div class="card">
-                        <div class="card-body">
-                            <div class="d-flex flex-column align-items-center text-center pt-4">
+                        <div class="card-body text-white">
+                            <div class="d-flex flex-column align-items-center text-center">
                                 <div *ngIf="!character.get('imgProfile')?.value">
                                     <div class="spinner-border p-4" style="width: 3rem; height: 3rem;" role="status">
                                         <span class="sr-only">Loading...</span>
@@ -13,14 +13,14 @@
                                 </div>
                                 <div *ngIf="profile" class="mt-3 profile">
                                     <img [src]="profile" alt="Selected Image"
-                                        style="max-width: 100%; max-height: 200px;">
+                                        style="max-width: 100%; max-height: 200px; border-radius: 20px;">
                                 </div>
                                 <div class="mt-4">
                                     <h4 *ngIf="!character.get('name')?.value">Character Name</h4>
                                     <h4 *ngIf="character.get('name')?.value">{{ character.get('name')?.value }}</h4>
-                                    <p class="text-secondary mb-1" style="text-align: left;"> Anime: {{
+                                    <p class="mb-1" style="text-align: left;"> Anime: {{
                                         getAnimeName(character.get('animeId')?.value) }}</p>
-                                    <p class="text-secondary mb-1" style="text-align: left;"> Manga: {{
+                                    <p class="mb-1" style="text-align: left;"> Manga: {{
                                         getMangaName(character.get('mangaId')?.value) }}</p>
                                 </div>
                             </div>
@@ -118,9 +118,12 @@
                                 </div>
 
                                 <div class="row">
-                                    <div class="col-sm-3"></div>
-                                    <div class="col-sm-3 text-secondary">
-                                        <input type="button" class="btn btn-primary px-5 mb-4" value="Post"
+                                    <div class="col-sm-3">
+                                        <a href="/tablecharacter" type="button" class="btn btn-warning px-5 mb-4"
+                                            value="Back">Back</a>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <input type="button" class="btn btn-warning px-5 mb-4 float-end" value="Post"
                                             (click)="onSubmit()">
                                     </div>
 
