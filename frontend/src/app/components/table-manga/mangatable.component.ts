@@ -21,7 +21,6 @@ export class MangatableComponent implements OnInit{
 
   data: MangaResponse[] = [];
   mangaToDelete: any; // เก็บ anime ที่ต้องการลบ
-  baseUrl: string = 'http://localhost:5555';
   mangaName?: string;
   baseUrl: string = 'http://localhost:5555';
   searchQuery: string = '';
