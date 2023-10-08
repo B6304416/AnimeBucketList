@@ -1,64 +1,68 @@
-<div class="container-fluid bg-img full-height">
+<div style="margin-top: 0px !important;">
+  <div class="container-fluid bg-img full-height">
     <div class="row">
-        <div class="col-md-4 offset-md-4">
-            <div class="card my-5">
-                <form [formGroup]="signupUser" class="card-body cardbody-color p-lg-5 text-center" (ngSubmit)="onSubmit()">
-                    <a routerLink="/listanime" class="btn btn-color px-5 mb-5 w-10 btn-home">
-                        <i class="fas fa-home"></i> Home
-                    </a>
+      <div class="col-md-4 offset-md-4">
+        <div class="card my-5">
+          <form [formGroup]="signupUser" class="card-body cardbody-color p-lg-5 text-center" (ngSubmit)="onSubmit()">
+            <a routerLink="/listanime" class="btn btn-color px-5 mb-5 w-10 btn-home">
+              <i class="fas fa-home"></i> Home
+            </a>
 
-                    <div class="text-center">
-                        <img *ngIf="showOriginalImage;"
-                            src="https://cdn.discordapp.com/attachments/1155377186291851317/1157936858991431680/deku_sq.gif?ex=651a6c3c&is=65191abc&hm=d01340416bba7dc2c537c826bba18b87dc14aa789c112db09fc3e9be531c97f2&"
-                            class="img-fluid profile-image-pic img-thumbnail rounded my-3" width="80%" height="100%"
-                            alt="profile">
-                    </div>
-                    <div class="text-center">
-                        <img *ngIf="!showOriginalImage;"
-                            src="https://cdn.discordapp.com/attachments/1155377186291851317/1157936858651709440/almight_sq.gif?ex=651a6c3c&is=65191abc&hm=b4d8afbd286e7fe6fd16d1661dbcf5fbc0e84c52e4ead8baa22893afb2b5995a&"
-                            class="img-fluid profile-image-pic img-thumbnail rounded my-3" width="80%" height="100%"
-                            alt="profile">
-                    </div>
-                    
-                    <div class="form-group">
-                      <!-- <label for="name">ชื่อ:</label> -->
-                      <input type="text" class="form-control" id="name" formControlName="name" placeholder="user name" required >
-                      <div *ngIf="signupUser.get('name')?.hasError('required') && signupUser.get('name')?.touched" class="alert alert-danger">
-                        Please enter your name.
-                      </div>
-                    </div>
-                
-                    <div class="form-group">
-                      <!-- <label for="email">อีเมล:</label> -->
-                      <input type="email" class="form-control" id="email" formControlName="email" placeholder="email" required >
-                      <!-- แสดงข้อความแจ้งเตือน validate email -->
-                      <div *ngIf="signupUser.get('email')?.hasError('required') && signupUser.get('email')?.touched" class="alert alert-danger">
-                        Please enter your email.
-                      </div>
-                      <div *ngIf="signupUser.get('email')?.hasError('email') && signupUser.get('email')?.touched" class="alert alert-danger">
-                        Invalid email.
-                      </div>
-                    </div>
-                
-                    <div class="form-group">
-                      <!-- <label for="password">รหัสผ่าน:</label> -->
-                      <input type="password" class="form-control" id="password" formControlName="password" placeholder="password" required>
-                      <!-- แสดงข้อความแจ้งเตือน validate password -->
-                      <div *ngIf="signupUser.get('password')?.hasError('required') && signupUser.get('password')?.touched" class="alert alert-danger">
-                        Please enter your password.
-                      </div>
-                      <div *ngIf="signupUser.get('password')?.hasError('pattern') && signupUser.get('password')?.touched" class="alert alert-danger">
-                        Password must be 4 or more numbers.
-                      </div>
-                    </div>
-                
-                    <div class="form-group">
-                        <button type="submit" class="btn btn-color px-5 mb-5 w-10">Signup</button>
-                    </div>
-                </form>
+            <!-- <div class="text-center">
+              <img *ngIf="showOriginalImage;" src="assets/deku.gif"
+                class="img-fluid profile-image-pic img-thumbnail rounded my-3" width="80%" height="100%" alt="profile">
+            </div>
+            <div class="text-center">
+              <img *ngIf="!showOriginalImage;" src="assets/allmight.gif"
+                class="img-fluid profile-image-pic img-thumbnail rounded my-3" width="80%" height="100%" alt="profile">
+            </div> -->
+
+            <div class="form-group">
+              <!-- <label for="name">ชื่อ:</label> -->
+              <input type="text" class="form-control" id="name" formControlName="name" placeholder="user name" required>
+              <div *ngIf="signupUser.get('name')?.hasError('required') && signupUser.get('name')?.touched"
+                class="alert alert-danger">
+                Please enter your name.
+              </div>
             </div>
 
+            <div class="form-group">
+              <!-- <label for="email">อีเมล:</label> -->
+              <input type="email" class="form-control" id="email" formControlName="email" placeholder="email" required>
+              <!-- แสดงข้อความแจ้งเตือน validate email -->
+              <div *ngIf="signupUser.get('email')?.hasError('required') && signupUser.get('email')?.touched"
+                class="alert alert-danger">
+                Please enter your email.
+              </div>
+              <div *ngIf="signupUser.get('email')?.hasError('email') && signupUser.get('email')?.touched"
+                class="alert alert-danger">
+                Invalid email.
+              </div>
+            </div>
+
+            <div class="form-group">
+              <!-- <label for="password">รหัสผ่าน:</label> -->
+              <input type="password" class="form-control" id="password" formControlName="password"
+                placeholder="password" required>
+              <!-- แสดงข้อความแจ้งเตือน validate password -->
+              <div *ngIf="signupUser.get('password')?.hasError('required') && signupUser.get('password')?.touched"
+                class="alert alert-danger">
+                Please enter your password.
+              </div>
+              <div *ngIf="signupUser.get('password')?.hasError('pattern') && signupUser.get('password')?.touched"
+                class="alert alert-danger">
+                Password must be 4 or more numbers.
+              </div>
+            </div>
+
+            <div class="form-group">
+              <button type="submit" class="btn btn-color px-5 mb-5 w-10">Signup</button>
+            </div>
+          </form>
         </div>
+
+      </div>
     </div>
+  </div>
 </div>
 <router-outlet></router-outlet>

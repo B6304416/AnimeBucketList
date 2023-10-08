@@ -48,7 +48,6 @@ a {
   background-image: url('../../img/wall_hero.png');
   background-size: cover;
   background-position: center;
-  background-repeat: no-repeat;
   animation: slideImages 25s linear infinite;
 }
 
