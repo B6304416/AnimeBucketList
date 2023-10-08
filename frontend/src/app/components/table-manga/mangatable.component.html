@@ -37,7 +37,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr *ngFor="let manga of filteredData | paginate: { itemsPerPage: 5, currentPage: p }">
+                                <tr *ngFor="let manga of filteredData | paginate: { itemsPerPage: 6, currentPage: p }">
                                     <td>
                                         <div class="user_img">
                                             <img *ngIf="manga.imgCover != 'http://localhost:5555undefined'"[src]="manga.imgCover" alt="..." />
