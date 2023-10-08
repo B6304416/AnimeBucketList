@@ -7,7 +7,7 @@ interface AnimeResponse {
   _id: string;
   name: string;
   episode: number;
-  genre: string;
+  genre: string[];
   imgCover: string;
   imgUrl: string;
   type: string;
@@ -102,12 +102,14 @@ export class AnimetableComponent implements OnInit {
       // ถ้าค่าค้นหาเป็นสตริงว่าง ให้แสดงข้อมูลทั้งหมด
       this.filteredData = this.data;
     } else {
+      const lowerSearchQuery = this.searchQuery.toLowerCase(); 
       // ไม่งั้น กรองข้อมูล Anime ตามคำค้นหา
       this.filteredData = this.data.filter(anime => {
         return (
           anime.name.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
           anime.type.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
           anime.source.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
+          (anime.genre && anime.genre.some(genre => genre.toLowerCase().includes(lowerSearchQuery))) ||
           anime.studio.toLowerCase().includes(this.searchQuery.toLowerCase())
         );
       });

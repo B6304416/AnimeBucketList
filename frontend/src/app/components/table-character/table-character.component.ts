@@ -8,9 +8,9 @@ interface CharacterResponse {
   name: string;
   score: number;
   imgProfile: string;
-  anime: string;
+  anime: string[];
   animeId: string;
-  manga: string;
+  manga: string[];
   mangaId: string;
   detail: string;
 }
@@ -90,17 +90,22 @@ export class TableCharacterComponent implements OnInit{
       $('#deleteConfirmationModal').modal('hide'); // ปิด Modal ด้วย jQuery
     }
   }
+  closeModal() {
+    $('#deleteConfirmationModal').modal('hide');
+    this.characterToDelete = null
+  }
+
   onSearchChange() {
     if (this.searchQuery === '') {
       // ถ้าค่าค้นหาเป็นสตริงว่าง ให้แสดงข้อมูลทั้งหมด
       this.filteredData = this.data;
     } else {
-      // ไม่งั้น กรองข้อมูล Anime ตามคำค้นหา
-      this.filteredData = this.data.filter(anime => {
+      const lowerSearchQuery = this.searchQuery.toLowerCase(); 
+      this.filteredData = this.data.filter(character => {
         return (
-          anime.name.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
-          anime.anime.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
-          anime.manga.toLowerCase().includes(this.searchQuery.toLowerCase()) 
+          character.name.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
+          (character.anime && character.anime.some(anime => anime.toLowerCase().includes(lowerSearchQuery))) ||
+          (character.manga && character.manga.some(manga => manga.toLowerCase().includes(lowerSearchQuery))) 
         );
       });
     }
