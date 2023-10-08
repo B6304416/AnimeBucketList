@@ -26,6 +26,9 @@ export class TableCharacterComponent implements OnInit{
   characterToDelete: any; 
   characterName?: string;
   baseUrl: string = 'http://localhost:5555';
+  searchQuery: string = '';
+  filteredData: CharacterResponse[] = [];
+  p: number = 1; // เพิ่มตัวแปร p สำหรับควบคุมหน้าปัจจุบัน
 
   constructor(
     private http: HttpClient,
@@ -45,7 +48,7 @@ export class TableCharacterComponent implements OnInit{
           ...character,
           imgProfile: this.baseUrl + character.imgProfile
         }));
-        
+        this.filteredData = this.data
         console.log(this.data)
         console.log(this.data[0].imgProfile)
       },
@@ -86,5 +89,21 @@ export class TableCharacterComponent implements OnInit{
       this.characterToDelete = null;
       $('#deleteConfirmationModal').modal('hide'); // ปิด Modal ด้วย jQuery
     }
+  }
+  onSearchChange() {
+    if (this.searchQuery === '') {
+      // ถ้าค่าค้นหาเป็นสตริงว่าง ให้แสดงข้อมูลทั้งหมด
+      this.filteredData = this.data;
+    } else {
+      // ไม่งั้น กรองข้อมูล Anime ตามคำค้นหา
+      this.filteredData = this.data.filter(anime => {
+        return (
+          anime.name.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
+          anime.anime.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
+          anime.manga.toLowerCase().includes(this.searchQuery.toLowerCase()) 
+        );
+      });
+    }
+    this.p = 1;
   }
 }
