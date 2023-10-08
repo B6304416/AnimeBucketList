@@ -120,4 +120,8 @@
     <div class="container pt-5 pb-5"></div>
     <div class="container pt-5 pb-5"></div>
 </div>
-<router-outlet></router-outlet>
+<div class="alert-container">
+    <div [ngClass]="alertClass" role="alert" *ngIf="showAlert">
+        {{ alertMessage }}
+    </div>
+</div>
