@@ -28,12 +28,13 @@ export class AnimetableComponent implements OnInit {
   baseUrl: string = 'http://localhost:5555';
   searchQuery: string = '';
   filteredData: AnimeResponse[] = [];
+  p: number = 1; // เพิ่มตัวแปร p สำหรับควบคุมหน้าปัจจุบัน
 
 
   constructor(
     private http: HttpClient,
     private router: Router,
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.fetchData()
@@ -82,7 +83,6 @@ export class AnimetableComponent implements OnInit {
         (response) => {
           console.log('Anime deleted successfully', response);
           this.fetchData();
-          // this.router.navigate(['/anime-list']); // หลังจากลบเสร็จให้เปลี่ยนเส้นทางไปยังหน้ารายการ Anime หรือหน้าอื่นที่เหมาะสม
         },
         (error) => {
           console.error('Error deleting anime', error);
@@ -96,7 +96,7 @@ export class AnimetableComponent implements OnInit {
     $('#deleteConfirmationModal').modal('hide');
     this.animeToDelete = null
   }
-  
+
   onSearchChange() {
     if (this.searchQuery === '') {
       // ถ้าค่าค้นหาเป็นสตริงว่าง ให้แสดงข้อมูลทั้งหมด
@@ -111,6 +111,7 @@ export class AnimetableComponent implements OnInit {
           anime.studio.toLowerCase().includes(this.searchQuery.toLowerCase())
         );
       });
+    }
+    this.p = 1;
   }
-}
 }

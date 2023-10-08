@@ -11,14 +11,13 @@
                             </div>                         
                             <div class="row col-sm-4 text-end">
                                 <div class="col-sm-8">
-                                    <input class="form-control me-2 " type="search" placeholder="ค้นหา Anime" [(ngModel)]="searchQuery" (input)="onSearchChange()" />
+                                    <input class="form-control me-2 " type="search" placeholder="search" [(ngModel)]="searchQuery" (input)="onSearchChange()" />
                                 </div>
                                 <div class="col-sm-4">
                                     <a href="/postanime" class="btn add-new"><i class="fa fa-plus-circle"></i>
                                     Add New
                                 </a>
                                 </div>
-                                
                             </div>
                         </div>
                     </div>
@@ -37,10 +36,9 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr *ngFor="let anime of filteredData">
+                                <tr *ngFor="let anime of filteredData | paginate: { itemsPerPage: 6, currentPage: p }">
                                     <td>
                                         <div class="user_img">
-                                            <!-- <img *ngClass="anime.imgCover" [src]="anime.imgCover" alt="..." /> -->
                                             <img *ngIf="anime.imgCover != 'http://localhost:5555undefined'"[src]="anime.imgCover" alt="..." />
                                         </div>
                                     </td>
@@ -67,6 +65,9 @@
                         </table>
                     </div>
                     <div class="panel-footer">
+                        <div class="text-center">
+                            <pagination-controls (pageChange)="p = $event"></pagination-controls>
+                        </div>
                     </div>
                 </div>
             </div>
