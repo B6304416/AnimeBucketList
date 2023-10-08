@@ -20,22 +20,25 @@ interface AnimeResponse {
   templateUrl: './animetable.component.html',
   styleUrls: ['./animetable.component.css']
 })
-export class AnimetableComponent implements OnInit{
+export class AnimetableComponent implements OnInit {
 
   data: AnimeResponse[] = [];
   animeToDelete: any; // เก็บ anime ที่ต้องการลบ
   animeName?: string;
   baseUrl: string = 'http://localhost:5555';
+  searchQuery: string = '';
+  filteredData: AnimeResponse[] = [];
+
 
   constructor(
     private http: HttpClient,
     private router: Router,
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.fetchData()
   }
-  
+
   fetchData(): void {
     const url = 'http://localhost:5555/anime/detail';
     this.http.get<AnimeResponse[]>(url).subscribe(
@@ -43,9 +46,10 @@ export class AnimetableComponent implements OnInit{
         res = res.map(anime => ({
           ...anime,
           imgCover: this.baseUrl + anime.imgCover
-        })) 
+        }))
         // console.log('Response data:', res);
         this.data = res
+        this.filteredData = res
         console.log(this.data)
       },
       (error) => {
@@ -61,7 +65,7 @@ export class AnimetableComponent implements OnInit{
 
   // เมื่อคลิกปุ่มลบ
   confirmDelete(id: string, name: string) {
-    this.animeToDelete = id; 
+    this.animeToDelete = id;
     this.animeName = name;
     $('#deleteConfirmationModal').modal('show'); // เปิด Modal ด้วย jQuery
     // console.log('Deleting anime:', this.animeToDelete);
@@ -92,5 +96,21 @@ export class AnimetableComponent implements OnInit{
     $('#deleteConfirmationModal').modal('hide');
     this.animeToDelete = null
   }
-
+  
+  onSearchChange() {
+    if (this.searchQuery === '') {
+      // ถ้าค่าค้นหาเป็นสตริงว่าง ให้แสดงข้อมูลทั้งหมด
+      this.filteredData = this.data;
+    } else {
+      // ไม่งั้น กรองข้อมูล Anime ตามคำค้นหา
+      this.filteredData = this.data.filter(anime => {
+        return (
+          anime.name.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
+          anime.type.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
+          anime.source.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
+          anime.studio.toLowerCase().includes(this.searchQuery.toLowerCase())
+        );
+      });
+  }
+}
 }
