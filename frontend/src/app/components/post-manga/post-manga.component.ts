@@ -103,6 +103,7 @@ export class PostMangaComponent implements OnInit {
   submitManga() {
     const mangaData = this.manga.value;
     const formData = new FormData();
+    
     // this.submitted = true;
   
     if (mangaData.name && mangaData.authorId) {
@@ -128,7 +129,6 @@ export class PostMangaComponent implements OnInit {
     if (this.manga.get('name')?.hasError('required') ||
       this.manga.get('authorId')?.hasError('required') ||
       this.manga.get('genre')?.hasError('required') ||
-      this.manga.get('imgUrl')?.hasError('required') ||
       this.manga.get('imgCover')?.hasError('required') ||
       this.manga.get('imgCover')?.hasError('pattern')
       ) {
