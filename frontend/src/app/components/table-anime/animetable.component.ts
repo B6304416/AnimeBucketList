@@ -83,7 +83,6 @@ export class AnimetableComponent implements OnInit {
         (response) => {
           console.log('Anime deleted successfully', response);
           this.fetchData();
-          // this.router.navigate(['/anime-list']); // หลังจากลบเสร็จให้เปลี่ยนเส้นทางไปยังหน้ารายการ Anime หรือหน้าอื่นที่เหมาะสม
         },
         (error) => {
           console.error('Error deleting anime', error);
