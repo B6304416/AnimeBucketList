@@ -37,7 +37,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr *ngFor="let anime of filteredData">
+                                <tr *ngFor="let anime of filteredData | paginate: { itemsPerPage: 5, currentPage: p }">
                                     <td>
                                         <div class="user_img">
                                             <!-- <img *ngClass="anime.imgCover" [src]="anime.imgCover" alt="..." /> -->
@@ -67,6 +67,9 @@
                         </table>
                     </div>
                     <div class="panel-footer">
+                        <div class="text-center">
+                            <pagination-controls (pageChange)="p = $event"></pagination-controls>
+                        </div>
                     </div>
                 </div>
             </div>
