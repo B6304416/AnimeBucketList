@@ -8,7 +8,7 @@ interface MangaResponse {
   name: string;
   // episode: number;
   genre: string;
-  imgUrl: string;
+  imgCover: string;
   // type: string;
   author: string;
   // source: string;
@@ -23,7 +23,10 @@ export class MangatableComponent implements OnInit{
 
   data: MangaResponse[] = [];
   mangaToDelete: any; // เก็บ anime ที่ต้องการลบ
+  baseUrl: string = 'http://localhost:5555';
   mangaName?: string;
+  filteredData: MangaResponse[] = [];
+
 
   constructor(
     private http: HttpClient,
@@ -38,8 +41,13 @@ export class MangatableComponent implements OnInit{
     const url = 'http://localhost:5555/manga/detail';
     this.http.get<MangaResponse[]>(url).subscribe(
       (res) => {
-        console.log('Response data:', res);
+        res = res.map(manga => ({
+          ...manga,
+          imgCover: this.baseUrl + manga.imgCover
+        }))
+        // console.log('Response data:', res);
         this.data = res
+        this.filteredData = res
         console.log(this.data)
       },
       (error) => {
@@ -48,9 +56,9 @@ export class MangatableComponent implements OnInit{
     );
   }
 
-  onClick(animeId: string) {
-    console.log('Clicked on manga with ID:', animeId);
-    this.router.navigate(['/updateanime', animeId]);
+  onClick(mangaId: string) {
+    console.log('Clicked on manga with ID:', mangaId);
+    this.router.navigate(['/updatemanga', mangaId]);
   }
 
   // เมื่อคลิกปุ่มลบ
@@ -75,7 +83,7 @@ export class MangatableComponent implements OnInit{
           // this.router.navigate(['/anime-list']); // หลังจากลบเสร็จให้เปลี่ยนเส้นทางไปยังหน้ารายการ Anime หรือหน้าอื่นที่เหมาะสม
         },
         (error) => {
-          console.error('Error deleting anime', error);
+          console.error('Error deleting manga', error);
           alert('Error: ' + error.message);
         }
       );

@@ -34,6 +34,7 @@
                                     
                                     <p class="font-size-sm" style="text-align: left;">genre: {{
                                         manga.get('genre')?.value }}</p>
+                                    
                                 </div>
                             </div>
                             <hr class="my-2">
@@ -81,7 +82,7 @@
                                     <div class="form-group col-sm-9 ">
                                         <select class="form-control" formControlName="authorId">
                                             <option *ngFor="let author of authorOptions" [value]="author._id">{{
-                                                author.name }}</option>
+                                                author.eng_name }}</option>
                                         </select>
                                     </div>
                                 </div>
@@ -150,14 +151,14 @@
                                         <input type="text" class="form-control" formControlName="trailerUrl">
                                     </div>
                                 </div> -->
-                                <div class="row mb-4">
+                                <!-- <div class="row mb-4">
                                     <div class="col-sm-3">
                                         <h6 class="mb-0">synopsis</h6>
                                     </div>
                                     <div class="col-sm-9 ">
                                         <textarea class="form-control" formControlName="synopsis" rows="4"></textarea>
                                     </div>
-                                </div>
+                                </div> -->
 
                                 <div class="row">
                                     <div class="col-sm-3">

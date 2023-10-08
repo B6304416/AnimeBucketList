@@ -32,10 +32,11 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr *ngFor="let manga of data">
+                                <tr *ngFor="let manga of filteredData">
                                     <td>
                                         <div class="user_img">
-                                            <img [src]="manga.imgUrl" alt="">
+                                            <!-- <img *ngClass="anime.imgCover" [src]="anime.imgCover" alt="..." /> -->
+                                            <img *ngIf="manga.imgCover != 'http://localhost:5555undefined'"[src]="manga.imgCover" alt="..." />
                                         </div>
                                     </td>
                                     <td>{{manga.name}}</td>
