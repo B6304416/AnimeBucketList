@@ -1,43 +1,76 @@
 .card {
-    background: none; /* ลบพื้นหลังของ .card */
-    border: none; /* ลบเส้นขอบของ .card ถ้ามี */
-    box-shadow: none; /* ลบขอบเงาของ .card ถ้ามี */
-    opacity: 1; /* กำหนดความโปรงใสให้ .card */
+  background: none;
+  /* ลบพื้นหลังของ .card */
+  border: none;
+  /* ลบเส้นขอบของ .card ถ้ามี */
+  box-shadow: none;
+  /* ลบขอบเงาของ .card ถ้ามี */
+  opacity: 1;
+  /* กำหนดความโปรงใสให้ .card */
 }
 
-.btn-color{
-    background-color: #0e1c36;
-    color: #fff;
-    
-  }
-  
-  .profile-image-pic{
-    height: 200px;
-    width: 200px;
-    object-fit: cover;
-  }
-  
-  .cardbody-color{
-    background-color: rgba(57, 136, 215, 0);
-    opacity: 1;
-  }
+.btn-color {
+  background-color: #0e1c36;
+  color: #fff;
 
-  .box{
-    opacity: 0.9;
-  }
-  
-  a{
-    text-decoration: none;
-  }
+} 
 
-  .bg-img {
-    width: 100%;
-    height: 100%;
-    background-image: url('../../img/your-name.jpg'); /* Replace 'background-image.jpg' with the path to your image */
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat; 
+.register{
+  color: rgb(0, 0, 0);
 }
+.register:hover{
+  color: rgb(212, 184, 0);
+}
+
+
+.profile-image-pic {
+  height: 200px;
+  width: 200px;
+  object-fit: cover;
+}
+
+.cardbody-color {
+  background-color: rgba(57, 136, 215, 0);
+  opacity: 1;
+}
+
+.box {
+  opacity: 0.9;
+}
+
+a {
+  text-decoration: none;
+}
+
+.bg-img {
+  width: 100%;
+  height: 100%;
+  background-image: url('../../img/wall_hero.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  animation: slideImages 25s linear infinite;
+}
+
+@keyframes slideImages {
+  0% {
+    background-image: url('../../img/wall_hero.png');
+    background-position: 0% 0%;
+  }
+
+  50% {
+    background-image: url('../../img/wall_hero.png');
+    background-position: 0% 100%;
+  }
+
+  100% {
+    background-image: url('../../img/wall_hero.png');
+    background-position: 0% 0%;
+  }
+}
+
+
 .full-height {
-  height: 100%; /* ความสูงเท่ากับหน้าจอ (viewport height) */
+  height: 100%;
+  /* ความสูงเท่ากับหน้าจอ (viewport height) */
 }
