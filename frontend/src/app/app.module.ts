@@ -25,6 +25,7 @@ import { TableCharacterComponent } from './components/table-character/table-char
 import { MangatableComponent } from './components/table-manga/mangatable.component';
 import { UpdateCharacterComponent } from './components/update-character/update-character.component';
 import { UpdateMangaComponent } from './components/update-manga/update-manga.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   declarations: [
@@ -56,7 +57,8 @@ import { UpdateMangaComponent } from './components/update-manga/update-manga.com
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgxPaginationModule
   ],
   providers: [SharedDataService],
   bootstrap: [AppComponent]

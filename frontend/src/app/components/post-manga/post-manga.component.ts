@@ -165,6 +165,7 @@ export class PostMangaComponent implements OnInit {
   showAlertMessage(message: string, isSuccess: boolean) {
     this.alertMessage = message;
     this.alertClass = isSuccess ? 'alert alert-success' : 'alert alert-warning';
+
     this.showAlert = true; // แสดง alert
     // หลังจาก 3 วินาที ซ่อน alert ลง
     setTimeout(() => {

@@ -5,7 +5,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 
 interface AuthorResponse {
   _id: string;
-  name: string;
+  eng_name: string;
 }
 
 interface MangaResponse {
@@ -25,15 +25,11 @@ interface MangaResponse {
 export class UpdateMangaComponent implements OnInit {
 
   manga = new FormGroup({
-    name: new FormControl('', [Validators.required]),
-    authorId: new FormControl('', [Validators.required]),
-    genre: new FormArray([], [Validators.required]),
-    imgUrl: new FormControl('', [Validators.required]),
-    // imgCover: new FormControl(null as File | null, [Validators.required]),
-    imgCover: new FormControl(null, [
-      Validators.required,
-      Validators.pattern(/\.(jpg|png)$/i) // เพิ่ม Validators.pattern สำหรับระบุนามสกุลไฟล์
-    ]),
+    name: new FormControl(''),
+    authorId: new FormControl(''),
+    genre: new FormArray([]),
+    imgUrl: new FormControl(''),
+    
   });
   
   mangaData: MangaResponse[] = []
@@ -131,7 +127,7 @@ export class UpdateMangaComponent implements OnInit {
       return 'Unknown';
     }
     const author = this.authorOptions.find(a => a._id === authorId);
-    return author ? author.name : 'Unknown Studio';
+    return author ? author.eng_name : 'Unknown Studio';
   }
 
   isValidGenre(genre: string): boolean {
