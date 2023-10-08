@@ -48,8 +48,17 @@ export class SignUpComponent implements OnInit, DoCheck {
       role: 2,
       favCharacter: null
     };
-
     console.log(data)
+
+    if (this.signupUser.get('name')?.hasError('required') ||
+      this.signupUser.get('email')?.hasError('required') ||
+      this.signupUser.get('email')?.hasError('email') ||
+      this.signupUser.get('password')?.hasError('pattern') ||
+      this.signupUser.get('password')?.hasError('required')) {
+        
+        this.showAlertMessage('Error: Please enter valid data.' , false)
+      return;
+    }
     this.http.post('http://localhost:5555/signup', data)
       .subscribe(
         (response: any) => {
@@ -60,6 +69,20 @@ export class SignUpComponent implements OnInit, DoCheck {
           console.error('signup error', error);
         }
       );
+  }
+  
+  showAlert: boolean = false;
+  alertMessage: string = "alert—check it out!";
+  alertClass: string = ''; // ตัวแปรสำหรับกำหนดคลาส CSS ของ alert
+
+  showAlertMessage(message: string, isSuccess: boolean) {
+    this.alertMessage = message;
+    this.alertClass = isSuccess ? 'alert alert-success' : 'alert alert-danger';
+    this.showAlert = true; // แสดง alert
+    // หลังจาก 3 วินาที ซ่อน alert ลง
+    setTimeout(() => {
+      this.showAlert = false;
+    }, 3000);
   }
 
 }

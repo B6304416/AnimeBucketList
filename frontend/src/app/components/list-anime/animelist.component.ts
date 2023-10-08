@@ -53,6 +53,7 @@ export class AnimelistComponent implements OnInit {
           imgCover: this.baseUrl + anime.imgCover
         }))
         console.log(this.data)
+        this.data.reverse();  //เปลี่ยนลำดับ
       },
       (error) => {
         console.error('Error:', error);
