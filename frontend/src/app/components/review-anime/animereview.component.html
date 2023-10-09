@@ -92,23 +92,31 @@
                                         <div class="col-sm-12">
                                             <h3>{{ reviewData.length }} Comments</h3>
                                             <div *ngFor="let review of reviewData; let i = index" class="media">
-                                                <a class="pull-left">
-                                                    <img class="media-object card-img-test"
-                                                        [src]="'https://cdn.pic.in.th/file/picinth/anime-profile-' + avatarNumbers[i] + '.jpeg'"
-                                                        alt="">
-                                                </a>
-                                                <div class="media-body">
-                                                    <div class="media-heading">
-                                                        <div style="display: inline-block; font-weight: bold;">{{
-                                                            review.user }}</div>
-                                                        <div style="float: right;">
-                                                            <span *ngFor="let i of [1, 2, 3, 4, 5]">
-                                                                <span class="fa"
-                                                                    [ngClass]="{'fa-star': i <= review.rate, 'fa-star-o': i > review.rate}"></span>
-                                                            </span>
+                                                <div class="row">
+                                                    <div class="col-sm-1">
+                                                        <a class="pull-left">
+                                                            <img class="media-object card-img-test"
+                                                                [src]="'https://cdn.pic.in.th/file/picinth/anime-profile-' + avatarNumbers[i] + '.jpeg'"
+                                                                alt="">
+                                                        </a>
+                                                    </div>
+                                                    <div class="col-sm-11 ">
+                                                        <div class="media-body">
+                                                            <div class="media-heading">
+                                                                <div style="display: inline-block; font-weight: bold;" class="ms-2">
+                                                                    {{review.user }}</div>
+                                                                <div style="float: right;">
+                                                                    <span *ngFor="let i of [1, 2, 3, 4, 5]">
+                                                                        <span class="fa"
+                                                                            [ngClass]="{'fa-star': i <= review.rate, 'fa-star-o': i > review.rate}"></span>
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="ms-2">
+                                                                <p>{{ review.comment }}</p>
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                    <p>{{ review.comment }}</p>
                                                 </div>
                                             </div>
                                         </div>

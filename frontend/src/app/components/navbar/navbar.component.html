@@ -26,14 +26,14 @@
       </ul>
       <button class="btn my-2 my-sm-0 me-2 "
         [ngClass]="{'btn-outline-primary': !checkUserRole(), 'btn-outline-warning': checkUserRole()}" type="button"
-        *ngIf="isLoggedIn">{{name}}
+        *ngIf="isLoggedIn"><i class="fa-regular fa-user me-2"></i>{{ name}}
       </button>
       <ul class="navbar-nav my-2 my-sm-0 me-2">
         <li class="nav-item" *ngIf="!isLoggedIn">
-          <button class="btn btn-outline-success my-2 my-sm-0 " routerLink="/login">Login</button>
+          <button class="btn btn-outline-success my-2 my-sm-0 " routerLink="/login">Login<i class="fa-solid fa-right-to-bracket ms-1"></i></button>
         </li>
         <li class="nav-item" *ngIf="isLoggedIn">
-          <button class="btn btn-outline-danger my-2 my-sm-0 " (click)="logout()">Logout</button>
+          <button class="btn btn-outline-danger my-2 my-sm-0 " (click)="logout()">Logout<i class="fa-solid fa-right-to-bracket ms-1"></i></button>
         </li>
       </ul>
     </div>
