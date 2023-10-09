@@ -51,8 +51,8 @@ export class FromMangaComponent implements OnInit,OnChanges {
   }
 
   onClick(animeId: string) {
-    console.log('Clicked on anime with ID:', animeId);
-    this.router.navigate(['/animereview', animeId]);
+    console.log('Clicked on manga with ID:', animeId);
+    this.router.navigate(['/mangareview', animeId]);
     window.scrollTo(0, 0); 
   }
 }

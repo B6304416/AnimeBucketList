@@ -3,43 +3,27 @@
         <div class="row">
             <div class="col-md-4">
                 <div class="col-md-12 sticky-top">
-                  <div class="card mb-4" *ngIf="mangaData[0]">
-                    <img class="card-img-top" [src]="mangaData[0].imgUrl" alt="..." />
-                  </div>
-                  <div class="card mb-4 ">
-                    <div class="card-header">ลายละเอียด</div>
-                    <div class="card-body">
-                      <div class="row" *ngIf="mangaData[0]">
-                        <div class="col-sm-12">
-                          <ul class="list-unstyled mb-0">
-                            <li>Name: {{ mangaData[0].name}}</li>
-                            <li>Author: {{ mangaData[0].author}}</li>
-                            <li>Genres: {{ mangaData[0].genre}}</li>
-                          </ul>
-                        </div>
-                      </div>
+                    <div class="card mb-4" *ngIf="mangaData[0]">
+                        <img class="card-img-top" [src]="mangaData[0].imgCover" alt="..." />
                     </div>
-                  </div>
-              
-                  <!-- <div class="card mb-4">
-                    <div class="card-header">เรื่องย่อ</div>
-                    <div class="card-body" *ngIf="mangaData[0]">{{ mangaData[0].synopsis || 'No synopsis available.' }}</div>
-                  </div> -->
-                </div>
-              </div>
-              
-            <!-- Nested row for non-featured blog posts-->
-            <div class="col-md-8">
-                <div class="row">
-
-                    <!-- <div class="col-md-12">
-                        <div class="card mb-4">
-                            <div class="embed-responsive embed-responsive-16by9">
-                                <iframe src='' id="mangaTrailer"></iframe>
+                    <div class="card mb-4 ">
+                        <div class="card-header">ลายละเอียด</div>
+                        <div class="card-body">
+                            <div class="row" *ngIf="mangaData[0]">
+                                <div class="col-sm-12">
+                                    <ul class="list-unstyled mb-0">
+                                        <li>Name: {{ mangaData[0].name}}</li>
+                                        <li>Author: {{ mangaData[0].author}}</li>
+                                        <li>Genres: {{ mangaData[0].genre}}</li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
-                    </div> -->
-
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="row">
 
                     <div class="col-md-12">
                         <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"
@@ -74,13 +58,16 @@
                                                     <textarea class="form-control" id="message"
                                                         placeholder="Your message" required=""
                                                         formControlName="comment"></textarea>
-                                                        <div *ngIf="review.get('comment')?.hasError('forbiddenWord') && review.get('comment')?.touched" class="text-danger">
-                                                            ไม่หยาบนะจ๊ะ!!!
-                                                        </div>
+                                                    <div *ngIf="review.get('comment')?.hasError('forbiddenWord') && review.get('comment')?.touched"
+                                                        class="text-danger">
+                                                        ไม่หยาบนะจ๊ะ!!!
+                                                    </div>
                                                 </div>
                                             </div>
                                         </fieldset>
-                                        <button type="submit" class="btn btn-primary pull-right " [ngClass]="{'btncomment btn-danger': review.get('comment')?.hasError('forbiddenWord') }" (click)="submitManga()">Submit</button>
+                                        <button type="submit" class="btn btn-primary pull-right "
+                                            [ngClass]="{'btncomment btn-danger': review.get('comment')?.hasError('forbiddenWord') }"
+                                            (click)="submitManga()">Submit</button>
                                     </form>
                                 </div>
                                 <div class="card-body">
