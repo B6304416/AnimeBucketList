@@ -6,7 +6,6 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { AbstractControl, ValidatorFn } from '@angular/forms';
 
 interface ReviewResponse {
-  // animeId: string;
   user: string;
   rate: number;
   comment: string;
@@ -15,14 +14,10 @@ interface ReviewResponse {
 interface MangaResponse {
   _id: string;
   name: string;
-  // episode: number;
   genre: string;
   imgUrl: string;
-  // trailerUrl: string;
-  // synopsis: string;
+  imgCover: string;
   author: string;
-  // studio: string;
-  // source: string;
 }
 
 @Component({
@@ -99,28 +94,17 @@ export class MangareviewComponent implements OnInit {
 
       this.http.get<MangaResponse[]>(mangaUrlbyId).subscribe(
         (res) => {
-          this.mangaData = res;
+          this.mangaData = res.map(manga => ({
+            ...manga,
+            imgCover: 'http://localhost:5555' + manga.imgCover
+          }))
           console.log('manga');
           console.log(this.mangaData);
-          // if (this.animeData.length > 0 && this.animeData[0].videoUrl) {
-          //   const videoUrl = `https://www.youtube.com/embed/${this.animeData[0].videoUrl}`;
-          //   const safeVideoUrl: SafeResourceUrl = this.sanitizer.bypassSecurityTrustResourceUrl(videoUrl);
-          //   this.videoUrls = safeVideoUrl;
-          // } else {
-          //   console.error('Invalid or missing videoUrl in animeData[0].');
-          // }
 
           this.review.patchValue({
             mangaId: this.mangaData[0]._id, // Assuming there's at least one anime in the array
-            // userId: user
+
           });
-          // const iframe = document.getElementById("mangaTrailer") as HTMLIFrameElement;;
-          // if (iframe) {
-          //   console.log(this.mangaData[0].trailerUrl)
-          //   iframe.src = this.mangaData[0].trailerUrl;
-          // } else {
-          //   console.warn("");
-          // }
         },
         (error) => {
           console.error('Error:', error);
