@@ -11,6 +11,7 @@
     object-fit: cover;
 }
 
+
 @keyframes slideImages {
     0% {
         background-image: url('../../img/wallpaper1_h.jpg');
