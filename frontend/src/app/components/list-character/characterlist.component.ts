@@ -107,8 +107,8 @@ export class CharacterlistComponent implements OnInit {
         this.fetchData()
       },
       (error) => {
-        console.error('Error posting anime', error);
-        this.showAlertMessage('Error: ' + error.message,false)
+        console.error('Error', error);
+        this.showAlertMessage('Error: ' + error.message, false)
       }
     );
 

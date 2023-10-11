@@ -42,29 +42,85 @@ a {
   text-decoration: none;
 }
 
+.logo{
+  animation:Madukdik 1.5s ;
+}
+
+@keyframes Madukdik {
+	0% {
+		animation-timing-function: ease-in;
+		opacity: 1;
+		transform: translateY(-45px);
+	}
+
+	24% {
+		opacity: 1;
+	}
+
+	40% {
+		animation-timing-function: ease-in;
+		transform: translateY(-24px);
+	}
+
+	65% {
+		animation-timing-function: ease-in;
+		transform: translateY(-12px);
+	}
+
+	82% {
+		animation-timing-function: ease-in;
+		transform: translateY(-6px);
+	}
+
+	93% {
+		animation-timing-function: ease-in;
+		transform: translateY(-4px);
+	}
+
+	25%,
+	55%,
+	75%,
+	87% {
+		animation-timing-function: ease-out;
+		transform: translateY(0px);
+	}
+
+	100% {
+		animation-timing-function: ease-out;
+		opacity: 1;
+		transform: translateY(0px);
+	}
+}
+
 .bg-img {
   width: 100%;
   height: 100%;
   background-image: url('../../img/wall_hero.png');
   background-size: cover;
   background-position: center;
-  animation: slideImages 25s linear infinite;
+  animation: slideImages 20s linear infinite;
 }
 
 @keyframes slideImages {
   0% {
-    background-image: url('../../img/wall_hero.png');
-    background-position: 0% 0%;
+      background-image: url('../../img/your-name.jpg');
+      background-position: 0% 0%;
   }
-
+  40% {
+      background-image: url('../../img/your-name.jpg');
+      background-position: 0% 100%;
+  }
   50% {
-    background-image: url('../../img/wall_hero.png');
-    background-position: 0% 100%;
+      background-image: url('../../img/737385.jpg');
+      background-position: 0% 100%;
   }
-
+  90% {
+      background-image: url('../../img/737385.jpg');
+      background-position: 0% 0%;
+  }
   100% {
-    background-image: url('../../img/wall_hero.png');
-    background-position: 0% 0%;
+      background-image: url('../../img/your-name.jpg');
+      background-position: 0% 0%;
   }
 }
 
