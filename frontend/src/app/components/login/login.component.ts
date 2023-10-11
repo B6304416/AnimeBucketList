@@ -43,10 +43,11 @@ export class LoginComponent implements OnInit {
         },
         (error) => {
           console.error('Login error', error);
+          this.showAlertMessage('Error: Invalid email or password.', false);
         }
       );
   }
-    
+
   showAlert: boolean = false;
   alertMessage: string = "alert—check it out!";
   alertClass: string = ''; // ตัวแปรสำหรับกำหนดคลาส CSS ของ alert
