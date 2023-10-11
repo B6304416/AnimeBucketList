@@ -4,6 +4,16 @@
     background-size: cover;
     animation: slideImages 60s linear infinite;
 }
+.card {
+    display: flex; /* หรือเปลี่ยนเป็น display: grid; ในกรณีที่คุณต้องการใช้ Grid Layout */
+    flex-direction: column; /* หรือ grid-template-rows: 1fr 1fr 1fr 1fr 1fr; ในกรณีที่คุณใช้ Grid Layout */
+    height: 100%; /* ให้การ์ดมีความยาวเท่ากัน */
+  }.card-body {
+    flex: 1; /* หรือ grid-row: 3; ในกรณีที่คุณใช้ Grid Layout */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* ให้ข้อมูลอยู่ระหว่างด้านบนและด้านล่างของการ์ด */
+  }
 
 .card-img-test{
     width: auto;
