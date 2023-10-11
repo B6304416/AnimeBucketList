@@ -46,4 +46,18 @@ export class LoginComponent implements OnInit {
         }
       );
   }
+    
+  showAlert: boolean = false;
+  alertMessage: string = "alert—check it out!";
+  alertClass: string = ''; // ตัวแปรสำหรับกำหนดคลาส CSS ของ alert
+
+  showAlertMessage(message: string, isSuccess: boolean) {
+    this.alertMessage = message;
+    this.alertClass = isSuccess ? 'alert alert-success' : 'alert alert-danger';
+    this.showAlert = true; // แสดง alert
+    // หลังจาก 3 วินาที ซ่อน alert ลง
+    setTimeout(() => {
+      this.showAlert = false;
+    }, 3000);
+  }
 }
