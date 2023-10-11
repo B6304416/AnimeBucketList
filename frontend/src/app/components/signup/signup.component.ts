@@ -49,16 +49,27 @@ export class SignUpComponent implements OnInit, DoCheck {
       favCharacter: null
     };
     console.log(data)
-
-    if (this.signupUser.get('name')?.hasError('required') ||
-      this.signupUser.get('email')?.hasError('required') ||
-      this.signupUser.get('email')?.hasError('email') ||
-      this.signupUser.get('password')?.hasError('pattern') ||
-      this.signupUser.get('password')?.hasError('required')) {
-        
-        this.showAlertMessage('Error: Please enter valid data.' , false)
+    
+    if (this.signupUser.get('name')?.hasError('required')) {
+      this.showAlertMessage('Error: Please enter your name.', false);
       return;
+    } else if (this.signupUser.get('email')?.hasError('required')) {
+      this.showAlertMessage('Error: Please enter your email address.', false);
+      return;
+    } else if (this.signupUser.get('email')?.hasError('email')) {
+      this.showAlertMessage('Error: Please enter a valid email address.', false);
+      return;
+    } else if (this.signupUser.get('password')?.hasError('pattern')) {
+      this.showAlertMessage('Error: Password must meet the pattern requirements.', false);
+      return;
+    } else if (this.signupUser.get('password')?.hasError('required')) {
+      this.showAlertMessage('Error: Please enter a password.', false);
+      return;
+    } else {
     }
+    
+
+    
     this.http.post('http://localhost:5555/signup', data)
       .subscribe(
         (response: any) => {
@@ -67,6 +78,13 @@ export class SignUpComponent implements OnInit, DoCheck {
         },
         (error) => {
           console.error('signup error', error);
+          if (error.error && error.error.message && error.error.message.includes('duplicate key error')) {
+            // เมื่อเจอข้อผิดพลาดที่คีย์ซ้ำกันใน MongoDB
+            this.showAlertMessage('Email is already registered.', false);
+          } else {
+            // กรณีอื่น ๆ ของข้อผิดพลาด
+            this.showAlertMessage('signup error', false);
+          }
         }
       );
   }
