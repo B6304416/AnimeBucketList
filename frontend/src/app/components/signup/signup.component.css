@@ -3,6 +3,12 @@
 div {
     font-family: 'Shippori Antique', sans-serif;
 }
+
+.profile-image-pic {
+    height: 200px;
+    width: 200px;
+    object-fit: cover;
+  }
 .alert-container {
     position: fixed; /* ตั้งค่าเป็น fixed เพื่อควบคุมตำแหน่งของ alerts ในหน้าจอ */
     top: 92%; /* ตำแหน่งด้านบนที่ 50% ของหน้าจอ */
@@ -49,27 +55,35 @@ a {
 .bg-img {
     width: 100%;
     height: 100%;
+    background-image: url('../../img/wall_hero.png');
     background-size: cover;
     background-position: center;
-    animation: slideImages 25s linear infinite;
-}
-
-@keyframes slideImages {
+    animation: slideImages 20s linear infinite;
+  }
+  
+  @keyframes slideImages {
     0% {
-        background-image: url('../../img/wall_hero.png');
+        background-image: url('../../img/your-name.jpg');
         background-position: 0% 0%;
     }
-
-    50% {
-        background-image: url('../../img/wall_hero.png');
+    40% {
+        background-image: url('../../img/your-name.jpg');
         background-position: 0% 100%;
     }
-
-    100% {
-        background-image: url('../../img/wall_hero.png');
+    50% {
+        background-image: url('../../img/737385.jpg');
+        background-position: 0% 100%;
+    }
+    90% {
+        background-image: url('../../img/737385.jpg');
         background-position: 0% 0%;
     }
-}
+    100% {
+        background-image: url('../../img/your-name.jpg');
+        background-position: 0% 0%;
+    }
+  }
+  
 
 .full-height {
     height: 100%;
