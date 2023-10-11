@@ -36,6 +36,7 @@ export class CharacterlistComponent implements OnInit {
   characters: CharacterResponse[] = [];
   sortedCharacters: CharacterResponse[] = [];
   currentUser: UserResponse[] = [];
+  showFullDetail: boolean = false;
 
   constructor(
     private http: HttpClient,

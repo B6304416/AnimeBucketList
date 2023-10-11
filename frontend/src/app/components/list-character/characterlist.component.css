@@ -5,6 +5,16 @@
     animation: slideImages 30s linear infinite;
 }
 
+.link {
+    color: rgb(89, 92, 95); /* สีลิงก์เมื่อไม่ hover หรือเมาส์ออกจากลิงก์ */
+    text-decoration: none; /* ลบเส้นใต้ของลิงก์ */
+  }
+  
+  .link:hover {
+    color: #ef0b0b; /* สีลิงก์เมื่อ hover */
+  }
+  
+
 .card-img-top {
     width: 100%;
     height: 400px;

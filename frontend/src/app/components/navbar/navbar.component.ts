@@ -47,6 +47,7 @@ export class NavbarComponent implements OnInit, DoCheck{
     localStorage.removeItem('token');
     localStorage.removeItem('userId');
     sessionStorage.removeItem('token');
+    sessionStorage.removeItem('userId');
     sessionStorage.removeItem('role');
     sessionStorage.removeItem('refresh');
     sessionStorage.removeItem('username');

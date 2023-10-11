@@ -28,8 +28,8 @@
                 </button>
             </div>
             <div class="row" *ngIf="isAllClicked">
-                <div class="col-lg-3" *ngFor="let manga of data">
-                    <div class="card mb-4">
+                <div class="col-lg-3 mb-4" *ngFor="let manga of data">
+                    <div class="card">
                         <img class="card-img-top card-img-test" *ngIf="manga.imgCover != 'http://localhost:5555undefined'" [src]="manga.imgCover" alt="..." />
                         <img class="card-img-top card-img-test" *ngIf="manga.imgCover == 'http://localhost:5555undefined'" [src]="manga.imgUrl" alt="..." />
                         <div class="card-body">
@@ -46,8 +46,8 @@
                 </div>
             </div>
             <div class="row" *ngIf="isSortByScoreClicked">
-                <div class="col-lg-3" *ngFor="let manga of mangaData">
-                    <div class="card mb-4">
+                <div class="col-lg-3 mb-4" *ngFor="let manga of mangaData">
+                    <div class="card">
                         <img class="card-img-top card-img-test" *ngIf="manga.mangaImgCover != 'http://localhost:5555undefined'" [src]="manga.mangaImgCover"  alt="..." />
                         <img class="card-img-top card-img-test" *ngIf="manga.mangaImgCover == 'http://localhost:5555undefined'" [src]="manga.mangaImgUrl" alt="..." />
                         <div class="card-body">
