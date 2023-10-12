@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { AbstractControl, ValidatorFn } from '@angular/forms';
@@ -51,7 +51,9 @@ export class MangareviewComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private http: HttpClient,
-    private sanitizer: DomSanitizer
+    private sanitizer: DomSanitizer,
+    private router: Router
+
   ) {
     this.mangaId = this.route.snapshot.paramMap.get('id');
   }
@@ -147,6 +149,10 @@ export class MangareviewComponent implements OnInit {
     console.log('hahah', review);
     console.log('hahah', review);
     const token = sessionStorage.getItem('token');
+    if (!token) {
+      this.router.navigate(['/login']);
+      return
+    }
     console.log(review);
     const headers = new HttpHeaders({
       Authorization: 'Bearer ' + token,
