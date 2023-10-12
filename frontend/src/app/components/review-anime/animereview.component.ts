@@ -1,8 +1,9 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, FormControl, ValidatorFn, AbstractControl } from '@angular/forms';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+
 
 interface ReviewResponse {
   user: string;
@@ -54,7 +55,8 @@ export class AnimereviewComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private http: HttpClient,
-    private sanitizer: DomSanitizer
+    private sanitizer: DomSanitizer,
+    private router: Router,
   ) {
     this.animeId = this.route.snapshot.paramMap.get('id');
   }
@@ -159,8 +161,12 @@ export class AnimereviewComponent implements OnInit {
     const review = this.review.value;
     console.log('hahah', review)
     console.log('hahah', review)
-    const token = sessionStorage.getItem('token');
     console.log(review)
+    const token = sessionStorage.getItem('token');
+    if (!token) {
+      this.router.navigate(['/login']);
+      return
+    }
     const headers = new HttpHeaders({
       'Authorization': 'Bearer ' + token
     });
@@ -174,7 +180,6 @@ export class AnimereviewComponent implements OnInit {
       },
       (error) => {
         console.error('Error posting anime', error);
-        alert('Error: ' + error.message)
       }
     );
 
