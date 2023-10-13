@@ -123,7 +123,7 @@ router.get('/:id', async (req, res) => {
 
 router.post('/', tokenVerify,async (req, res) => {
     try {
-        // const { comment, rate, animeId } = req.body;
+
         const comment = req.body.comment;
         const rate = req.body.rate;
         const animeId = req.body.animeId;
@@ -136,13 +136,18 @@ router.post('/', tokenVerify,async (req, res) => {
                 message: 'Required fields are invalid or missing!',
             });
         }
+
         const newAnimeReview = {
             comment : comment,
             rate : rate,
             userId : userIdObjectId,
             animeId : animeIdObjectId,
         };
+
+        // const toAnime = await AnimeReview.find({ animeId: animeIdObjectId});
+
         const animeReview = await AnimeReview.create(newAnimeReview);
+
         return res.status(201).send(animeReview);
     } catch (error) {
         console.log(error.message);

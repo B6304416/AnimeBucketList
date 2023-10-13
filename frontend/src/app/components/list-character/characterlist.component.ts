@@ -69,8 +69,8 @@ export class CharacterlistComponent implements OnInit {
         if(this.sortedCharacters[0].mangaId){
           this.fromMangaId = this.sortedCharacters[0].mangaId
         }
-        this.fromAnimeComponent.fetchData();
-        this.fromMangaComponent.fetchData();
+        this.fromAnimeComponent.fetchAnime();
+        this.fromMangaComponent.fetchManga();
       },
       (error) => {
         console.error('Error:', error);
