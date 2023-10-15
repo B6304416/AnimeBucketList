@@ -63,6 +63,11 @@ export class AnimetableComponent implements OnInit {
     console.log('Clicked on anime with ID:', animeId);
     this.router.navigate(['/updateanime', animeId]);
   }
+  Reviwe(animeId: string) {
+    console.log('Clicked on anime with ID:', animeId);
+    this.router.navigate(['/animereview', animeId]);
+    window.scrollTo(0, 0); 
+  }
 
   // เมื่อคลิกปุ่มลบ
   confirmDelete(id: string, name: string) {

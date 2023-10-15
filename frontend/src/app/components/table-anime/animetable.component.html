@@ -37,7 +37,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr *ngFor="let anime of filteredData | paginate: { itemsPerPage: 6, currentPage: p }">
+                                <tr *ngFor="let anime of filteredData | paginate: { itemsPerPage: 6, currentPage: p }" (click)="Reviwe(anime._id)">
                                     <td>
                                         <div class="user_img">
                                             <img *ngIf="anime.imgCover != 'http://localhost:5555undefined'"
