@@ -19,6 +19,7 @@ export class PostAnimeComponent implements OnInit {
     name: new FormControl('', [Validators.required, Validators.maxLength(64)]),
     typeId: new FormControl('', [Validators.required]),
     studioId: new FormControl('', [Validators.required]),
+    newStudio: new FormControl('', [Validators.required]),
     episode: new FormControl(null, [Validators.required, Validators.min(1)]),
     genre: new FormArray([], [Validators.required]),
     imgUrl: new FormControl(''),
@@ -136,26 +137,45 @@ export class PostAnimeComponent implements OnInit {
       'Authorization': 'Bearer ' + token
     });
 
-    if (this.anime.get('name')?.hasError('required') ||
-      this.anime.get('name')?.hasError('maxlength') ||
-      this.anime.get('episode')?.hasError('required') ||
-      this.anime.get('episode')?.hasError('min') ||
-      this.anime.get('studioId')?.hasError('required') ||
-      this.anime.get('typeId')?.hasError('required') ||
-      this.anime.get('sourceId')?.hasError('required') ||
-      this.anime.get('genre')?.hasError('required') ||
-      this.anime.get('trailerUrl')?.hasError('required') || 
-      this.anime.get('trailerUrl')?.hasError('pattern') ||
-      this.anime.get('synopsis')?.hasError('required') || 
-      this.anime.get('synopsis')?.hasError('minlength') ||
-      this.anime.get('imgCover')?.hasError('required') || 
-      this.anime.get('imgCover')?.hasError('pattern')) {
-        
-        this.showAlertMessage('Error: Please enter valid data.' , false)
-      return;
-    }
+    // if (this.anime.get('name')?.hasError('required') ||
+    //   this.anime.get('name')?.hasError('maxlength') ||
+    //   this.anime.get('episode')?.hasError('required') ||
+    //   this.anime.get('episode')?.hasError('min') ||
+    //   this.anime.get('studioId')?.hasError('required') ||
+    //   this.anime.get('typeId')?.hasError('required') ||
+    //   this.anime.get('sourceId')?.hasError('required') ||
+    //   this.anime.get('genre')?.hasError('required') ||
+    //   this.anime.get('trailerUrl')?.hasError('required') ||
+    //   this.anime.get('trailerUrl')?.hasError('pattern') ||
+    //   this.anime.get('synopsis')?.hasError('required') ||
+    //   this.anime.get('synopsis')?.hasError('minlength') ||
+    //   this.anime.get('imgCover')?.hasError('required') ||
+    //   this.anime.get('imgCover')?.hasError('pattern')) {
 
-    this.http.post('http://localhost:5555/anime', formData, { headers }).subscribe(
+    //   this.showAlertMessage('Error: Please enter valid data.', false)
+    //   return;
+    // }
+
+    ///new
+    // Check if studioId is 'new' (indicating a new studio is being created)
+    if (animeData.studioId === 'new') {
+      // Create a new studio with the provided name
+      const newStudioName = this.anime.get('newStudio')?.value;
+      if (newStudioName) {
+        this.http.post('http://localhost:5555/studio', newStudioName, { headers }).subscribe(
+          (response) => {
+            console.log('Anime posted successfully', response);
+          },
+          (error) => {
+            console.error('Error creating new studio', error);
+          }
+        );
+      } else {
+        console.error('Error: New studio name is required.');
+        return;
+      }
+    } else {
+      this.http.post('http://localhost:5555/anime', formData, { headers }).subscribe(
       (response) => {
         console.log('Anime posted successfully', response);
         this.resetForm();
@@ -164,8 +184,24 @@ export class PostAnimeComponent implements OnInit {
       (error) => {
         console.error('Error posting anime', error);
         this.showAlertMessage('Error: ' + error.message, false)
+        console.log(formData)
       }
     );
+    }
+    ///new
+
+
+    // this.http.post('http://localhost:5555/anime', formData, { headers }).subscribe(
+    //   (response) => {
+    //     console.log('Anime posted successfully', response);
+    //     this.resetForm();
+    //     this.showAlertMessage('Anime posted successfully', true)
+    //   },
+    //   (error) => {
+    //     console.error('Error posting anime', error);
+    //     this.showAlertMessage('Error: ' + error.message, false)
+    //   }
+    // );
 
   }
   resetForm() {
@@ -187,4 +223,5 @@ export class PostAnimeComponent implements OnInit {
       this.showAlert = false;
     }, 3000);
   }
+
 }

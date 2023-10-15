@@ -51,19 +51,19 @@ export class SignUpComponent implements OnInit, DoCheck {
     console.log(data)
     
     if (this.signupUser.get('name')?.hasError('required')) {
-      this.showAlertMessage('Error: Please enter your name.', false);
+      this.showAlertMessage('Please enter your name.', false);
       return;
     } else if (this.signupUser.get('email')?.hasError('required')) {
-      this.showAlertMessage('Error: Please enter your email address.', false);
+      this.showAlertMessage('Please enter your email address.', false);
       return;
     } else if (this.signupUser.get('email')?.hasError('email')) {
-      this.showAlertMessage('Error: Please enter a valid email address.', false);
+      this.showAlertMessage('Please enter a valid email address.', false);
       return;
     } else if (this.signupUser.get('password')?.hasError('pattern')) {
-      this.showAlertMessage('Error: Password must meet the pattern requirements.', false);
+      this.showAlertMessage('There must be at least 4 digits (0-9).', false);
       return;
     } else if (this.signupUser.get('password')?.hasError('required')) {
-      this.showAlertMessage('Error: Please enter a password.', false);
+      this.showAlertMessage('Please enter a password.', false);
       return;
     } else {
     }
