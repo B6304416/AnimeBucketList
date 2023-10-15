@@ -27,6 +27,7 @@ import { UpdateCharacterComponent } from './components/update-character/update-c
 import { UpdateMangaComponent } from './components/update-manga/update-manga.component';
 import { CommonModule } from '@angular/common';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { PresentationsComponent } from './components/presentations/presentations.component';
 
 
 @NgModule({
@@ -52,6 +53,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
     MangatableComponent,
     UpdateCharacterComponent,
     UpdateMangaComponent,
+    PresentationsComponent,
 
 
   ],
