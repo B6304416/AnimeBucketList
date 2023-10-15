@@ -58,6 +58,7 @@ export class PostAnimeComponent implements OnInit {
     this.http.get<StudioResponse[]>(studioUrl).subscribe(
       (res) => {
         this.studioOptions = res
+        this.studioOptions.sort((a, b) => a.name.localeCompare(b.name));
         console.log(this.studioOptions)
       },
       (error) => {
@@ -91,7 +92,7 @@ export class PostAnimeComponent implements OnInit {
       return 'Unknown';
     }
     const studio = this.studioOptions.find(s => s._id === studioId);
-    return studio ? studio.name : 'Unknown Studio';
+    return studio ? studio.name : 'New Studio';
   }
 
   isValidGenre(genre: string): boolean {
@@ -109,6 +110,10 @@ export class PostAnimeComponent implements OnInit {
   }
 
   submitAnime() {
+    if (this.checkAndShowErrors()) {
+      return; // มีข้อผิดพลาด ไม่ดำเนินการต่อ
+    }
+
     const animeData = this.anime.value;
     const token = sessionStorage.getItem('token');
     const headers = new HttpHeaders({
@@ -117,7 +122,6 @@ export class PostAnimeComponent implements OnInit {
 
     // Check if studioId is 'new' (indicating a new studio is being created)
     if (animeData.studioId === 'new') {
-      // Create a new studio with the provided name
       const newStudioName = this.anime.get('newStudio')?.value;
       if (newStudioName) {
         const dataToPost = CircularJSON.stringify({ name: newStudioName });
@@ -126,21 +130,21 @@ export class PostAnimeComponent implements OnInit {
           (response: any) => {
             console.log(' New studio successfully', response);
             animeData.studioId = response._id
-            console.log("1    1" + animeData.studioId)
-            this.newdata(animeData)
+            this.postAnime(animeData)
 
           },
           (error) => {
             console.error('Error creating new studio', error);
-            console.log(parsedData)
+            this.showAlertMessage('This studio already exists.', false)
           }
         );
       } else {
         console.error('Error: New studio name is required.');
+        this.showAlertMessage('New studio name is required.', false)
         return;
       }
     } else {
-      this.newdata(animeData)
+      this.postAnime(animeData)
     }
   }
   resetForm() {
@@ -163,10 +167,9 @@ export class PostAnimeComponent implements OnInit {
     }, 3000);
   }
 
-  newdata(Data: any) {
+  postAnime(Data: any) {
     const animeData = Data
     const formData = new FormData();
-    console.log("mai  " + animeData.studioId)
     if (animeData.name && animeData.typeId && animeData.studioId &&
       animeData.episode && animeData.sourceId && animeData.synopsis && animeData.trailerUrl) {
       formData.append('name', animeData.name);
@@ -205,6 +208,29 @@ export class PostAnimeComponent implements OnInit {
       }
     );
 
+  }
+
+  checkAndShowErrors() {
+    if (
+      this.anime.get('name')?.hasError('required') ||
+      this.anime.get('name')?.hasError('maxlength') ||
+      this.anime.get('episode')?.hasError('required') ||
+      this.anime.get('episode')?.hasError('min') ||
+      this.anime.get('studioId')?.hasError('required') ||
+      this.anime.get('typeId')?.hasError('required') ||
+      this.anime.get('sourceId')?.hasError('required') ||
+      this.anime.get('genre')?.hasError('required') ||
+      this.anime.get('trailerUrl')?.hasError('required') ||
+      this.anime.get('trailerUrl')?.hasError('pattern') ||
+      this.anime.get('synopsis')?.hasError('required') ||
+      this.anime.get('synopsis')?.hasError('minlength') ||
+      this.anime.get('imgCover')?.hasError('required') ||
+      this.anime.get('imgCover')?.hasError('pattern')
+    ) {
+      this.showAlertMessage('Error: Please enter valid data.', false);
+      return true; // มีข้อผิดพลาด
+    }
+    return false; // ไม่มีข้อผิดพลาด
   }
 
 }
