@@ -28,6 +28,7 @@ import { UpdateMangaComponent } from './components/update-manga/update-manga.com
 import { CommonModule } from '@angular/common';
 import { NgxPaginationModule } from 'ngx-pagination';
 
+
 @NgModule({
   declarations: [
     AppComponent,

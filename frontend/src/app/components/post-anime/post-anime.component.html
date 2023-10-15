@@ -104,9 +104,9 @@
                                     </div>
                                     <div class="form-group col-sm-9 ">
                                         <select class="form-control" formControlName="studioId">
+                                            <option value="new">กรอกข้อมูลสตูดิโอใหม่</option>
                                             <option *ngFor="let studio of studioOptions" [value]="studio._id">{{
                                                 studio.name }}</option>
-                                            <option value="new">กรอกข้อมูลสตูดิโอใหม่</option>
                                         </select>
                                         <div *ngIf="anime.get('studioId')?.hasError('required') && anime.get('studioId')?.touched"
                                             class="text-warning">
