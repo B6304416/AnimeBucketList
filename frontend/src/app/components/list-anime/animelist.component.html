@@ -64,7 +64,7 @@
             </div>
             <div class="row" *ngIf="isAllClicked">
                 <div class="col-lg-4 mb-4" *ngFor="let anime of data">
-                    <div class="card">
+                    <div class="card card-list">
                         <img class="card-img-top card-img-test" [src]="anime.imgCover" alt="..." />
                         <div class="card-body">
                             <div class="small text-muted">{{ anime.genre }}</div>
@@ -88,7 +88,7 @@
             </div>
             <div class="row" *ngIf="isSortByScoreClicked">
                 <div class="col-lg-4 mb-4" *ngFor="let anime of animeData">
-                    <div class="card card-content">
+                    <div class="card card-content card-list">
                         <img class="card-img-top card-img-test" [src]="anime.animeImgCover" alt="..." (click)="onClick(anime._id)"/>
                         <div class="card-body">
                             <div class="small text-muted">{{ anime.animeGenre }}</div>

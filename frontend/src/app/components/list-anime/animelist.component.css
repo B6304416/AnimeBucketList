@@ -4,7 +4,7 @@
     background-size: cover;
     animation: slideImages 30s linear infinite;
 }
-.card {
+.card-list {
     display: flex; /* หรือเปลี่ยนเป็น display: grid; ในกรณีที่คุณต้องการใช้ Grid Layout */
     flex-direction: column; /* หรือ grid-template-rows: 1fr 1fr 1fr 1fr 1fr; ในกรณีที่คุณใช้ Grid Layout */
     height: 100%; /* ให้การ์ดมีความยาวเท่ากัน */
