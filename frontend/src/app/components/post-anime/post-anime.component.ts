@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormArray, Validators } from '@angular/forms';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
+import * as CircularJSON from 'circular-json';
 
 interface StudioResponse {
   _id: string;
@@ -19,6 +20,7 @@ export class PostAnimeComponent implements OnInit {
     name: new FormControl('', [Validators.required, Validators.maxLength(64)]),
     typeId: new FormControl('', [Validators.required]),
     studioId: new FormControl('', [Validators.required]),
+    newStudio: new FormControl(''),
     episode: new FormControl(null, [Validators.required, Validators.min(1)]),
     genre: new FormArray([], [Validators.required]),
     imgUrl: new FormControl(''),
@@ -108,65 +110,38 @@ export class PostAnimeComponent implements OnInit {
 
   submitAnime() {
     const animeData = this.anime.value;
-    const formData = new FormData();
-
-    if (animeData.name && animeData.typeId && animeData.studioId &&
-      animeData.episode && animeData.sourceId && animeData.synopsis && animeData.trailerUrl) {
-      formData.append('name', animeData.name);
-      formData.append('typeId', animeData.typeId);
-      formData.append('studioId', animeData.studioId);
-      formData.append('episode', animeData.episode);
-      formData.append('sourceId', animeData.sourceId);
-      formData.append('synopsis', animeData.synopsis);
-      formData.append('trailerUrl', animeData.trailerUrl);
-    }
-
-    const genres = this.anime.get('genre')!.value as string[];
-    genres.forEach((genre, index) => {
-      formData.append(`genre[${index}]`, genre);
-    });
-
     const token = sessionStorage.getItem('token');
-
-    if (this.selectedFile) {
-      formData.append('imgProfile', this.selectedFile, this.selectedFile.name);
-    }
-
     const headers = new HttpHeaders({
       'Authorization': 'Bearer ' + token
     });
 
-    if (this.anime.get('name')?.hasError('required') ||
-      this.anime.get('name')?.hasError('maxlength') ||
-      this.anime.get('episode')?.hasError('required') ||
-      this.anime.get('episode')?.hasError('min') ||
-      this.anime.get('studioId')?.hasError('required') ||
-      this.anime.get('typeId')?.hasError('required') ||
-      this.anime.get('sourceId')?.hasError('required') ||
-      this.anime.get('genre')?.hasError('required') ||
-      this.anime.get('trailerUrl')?.hasError('required') || 
-      this.anime.get('trailerUrl')?.hasError('pattern') ||
-      this.anime.get('synopsis')?.hasError('required') || 
-      this.anime.get('synopsis')?.hasError('minlength') ||
-      this.anime.get('imgCover')?.hasError('required') || 
-      this.anime.get('imgCover')?.hasError('pattern')) {
-        
-        this.showAlertMessage('Error: Please enter valid data.' , false)
-      return;
-    }
+    // Check if studioId is 'new' (indicating a new studio is being created)
+    if (animeData.studioId === 'new') {
+      // Create a new studio with the provided name
+      const newStudioName = this.anime.get('newStudio')?.value;
+      if (newStudioName) {
+        const dataToPost = CircularJSON.stringify({ name: newStudioName });
+        const parsedData = CircularJSON.parse(dataToPost);
+        this.http.post('http://localhost:5555/anime/studio', parsedData, { headers }).subscribe(
+          (response: any) => {
+            console.log(' New studio successfully', response);
+            animeData.studioId = response._id
+            console.log("1    1" + animeData.studioId)
+            this.newdata(animeData)
 
-    this.http.post('http://localhost:5555/anime', formData, { headers }).subscribe(
-      (response) => {
-        console.log('Anime posted successfully', response);
-        this.resetForm();
-        this.showAlertMessage('Anime posted successfully', true)
-      },
-      (error) => {
-        console.error('Error posting anime', error);
-        this.showAlertMessage('Error: ' + error.message, false)
+          },
+          (error) => {
+            console.error('Error creating new studio', error);
+            console.log(parsedData)
+          }
+        );
+      } else {
+        console.error('Error: New studio name is required.');
+        return;
       }
-    );
-
+    } else {
+      this.newdata(animeData)
+    }
   }
   resetForm() {
     this.anime.reset();
@@ -187,4 +162,49 @@ export class PostAnimeComponent implements OnInit {
       this.showAlert = false;
     }, 3000);
   }
+
+  newdata(Data: any) {
+    const animeData = Data
+    const formData = new FormData();
+    console.log("mai  " + animeData.studioId)
+    if (animeData.name && animeData.typeId && animeData.studioId &&
+      animeData.episode && animeData.sourceId && animeData.synopsis && animeData.trailerUrl) {
+      formData.append('name', animeData.name);
+      formData.append('typeId', animeData.typeId);
+      formData.append('studioId', animeData.studioId);
+      formData.append('episode', animeData.episode);
+      formData.append('sourceId', animeData.sourceId);
+      formData.append('synopsis', animeData.synopsis);
+      formData.append('trailerUrl', animeData.trailerUrl);
+    }
+    const genres = this.anime.get('genre')!.value as string[];
+    genres.forEach((genre, index) => {
+      formData.append(`genre[${index}]`, genre);
+    });
+
+
+    if (this.selectedFile) {
+      formData.append('imgProfile', this.selectedFile, this.selectedFile.name);
+    }
+
+    const token = sessionStorage.getItem('token');
+    const headers = new HttpHeaders({
+      'Authorization': 'Bearer ' + token
+    });
+
+    this.http.post('http://localhost:5555/anime', formData, { headers }).subscribe(
+      (response) => {
+        console.log('Anime posted successfully', response);
+        this.resetForm();
+        this.showAlertMessage('Anime posted successfully', true)
+      },
+      (error) => {
+        console.error('Error posting anime', error);
+        console.log(formData)
+        this.showAlertMessage('Error: ' + error.message, false)
+      }
+    );
+
+  }
+
 }

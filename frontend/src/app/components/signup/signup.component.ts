@@ -60,7 +60,7 @@ export class SignUpComponent implements OnInit, DoCheck {
       this.showAlertMessage('Please enter a valid email address.', false);
       return;
     } else if (this.signupUser.get('password')?.hasError('pattern')) {
-      this.showAlertMessage('There must be at least 4 digits. (0-9)', false);
+      this.showAlertMessage('There must be at least 4 digits (0-9).', false);
       return;
     } else if (this.signupUser.get('password')?.hasError('required')) {
       this.showAlertMessage('Please enter a password.', false);
