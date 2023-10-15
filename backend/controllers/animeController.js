@@ -153,7 +153,7 @@ router.get('/studios', async (req, res) => {
     }
 })
 
-router.post('/studio', async (req, res) =>{
+router.post('/studio',authMiddleware, async (req, res) =>{
     try {
         if (
             !req.body.name 
@@ -265,6 +265,7 @@ router.post('/', [upload.single('imgProfile'), authMiddleware], async (req, res)
         return res.status(201).send(anime);
     } catch (error) {
         console.log(error.message);
+        console.log(req.body)
         res.status(500).send({ message: error.message })
     }
 })
