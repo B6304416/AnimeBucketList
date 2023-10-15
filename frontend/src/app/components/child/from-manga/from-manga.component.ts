@@ -23,7 +23,7 @@ export class FromMangaComponent implements OnInit,OnChanges {
 
   ngOnChanges(): void {
     if(this.fromMangaId){
-      this.fetchData();
+      this.fetchManga();
     }
   }
 
@@ -34,7 +34,7 @@ export class FromMangaComponent implements OnInit,OnChanges {
   }
 
   baseUrl: string = 'http://localhost:5555';
-  fetchData(){
+  fetchManga(){
     const url = 'http://localhost:5555/manga/'+this.fromMangaId;
     this.http.get<MangaResponse[]>(url).subscribe(
       (res) => {

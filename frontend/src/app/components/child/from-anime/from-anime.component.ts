@@ -28,7 +28,7 @@ export class FromAnimeComponent implements OnInit, OnChanges {
 
   ngOnChanges(): void {
     if(this.fromAnimeId){
-      this.fetchData();
+      this.fetchAnime();
     }
   }
 
@@ -38,7 +38,7 @@ export class FromAnimeComponent implements OnInit, OnChanges {
     // }
   }
   baseUrl: string = 'http://localhost:5555';
-  fetchData(){
+  fetchAnime(){
     const url = 'http://localhost:5555/anime/detail/'+this.fromAnimeId;
     this.http.get<AnimeResponse[]>(url).subscribe(
       (res) => {
