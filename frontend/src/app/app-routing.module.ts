@@ -17,6 +17,7 @@ import { MangareviewComponent } from './components/review-manga/mangareview.comp
 import { MangatableComponent } from './components/table-manga/mangatable.component';
 import { UpdateCharacterComponent } from './components/update-character/update-character.component';
 import { UpdateMangaComponent } from './components/update-manga/update-manga.component';
+import { PresentationsComponent } from './components/presentations/presentations.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -31,6 +32,7 @@ const routes: Routes = [
   { path: 'postanime', component: PostAnimeComponent },
   { path: 'postmanga', component: PostMangaComponent },
   { path: 'postcharacter', component: PostCharacterComponent },
+  { path: 'Presentations', component: PresentationsComponent },
   { path: 'animereview/:id', component: AnimereviewComponent },
   { path: 'mangareview/:id', component: MangareviewComponent },
   { path: 'updateanime/:id', component: UpdateAnimeComponent },
