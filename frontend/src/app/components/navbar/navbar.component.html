@@ -5,11 +5,11 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     
-    <a class="navbar-brand" routerLink="/mangalist">Mangalist</a>
+    <!-- <a class="navbar-brand" routerLink="/mangalist">Mangalist</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
       aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
-    </button>
+    </button> -->
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
@@ -35,7 +35,7 @@
       </ul>
       <button class="btn my-2 my-sm-0 me-2 "
         [ngClass]="{'btn-outline-primary': !checkUserRole(), 'btn-outline-warning': checkUserRole()}" type="button"
-        *ngIf="isLoggedIn"><i class="fa-regular fa-user me-2"></i>{{ name}}
+        *ngIf="isLoggedIn"><i class="fa-regular fa-user me-2"></i>{{name}}
       </button>
       <ul class="navbar-nav my-2 my-sm-0 me-2">
         <li class="nav-item" *ngIf="!isLoggedIn">
