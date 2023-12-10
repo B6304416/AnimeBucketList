@@ -1,0 +1,25 @@
+
+.custom-bg-color {
+    background-color: #121212;
+}
+
+.btn-outline-primary {
+    pointer-events: none; /* ไม่อนุญาตให้ปุ่มรับการคลิก */
+    opacity: 1; /* ความทึบของปุ่ม */
+    cursor: not-allowed; /* แสดง cursor ที่บ่งบอกว่าไม่สามารถคลิกได้ */
+    transition: box-shadow 0.3s ease-in-out; /* เพิ่มการเปลี่ยนแปลงของ box-shadow ด้วยอนิเมชัน */
+}
+.btn-outline-warning {
+    pointer-events: none; /* ไม่อนุญาตให้ปุ่มรับการคลิก */
+    opacity: 1; /* ความทึบของปุ่ม */
+    cursor: not-allowed; /* แสดง cursor ที่บ่งบอกว่าไม่สามารถคลิกได้ */
+    transition: box-shadow 0.3s ease-in-out; /* เพิ่มการเปลี่ยนแปลงของ box-shadow ด้วยอนิเมชัน */
+}
+
+.navlist{
+    color: #f9f3e9;
+}
+.navlist:hover{
+    color: #b5bec7;
+}
+

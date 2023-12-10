@@ -6,10 +6,12 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root'
 })
 export class SharedDataService {
+
   private isLoginPageSubject = new BehaviorSubject<boolean>(false);
   isLoginPage$ = this.isLoginPageSubject.asObservable();
 
   setIsLoginPage(value: boolean) {
     this.isLoginPageSubject.next(value);
   }
+
 }

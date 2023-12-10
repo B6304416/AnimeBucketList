@@ -1,0 +1,190 @@
+<div class="bg-dark page-body">
+    <div class="container pt-5">
+        <div class="main-body pt-5">
+            <div class="row ">
+                <div class="col-lg-4">
+                    <div class="card">
+                        <div class="card-body text-white">
+                            <div class="d-flex flex-column align-items-center text-center">
+
+                                <!-- รูปภาพจริงๆ เมื่อมีค่า imgUrl -->
+                                <div *ngFor="let anime of animeData" class="mt-3 cover ">
+                                    <img [src]="anime.imgCover" alt="..." 
+                                        style="max-width: 100%; max-height: 200px; border-radius: 20px;">
+                                </div>
+                                <div class="mt-3">
+                                    <!-- แสดงค่า name ก่อนและหลังจากมีค่า -->
+                                    <h4 *ngIf="!anime.get('name')?.value">Anime Name</h4>
+                                    <h4 *ngIf="anime.get('name')?.value">{{ anime.get('name')?.value }}</h4>
+
+                                    <p class=" mb-1" style="text-align: left;">episode: {{
+                                        anime.get('episode')?.value }}</p>
+
+                                    <p class="mb-1" style="text-align: left;"> studio: {{
+                                        getStudioName(anime.get('studioId')?.value) }}</p>
+
+                                    <p class="mb-1" style="text-align: left;">Type: {{
+                                        anime.get('typeId')?.value === '6513dc34e62aa885492968ca' ? 'Movie' : 
+                                        anime.get('typeId')?.value === '6513dc34e62aa885492968c8' ? 'TV Series' : 'Unknown' }}</p>
+
+                                    <p class="mb-1" style="text-align: left;">Source: {{
+                                        anime.get('sourceId')?.value === '6513dc35e62aa885492968d0' ? 'Original' :
+                                        anime.get('sourceId')?.value === '6513dc35e62aa885492968ce' ? 'Light Novel' :
+                                        anime.get('sourceId')?.value === '6513dc34e62aa885492968cc' ? 'Manga' : 'Unknown' }}</p>
+                                    
+                                    <p class="font-size-sm" style="text-align: left;">genre: {{
+                                        anime.get('genre')?.value }}</p>
+                                </div>
+                            </div>
+                            <hr class="my-2">
+                            <ul class="list-group list-group-flush" style="border-radius: 10px;">
+                                <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                                    <p class="text-secondary mb-1"
+                                        style="white-space: pre-wrap; word-wrap: break-word; overflow-wrap: break-word;">
+                                        เรื่องย่อ: {{ anime.get('synopsis')?.value }}
+                                    </p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div class="col-lg-8">
+                    <div class="card">
+                        <div class="card-body text-white">
+                            
+                            <form [formGroup]="anime">
+                                <div class="row mb-3">
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">Anime Name</h6>
+                                    </div>
+                                    <div class="form-group col-sm-9 ">
+                                        <input type="text" class="form-control" formControlName="name">
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">Episode</h6>
+                                    </div>
+                                    <div class="form-group col-sm-9 ">
+                                        <input type="number" class="form-control" formControlName="episode">
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">Studio</h6>
+                                    </div>
+                                    <div class="form-group col-sm-9 ">
+                                        <select class="form-control" formControlName="studioId">
+                                            <option *ngFor="let studio of studioOptions" [value]="studio._id">{{
+                                                studio.name }}</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">Type</h6>
+                                    </div>
+                                    <div class="form-group col-sm-9">
+                                        <input type="radio" class="btn-check " name="typeId" id="Movie"
+                                            autocomplete="off" value="6513dc34e62aa885492968ca"
+                                            formControlName="typeId">
+                                        <label class="btn btn-outline-primary me-2" for="Movie">Movie</label>
+
+                                        <input type="radio" class="btn-check " name="typeId" id="TV" autocomplete="off"
+                                            value="6513dc34e62aa885492968c8" formControlName="typeId">
+                                        <label class="btn btn-outline-primary me-2" for="TV">TV
+                                            Series</label>
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">Source</h6>
+                                    </div>
+                                    <div class="form-group col-sm-9">
+
+                                        <input type="radio" class="btn-check " name="sourceId" id="Original"
+                                            autocomplete="off" value="6513dc35e62aa885492968d0"
+                                            formControlName="sourceId">
+                                        <label class="btn btn-outline-success me-2" for="Original">Original</label>
+
+                                        <input type="radio" class="btn-check " name="sourceId" id="Novel"
+                                            autocomplete="off" value="6513dc35e62aa885492968ce"
+                                            formControlName="sourceId">
+                                        <label class="btn btn-outline-success me-2" for="Novel">Light Novel</label>
+
+                                        <input type="radio" class="btn-check " name="sourceId" id="Manga"
+                                            autocomplete="off" value="6513dc34e62aa885492968cc"
+                                            formControlName="sourceId">
+                                        <label class="btn btn-outline-success me-2" for="Manga">Manga</label>
+
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">Genre</h6>
+                                    </div>
+                                    <div class="form-group col-sm-9">
+
+                                        <label class="btn btn-outline-warning me-2 mb-2"
+                                            *ngFor="let genreOption of genreOptions"
+                                            [class.active]="isValidGenre(genreOption)">
+                                            <input class="btn-check" type="checkbox" [value]="genreOption"
+                                                [checked]="isValidGenre(genreOption)"
+                                                (change)="toggleGenre(genreOption)">
+                                            {{ genreOption }}
+                                        </label>
+                                        <div *ngIf="anime.get('genre')?.hasError('required') && anime.get('genre')?.touched"
+                                            class="text-warning">
+                                            genre is required.
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">TrailerUrl</h6>
+                                    </div>
+                                    <div class="form-group col-sm-9 ">
+                                        <input type="text" class="form-control" formControlName="trailerUrl">
+                                    </div>
+                                </div>
+                                <div class="row mb-4">
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">synopsis</h6>
+                                    </div>
+                                    <div class="col-sm-9 ">
+                                        <textarea class="form-control" formControlName="synopsis" rows="4"></textarea>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <a href="/tableanime" type="button" class="btn btn-warning px-5 mb-4" value="Back">Back</a>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <input type="button" class="btn btn-warning px-5 mb-4 text-dark float-end" value="Update"
+                                            (click)="UpdateAnime()">
+                                    </div>
+                                    
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>  
+        </div>
+    </div>
+</div>
+<div class="alert-container">
+    <div [ngClass]="alertClass" role="alert" *ngIf="showAlert">
+      {{ alertMessage }}
+    </div>
+  </div>

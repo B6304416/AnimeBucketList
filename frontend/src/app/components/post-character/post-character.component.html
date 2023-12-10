@@ -1,0 +1,144 @@
+<div class="bg-dark page-body">
+    <div class="container pt-4">
+        <div class="main-body pt-5">
+            <div class="row ">
+                <div class="col-lg-4">
+                    <div class="card">
+                        <div class="card-body text-white">
+                            <div class="d-flex flex-column align-items-center text-center">
+                                <div *ngIf="!character.get('imgProfile')?.value">
+                                    <div class="spinner-border p-4" style="width: 3rem; height: 3rem;" role="status">
+                                        <span class="sr-only">Loading...</span>
+                                    </div>
+                                </div>
+                                <div *ngIf="profile" class="mt-3 profile">
+                                    <img [src]="profile" alt="Selected Image"
+                                        style="max-width: 100%; max-height: 200px; border-radius: 20px;">
+                                </div>
+                                <div class="mt-4">
+                                    <h4 *ngIf="!character.get('name')?.value">Character Name</h4>
+                                    <h4 *ngIf="character.get('name')?.value">{{ character.get('name')?.value }}</h4>
+                                    <p class="mb-1" style="text-align: left;"> Anime: {{
+                                        getAnimeName(character.get('animeId')?.value) }}</p>
+                                    <p class="mb-1" style="text-align: left;"> Manga: {{
+                                        getMangaName(character.get('mangaId')?.value) }}</p>
+                                </div>
+                            </div>
+                            <hr class="my-2">
+                            <ul class="list-group list-group-flush" style="border-radius: 10px;">
+                                <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                                    <p class="text-secondary mb-1"
+                                        style="white-space: pre-wrap; word-wrap: break-word; overflow-wrap: break-word;">
+                                        Detail: {{ character.get('detail')?.value }}
+                                    </p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-8">
+                    <div class="card">
+                        <div class="card-body">
+
+                            <form [formGroup]="character">
+                                <div class="row mb-3">
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">Character Name</h6>
+                                    </div>
+                                    <div class="form-group col-sm-9 text-secondary">
+                                        <input type="text" class="form-control" formControlName="name">
+                                        <div *ngIf="character.get('name')?.hasError('required') && character.get('name')?.touched"
+                                            class="text-warning">
+                                            name is required.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">Anime</h6>
+                                    </div>
+                                    <div class="form-group col-sm-9 text-secondary">
+                                        <select class="form-control" formControlName="animeId">
+                                            <option *ngFor="let anime of animeOptions" [value]="anime._id">{{
+                                                anime.name }}</option>
+                                        </select>
+                                        <div *ngIf="character.get('animeId')?.hasError('required') && character.get('animeId')?.touched"
+                                            class="text-warning">
+                                            this field is required.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">Manga</h6>
+                                    </div>
+                                    <div class="form-group col-sm-9 text-secondary">
+                                        <select class="form-control" formControlName="mangaId">
+                                            <option *ngFor="let manga of mangaOptions" [value]="manga._id">{{
+                                                manga.name }}</option>
+                                        </select>
+                                        <div *ngIf="character.get('mangaId')?.hasError('required') && character.get('mangaId')?.touched"
+                                            class="text-warning">
+                                            this field is required.
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row mb-4">
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">Detail</h6>
+                                    </div>
+                                    <div class="col-sm-9 text-secondary">
+                                        <textarea class="form-control" formControlName="detail" rows="4"></textarea>
+                                        <div *ngIf="character.get('detail')?.hasError('required') && character.get('detail')?.touched"
+                                            class="text-warning">
+                                            this field is required.
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">Character Profile</h6>
+                                    </div>
+                                    <div class="form-group col-sm-9 text-secondary">
+                                        <div class="form-group col-sm-9 text-secondary">
+                                            <input type="file" id="fileInput" formControlName="imgProfile"
+                                                (change)="onFileSelected($event)">
+                                            <div *ngIf="character.get('imgProfile')?.hasError('required') && character.get('imgProfile')?.touched"
+                                                class="text-warning">
+                                                this field is required.
+                                            </div>
+                                            <div *ngIf="character?.get('imgProfile')?.hasError('pattern') && character?.get('imgProfile')?.touched && character?.get('imgProfile')?.dirty" class="text-warning">
+                                                Only png and jpg image supported.
+                                            </div> 
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <a href="/tablecharacter" type="button" class="btn btn-warning px-5 mb-4"
+                                            value="Back">Back</a>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <input type="button" class="btn btn-warning px-5 mb-4 float-end" value="Post"
+                                            (click)="onSubmit()">
+                                    </div>
+
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container pt-5 pb-3"></div>
+</div>
+<div class="alert-container">
+    <div [ngClass]="alertClass" role="alert" *ngIf="showAlert">
+        {{ alertMessage }}
+    </div>
+</div>

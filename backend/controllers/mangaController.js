@@ -1,10 +1,154 @@
 import express from "express";
-import { Manga } from "../models/mangaModel.js";
-import { adminVerify } from "../middleware.js";
+import { Manga, Author } from "../models/mangaModel.js";
+import { MangaReview } from "../models/mangaReviewModel.js";
+import { authMiddleware } from "../middleware.js";
+import { upload } from "../uploadImg.js";
+import { ObjectId } from 'mongodb';
 
 const router = express.Router();
 
-//Route for Get All animes
+//Route for Get detail of each animes
+router.get('/detail', async (req, res) => {
+    try {
+        const pipeline = [
+            {
+                $lookup: {
+                    from: 'authors', 
+                    localField: 'authorId',
+                    foreignField: '_id',
+                    as: 'author'
+                }
+            },
+            {
+                $unwind: '$author'
+            },
+            {
+                $project: {
+                    _id: 1,
+                    name: 1,
+                    genre: 1,
+                    imgUrl: 1,
+                    imgCover: 1,
+                    author: '$author.eng_name',
+                }
+            }
+            // Add more stages if needed
+        ];
+        
+        const result = await Manga.aggregate(pipeline);
+        return res.status(200).json(
+            result
+        );
+    } catch (error) {
+        console.log(error.message)
+        res.status(500).send({ message: error.message })
+    }
+});
+
+router.get('/detail/:id', async (req, res) => {
+    try {
+        const { id } = req.params;
+        const mangaObjectId = new ObjectId(id);
+        const pipeline = [
+            {
+                $match: {
+                    _id: mangaObjectId
+                }
+            },
+            {
+                $lookup: {
+                    from: 'authors', 
+                    localField: 'authorId',
+                    foreignField: '_id',
+                    as: 'author'
+                }
+            },
+            
+            
+            {
+                $unwind: '$author'
+            },
+            {
+                $project: {
+                    _id: 1,
+                    name: 1,
+                    genre: 1,
+                    imgUrl: 1,
+                    imgCover: 1,
+                    author: '$author.eng_name',
+                }
+            }
+        ];
+        
+        const result = await Manga.aggregate(pipeline);
+        return res.status(200).json(
+            result
+        );
+    } catch (error) {
+        console.log(error.message)
+        res.status(500).send({ message: error.message })
+    }
+});
+
+//Route for Get rate of each mangas
+router.get('/avg_rate', async (req, res) => {
+    try {
+        const pipeline = [
+            {
+                $group: {
+                    _id: '$mangaId',
+                    totalRate: { $sum: '$rate' },
+                    countRate: { $count: {} },
+                    averageRate: { $avg: '$rate' },
+                }
+            },
+            {
+                $lookup: {
+                    from: 'mangas', 
+                    localField: '_id',
+                    foreignField: '_id',
+                    as: 'mangaDetails'
+                }
+            },
+            {
+                $unwind: '$mangaDetails'
+            },
+            {
+                $project: {
+                    _id: 1,
+                    totalRate: 1,
+                    countRate: 1,
+                    averageRate: 1,
+                    mangaName: '$mangaDetails.name' ,
+                    mangaGenre: '$mangaDetails.genre' ,
+                    mangaImgUrl: '$mangaDetails.imgUrl',
+                    mangaImgCover: '$mangaDetails.imgCover',
+                    mangaSynopsis: '$mangaDetails.synopsis',
+                }
+            }
+        ];
+        const result = await MangaReview.aggregate(pipeline);
+        return res.status(200).json(
+            result
+        );
+    } catch (error) {
+        console.log(error.message)
+        res.status(500).send({ message: error.message })
+    }
+});
+
+//Route for Get All authors
+router.get('/authors', async (req, res) => {
+    try {
+        const authors = await Author.find({});
+        return res.status(200).json(authors);
+    } catch (error) {
+        console.log(error.message)
+        res.status(500).send({ message: error.message })
+    }
+})
+
+//Route for Get All mangas
 router.get('/', async (req, res) =>{
     try {
         const mangas = await Manga.find({});
@@ -15,41 +159,41 @@ router.get('/', async (req, res) =>{
     }
 })
 
-//Route for Get a anime by ID
+//Route for Get a manga by ID
 router.get('/:id',async (req, res) =>{
     try{
         const {id} = req.params;
         const manga = await Manga.findById(id);
-        return res.status(200).json(manga);
+        return res.status(200).json([manga]);
     }catch(error){
         console.log(error.message)
         res.status(500).send({message: error.message})
     }
 })
 
-//Route for Post a new Anime
-router.post('/', adminVerify, async (req, res) =>{
+//Route for Post a new manga
+router.post('/', [upload.single('imgProfile'), authMiddleware], async (req, res) =>{
     try {
         if (
             !req.body.name ||
-            !req.body.typeId ||
-            !req.body.studioId ||
-            !req.body.sourceId ||
-            !req.body.episode 
+            !req.body.authorId
         ){
             return res.status(400).send({
                 message: 'required field invalid!',
                 req:req
             });
         }
+        const authorId = req.body.authorId;
+        const authorObjectId = new ObjectId(authorId);
+
         const newManga = {
             name: req.body.name, 
-            typeId: req.body.typeId, 
-            studioId: req.body.studioId, 
-            episode: req.body.episode, 
-            sourceId: req.body.sourceId,
+            authorId: authorObjectId,
             genre: req.body.genre,
-            imgUrl: req.body.imgUrl,
+            // imgUrl: req.body.imgUrl
+        }
+        if (req.file) {
+            newManga.imgCover = '/uploads/' + req.file.filename;
         }
         const manga = await Manga.create(newManga);
         return res.status(201).send(manga);
@@ -59,16 +203,13 @@ router.post('/', adminVerify, async (req, res) =>{
     }
 })
 
-//Route for Update a new Anime
-router.put('/:id', adminVerify, async (req, res) =>{
+//Route for Update a new manga
+router.put('/:id', authMiddleware, async (req, res) =>{
     try {
         
         if (
             !req.body.name ||
-            !req.body.typeId ||
-            !req.body.studioId ||
-            !req.body.episode ||
-            !req.body.sourceId 
+            !req.body.authorId
         ){
             return res.status(400).send({
                 message: 'required field invalid!',
@@ -81,15 +222,15 @@ router.put('/:id', adminVerify, async (req, res) =>{
                 message: 'required field invalid!',
             });
         }
-        return res.status(200).send({message: 'anime update successfully'});
+        return res.status(200).send({message: 'manga update successfully'});
     } catch(error) {
         console.log(error.message);
         res.status(500).send({message: error.message})
     }
 })
 
-//Route for Delete a anime by ID
-router.delete('/:id', adminVerify, async (req, res) =>{
+//Route for Delete a manga by ID
+router.delete('/:id', authMiddleware, async (req, res) =>{
     try{
         const {id} = req.params;
         const result = await Manga.findByIdAndRemove(id);

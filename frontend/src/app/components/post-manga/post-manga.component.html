@@ -1,0 +1,127 @@
+<div class="bg-dark page-body">
+    <div class="container pt-4 ">
+        <div class="main-body pt-5">
+            <div class="row ">
+                <div class="col-lg-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="d-flex flex-column align-items-center text-center text-white">
+                                <div *ngIf="!manga.get('imgCover')?.value">
+                                    <div class="spinner-border p-4" style="width: 3rem; height: 3rem; " role="status">
+                                        <span class="sr-only">Loading...</span>
+                                    </div>
+                                </div>
+                                <div *ngIf="cover" class="mt-3 cover">
+                                    <img [src]="cover" alt="Selected Image"
+                                        style="max-width: 100%; max-height: 200px; border-radius: 20px;">
+                                </div>
+                                <div class="mt-4">
+                                    <h4 *ngIf="!manga.get('name')?.value" class="text-white">Manga Name</h4>
+                                    <h4 *ngIf="manga.get('name')?.value" class="text-white">{{ manga.get('name')?.value }}</h4>
+
+                                    <p class=" mb-1" style="text-align: left;"> Author: {{
+                                        getAuthorName(manga.get('authorId')?.value) }}</p>
+
+                                    <p class=" font-size-sm" style="text-align: left;">Genre: {{
+                                        manga.get('genre')?.value }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div class="col-lg-8">
+                    <div class="card">
+                        <div class="card-body">
+                            
+                            <form [formGroup]="manga">
+                                <div class="row mb-3">
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">Manga Name</h6>
+                                    </div>
+                                    <div class="form-group col-sm-9 text-secondary">
+                                        <input type="text" class="form-control" formControlName="name">
+                                        <div *ngIf="manga.get('name')?.hasError('required') && manga.get('name')?.touched" class="text-warning">
+                                            Please enter manga's name.
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">Author</h6>
+                                    </div>
+                                    <div class="form-group col-sm-9 text-secondary">
+                                        <select class="form-control" formControlName="authorId">
+                                            <option *ngFor="let author of authorOptions" [value]="author._id">{{
+                                                author.eng_name }}</option>
+                                        </select>
+                                        <div *ngIf="manga.get('authorId')?.hasError('required') && manga.get('authorId')?.touched" class="text-warning">
+                                            Please select author.
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">Genre</h6>
+                                    </div>
+                                    <div class="form-group col-sm-9">
+                                        <label class="btn btn-outline-light me-2 mb-2"
+                                            *ngFor="let genreOption of genreOptions"
+                                            [class.active]="isValidGenre(genreOption)">
+                                            <input class="btn-check" type="checkbox" [value]="genreOption"
+                                                [checked]="isValidGenre(genreOption)"
+                                                (change)="toggleGenre(genreOption)">
+                                            {{ genreOption }}
+                                        </label>
+                                        <div *ngIf="manga.get('genre')?.hasError('required') && manga.get('genre')?.touched"
+                                            class="text-warning">
+                                            genre is required.
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">Manga Cover</h6>
+                                    </div>
+                                    <div class="form-group col-sm-9 text-secondary">
+                                        <div class="form-group col-sm-9 text-secondary">
+                                            <input type="file" id="fileInput" formControlName="imgCover" (change)="onFileSelected($event)">
+                                            <div *ngIf="manga?.get('imgCover')?.hasError('required') && manga?.get('imgCover')?.touched" class="text-warning">
+                                                Cover Image is required.
+                                            </div>
+                                            <div *ngIf="manga?.get('imgCover')?.hasError('pattern') && manga?.get('imgCover')?.touched && manga?.get('imgCover')?.dirty" class="text-warning">
+                                                Only png and jpg image supported.
+                                            </div> 
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <a href="/tablemanga" type="button" class="btn btn-warning px-5 mb-4"
+                                            value="Back">Back</a>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <input type="button" class="btn btn-warning px-5 mb-4 float-end" value="Post"
+                                            (click)="submitManga()">
+                                    </div>
+
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>  
+        </div>
+    </div>
+</div>
+<div class="alert-container">
+    <div [ngClass]="alertClass" role="alert" *ngIf="showAlert">
+        {{ alertMessage }}
+    </div>
+</div>

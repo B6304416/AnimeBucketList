@@ -1,39 +1,45 @@
-<div class="container-fluid bg-img full-height">
-    <div class="row">
-        <div class="col-md-4 offset-md-4">
-            <div class="card my-5">
-                <form class="card-body cardbody-color p-lg-5 text-center" (ngSubmit)="onSubmit()">
-                    <a routerLink="/animelist" class="btn btn-color px-5 mb-5 w-10 btn-home">
-                        <i class="fas fa-home"></i> Home
-                    </a>
-                    
-                    <div class="text-center">
-                        <img src="https://static.wikia.nocookie.net/c89873b3-6d89-4d09-9f1b-aa4dc27a50a7/scale-to-width/755"
-                            class="img-fluid profile-image-pic img-thumbnail rounded-circle my-3" width="200px"
-                            alt="profile">
-                    </div>
+<div style="margin-top: 0px !important;" class="bg-img">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-4 offset-md-4">
+                <div class="card my-1">
+                    <form class="card-body cardbody-color p-lg-5 text-center" (ngSubmit)="onSubmit()">
+                        <a routerLink="/listanime" class="btn btn-color px-5 mb-5 w-10 btn-home">
+                            <i class="fas fa-home"></i> Home
+                        </a>
 
-                    <div class="mb-3 form-group box">
-                        <input class="form-control" type="email" id="email" name="email" aria-describedby="emailHelp"
-                            placeholder="Email" [(ngModel)]="email" required>
-                    </div>
-                    <div class="mb-3 form-group box">
-                        <input class="form-control" type="password" id="password" name="password" placeholder="password"
-                            [(ngModel)]="password" required>
-                    </div>
+                        <div class="text-center">
+                            <img src="./assets/animes21.png"
+                                class="profile-image-pic logo" width="100%" height="100%"
+                                alt="profile">
+                        </div>
 
-                    <div class="form-group">
-                        <button type="submit" class="btn btn-color px-5 mb-5 w-10">Login</button>
-                    </div>
+                        <div class="mb-3 form-group box">
+                            <input class="form-control" type="email" id="email" name="email"
+                                aria-describedby="emailHelp" placeholder="Email" [(ngModel)]="email" required>
+                        </div>
+                        <div class="mb-3 form-group box">
+                            <input class="form-control" type="password" id="password" name="password"
+                                placeholder="password" [(ngModel)]="password" required>
+                        </div>
 
-                    <div id="emailHelp" class="form-text text-center mb-5 text-white">Not
-                        Registered? <a href="#" class="text-white font-weight-bold"> Create an Account</a>
-                    </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-color px-5 mb-5 w-10">Login</button>
+                        </div>
 
-                </form>
+                        <div id="emailHelp" class="form-text text-center mb-5 text-black">Not
+                            Registered? <a href="/signup" class="font-weight-bold register"> Create an Account</a>
+                        </div>
+
+                    </form>
+                </div>
+
             </div>
-
         </div>
     </div>
 </div>
-<router-outlet></router-outlet>
+<div class="alert-container">
+    <div [ngClass]="alertClass" role="alert" *ngIf="showAlert">
+      {{ alertMessage }}
+    </div>
+  </div>

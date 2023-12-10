@@ -1,0 +1,9 @@
+/* ซ่อนปุ่ม Previous */
+.carousel-control-prev-icon {
+  display: none;
+}
+
+/* ซ่อนปุ่ม Next */
+.carousel-control-next-icon {
+  display: none;
+}

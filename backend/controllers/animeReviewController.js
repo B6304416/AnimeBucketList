@@ -1,10 +1,11 @@
 import express from "express";
 import { AnimeReview } from "../models/animeReviewModel.js";
-
+import { ObjectId } from 'mongodb';
+import { authMiddleware, tokenVerify } from "../middleware.js";
 const router = express.Router();
 
 //Route for Get rate of each animes
-router.get('/rate', async (req, res) => {
+router.get('/avg_rate', async (req, res) => {
     try {
         const pipeline = [
             {
@@ -32,20 +33,66 @@ router.get('/rate', async (req, res) => {
                     totalRate: 1,
                     countRate: 1,
                     averageRate: 1,
-                    animeName: '$animeDetails.name' 
+                    animeName: '$animeDetails.name',
+                    animeImgUrl: '$animeDetails.imgUrl',
+                    animeImgCover: '$animeDetails.imgCover',
+                    animeEpisode: '$animeDetails.episode',
+                    animeSynopsis: '$animeDetails.synopsis',
+                    animeGenre: '$animeDetails.genre',
                 }
             }
         ];
         const result = await AnimeReview.aggregate(pipeline);
-        return res.status(200).json({
+        return res.status(200).json(
             result
-        });
+        );
     } catch (error) {
         console.log(error.message)
         res.status(500).send({ message: error.message })
     }
 });
 
+//Route for Get review by animeId
+router.get('/rate/:id', async (req, res) => {
+    try {
+        const { id } = req.params;
+        const animeObjectId = new ObjectId(id);
+        const pipeline = [
+            {
+                $match: {
+                    animeId: animeObjectId
+                }
+            },
+            {
+                $lookup: {
+                    from: 'users', // Assuming your collection name for types is 'types'
+                    localField: 'userId',
+                    foreignField: '_id',
+                    as: 'user'
+                }
+            },
+            {
+                $unwind: '$user'
+            },
+            {
+                $project: {
+                    _id: 1,
+                    comment: 1,
+                    rate: 1,
+                    user: '$user.name' ,
+                }
+            }
+            // Add more stages if needed
+        ];
+        const result = await AnimeReview.aggregate(pipeline);
+        return res.status(200).json(
+            result
+        );
+    } catch (error) {
+        console.error(error.message);
+        res.status(500).send({ message: 'Server Error' });
+    }
+});
 
 //Route for Get All animeReviews
 router.get('/', async (req, res) => {
@@ -74,22 +121,33 @@ router.get('/:id', async (req, res) => {
     }
 })
 
-router.post('/', async (req, res) => {
+router.post('/', tokenVerify,async (req, res) => {
     try {
-        const { comment, rate, animeId } = req.body;
+
+        const comment = req.body.comment;
+        const rate = req.body.rate;
+        const animeId = req.body.animeId;
+        const animeIdObjectId = new ObjectId(animeId);
         const userId = req.user.userId;
+        const userIdObjectId = new ObjectId(userId);
+
         if (!comment || !rate || !userId || !animeId) {
             return res.status(400).send({
                 message: 'Required fields are invalid or missing!',
             });
         }
+
         const newAnimeReview = {
-            comment,
-            rate,
-            userId,
-            animeId,
+            comment : comment,
+            rate : rate,
+            userId : userIdObjectId,
+            animeId : animeIdObjectId,
         };
+
+        // const toAnime = await AnimeReview.find({ animeId: animeIdObjectId});
+
         const animeReview = await AnimeReview.create(newAnimeReview);
+
         return res.status(201).send(animeReview);
     } catch (error) {
         console.log(error.message);

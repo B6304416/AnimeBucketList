@@ -13,7 +13,9 @@ import authController from "./controllers/authController.js";
 import animeController from "./controllers/animeController.js";
 import mangaController from "./controllers/mangaController.js";
 import animeReviewController from "./controllers/animeReviewController.js";
+import mangaReviewController from "./controllers/mangaReviewController.js";
 import characterController from "./controllers/characterController.js";
+import genreController from "./controllers/genreController.js";
 
 const app = express();
 
@@ -30,10 +32,19 @@ app.use(
     cors({
         origin: 'http://localhost:3000',
         methods: ['GET', 'POST', 'PUT', 'DELETE'],
-        allowedHeaders: ['Content-Type', 'Authorization', 'UserRole'],
-        credentials: true,
+        allowedHeaders: ['Content-Type', 'Authorization'],
+        // credentials: true,
     })
 )
+
+// app.use((req, res, next) => {
+//     res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000')
+//     res.setHeader('Access-Control-Allow-Methods', 'POST, GET, PUT, DELETE')
+//     res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Option, Authorization')
+//     return next()
+// });
+
+app.use('/uploads', express.static('uploads'));
 
 app.use(
     session({
@@ -61,10 +72,15 @@ app.use('/book', tokenVerify, bookController);
 //Route for CRUD animes
 app.use('/anime', animeController);
 
+app.use('/manga', mangaController);
 //Route for CRUD animes
-app.use('/anime_review', tokenVerify, animeReviewController);
-//Route for CRUD animes
+app.use('/anime_review', animeReviewController);
+//Route for CRUD mangas
+app.use('/manga_review', mangaReviewController);
+//Route for CRUD characters
 app.use('/character', characterController);
+//Route for CRUD genres
+app.use('/genre', genreController);
 
 //Connect database
 mongoose

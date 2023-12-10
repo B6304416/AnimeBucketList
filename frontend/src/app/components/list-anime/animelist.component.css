@@ -1,0 +1,94 @@
+.bg-img {
+    width: 100%;
+    height: auto;
+    background-size: cover;
+    animation: slideImages 30s linear infinite;
+}
+.card-list {
+    display: flex; /* หรือเปลี่ยนเป็น display: grid; ในกรณีที่คุณต้องการใช้ Grid Layout */
+    flex-direction: column; /* หรือ grid-template-rows: 1fr 1fr 1fr 1fr 1fr; ในกรณีที่คุณใช้ Grid Layout */
+    height: 100%; /* ให้การ์ดมีความยาวเท่ากัน */
+  }.card-body {
+    flex: 1; /* หรือ grid-row: 3; ในกรณีที่คุณใช้ Grid Layout */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* ให้ข้อมูลอยู่ระหว่างด้านบนและด้านล่างของการ์ด */
+  }
+
+.card-img-test {
+    width: auto;
+    height: 200px;
+    object-fit: cover;
+}
+
+
+@keyframes slideImages {
+    0% {
+        background-image: url('../../img/wallpaper1_h.jpg');
+        background-position: 0% 0%;
+    }
+
+    48% {
+        background-image: url('../../img/wallpaper1_h.jpg');
+        background-position: 0% 100%;
+    }
+
+    50% {
+        background-image: url('../../img/wallpaper2_h.jpg');
+        background-position: 0% 100%;
+    }
+
+    98% {
+        background-image: url('../../img/wallpaper2_h.jpg');
+        background-position: 0% 0%;
+    }
+
+    100% {
+        background-image: url('../../img/wallpaper1_h.jpg');
+        background-position: 0% 0%;
+    }
+}
+
+.btn-clicked {
+    background-color: #b13e49;
+    /* Change this to the desired color */
+    color: #ffffff;
+    /* Change this to the desired text color */
+}
+
+.btn-readmore {
+    background-color: #b13e49;
+    /* Change this to the desired color */
+    color: #ffffff;
+    /* Change this to the desired text color */
+    
+}
+
+.btn-readmore-top{
+    background-color: #b13e49;
+    color: #ffffff;
+    text-align: center;
+    display: inline-flex;
+    align-items: center;
+    padding: 10px;
+    /* font-size: 14px; */
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+}
+.btn-readmore-top:hover{
+    background-color: #792f36;
+}
+.btn-readmore:hover{
+    background-color: #792f36;
+}
+
+
+.card-detail{
+    display: flex;
+    justify-content: space-between;
+}
+
+.left-info, .right-info {
+    width: auto; /* Adjust the width as needed */
+}

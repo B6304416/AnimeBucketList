@@ -1,8 +1,7 @@
-<nav class="navbar navbar-expand-lg bg-body-tertiary navbar-dark bg-dark" *ngIf="!isLoginPage">
+<nav class="navbar navbar-expand-lg bg-body-tertiary navbar-dark custom-bg-color fixed-top" *ngIf="!shownavar">
   <div class="container-fluid">
-    <a class="navbar-brand" routerLink="/animelist">Animelist</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <a class="navbar-brand navlist" href="/listanime">Animelist</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     
@@ -13,60 +12,39 @@
     </button>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav mr-auto">
-
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" routerLink="/home">Character</a>
+          <a class="nav-link active navlist" aria-current="page" href="/listmanga">Mangalist</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/home">Link</a>
+          <a class="nav-link active navlist" href="/listcharacter">Characterlist</a>
         </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
-            aria-haspopup="true" aria-expanded="false">
-            Dropdown
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-            <li><a class="dropdown-item" href="#">Action</a></li>
-            <li><a class="dropdown-item" href="#">Another action</a></li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-            <li><a class="dropdown-item" href="#">Something else here</a></li>
-          </ul>
-        </li>
-
-        <li class="nav-item">
-          <a class="nav-link disabled" aria-disabled="true">Disabled</a>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
-            aria-haspopup="true" aria-expanded="false">
+        <li class="nav-item dropdown"  *ngIf="checkUserRole()">
+          <a class="nav-link dropdown-toggle text-warning" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Admin
           </a>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-            <li><a class="dropdown-item" href="/postanime">Anime</a></li>
-            <li><a class="dropdown-item" href="#">Manga</a></li>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="/tableanime">Anime</a></li>
+            <li><a class="dropdown-item" href="/tablemanga">Manga</a></li>
+            <li><a class="dropdown-item" href="/tablecharacter">Character</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="/Presentations">Presentations</a></li>
           </ul>
         </li>
-      </ul>
 
-      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-        <form class="d-flex" role="search">
-          <input class="form-control mr-sm-2 " type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success my-2 my-sm-0 " type="submit">Search</button>
-        </form>
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" routerLink="/login">Login</a>
+      </ul>
+      <button class="btn my-2 my-sm-0 me-2 "
+        [ngClass]="{'btn-outline-primary': !checkUserRole(), 'btn-outline-warning': checkUserRole()}" type="button"
+        *ngIf="isLoggedIn"><i class="fa-regular fa-user me-2"></i>{{ name}}
+      </button>
+      <ul class="navbar-nav my-2 my-sm-0 me-2">
+        <li class="nav-item" *ngIf="!isLoggedIn">
+          <button class="btn btn-outline-success my-2 my-sm-0 " routerLink="/login">Login<i class="fa-solid fa-right-to-bracket ms-1"></i></button>
         </li>
-        <!-- <li class="nav-item" *ngIf="!LoggedIn"> 
-          <a class="nav-link active" aria-current="page" routerLink="/login">Login</a>
+        <li class="nav-item" *ngIf="isLoggedIn">
+          <button class="btn btn-outline-danger my-2 my-sm-0 " (click)="logout()">Logout<i class="fa-solid fa-right-to-bracket ms-1"></i></button>
         </li>
-        <li class="nav-item" *ngIf="LoggedIn"> 
-          <a class="nav-link active" aria-current="page" (click)="logout()">Logout</a>
-        </li> -->
       </ul>
     </div>
   </div>
 </nav>
-

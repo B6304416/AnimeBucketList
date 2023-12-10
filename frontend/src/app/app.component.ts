@@ -21,13 +21,7 @@ export class AppComponent implements OnInit {
     //   localStorage.clear();
     // });
 
-    const token = sessionStorage.getItem('token');
 
-    if (!token) {
-      this.router.navigate(['/login']);
-    } else {
-      console.log('User is logged in with userId:', token);
-    }
   }
 
 

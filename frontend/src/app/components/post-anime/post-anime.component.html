@@ -1,57 +1,44 @@
-<div class="bg-Black">
-    <div class="container pt-4 pb-5">
-        <div class="main-body">
+<div class="page-body ">
+    <div class="container pt-4">
+        <div class="main-body pt-5">
             <div class="row ">
                 <div class="col-lg-4">
                     <div class="card">
-                        <div class="card-body">
-                            <div class="d-flex flex-column align-items-center text-center">
-                                <!-- รูปภาพเริ่มต้น -->
-                                <!-- <img *ngIf="!anime.get('imgUrl')?.value"
-                                    src=""
-                                    alt="Default Image" width="300"> -->
-                                <div *ngIf="!anime.get('imgUrl')?.value">
-                                    <div class="spinner-grow text-primary" role="status">
-                                        <span class="sr-only">Loading...</span>
-                                    </div>
-                                    <div class="spinner-grow text-secondary" role="status">
-                                        <span class="sr-only">Loading...</span>
-                                    </div>
-                                    <div class="spinner-grow text-success" role="status">
-                                        <span class="sr-only">Loading...</span>
-                                    </div>
-                                    <div class="spinner-grow text-danger" role="status">
-                                        <span class="sr-only">Loading...</span>
-                                    </div>
-                                    <div class="spinner-grow text-warning" role="status">
-                                        <span class="sr-only">Loading...</span>
-                                    </div>
-                                    <div class="spinner-grow text-info" role="status">
-                                        <span class="sr-only">Loading...</span>
-                                    </div>
-                                    <div class="spinner-grow text-light" role="status">
-                                        <span class="sr-only">Loading...</span>
-                                    </div>
-                                    <div class="spinner-grow text-dark" role="status">
+                        <div class="card-body text-white">
+                            <div class="d-flex flex-column align-items-center text-center ">
+                                <div *ngIf="!anime.get('imgCover')?.value">
+                                    <div class="spinner-border p-4" style="width: 3rem; height: 3rem;" role="status">
                                         <span class="sr-only">Loading...</span>
                                     </div>
                                 </div>
-
-                                <!-- รูปภาพจริงๆ เมื่อมีค่า imgUrl -->
-                                <img *ngIf="anime.get('imgUrl')?.value" [src]="anime.get('imgUrl')?.value" alt="Admin"
-                                    width="300">
+                                <div *ngIf="cover" class="mt-3 cover">
+                                    <img [src]="cover" alt="Selected Image"
+                                        style="max-width: 100%; max-height: 200px; border-radius: 20px;">
+                                </div>
                                 <div class="mt-3">
                                     <!-- แสดงค่า name ก่อนและหลังจากมีค่า -->
                                     <h4 *ngIf="!anime.get('name')?.value">Anime Name</h4>
                                     <h4 *ngIf="anime.get('name')?.value">{{ anime.get('name')?.value }}</h4>
 
-                                    <p class="text-secondary mb-1" style="text-align: left;">episode: {{ anime.get('episode')?.value }}</p>
+                                    <p class="mb-1" style="text-align: left;">Episode: {{
+                                        anime.get('episode')?.value }}</p>
 
-                                    <p class="text-secondary mb-1" style="text-align: left;"> studio: {{ getStudioName(anime.get('studioId')?.value) }}</p>
+                                    <p class=" mb-1" style="text-align: left;"> Studio: {{
+                                        getStudioName(anime.get('studioId')?.value) }}</p>
 
-                                    <p class="text-secondary mb-1" style="text-align: left;">Type: {{ anime.get('typeId')?.value }}</p>
+                                    <p class=" mb-1" style="text-align: left;">Type: {{
+                                        anime.get('typeId')?.value === '6513dc34e62aa885492968ca' ? 'Movie' :
+                                        anime.get('typeId')?.value === '6513dc34e62aa885492968c8' ? 'TV Series' :
+                                        'Unknown' }}</p>
 
-                                    <p class="text-muted font-size-sm" style="text-align: left;">genre: {{ anime.get('genre')?.value }}</p>
+                                    <p class=" mb-1" style="text-align: left;">Source: {{
+                                        anime.get('sourceId')?.value === '6513dc35e62aa885492968d0' ? 'Original' :
+                                        anime.get('sourceId')?.value === '6513dc35e62aa885492968ce' ? 'Light Novel' :
+                                        anime.get('sourceId')?.value === '6513dc34e62aa885492968cc' ? 'Manga' :
+                                        'Unknown' }}</p>
+
+                                    <p class="font-size-sm" style="text-align: left;">Genre: {{
+                                        anime.get('genre')?.value }}</p>
                                 </div>
                             </div>
                             <hr class="my-2">
@@ -71,23 +58,43 @@
 
                 <div class="col-lg-8">
                     <div class="card">
-                        <div class="card-body">
+                        <div class="card-body text-white">
+
                             <form [formGroup]="anime">
                                 <div class="row mb-3">
                                     <div class="col-sm-3">
                                         <h6 class="mb-0">Anime Name</h6>
                                     </div>
-                                    <div class="form-group col-sm-9 text-secondary">
+                                    <div class="form-group col-sm-9">
                                         <input type="text" class="form-control" formControlName="name">
+                                        <div [ngSwitch]="true">
+                                            <div *ngSwitchCase="anime.get('name')?.hasError('required') && anime.get('name')?.touched"
+                                                class="text-warning">
+                                                Name is required.
+                                            </div>
+                                            <div *ngSwitchCase="anime.get('name')?.hasError('maxlength') && anime.get('name')?.touched"
+                                                class="text-warning">
+                                                Name should not exceed 64 characters.
+                                            </div>
+                                        </div>
                                     </div>
+
                                 </div>
 
                                 <div class="row mb-3">
                                     <div class="col-sm-3">
                                         <h6 class="mb-0">Episode</h6>
                                     </div>
-                                    <div class="form-group col-sm-9 text-secondary">
-                                        <input type="text" class="form-control" formControlName="episode">
+                                    <div class="form-group col-sm-9 ">
+                                        <input type="number" class="form-control" formControlName="episode">
+                                        <div *ngIf="anime.get('episode')?.hasError('required') && anime.get('name')?.touched"
+                                            class="text-warning">
+                                            episode is required.
+                                        </div>
+                                        <div *ngIf="anime.get('episode')?.hasError('min') && anime.get('episode')?.touched"
+                                            class="text-warning">
+                                            episode should be at least 1.
+                                        </div>
                                     </div>
                                 </div>
 
@@ -95,11 +102,20 @@
                                     <div class="col-sm-3">
                                         <h6 class="mb-0">Studio</h6>
                                     </div>
-                                    <div class="form-group col-sm-9 text-secondary">
+                                    <div class="form-group col-sm-9 ">
                                         <select class="form-control" formControlName="studioId">
-                                            <option *ngFor="let studio of studioOptions" [value]="studio.id">{{
+                                            <option value="new" class="text-danger">Add New Studio</option>
+                                            <option *ngFor="let studio of studioOptions" [value]="studio._id">{{
                                                 studio.name }}</option>
                                         </select>
+                                        <div *ngIf="anime.get('studioId')?.hasError('required') && anime.get('studioId')?.touched"
+                                            class="text-warning">
+                                            studioId is required.
+                                        </div>
+                                        <div *ngIf="anime.get('studioId')?.value === 'new'">
+                                            <input type="text" class="form-control my-1" placeholder="New Studio" formControlName="newStudio">
+                                        </div>
+                                        
                                     </div>
                                 </div>
 
@@ -107,17 +123,40 @@
                                     <div class="col-sm-3">
                                         <h6 class="mb-0">Type</h6>
                                     </div>
-                                    <div class="form-group col-sm-9 text-secondary">
-                                        <label class="form-check-label ml-4">
-                                            <input class="form-check-input" type="radio" name="typeId" value="Movie"
-                                                formControlName="typeId">
-                                            <span>Movie</span>
-                                        </label>
-                                        <label class="form-check-label ml-5">
-                                            <input class="form-check-input" type="radio" name="typeId" value="TV serie"
-                                                formControlName="typeId">
-                                            <span>TV Series</span>
-                                        </label>
+                                    <div class="form-group col-sm-9">
+                                        <input type="radio" class="btn-check " name="typeId" id="Movie"
+                                            autocomplete="off" value="6513dc34e62aa885492968ca"
+                                            formControlName="typeId">
+                                        <label class="btn btn-outline-primary me-2" for="Movie">Movie</label>
+
+                                        <input type="radio" class="btn-check " name="typeId" id="TV" autocomplete="off"
+                                            value="6513dc34e62aa885492968c8" formControlName="typeId">
+                                        <label class="btn btn-outline-primary me-2" for="TV">TV
+                                            Series</label>
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">Source</h6>
+                                    </div>
+                                    <div class="form-group col-sm-9">
+
+                                        <input type="radio" class="btn-check " name="sourceId" id="Original"
+                                            autocomplete="off" value="6513dc35e62aa885492968d0"
+                                            formControlName="sourceId">
+                                        <label class="btn btn-outline-success me-2" for="Original">Original</label>
+
+                                        <input type="radio" class="btn-check " name="sourceId" id="Novel"
+                                            autocomplete="off" value="6513dc35e62aa885492968ce"
+                                            formControlName="sourceId">
+                                        <label class="btn btn-outline-success me-2" for="Novel">Light Novel</label>
+
+                                        <input type="radio" class="btn-check " name="sourceId" id="Manga"
+                                            autocomplete="off" value="6513dc34e62aa885492968cc"
+                                            formControlName="sourceId">
+                                        <label class="btn btn-outline-success me-2" for="Manga">Manga</label>
+
                                     </div>
                                 </div>
 
@@ -125,38 +164,87 @@
                                     <div class="col-sm-3">
                                         <h6 class="mb-0">Genre</h6>
                                     </div>
-                                    <div class="form-group col-sm-9 text-secondary">
-                                        <label class="form-check-label ml-4 spaced-label"
-                                            *ngFor="let genreOption of genreOptions">
-                                            <input class="form-check-input" type="checkbox" [value]="genreOption"
+                                    <div class="form-group col-sm-9">
+
+                                        <label class="btn btn-outline-warning me-2 mb-2"
+                                            *ngFor="let genreOption of genreOptions"
+                                            [class.active]="isValidGenre(genreOption)">
+                                            <input class="btn-check" type="checkbox" [value]="genreOption"
                                                 [checked]="isValidGenre(genreOption)"
                                                 (change)="toggleGenre(genreOption)">
-                                            <span>{{ genreOption }}</span>
+                                            {{ genreOption }}
                                         </label>
+                                        <div *ngIf="anime.get('genre')?.hasError('required') && anime.get('genre')?.touched"
+                                            class="text-warning">
+                                            genre is required.
+                                        </div>
                                     </div>
                                 </div>
+
                                 <div class="row mb-3">
                                     <div class="col-sm-3">
-                                        <h6 class="mb-0">ImgUrl</h6>
+                                        <h6 class="mb-0">TrailerUrl</h6>
                                     </div>
-                                    <div class="form-group col-sm-9 text-secondary">
-                                        <input type="text" class="form-control" formControlName="imgUrl">
+                                    <div class="form-group col-sm-9 ">
+                                        <input type="text" class="form-control" formControlName="trailerUrl">
+                                        <div *ngIf="anime.get('trailerUrl')?.hasError('required') && anime.get('trailerUrl')?.touched"
+                                            class="text-warning">
+                                            trailerUrl is required.
+                                        </div>
+                                        <div *ngIf="anime.get('trailerUrl')?.hasError('pattern') && anime.get('trailerUrl')?.touched"
+                                            class="text-warning">
+                                            Invalid YouTube URL format. <br>
+                                            (https://www.youtube.com/embed/...)
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="row mb-4">
                                     <div class="col-sm-3">
                                         <h6 class="mb-0">synopsis</h6>
                                     </div>
-                                    <div class="col-sm-9 text-secondary">
+                                    <div class="col-sm-9 ">
                                         <textarea class="form-control" formControlName="synopsis" rows="4"></textarea>
+                                        <div *ngIf="anime.get('synopsis')?.hasError('required') && anime.get('synopsis')?.touched"
+                                            class="text-warning">
+                                            synopsis is required.
+                                        </div>
+                                        <div *ngIf="anime.get('synopsis')?.hasError('minlength') && anime.get('synopsis')?.touched"
+                                            class="text-warning">
+                                            Synopsis should be at least 10 characters.
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">Anime Cover</h6>
+                                    </div>
+                                    <div class="form-group col-sm-9 text-secondary">
+                                        <div class="form-group col-sm-9 text-secondary">
+                                            <input type="file" id="fileInput" formControlName="imgCover"
+                                                (change)="onFileSelected($event)">
+                                            <div *ngIf="anime?.get('imgCover')?.hasError('required') && anime?.get('imgCover')?.touched"
+                                                class="text-warning">
+                                                Cover Image is required.
+                                            </div>
+                                            <div *ngIf="anime?.get('imgCover')?.hasError('pattern') && anime?.get('imgCover')?.touched && anime?.get('imgCover')?.dirty"
+                                                class="text-warning">
+                                                Only png and jpg image supported.
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
 
                                 <div class="row">
-                                    <div class="col-sm-3"></div>
-                                    <div class="col-sm-9 text-secondary">
-                                        <input type="button" class="btn btn-primary px-4" value="Post">
+                                    <div class="col-sm-3">
+                                        <a href="/tableanime" type="button" class="btn btn-warning px-5 mb-4"
+                                            value="Back">Back</a>
                                     </div>
+                                    <div class="col-sm-9">
+                                        <input type="button" class="btn btn-warning px-5 mb-4 float-end" value="Post"
+                                            (click)="submitAnime()">
+                                    </div>
+
                                 </div>
                             </form>
                         </div>
@@ -166,4 +254,8 @@
         </div>
     </div>
 </div>
-<router-outlet></router-outlet>
+<div class="alert-container">
+    <div [ngClass]="alertClass" role="alert" *ngIf="showAlert">
+        {{ alertMessage }}
+    </div>
+</div>

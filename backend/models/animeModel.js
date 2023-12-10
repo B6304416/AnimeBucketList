@@ -24,11 +24,20 @@ const animeSchema = mongoose.Schema(
             required: true,
         },
         genre: {
-            type: String,
+            type: Array,
         },
         imgUrl: {
             type: String,
         },
+        synopsis: {
+            type: String,
+        },
+        trailerUrl: {
+            type: String,
+        },
+        imgCover: {
+            type: String,
+        }
     },
     {
         timestamps: true,

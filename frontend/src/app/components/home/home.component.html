@@ -1,1 +1,14 @@
-<p>Book list!: {{data}}</p>
+<div class="row">
+    <div class="col-lg-4" *ngFor="let character of characters">
+        <div class="card mb-4 p-4">
+            <img class="card-img" [src]="character.imgProfile" alt="..." />
+            <div class="card-body">
+                <h2 class="card-title h4 mb-1">
+                    <strong>
+                        {{ character.name }}
+                    </strong>
+                </h2>
+            </div>
+        </div>
+    </div>
+</div>

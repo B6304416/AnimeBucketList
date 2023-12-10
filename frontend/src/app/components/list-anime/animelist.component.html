@@ -1,0 +1,122 @@
+<div class="bg-img">
+    <div class="text-center p-1">
+        <h1 class="fw-bolder text-danger p-5 mt-5 display-3 title-text">
+            <strong>
+                Welcome to Anime bucket list!
+            </strong>
+            <h2 class="fw-bolder text-danger p-1 mb-lg-4 ">
+                <strong>
+                    100 Anime to Watch Before You Die
+                </strong>
+            </h2>
+        </h1>
+    </div>
+</div>
+
+<div class="container p-4">
+    <div class="row">
+        <div class="col-md-7" *ngIf="animeData[0]">
+            <div class="card mb-4">
+                <!-- <a href="#!"><img class="card-img-top" [src]="animeData[0].animeImgUrl" alt="..." /></a> -->
+                <img class="card-img-top card-img-top" [src]="animeData[0].animeImgCover" alt="..." (click)="onClick(animeData[0]._id)"/>
+                <div class="card-body">
+                    <div class="small text-muted ">HIGH AVERAGE SCORE</div>
+                    <div class="card-detail">
+                        <h2 class="card-title h3 mt-1">
+                            <strong>
+                                {{ animeData[0].animeName }}
+                            </strong>
+                            <p class="card-text h5 mt-2">score: ⭐{{ animeData[0].averageRate }}</p>
+                        </h2>
+                        <a class="btn btn-readmore-top" (click)="onClick(animeData[0]._id)" >Read more →</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-5" *ngIf="animeData[0]">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <div>
+                        Genre: {{ animeData[0].animeGenre }}
+                    </div>
+                    <div>
+                        Episodes: {{ animeData[0].animeEpisode }}
+                    </div>
+                </div>
+                <div class="card-body">เรื่องย่อ: &nbsp;&nbsp;{{animeData[0].animeSynopsis}}</div>
+            </div>
+        </div>
+
+
+        <!-- Nested row for non-featured blog posts-->
+        <div class="container">
+            <div class="d-flex justify-content-end p-3">
+                <h2 class="mt-2 mb-2 text-white">Anime List</h2>
+                <button type="button" class="btn btn-secondary mt-2 mb-2 ms-auto" [class.btn-clicked]="isAllClicked"
+                    (click)="handleAllClick()">
+                    All
+                </button>
+                <button type="button" class="btn btn-secondary mt-2 mb-2 ms-2 me-1"
+                    [class.btn-clicked]="isSortByScoreClicked" (click)="handleSortByScoreClick()">
+                    Sort by average score
+                </button>
+            </div>
+            <div class="row" *ngIf="isAllClicked">
+                <div class="col-lg-4 mb-4" *ngFor="let anime of data">
+                    <div class="card card-list">
+                        <img class="card-img-top card-img-test" [src]="anime.imgCover" alt="..." />
+                        <div class="card-body">
+                            <div class="small text-muted">{{ anime.genre }}</div>
+                            <h2 class="card-title h4 mb-1">
+                                <strong>
+                                    {{ anime.name }}
+                                </strong>
+                            </h2>
+                            <div class="card-detail mb-2">
+                                <div class="left-info">
+                                    <p class="card-text">By {{ anime.studio }} </p>
+                                </div>
+                                <div class="right-info">
+                                    <p class="card-text">{{ anime.episode }} episodes</p>
+                                </div>
+                            </div>
+                            <a class="btn btn-readmore" (click)="onClick(anime._id)">Read more →</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row" *ngIf="isSortByScoreClicked">
+                <div class="col-lg-4 mb-4" *ngFor="let anime of animeData">
+                    <div class="card card-content card-list">
+                        <img class="card-img-top card-img-test" [src]="anime.animeImgCover" alt="..." (click)="onClick(anime._id)"/>
+                        <div class="card-body">
+                            <div class="small text-muted">{{ anime.animeGenre }}</div>
+                            <h2 class="card-title h4 mb-1">
+                                <strong>
+                                    {{ anime.animeName }}
+                                </strong>
+                            </h2>
+                            <div class="card-detail mb-2">
+                                <div class="left-info">
+                                    <p class="card-text">⭐{{ anime.averageRate }} </p>
+                                </div>
+                                <div class="right-info">
+                                    <p class="card-text">{{ anime.animeEpisode }} episodes</p>
+                                </div>
+                            </div>
+                            <a class="btn btn-readmore" (click)="onClick(anime._id)">Read more →</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<!-- Footer-->
+<footer class="py-5 bg-dark">
+    <div class="container">
+        <p class="m-0 text-center text-white"></p>
+    </div>
+</footer>
