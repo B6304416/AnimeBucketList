@@ -74,7 +74,7 @@ export class MangareviewComponent implements OnInit {
 
   ngOnInit(): void {
     // this.comment.userId = '561'
-    this.randomAvatarNumber = this.getRandomAvatarNumber(1, 9);
+    this.randomAvatarNumber = this.getRandomAvatarNumber(1, 7);
 
     const token = sessionStorage.getItem('token');
     const user = sessionStorage.getItem('userId');
@@ -116,7 +116,7 @@ export class MangareviewComponent implements OnInit {
       console.error('Manga ID is null.');
     }
     for (let i = 0; i < 100; i++) {
-      this.avatarNumbers.push(this.getRandomAvatarNumber(1, 9));
+      this.avatarNumbers.push(this.getRandomAvatarNumber(1, 7));
     }
   }
 
